@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="my-ct-page-title text-white">
           <h1 class="ct-title text-white" id="content">
-            Cities
+            Category 
           </h1>
           <div class="avatar-group mt-3">
           </div>

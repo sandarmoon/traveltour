@@ -1,0 +1,87 @@
+header {
+   min-height: 600px;
+    width: 100vw;
+    background: black;
+    overflow: hidden;
+    background: #fff;  /* fallback colour. Make sure this is just one solid colour. */
+    background:linear-gradient(to top, #212529c9, #f9fafb0f), url(../assets/banner3.jpeg) top right no-repeat;
+    /*background-repeat: no-repeat;*/
+    display: flex;
+   justify-content: center;
+   align-items: center;
+
+}
+
+.container{
+   
+
+}
+
+.search-div{
+   position: relative;
+   min-height: 260px;
+    max-width: calc(25rem + 3rem);
+    top: 3px;
+    left: 700px;
+
+}
+.search-div button{
+   
+   color: #333;
+}
+.nav-link{
+   display: inline-flex;
+}
+.label-text{
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 3.29;
+    margin-left: 10px;
+}
+
+.icon{
+   display: inline-block;
+   width: 40px;
+   height: 40px;
+   background-size: cover;
+}
+
+.icon-hotel{
+   background-image: url('../assets/hotel.svg');
+}
+.icon-car{
+   background-image: url('../assets/car.svg');
+}
+.icon-jounery{
+   background-image: url('../assets/journey.svg');
+}
+
+.nav-link.active .icon ,.nav-link.focus .icon {
+  filter: invert(73%) sepia(91%) saturate(540%) hue-rotate(341deg) brightness(89%) contrast(92%);
+}
+.nav-link.active .label-text{
+  color: goldenrod;
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .search-div{
+  left: 45%;
+}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .search-div{
+  left: 15%;
+}
+}
+
+@media screen and (max-width: 35.938rem){
+.search-div{
+   left:0px;
+}
+}
+
+
+

@@ -24,19 +24,67 @@
     Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
   </title>
   <!-- Favicon -->
-  <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <link href="{{asset('assets/img/brand/favicon.png')}}" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
-  <link href="../assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-  <link href="../assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <link href="{{asset('assets/js/plugins/nucleo/css/nucleo.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
   {{-- datatable css --}}
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
   <!-- CSS Files -->
-  <link href="../assets/css/argon-dashboard.css?v=1.1.1" rel="stylesheet" />
+  <link href="{{asset('assets/css/argon-dashboard.css?v=1.1.1')}}" rel="stylesheet" />
   <style>
+   html,body{
+      height: 100%;
+    }
+    @media (max-width: 720px){
+        .profilemedia{
+           text-align: center;
+            margin-left: 183px;
+            margin-right: 0px;
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+    }
+
+    @media (min-width: 768px){
+      .main-content .container-fluid {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+      }
+    }
+
+
+    .sfont{
+      font-size: 0.875rem;
+    }
+    .my-td
+    {
+     max-width: 100px;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+    }
+     .my-td:hover
+    {
+     
+     overflow: visible;
+    
+     white-space: unset;
+    }
+    #more  {display:  none;}
+    body{
+      min-height: 100vh;
+    }
+    #page-content{
+      flex:1 0 auto;
+    }
     .my-card {
     position: relative;
     display: flex;
@@ -53,6 +101,7 @@
     border-left: 2px solid #fff;
     margin-bottom: 1.5rem;
 }
+
   </style>
 </head>
 
@@ -65,7 +114,7 @@
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="../index.html">
-        <img src="../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <img src="{{asset('assets/img/brand/blue.png')}}" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -124,7 +173,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="../index.html">
-                <img src="../assets/img/brand/blue.png">
+                <img src="{{asset('assets/img/brand/blue.png')}}">
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -149,23 +198,28 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  active ">
-            <a class="nav-link " href="../index.html">
-              <i class="ni ni-tv-2 text-primary"></i> Dashboard
+            <a class="nav-link " href="{{route('city.index')}}">
+              <i class="ni ni-tv-2 text-primary"></i> City
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Icons
+            <a class="nav-link " href="{{route('pickup.index')}}">
+              <i class="ni ni-planet text-blue"></i> Pickup_location
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Maps
+            <a class="nav-link " href="{{route('type.index')}}">
+              <i class="ni ni-pin-3 text-orange"></i> Type
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/profile.html">
-              <i class="ni ni-single-02 text-yellow"></i> User profile
+            <a class="nav-link " href="">
+              <i class="ni ni-pin-3 text-orange"></i> Brands
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{{route('car.index')}}">
+              <i class="ni ni-single-02 text-yellow"></i> Cars
             </a>
           </li>
           <li class="nav-item">
@@ -232,7 +286,7 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg">
+                  <img alt="Image placeholder" src="{{asset('assets/img/theme/team-4-800x800.jpg')}}">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
@@ -274,8 +328,8 @@
     @yield('main-content')
   </div>
   <!--   Core   -->
-  <script src="../assets/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{asset('assets/js/plugins/jquery/dist/jquery.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <!--   Optional JS   -->
   {{-- datatable js   --}}
 
@@ -286,16 +340,19 @@
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
   {{-- datatable js   --}}
   <!--   Argon JS   -->
-  <script src="../assets/js/argon-dashboard.min.js?v=1.1.1"></script>
+  <script src="{{asset('assets/js/argon-dashboard.min.js?v=1.1.1')}}"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
   <script>
+    
     window.TrackJS &&
       TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
   </script>
-å  @yield('script')
+    @yield('script')
 </body>
 
 </html>     

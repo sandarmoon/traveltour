@@ -11,6 +11,10 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "livewire/livewire": "^2.5",
+        "nesbot/carbon": "^2.50",
+        "spatie/laravel-permission": "^4.2",
+        "ttskch/select2-bootstrap4-theme": "^1.5",
         "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {

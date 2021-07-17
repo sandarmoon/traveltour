@@ -29,7 +29,7 @@ class CityController extends Controller
             'id',
             'name',
             'created_at',
-            'updated_at']);
+            'updated_at'])->whereNull('parent_id');
 
 
 

@@ -15,6 +15,29 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->text('logo')->nullable();
+            $table->string('ceo_name')->nullable();
+            $table->text('photo')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('addresss')->nullable();
+            $table->string('incharge_name')->nullable();
+            $table->string('incharge_phone')->nullable();
+            $table->string('incharge_position')->nullable();
+            $table->integer('status')->nullable();
+            $table->text('info')->nullable();
+            $table->string('service_label_one')->nullable();
+            $table->string('service_label_two')->nulable();
+            $table->string('service_label_three')->nullable();
+            $table->text('service_desc_one')->nullable();
+            $table->text('service_desc_two')->nulable();
+            $table->text('service_desc_three')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

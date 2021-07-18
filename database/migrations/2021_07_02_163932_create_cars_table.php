@@ -24,11 +24,12 @@ class CreateCarsTable extends Migration
             $table->integer('bags');
             $table->integer('aircon')->default('1');
             $table->integer('status')->default('1');
-            $table->integer('brand_id');
+
+            $table->BigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-            $table->integer('type_id');
+            $table->BigInteger('type_id')->unsigned();
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
-            $table->integer('company_id');
+            $table->BigInteger('company_id')->unsigned();
             $table->foreign('company_id')->references('id')->on('compaines')->onDelete('cascade');
             $table->string('priceperday');
             $table->string('discount');

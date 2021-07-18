@@ -15,8 +15,8 @@ class CreateCarCityTable extends Migration
     {
         Schema::create('car_city', function (Blueprint $table) {
              $table->id();
-            $table->unsignedInteger('car_id');   
-            $table->unsignedInteger('city_id');
+            $table->BigInteger('car_id')->unsigned();   
+            $table->BigInteger('city_id')->unsigned();
              $table->foreign('car_id')
                     ->references('id')
                     ->on('cars')

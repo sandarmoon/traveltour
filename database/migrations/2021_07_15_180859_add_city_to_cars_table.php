@@ -14,7 +14,7 @@ class AddCityToCarsTable extends Migration
     public function up()
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->integer('city_id');  //where start point 
+            $table->BigInteger('city_id')->unsigned();  //where start point 
              $table->foreign('city_id')
                     ->references('id')
                     ->on('cities')

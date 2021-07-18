@@ -18,7 +18,7 @@
           <form action="{{route('search.car')}}" method="post">
             @csrf
            <div class="mb-3">
-               <label for="inputPassword2" class="visually-hidden">Departure Location</label>
+               <label for="inputPassword2" class="">Departure Location</label>
 
                 <select class="example_select2" name="p_city_id" style="width:100%">
                   @foreach($cities as $c)
@@ -28,7 +28,7 @@
 
            </div>
            <div class="mb-3">
-               <label for="inputPassword2" class="visually-hidden">Destination Location</label>
+               <label for="inputPassword2" class="">Destination Location</label>
 
                 <select class="example_select2" name="d_city_id" style="width:100%">
                   @foreach($cities as $c)
@@ -38,12 +38,12 @@
 
            </div>
            <div class="mb-3">
-               <label for="inputPassword2" class="visually-hidden">Start Date</label>
+               <label for="inputPassword2" class="">Start Date</label>
                 <input type="date" class="form-control" name="start_date" id="inputPassword2" placeholder="">
 
            </div>
            <div class="mb-3">
-               <label for="inputPassword2" class="visually-hidden">End Date</label>
+               <label for="inputPassword2" class="">End Date</label>
                 <input type="date" class="form-control" name="end_date" id="inputPassword2" placeholder="">
 
            </div>

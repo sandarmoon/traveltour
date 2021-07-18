@@ -27,10 +27,13 @@ class CreateCarsTable extends Migration
 
             $table->BigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+
             $table->BigInteger('type_id')->unsigned();
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
+
             $table->BigInteger('company_id')->unsigned();
-            $table->foreign('company_id')->references('id')->on('compaines')->onDelete('cascade');
+            
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->string('priceperday');
             $table->string('discount');
             $table->integer('qty');

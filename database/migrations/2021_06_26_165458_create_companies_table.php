@@ -24,7 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('incharge_name')->nullable();
             $table->string('incharge_phone')->nullable();
             $table->string('incharge_position')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->default(1);
             $table->text('info')->nullable();
             $table->string('service_label_one')->nullable();
             $table->string('service_label_two')->nulable();

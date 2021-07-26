@@ -7,6 +7,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\frontend\FrontController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ use App\Http\Controllers\BookingController;
 */
 
 Route::get('/',[FrontController::class,'index'])->name('frontend.index');
+
+Route::resource('company',CompanyController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -40,6 +43,8 @@ Route::post('ajax/getChildType',[TypeController::class,'getChildType'])->name('a
 
 Route::resource('car',CarController::class);
 Route::get('ajax/getCars',[CarController::class,'getCars'])->name('ajax.getCars');
+
+
 
 require __DIR__.'/auth.php';
 

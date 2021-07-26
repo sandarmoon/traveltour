@@ -21,16 +21,19 @@ class Company extends Component
     public $company;
     public $username,$email,$password,$password_confirmation;
     public $name, $price, $detail, $status = 1;
-    public  $logo,$info,$phone,$address;
+    public  $logo,$license,$info,$phone,$address;
     public $successMsg = '';
 
+    public function __construct(){
+        if(Auth::check()){
+            $this->currentStep++;
+        }
+    }
     
 
     public function render()
     {
-        if(Auth::check()){
-            $this->currentStep=2;
-        }
+        
         return view('livewire.company');
     }
     /**
@@ -65,12 +68,14 @@ class Company extends Component
      */
     public function secondStepSubmit()
     {
+        // dd('helo');
 
         if(Auth::user()->hasRole('company')){
             if(empty(Auth::user()->company)){
                 $validatedData = $this->validate([
                     'name' => 'required|unique:companies',
                     'logo' => 'required|image|max:1024',
+                    'license' => 'required|image|max:1024',
                     'info' => 'required',
                     'phone' => 'required',
                     'address' => 'required',
@@ -78,6 +83,7 @@ class Company extends Component
                 $filename=time();
 
                 $path = $this->logo->storeAs('logo',$filename,'public');
+                 $license = $this->logo->storeAs('license','l-'.$filename,'public');
 
                 
                 // if(Auth::check() && Auth::user()->hasRole()){
@@ -87,24 +93,29 @@ class Company extends Component
                  $this->company=\App\Models\Company::create([
                     'name'=>$this->name,
                     'logo'=>$path,
+                    'photo'=>$license,
                     'info'=>$this->info,
                     'phone'=>$this->phone,
                     'address'=>$this->address,
                     'status'=>1,
                     'user_id'=>Auth::user()->id
                  ]);
+                  // $this->successMsg = 'Company already exists!';
+                 $this->currentStep=3;
+                
             }else{
-                $this->successMsg = 'Company already exists.';
+                $this->currentStep=1;
+                $this->successMsg = 'Company already exists!';
+                
+                
             }
-        }else{
-            dd('no he is not');
         }
 
+           
+           // dd($this->currentStep);
         // dd('helo');
         
-
-  
-        $this->currentStep = 3;
+        
     }
   
     /**
@@ -129,9 +140,9 @@ class Company extends Component
     /**
      * Write code on Method
      */
-    public function back($step)
+    public function back($s)
     {
-        $this->currentStep = $step;    
+        $this->currentStep=$s;   
     }
   
     /**

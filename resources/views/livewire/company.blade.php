@@ -93,6 +93,11 @@
                     
                 </div>
                 <div class="form-group mb-3">
+                    <label for="license">Company License</label>@error('license') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <input type="file" wire:model="license" class="form-control" id="license" />
+                    
+                </div>
+                <div class="form-group mb-3">
                     <label for="info">Info:</label> @error('info') <span class="error text-danger">{{ $message }}</span> @enderror
                     <textarea type="text" wire:model="info" class="form-control"
                         id="info">{{{ $info ?? '' }}}</textarea>
@@ -111,7 +116,7 @@
                    
                 </div>
                 <button type="submit" class="btn btn-outline-primary my-3 form-control"> Next</button>
-            </form>
+              </form>
             </div>
         </div>
         <div class="row setup-content {{ $currentStep != 3 ? 'display-none' : '' }}" id="step-3">

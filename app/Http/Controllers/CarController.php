@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Datatable;
 use File;
+use Auth;
 
 class CarController extends Controller
 {
@@ -179,7 +180,7 @@ class CarController extends Controller
             'status'=>1,
             'type_id'=>$request->type_id,
             'brand_id'=>$request->brand_id,
-            'company_id'=>1,
+            'company_id'=>Auth::user()->id,
             'priceperday'=>$request->price_per_day,
             "discount"=>$request->discount,
             "qty"=>1,

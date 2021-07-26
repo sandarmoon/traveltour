@@ -104,6 +104,7 @@ class Company extends Component
                  $this->currentStep=3;
                 
             }else{
+                
                 $this->currentStep=1;
                 $this->successMsg = 'Company already exists!';
                 

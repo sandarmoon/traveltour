@@ -15,16 +15,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        // $this->call([
-        //     TypeSeeder::class,
-        //      BrandSeeder::class,
-        // ]);
+        $this->call([
+            // TypeSeeder::class,
+             BrandSeeder::class,
+        ]);
 
-         $array=['admin','customer','company'];
-           foreach($array as $a){
-             Role::create([
-                'name'=>$a
-             ]);
-           }
+         // $array=['admin','customer','company'];
+         //   foreach($array as $a){
+         //     Role::create([
+         //        'name'=>$a
+         //     ]);
+         //   }
     }
 }

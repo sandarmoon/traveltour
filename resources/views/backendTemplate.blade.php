@@ -102,6 +102,21 @@
     margin-bottom: 1.5rem;
 }
 
+.my-td
+    {
+     max-width: 150px;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+    }
+.my-td:hover
+    {
+     
+     overflow: visible;
+    
+     white-space: unset;
+    }
+
   </style>
 </head>
 
@@ -223,13 +238,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active " href="../examples/tables.html">
-              <i class="ni ni-bullet-list-67 text-red"></i> Tables
+            <a class="nav-link  active " href="{{route('partnership')}}">
+              <i class="ni ni-bullet-list-67 text-red"></i> Partnership
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/login.html">
-              <i class="ni ni-key-25 text-info"></i> Login
+            <a class="nav-link" href="{{route('list.car')}}">
+              <i class="ni ni-key-25 text-info"></i> Car-Bookings
             </a>
           </li>
           <li class="nav-item">

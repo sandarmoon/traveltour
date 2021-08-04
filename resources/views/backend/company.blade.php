@@ -14,7 +14,7 @@
                   <p>{{ $message }}</p>
               </div>
           @endif
-          <a class="ct-example text-white float-right border-0" href="{{route('.create')}}">
+          <a class="ct-example text-white float-right border-0" href="">
             <i class="fas fa-plus-square me-1"></i>
                 <span class="error-name">New Company</span>
           </a>
@@ -37,12 +37,12 @@
                   <table class="table align-items-center table-flush" id="company-table">
                     <thead class="thead-light">
                       <tr>
-                        <th scope="col">Codeno</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Seat</th>
+                        <th scope="col">Register Date</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Contact</th>
                         <th scope="col">Action</th>
+                        
                        
                       </tr>
                     </thead>
@@ -71,6 +71,56 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    $('#company-table').dataTable({
+      'serverSide':true,
+      'processing':true,
+      ajax:'ajax/getPartnership',
+      columns:[
+
+        {data:'name'
+        },
+        {data:'created_at'},
+        {data:function(data){
+          let msg='';
+          if(data.status ==1){
+           msg='<span class="text-success">active</span>';
+          }else{
+            msg='<span class="text-danger">inactive</span>';
+          }
+          return msg;
+        }},
+        {data:function(data){
+          let address='';
+          if(data.addresss == undefined){
+            address='';
+          }else{
+            address=data.addresss+'/';
+          }
+          return address+' Ph -'+data.phone;
+        },className: "my-td"},
+        {data:'action',name:'action',searchable:false,orderable:false}
+
+      ]
+    })
+
+    $('#company-table').on('click','.btn-partner',function(){
+      let status=$(this).data('status');
+      let id=$(this).data('id');
+      $.ajax({
+        url:'confirm/partnership/'+id+'/'+status,
+        type:'GET',
+        success:function(res){
+          // alert('res');
+
+          $('#company-table').DataTable().ajax.reload();
+        },
+        error:function(err){
+          // console.log(err);
+        }
+      })
+
+    })
   })
 </script>
 @endsection

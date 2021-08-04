@@ -11,7 +11,7 @@
         
            <a href="#step-1" 
                     class=" btn {{ $currentStep != 1 ? 'text-default' : 'text-primary' }}">
-                    <span></span><font>Search</font>
+                    <span></span><font>Create Account</font>
                 </a>
                   
        </div>
@@ -20,7 +20,7 @@
             
             <a href="#step-2" 
                     class="btn {{ $currentStep != 2 ? 'text-default' : 'text-primary' }}">
-                        <span></span><font>Reserve Booking</font>
+                        <span></span><font>Part I</font>
                     </a>
            
        </div>
@@ -30,7 +30,7 @@
            <a href="#step-3" 
                     class="btn {{ $currentStep != 3 ? 'text-default' : 'text-primary' }}"
                     disabled="disabled">
-                        <span></span><font>Confirm</font>
+                        <span></span><font>Part II</font>
                     </a>
           
        </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\frontend\FrontController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\BackendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +45,33 @@ Route::post('ajax/getChildType',[TypeController::class,'getChildType'])->name('a
 Route::resource('car',CarController::class);
 Route::get('ajax/getCars',[CarController::class,'getCars'])->name('ajax.getCars');
 
+// for company
+Route::get('partnerships',[BackendController::class,'partnership'])->name('partnership');
+
+Route::get('ajax/getPartnership',[BackendController::class,'getPartnershipAjax'])->name('ajax.getPartnershipAjax');
+
+//admin view for company list
+Route::get('detail/cp/{id}',[BackendController::class,'companyDetail'])->name('company.detail');
+
+//admin confirm for partnership and revoking
+
+Route::get('confirm/partnership/{id}/{s}',[BackendController::class,'confirmPartner'])->name('confirm.parnership');
+
+
+//carbookinglist view for admin
+Route::get('list/car',[BackendController::class,'carBookingList'])->name('list.car');
+
+
+//booking confirm and cancel for car
+//sid means status
+Route::get('/confirm/{id}/{sid}',[BackendController::class,'bookingConfirmed'])->name('carbooking.confirm');
+
+//carbooking detail
+Route::get('/list/{id}/bc',[BackendController::class,'carBookingDetail'])->name('car.booking.detail');
 
 
 require __DIR__.'/auth.php';
+
 
 // frontend start
 Route::prefix('front')->group(function () {

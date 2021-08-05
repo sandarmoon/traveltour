@@ -45,7 +45,7 @@
                     <a href="/" class="btn btn-secondary ">Back to search</a>
                     </div>
 
-                    @if(empty($cars))
+                    @if($cars == null)
 
                     <h4>There is no Result for this Search! Please Try again!</h4>
 

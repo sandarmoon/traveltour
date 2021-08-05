@@ -167,6 +167,11 @@ class Wizard extends Component
         'status'=>1
 
        ]);
+
+       $car=Car::find($car_id);
+
+       $car->status=2;
+       $car->save();
   
         $this->clearForm();
         session()->flash('message', 'Booking is successfully added!.');

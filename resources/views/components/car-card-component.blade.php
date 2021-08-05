@@ -6,8 +6,11 @@
   $cover='storage/'.$photos['cover'];
 
   @endphp
-  <div class="col-md-6 mb-5">
+  <div class="col-md-6 mb-5 mt-3">
      <div class="card mb-3 " >
+      @if($car->status ==2)
+      <h2 class="justify-content-end d-inline float-right"><span class="badge bg-danger">Booked</span></h2>
+      @endif
         <div class="row g-0 ">
           <div class="col-md-5">
             <img src="{{asset($cover)}}" style="min-height: 100%;" class="img-fluid " alt="...">
@@ -46,13 +49,15 @@
                    <li>{{$car->bags}} air bags included!</li>
                    @endif
                 </ul>
-                <a wire:click="firstStepSubmit({{$car->id}})" class="btn btn-success">Book Now!</a>
+                <a wire:click="firstStepSubmit({{$car->id}})"  class="btn btn-success {{($car->status ==2) ? 'd-none':''}}">Book Now!</a>
+
                 
               </div>
             </div>
           </div>
         </div>
       </div>
+
   </div>
   @endforeach
 </div>

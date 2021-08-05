@@ -40,7 +40,17 @@
            {{-- list. end --}}
             <div class="row setup-content {{ $currentStep != 1 ? 'display-none' : '' }}" id="step-1">
                 <div class="col-md-12">
-                    <h3> Resultes in Yangon</h3>
+                    <div class="d-flex justify-content-between mb-3">
+                        <h3 class=""> Resultes in Yangon</h3>
+                    <a href="/" class="btn btn-secondary ">Back to search</a>
+                    </div>
+
+                    @if(empty($cars))
+
+                    <h4>There is no Result for this Search! Please Try again!</h4>
+
+                    @endif
+
                     <x-car-card-component :cars=$cars></x-car-card-component>
                     
                 </div>

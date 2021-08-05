@@ -290,7 +290,7 @@ class CarController extends Controller
             $path = $request->file('cover')->storeAs('cover',$fileNameToStore,'public');
              $input['image']['cover'] = "$path";
         
-              unlink(storage_path('app/public/'.$oldphoto['cover'])) ;
+              // unlink(storage_path('app/public/'.$oldphoto['cover'])) ;
        
 
         }else{
@@ -315,7 +315,7 @@ class CarController extends Controller
            }
 
            foreach($oldphoto['previews'] as $v){
-            unlink(storage_path('app/public/'.$v));
+            // unlink(storage_path('app/public/'.$v));
            }
         
 

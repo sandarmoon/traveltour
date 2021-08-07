@@ -9,6 +9,8 @@ use App\Http\Controllers\frontend\FrontController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\FcategoryController;
+use App\Http\Controllers\FacilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,7 @@ Route::get('/',[FrontController::class,'index'])->name('frontend.index');
 Route::resource('company',CompanyController::class);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('backend.car');
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('city',CityController::class);
@@ -68,6 +70,15 @@ Route::get('/confirm/{id}/{sid}',[BackendController::class,'bookingConfirmed'])-
 
 //carbooking detail
 Route::get('/list/{id}/bc',[BackendController::class,'carBookingDetail'])->name('car.booking.detail');
+
+//Fcategory view for admin
+Route::resource('fcategory',FcategoryController::class);
+Route::get('ajax/getFcategory',[FcategoryController::class,'getFcategoryAjax'])->name('ajax.getFcategoryAjax');
+
+//facilities view for admin
+Route::resource('facility',FacilityController::class);
+Route::get('ajax/getFacilites',[FacilityController::class,'getFacilityAjax'])->name('ajax.getFacilityAjax');
+
 
 
 require __DIR__.'/auth.php';

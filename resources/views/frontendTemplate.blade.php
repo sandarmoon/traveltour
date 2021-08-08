@@ -17,6 +17,8 @@
         <link href="{{asset('frontend/css/styles.css')}}" rel="stylesheet" />
          <link href="{{ asset('multiform.css') }}" rel="stylesheet" id="bootstrap">
         <link href="{{asset('frontend/css/mystyle.css')}}" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  
         <style>
             .select2-selection__rendered {
                 line-height: 35px !important;
@@ -27,6 +29,10 @@
             .select2-selection__arrow {
                 height: 34px !important;
             }
+
+            .note-group-select-from-files {
+          display: none;
+        }
         </style>
     </head>
     <body>
@@ -48,13 +54,30 @@
          <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-       
+       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
         <!-- Core theme JS-->
         
         <script src="{{asset('frontend/js/scripts.js')}}}"></script>
         <script>
         $(document).ready(function() {
                 $('.example_select2').select2();
+                $('.summernote').summernote({
+                    height: 200,
+                    toolbar: [
+                        
+                    [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+                    [ 'fontname', [ 'fontname' ] ],
+                    [ 'fontsize', [ 'fontsize' ] ],
+                    [ 'color', [ 'color' ] ],
+                    [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+                    [ 'table', [ 'table' ] ],
+                    [ 'insert', [ 'link'] ],
+                    [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+                      ]
+
+
+                });
+
             });
             
         </script>
@@ -62,6 +85,6 @@
         
         @livewireScripts
 
-        @yield('script')
+        @stack('script')
     </body>
 </html>

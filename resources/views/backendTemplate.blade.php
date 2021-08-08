@@ -304,7 +304,11 @@
                   <img alt="Image placeholder" src="{{asset('assets/img/theme/team-4-800x800.jpg')}}">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                  <span class="mb-0 text-sm  font-weight-bold">
+                    @if(Auth::check())
+                    {{Auth::user()->name}}
+                    @endif
+                  </span>
                 </div>
               </div>
             </a>
@@ -329,10 +333,22 @@
                 <span>Support</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#!" class="dropdown-item">
+              <a href="route('logout')" class="dropdown-item" onclick="event.preventDefault();
+                                                document.getElementById('logoutform').closest('form').submit();">
                 <i class="ni ni-user-run"></i>
-                <span>Logout</span>
-              </a>
+                
+                                    
+
+                                    
+                                                Log out
+                                                
+
+                                    <form method="POST" id="logoutform" class="d-inline" action="{{ route('logout') }}">
+                                                @csrf
+
+                                                
+                                            </form>
+                                </a>
             </div>
           </li>
         </ul>

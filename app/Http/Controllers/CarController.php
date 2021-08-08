@@ -180,7 +180,7 @@ class CarController extends Controller
             'status'=>1,
             'type_id'=>$request->type_id,
             'brand_id'=>$request->brand_id,
-            'company_id'=>Auth::user()->id,
+            'company_id'=>Auth::user()->company->id,
             'priceperday'=>$request->price_per_day,
             "discount"=>$request->discount,
             "qty"=>1,

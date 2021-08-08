@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\Models\Type;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,17 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(1)->create();
+        
         $this->call([
-            // TypeSeeder::class,
+              
              BrandSeeder::class,
         ]);
 
-         // $array=['admin','customer','company'];
-         //   foreach($array as $a){
-         //     Role::create([
-         //        'name'=>$a
-         //     ]);
-         //   }
+        Type::create([
+            "name"=>"Hotel",
+            "parent_id"=>null
+        ]);
+        Type::create([
+            "name"=>"CarTransport",
+            "parent_id"=>null
+        ]);
+        Type::create([
+            "name"=>"Package",
+            "parent_id"=>null
+        ]);
+
+         $array=['admin','customer','company'];
+           foreach($array as $a){
+             Role::create([
+                'name'=>$a
+             ]);
+           }
     }
 }

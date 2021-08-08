@@ -230,23 +230,23 @@
             
         });
 
-    $('#type-table').on('click','.btn-delete',function(){
-      let id=$(this).data('id');
-      let url='/city/'+id;
-        $.ajax({
-          url:url,
-          type:'DELETE',
-          success:function(data){
-            $('.successmsg').html(data.success);
-             $('.successmsg').addClass('text-success');
-             $('.successmsg').hide(2000);
-             $('#type-table').DataTable().ajax.reload();
-          },
-          error:function(error){
-            console.log(error);
-          }
-        })
-    })
+    // $('#type-table').on('click','.btn-delete',function(){
+    //   let id=$(this).data('id');
+    //   let url='/city/'+id;
+    //     $.ajax({
+    //       url:url,
+    //       type:'DELETE',
+    //       success:function(data){
+    //         $('.successmsg').html(data.success);
+    //          $('.successmsg').addClass('text-success');
+    //          $('.successmsg').hide(2000);
+    //          $('#type-table').DataTable().ajax.reload();
+    //       },
+    //       error:function(error){
+    //         console.log(error);
+    //       }
+    //     })
+    // })
 
     // hotel category create
     $('#sub-hotel-newform').submit(function(e){

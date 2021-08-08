@@ -228,8 +228,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="">
-              <i class="ni ni-pin-3 text-orange"></i> Brands
+            <a class="nav-link " href="{{route('brand.index')}}">
+              <i class="ni ni-pin-3 text-orange"></i> Brand
             </a>
           </li>
           <li class="nav-item">
@@ -238,7 +238,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active " href="{{route('partnership')}}">
+            <a class="nav-link  " href="{{route('partnership')}}">
               <i class="ni ni-bullet-list-67 text-red"></i> Partnership
             </a>
           </li>

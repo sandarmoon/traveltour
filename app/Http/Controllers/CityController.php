@@ -69,7 +69,7 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'name' => 'required|unique:cities|max:255',
             
         ]);

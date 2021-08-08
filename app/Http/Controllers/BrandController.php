@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Datatable;
+use DB;
+
 
 class BrandController extends Controller
 {
@@ -14,9 +17,35 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.brand');
     }
 
+
+    public function getBrand(Request $request){
+
+        DB::statement(DB::raw('set @rownum=0'));
+        $brands = Brand::select([
+            DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+            'id',
+            'name',
+            'created_at',
+            'updated_at']);
+        
+        $datatables = Datatable::of($brands)
+            ->addColumn('action',function($brand){
+                return "<button class='btn btn-danger btn-delete' data-id=".$brand->id.">Delete</button>";
+            } )
+            ;
+
+        if ($keyword = $request->get('search')['value']) {
+             $datatables->filterColumn('rownum', function($q,$keyword){
+                $q->whereRaw("@rownum +1  like ?", ["%{$keyword}%"]);
+             });
+            
+        }
+
+        return $datatables->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +64,18 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:brands|max:255',
+            
+        ]);
+
+        
+        // $data=Category::all();
+        Brand::create([
+            'name'=>$request->name
+        ]);
+        
+        return response()->json(['success'=>'Successfully added!']);
     }
 
     /**
@@ -69,7 +109,10 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        
+        $brand->name=$request->name;
+        $brand->save();
+        return response()->json(['success'=>'Successfully updated!']);
     }
 
     /**
@@ -80,6 +123,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return response()->json(['success'=>'Successfully updated!']);
     }
 }

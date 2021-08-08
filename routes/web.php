@@ -11,6 +11,8 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\FcategoryController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\BrandController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +81,9 @@ Route::get('ajax/getFcategory',[FcategoryController::class,'getFcategoryAjax'])-
 Route::resource('facility',FacilityController::class);
 Route::get('ajax/getFacilites',[FacilityController::class,'getFacilityAjax'])->name('ajax.getFacilityAjax');
 
-
+// admin crud brand
+Route::resource('brand',BrandController::class);
+Route::post('ajax/getBrand',[BrandController::class,'getBrand'])->name('ajax.getBrand');
 
 require __DIR__.'/auth.php';
 

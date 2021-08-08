@@ -131,6 +131,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return response()->json(['success'=>'Success!']);
     }
 }

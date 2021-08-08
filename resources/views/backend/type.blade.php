@@ -230,6 +230,7 @@
             
         });
 
+
     // hotel category create
     $('#sub-hotel-newform').submit(function(e){
       e.preventDefault();

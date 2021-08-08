@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Type;
+
 
 class TypeSeeder extends Seeder
 {
@@ -20,7 +20,11 @@ class TypeSeeder extends Seeder
             "parent_id"=>null
         ]);
         Type::create([
-            "name"=>"Hotel",
+            "name"=>"CarTransport",
+            "parent_id"=>null
+        ]);
+        Type::create([
+            "name"=>"Package",
             "parent_id"=>null
         ]);
     }

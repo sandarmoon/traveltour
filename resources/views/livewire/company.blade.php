@@ -121,28 +121,107 @@
         </div>
         <div class="row setup-content {{ $currentStep != 3 ? 'display-none' : '' }}" id="step-3">
             <div class="col-md-12">
-                <h3> Step 3</h3>
-                <table class="table">
-                    <tr>
-                        <td>Team Name:</td>
-                        <td><strong>{{$name}}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Team Price:</td>
-                        <td><strong>{{$price}}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Team status:</td>
-                        <td><strong>{{$status ? 'Active' : 'DeActive'}}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Team Detail:</td>
-                        <td><strong>{{$detail}}</strong></td>
-                    </tr>
-                </table>
+                <div class="d-flex justify-content-between">
+                    <h3 class="d-inline"> More Information Your Company </h3>
+                    
+                </div>
+                {{-- form start here --}}
+                <form wire:submit.prevent="secondStepSubmit">
+                    <div class="row">
+                       <div class="col form-group mb-3">
+                            <label for="name">Company Name:</label>@error('name') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <input type="text" wire:model="name" class="form-control" id="name">
+                            
+                        </div>
+
+                        <div class="col form-group mb-3">
+                            <label for="ceo_name">Company CEO Name:</label>@error('ceo_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <input type="text" wire:model="eco_name" class="form-control" id="ceo_name">
+                            
+                        </div> 
+                    </div>
+                    
+                    <hr class="my-2">
+                    <h3 class="description small">InCharge Person Info</h3>
+                    <div class="form-group mb-3">
+                        <label for="incharge_name">Name</label>@error('incharge_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input type="file" wire:model="incharge_name" class="form-control" id="incharge_name" />
+                        
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="incharge_position">Position:</label> @error('incharge_position') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input type="text" wire:model="incharge_position" class="form-control"
+                            id="incharge_position"/>
+                       
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="incharge_phone">Phone:</label> @error('incharge_phone') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input type="text" wire:model="incharge_phone" class="form-control"
+                            id="incharge_phone" >
+                       
+                    </div>
+                    <hr class="my-3">
+                    
+                    <div class="d-flex justify-content-between">
+                    <h3 class="description small">Company Service</h3>
+                    {{-- <Button class="btn btn-primary  float-left btn-newsec"   wire:click="$emit('addmore')" >Add New Section</Button> --}}
+                </div>
+                    <h4 class="description small">
+                        Service One
+                    </h4>
+
+                    <div class="d-flex justify-around mb-2">
+                        
+                        <div class="col-md-3">
+                            <p class="small">Title</p>
+                            <input type="text" name="service-label-one">
+                        </div>  
+                        <div class="col-md-8" wire:ignore>
+                            <p class="small">Description</p>
+                            <textarea name="service-desc-one" class="form-control summernote"></textarea>
+                        </div>
+                    </div>
+
+                   <div class="d-flex justify-around mb-2">
+                        
+                        <div class="col-md-3">
+                            <p class="small">Title</p>
+                            <input type="text" name="service-label-one">
+                        </div>  
+                        <div class="col-md-8" wire:ignore>
+                            <p class="small">Description</p>
+                            <textarea name="service-desc-one" class="form-control summernote"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-around mb-2">
+                        
+                        <div class="col-md-3">
+                            <p class="small">Title</p>
+                            <input type="text" name="service-label-one">
+                        </div>  
+                        <div class="col-md-8" wire:ignore>
+                            <p class="small">Description</p>
+                            <textarea name="service-desc-one" class="form-control summernote"></textarea>
+                        </div>
+                    </div>
+                      
+                    <button type="submit" class="btn btn-outline-primary my-3 form-control"> Next</button>
+                </form>
+                {{-- form end here --}}
                 <button class="btn btn-success btn-lg pull-right" wire:click="submitForm" type="button">Finish!</button>
                 <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="back(2)">Back</button>
             </div>
         </div>
     </div>
+
 </div>
+@push('scripts')
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        // @this.set('summernote', contents);
+        window.livewire.find('83b555bb3e243bc25f35')
+        
+    })
+    
+</script>
+@endpush

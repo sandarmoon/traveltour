@@ -27,10 +27,10 @@ class CreateCompaniesTable extends Migration
             $table->integer('status')->default(1);
             $table->text('info')->nullable();
             $table->string('service_label_one')->nullable();
-            $table->string('service_label_two')->nulable();
+            $table->string('service_label_two')->nullable();
             $table->string('service_label_three')->nullable();
             $table->text('service_desc_one')->nullable();
-            $table->text('service_desc_two')->nulable();
+            $table->text('service_desc_two')->nullable();
             $table->text('service_desc_three')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

@@ -96,7 +96,7 @@ class Company extends Component
                     'photo'=>$license,
                     'info'=>$this->info,
                     'phone'=>$this->phone,
-                    'address'=>$this->address,
+                    'addresss'=>$this->address,
                     'status'=>1,
                     'user_id'=>Auth::user()->id
                  ]);
@@ -111,8 +111,8 @@ class Company extends Component
                 
             }
         }
-
-           
+         // $this->currentStep=3;
+         //  $this->company=Auth::user()->company; 
            // dd($this->currentStep);
         // dd('helo');
         
@@ -124,6 +124,8 @@ class Company extends Component
      */
     public function submitForm()
     {
+
+        dd('you made it');
         Team::create([
             'name' => $this->name,
             'price' => $this->price,

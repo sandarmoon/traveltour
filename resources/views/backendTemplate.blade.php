@@ -212,42 +212,42 @@
         </form>
         <!-- Navigation -->
         <ul class="navbar-nav">
-          <li class="nav-item  active ">
+          <li class="nav-item {{ Request::is('city*') ? 'active' : '' }} ">
             <a class="nav-link " href="{{route('city.index')}}">
               <i class="ni ni-tv-2 text-primary"></i> City
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('pickup*') ? 'active' : '' }}">
             <a class="nav-link " href="{{route('pickup.index')}}">
               <i class="ni ni-planet text-blue"></i> Pickup_location
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('type*') ? 'active' : '' }}">
             <a class="nav-link " href="{{route('type.index')}}">
               <i class="ni ni-pin-3 text-orange"></i> Type
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('brand*') ? 'active' : '' }}">
             <a class="nav-link " href="{{route('brand.index')}}">
               <i class="ni ni-pin-3 text-orange"></i> Brand
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('car*') ? 'active' : '' }}">
             <a class="nav-link " href="{{route('car.index')}}">
               <i class="ni ni-single-02 text-yellow"></i> Cars
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('partnership*') ? 'active' : '' }}">
             <a class="nav-link  " href="{{route('partnership')}}">
               <i class="ni ni-bullet-list-67 text-red"></i> Partnership
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('list*') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('list.car')}}">
               <i class="ni ni-key-25 text-info"></i> Car-Bookings
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::is('city*') ? 'active' : '' }}">
             <a class="nav-link" href="../examples/register.html">
               <i class="ni ni-circle-08 text-pink"></i> Register
             </a>

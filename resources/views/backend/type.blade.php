@@ -18,7 +18,7 @@
 			
 			{{-- end --}}
         </div>
-       <div class="card mb-4">
+       <div class="card mb-4" id="newtype_store">
             <div class="card-header pb-0">
                 <i class="fas fa-plus-square me-1"></i>
                 <span class="error-name">Create New Types</span>
@@ -26,10 +26,10 @@
                 <div class="nav-wrapper pb-0">
 				    <ul class="nav nav-tabs" id="tabs-icons-text" role="tablist">
 				        <li class="nav-item">
-				            <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="fas fa-hotel mr-1"></i>Hotel Room Type</a>
+				            <a class="nav-link mb-sm-3 mb-md-0 active hotel_nav" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="fas fa-hotel mr-1"></i>Hotel Room Type</a>
 				        </li>
 				        <li class="nav-item">
-				            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">
+				            <a class="nav-link mb-sm-3 mb-md-0 car_nav" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">
 				            	<i class="fas fa-car mr-1"></i>Vehicle Type</a>
 				        </li>
 				        
@@ -39,9 +39,9 @@
             <div class="card shadow">
 			    <div class="card-body">
 			        <div class="tab-content" id="myTabContent">
-			            <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
+			            <div class="tab-pane fade show active hotel_nav_tab" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
 			                <form class="row gx-3 gy-2 align-items-center" id="sub-hotel-newform">
-                          <input type="hidden" name="category" value="1">
+                          <input type="hidden" name="category" value="1" class="hotel_hidden_value">
 			                    <div class="col-sm-8">
 			                       
 			                        <input type="text" class="form-control" name="name" id="specificSizeInputName" placeholder="Enter New City Name">
@@ -52,9 +52,9 @@
 			                    </div>
 			                </form>
 			            </div>
-			            <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
+			            <div class="tab-pane fade car_nav_tab" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
 			                <form class="row gx-3 gy-2 align-items-center" id="sub-car-newform">
-                          <input type="hidden" name="category" value="2">
+                          <input type="hidden" name="category" value="2" class="car_hidden_value">
 			                    <div class="col-sm-8">
 			                       
 			                        <input type="text" class="form-control" name="name" id="specificSizeInputName" placeholder="Enter New City Name">
@@ -260,7 +260,18 @@
              $('.successmsg').hide(2000);
              $(`#sub-hotel-newform input[name]`).val('');
              $('#type-table').DataTable().ajax.reload();
-            
+             // $('#newtype_store').reload();
+
+             // $('.hotel_nav').addClass('active');
+             // $('.car_nav').removeClass('active');
+
+             // $('.hotel_nav_tab').addClass('show');
+             // $('.hotel_nav_tab').addClass('active');
+
+             // $('.car_nav_tab').removeClass('show');
+             // $('.car_nav_tab').removeClass('active');
+             $(`.hotel_hidden_value`).val(1);
+
              },
       })
     })
@@ -293,8 +304,21 @@
              $('.successmsg').addClass('text-success');
              $('.successmsg').hide(2000);
              $(`#sub-car-newform input[name]`).val('');
-              $('#type-table').DataTable().ajax.reload();
-            
+             $('#type-table').DataTable().ajax.reload();
+             // $('#newtype_store').reload();
+
+             // $('.hotel_nav').removeClass('active');
+             // $('.car_nav').addClass('active');
+
+             // $('.hotel_nav_tab').removeClass('show');
+             // $('.hotel_nav_tab').removeClass('active');
+
+             // $('.car_nav_tab').addClass('show');
+             // $('.car_nav_tab').addClass('active');
+             $(`.car_hidden_value`).val(2);
+
+
+             
              },
       })
     })

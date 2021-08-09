@@ -18,9 +18,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(1)->create();
         
         $this->call([
-              
-             BrandSeeder::class,
-        ]);
+
+            TypeSeeder::class,
+            BrandSeeder::class,
+            FcategorySeeder::class,
+        ]);    
 
         Type::create([
             "name"=>"Hotel",

@@ -7,69 +7,30 @@
       <div class="container-fluid">
         <div class="my-ct-page-title text-white">
           <h1 class="ct-title text-white" id="content">
-            Category 
+            Brands
           </h1>
           <div class="avatar-group mt-3">
           </div>
         </div>
-        <div class="card">
-			{{-- start --}}
-			
-			
-			{{-- end --}}
-        </div>
-       <div class="card mb-4" id="newtype_store">
-            <div class="card-header pb-0">
+       <div class="card mb-4">
+            <div class="card-header">
                 <i class="fas fa-plus-square me-1"></i>
-                <span class="error-name">Create New Types</span>
+                <span class="error-name">New Brand</span>
                 <span class="successmsg"></span>
-                <div class="nav-wrapper pb-0">
-				    <ul class="nav nav-tabs" id="tabs-icons-text" role="tablist">
-				        <li class="nav-item">
-				            <a class="nav-link mb-sm-3 mb-md-0 active hotel_nav" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="fas fa-hotel mr-1"></i>Hotel Room Type</a>
-				        </li>
-				        <li class="nav-item">
-				            <a class="nav-link mb-sm-3 mb-md-0 car_nav" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">
-				            	<i class="fas fa-car mr-1"></i>Vehicle Type</a>
-				        </li>
-				        
-				    </ul>
-				</div>
             </div>
-            <div class="card shadow">
-			    <div class="card-body">
-			        <div class="tab-content" id="myTabContent">
-			            <div class="tab-pane fade show active hotel_nav_tab" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-			                <form class="row gx-3 gy-2 align-items-center" id="sub-hotel-newform">
-                          <input type="hidden" name="category" value="1" class="hotel_hidden_value">
-			                    <div class="col-sm-8">
-			                       
-			                        <input type="text" class="form-control" name="name" id="specificSizeInputName" placeholder="Enter New City Name">
-			                    </div>
-			                    
-			                    <div class="col-12 col-xl-3 col-lg-3 col-md-3 col-sm-12 ">
-			                        <button type="submit" class="btn btn-primary form-control">Submit</button>
-			                    </div>
-			                </form>
-			            </div>
-			            <div class="tab-pane fade car_nav_tab" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
-			                <form class="row gx-3 gy-2 align-items-center" id="sub-car-newform">
-                          <input type="hidden" name="category" value="2" class="car_hidden_value">
-			                    <div class="col-sm-8">
-			                       
-			                        <input type="text" class="form-control" name="name" id="specificSizeInputName" placeholder="Enter New City Name">
-			                    </div>
-			                    
-			                    <div class="col-12 col-xl-3 col-lg-3 col-md-3 col-sm-12 ">
-			                        <button type="submit" class="btn btn-primary form-control">Submit</button>
-			                    </div>
-			                </form>
-			            </div>
-			            
-			        </div>
-			    </div>
-			</div>
-            
+            <div class="card-body">
+                <form class="row gx-3 gy-2 align-items-center" id="brand-newform">
+                    
+                    <div class="col-sm-8">
+                       
+                        <input type="text" class="form-control" name="name" id="specificSizeInputName" placeholder="Enter New Brand Name">
+                    </div>
+                    
+                    <div class="col-12 col-xl-3 col-lg-3 col-md-3 col-sm-12 ">
+                        <button type="submit" class="btn btn-primary form-control">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
       </div>
     </div>
@@ -84,12 +45,12 @@
                   <h3 class="mb-0">City List</h3>
                 </div>
                 <div class="table-responsive  p-1">
-                  <table class="table align-items-center table-flush" id="type-table">
+                  <table class="table align-items-center table-flush" id="brand-table">
                     <thead class="thead-light">
                       <tr>
                         <th scope="col">No</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Category</th>
+                        
                         <th scope="col">Action</th>
                        
                       </tr>
@@ -167,7 +128,7 @@
               let id=row.data().id;
               
               $.ajax({
-                  url:'/type/'+id,
+                  url:'/brand/'+id,
                   type:"PATCH",
                   data:{name:newdata},
                   success:function(res){
@@ -181,7 +142,7 @@
               }
         })
       }
-        table=$('#type-table').DataTable({
+        table=$('#brand-table').DataTable({
            
             "serverSide": true,
             "processing": true,
@@ -198,17 +159,17 @@
                  }
                } ,
             ajax: {
-                url: 'ajax/getChildType',
+                url: 'ajax/getBrand',
                 method: 'POST',
                 data: {
                 "_token": "{{ csrf_token() }}"
                 }
             },
+
             columns: [
                 {data: 'rownum', name: 'rownum'},
                 
                 {data: 'name', name: 'name'},
-                {data: 'category', name: 'category'},
                 
                 {data: 'action', name: 'action',searchable:false,orderable:false}
             ],
@@ -230,62 +191,31 @@
             
         });
 
-
-    // hotel category create
-    $('#sub-hotel-newform').submit(function(e){
-      e.preventDefault();
-      let name=$(`#sub-hotel-newform input[name="name"]`).val();
-      let category=$(`#sub-hotel-newform input[name="category"]`).val();
-      // console.log(name,category);
-      $.ajax({
-        url:'type',
-        type:'POST',
-        data:{name:name,id:category},
-        error:function(data){
-            var errors=data.responseJSON.errors;
-            $.each(errors,function(i,v){
-                console.log(i);
-                $(`.error-${i}`).html(v);
-                $(`.error-${i}`).addClass('text-danger');
-
-            })
-           },
-           success:function(res){
-               console.log(typeof res);
-               console.log(res.success);
-             $(`.error-name`).html('New Sub-category');
-             $(`.error-name`).removeClass('text-danger');
-             $('.successmsg').html(res.success);
+    $('#brand-table').on('click','.btn-delete',function(){
+      let id=$(this).data('id');
+      let url='/brand/'+id;
+        $.ajax({
+          url:url,
+          type:'DELETE',
+          success:function(data){
+            $('.successmsg').html(data.success);
              $('.successmsg').addClass('text-success');
              $('.successmsg').hide(2000);
-             $(`#sub-hotel-newform input[name]`).val('');
-             $('#type-table').DataTable().ajax.reload();
-             // $('#newtype_store').reload();
-
-             // $('.hotel_nav').addClass('active');
-             // $('.car_nav').removeClass('active');
-
-             // $('.hotel_nav_tab').addClass('show');
-             // $('.hotel_nav_tab').addClass('active');
-
-             // $('.car_nav_tab').removeClass('show');
-             // $('.car_nav_tab').removeClass('active');
-             $(`.hotel_hidden_value`).val(1);
-
-             },
-      })
+             $('#brand-table').DataTable().ajax.reload();
+          },
+          error:function(error){
+            console.log(error);
+          }
+        })
     })
 
-    //car category create
-    $('#sub-car-newform').submit(function(e){
+    $('#brand-newform').submit(function(e){
       e.preventDefault();
-      let name=$(`#sub-car-newform input[name="name"]`).val();
-      let category=$(`#sub-car-newform input[name="category"]`).val();
-      // console.log(name,category);
+      let name=$(`input[name="name"]`).val();
       $.ajax({
-        url:'type',
+        url:'brand',
         type:'POST',
-        data:{name:name,id:category},
+        data:{name:name},
         error:function(data){
             var errors=data.responseJSON.errors;
             $.each(errors,function(i,v){
@@ -298,53 +228,17 @@
            success:function(res){
                console.log(typeof res);
                console.log(res.success);
-             $(`.error-name`).html('New Sub-category');
+             $(`.error-name`).html('New City');
              $(`.error-name`).removeClass('text-danger');
              $('.successmsg').html(res.success);
              $('.successmsg').addClass('text-success');
              $('.successmsg').hide(2000);
-             $(`#sub-car-newform input[name]`).val('');
-             $('#type-table').DataTable().ajax.reload();
-             // $('#newtype_store').reload();
-
-             // $('.hotel_nav').removeClass('active');
-             // $('.car_nav').addClass('active');
-
-             // $('.hotel_nav_tab').removeClass('show');
-             // $('.hotel_nav_tab').removeClass('active');
-
-             // $('.car_nav_tab').addClass('show');
-             // $('.car_nav_tab').addClass('active');
-             $(`.car_hidden_value`).val(2);
-
-
-             
+             $(`#brand-newform input[name]`).val('');
+             $('#brand-table').DataTable().ajax.reload();
+            
              },
       })
     })
-
-    // deleteing data
-    $('#type-table').on('click','.btn-delete',function(){
-        let ans=confirm("Are you sure to delete?");
-        if(ans){
-          let id=$(this).data('id');
-          $.ajax({
-            url:'/type/'+id,
-            type:"DELETE",
-            success:function(data){
-               $('.successmsg').html(data.success);
-               $('.successmsg').addClass('text-success');
-               $('.successmsg').hide(2000);
-               $('#type-table').DataTable().ajax.reload();
-            },
-            error:function(err){
-              console.log(err);
-            }
-          })
-        }
-    })
-
-    // end
   })
 </script>
 @endsection

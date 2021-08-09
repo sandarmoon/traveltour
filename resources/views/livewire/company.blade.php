@@ -1,3 +1,8 @@
+
+
+
+
+
 <div>
     @if(!empty($successMsg))
     <div class="alert alert-success">
@@ -136,16 +141,17 @@
 
                         <div class="col form-group mb-3">
                             <label for="ceo_name">Company CEO Name:</label>@error('ceo_name') <span class="error text-danger">{{ $message }}</span> @enderror
-                            <input type="text" wire:model="eco_name" class="form-control" id="ceo_name">
+                            <input type="text" wire:model="ceo_name" class="form-control" id="ceo_name">
                             
                         </div> 
                     </div>
                     
+                    
                     <hr class="my-2">
                     <h3 class="description small">InCharge Person Info</h3>
-                    <div class="form-group mb-3">
+                    <div class="form-group mb-3" wire:ignore>
                         <label for="incharge_name">Name</label>@error('incharge_name') <span class="error text-danger">{{ $message }}</span> @enderror
-                        <input type="file" wire:model="incharge_name" class="form-control" id="incharge_name" />
+                        <input type="text" wire:model="incharge_name" class="form-control" id="incharge_name" />
                         
                     </div>
                     <div class="form-group mb-3">
@@ -170,58 +176,56 @@
                         Service One
                     </h4>
 
-                    <div class="d-flex justify-around mb-2">
-                        
-                        <div class="col-md-3">
-                            <p class="small">Title</p>
-                            <input type="text" name="service-label-one">
-                        </div>  
-                        <div class="col-md-8" wire:ignore>
-                            <p class="small">Description</p>
-                            <textarea name="service-desc-one" class="form-control summernote"></textarea>
-                        </div>
-                    </div>
+                    
 
-                   <div class="d-flex justify-around mb-2">
-                        
-                        <div class="col-md-3">
-                            <p class="small">Title</p>
-                            <input type="text" name="service-label-one">
-                        </div>  
-                        <div class="col-md-8" wire:ignore>
-                            <p class="small">Description</p>
-                            <textarea name="service-desc-one" class="form-control summernote"></textarea>
-                        </div>
+                    <div class="mt-2 bg-white" wire:ignore>
+                      <div
+                        name="message"
+                           x-data
+                           x-ref="quillEditor"
+                           x-init="
+                             quill = new Quill($refs.quillEditor, {theme: 'snow'});
+                             quill.on('text-change', function () {
+                               setTimeout(() => {
+                                $dispatch('input', quill.root.innerHTML);
+                                },0);
+
+
+                               $dispatch('input', quill.root.innerHTML);
+                             });
+                           "
+                           wire:model.debounce.2000ms="message"
+                      >
+                        {!! $message !!}
+                      </div>
                     </div>
-                    <div class="d-flex justify-around mb-2">
-                        
-                        <div class="col-md-3">
-                            <p class="small">Title</p>
-                            <input type="text" name="service-label-one">
-                        </div>  
-                        <div class="col-md-8" wire:ignore>
-                            <p class="small">Description</p>
-                            <textarea name="service-desc-one" class="form-control summernote"></textarea>
-                        </div>
-                    </div>
+                   
                       
-                    <button type="submit" class="btn btn-outline-primary my-3 form-control"> Next</button>
+                   
+                       <div class="text-center my-3" >
+                       
+                        {{-- form end here --}}
+                        
+                        <button class="btn btn-danger nextBtn  pull-left float-right" type="button" wire:click="back(2)">Back</button>
+                        <button id="submit" class="btn btn-success  pull-left float-right" wire:click="submitForm" type="button">Complete Task!</button>
+
+                       </div>
+                       <div class="text-center my-2">
+                           <a class="text-dark" wire:click="skip" >Skip this step</a>
+                       </div>
+                  
                 </form>
-                {{-- form end here --}}
-                <button class="btn btn-success btn-lg pull-right" wire:click="submitForm" type="button">Finish!</button>
-                <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="back(2)">Back</button>
+                
             </div>
         </div>
     </div>
+   
 
 </div>
-@push('scripts')
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // @this.set('summernote', contents);
-        window.livewire.find('83b555bb3e243bc25f35')
-        
-    })
-    
-</script>
+
+@push('script')
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 @endpush
+
+
+

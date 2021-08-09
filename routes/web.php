@@ -91,3 +91,5 @@ Route::post('/scar',[FrontController::class,'searchCar'])->name('search.car')->m
 // Booking survey start
 Route::get('/booking/{cid}',[BookingController::class,'booking'])->name('booking');
 });
+
+

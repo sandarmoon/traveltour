@@ -17,7 +17,10 @@
         <link href="{{asset('frontend/css/styles.css')}}" rel="stylesheet" />
          <link href="{{ asset('multiform.css') }}" rel="stylesheet" id="bootstrap">
         <link href="{{asset('frontend/css/mystyle.css')}}" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+          <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        
+       
+        
   
         <style>
             .select2-selection__rendered {
@@ -54,37 +57,26 @@
          <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-        <!-- Core theme JS-->
-        
-        <script src="{{asset('frontend/js/scripts.js')}}}"></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
+         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+             <script src="{{asset('frontend/js/scripts.js')}}}"></script>
+
+             
+          
+        @livewireScripts
+
+
+        @stack('script')
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" ></script>
         <script>
         $(document).ready(function() {
-                $('.example_select2').select2();
-                $('.summernote').summernote({
-                    height: 200,
-                    toolbar: [
-                        
-                    [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
-                    [ 'fontname', [ 'fontname' ] ],
-                    [ 'fontsize', [ 'fontsize' ] ],
-                    [ 'color', [ 'color' ] ],
-                    [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
-                    [ 'table', [ 'table' ] ],
-                    [ 'insert', [ 'link'] ],
-                    [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
-                      ]
-
-
-                });
-
+                $('.example_select2').select2(); 
+              
             });
             
         </script>
-
         
-        @livewireScripts
 
-        @stack('script')
+
     </body>
 </html>

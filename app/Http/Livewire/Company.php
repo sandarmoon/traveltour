@@ -23,6 +23,17 @@ class Company extends Component
     public $name, $price, $detail, $status = 1;
     public  $logo,$license,$info,$phone,$address;
     public $successMsg = '';
+    public $message="";
+
+    public $ceo_name='';
+    public $incharge_name,$incharge_position,$incharge_phone;
+    public $service_label_one,
+            $service_label_two,
+            $service_label_three;
+
+    public $service_desc_one,
+            $service_desc_two,
+            $service_desc_three;
 
     public function __construct(){
         if(Auth::check()){
@@ -111,8 +122,9 @@ class Company extends Component
                 
             }
         }
-         // $this->currentStep=3;
-         //  $this->company=Auth::user()->company; 
+
+         $this->currentStep=3;
+          $this->company=Auth::user()->company; 
            // dd($this->currentStep);
         // dd('helo');
         
@@ -125,19 +137,44 @@ class Company extends Component
     public function submitForm()
     {
 
-        dd('you made it');
-        Team::create([
-            'name' => $this->name,
-            'price' => $this->price,
-            'detail' => $this->detail,
-            'status' => $this->status,
-        ]);
-  
+        // dd($this->company->name);
+        // dd($this->ceo_name);
+        dd($this->message);
+        
+       // dd($this->message);
+        $dom=new \DomDocument();
+
+        dd($this->service_desc_one);
+        
+        $this->company->ceo_name=$this->ceo_name;
+        $this->company->incharge_name=$this->incharge_name;
+        $this->company->incharge_position=$this->incharge_position;
+        $this->company->incharge_phone=$this->incharge_phone;
+        $this->company->service_label_one=$this->service_label_one;
+        $this->company->service_label_two=$this->service_label_two;
+        $this->company->service_label_three=$this->service_label_three;
+
+        $dom->loadHTML($this->service_desc_one,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+         $this->company->service_desc_one=$dom->saveHTML();
+
+         $dom->loadHTML($this->service_desc_two,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+         $this->company->service_desc_two=$dom->saveHTML();
+         
+      
+        $dom->loadHTML($this->service_desc_three,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $this->company->service_desc_three=$dom->saveHTML();
+        
+        $this->save();
+
         $this->successMsg = 'Team successfully created.';
   
         $this->clearForm();
   
-        $this->currentStep = 1;
+        dd('yes you make it!');
+        $this->emit('reinit');
     }
   
     /**
@@ -146,6 +183,12 @@ class Company extends Component
     public function back($s)
     {
         $this->currentStep=$s;   
+    }
+
+    public function skip(){
+        $this->currentStep = 1;
+        $this->clearForm();
+        return redirect()->route('car.index');
     }
   
     /**

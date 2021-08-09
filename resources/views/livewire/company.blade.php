@@ -99,7 +99,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="info">Info:</label> @error('info') <span class="error text-danger">{{ $message }}</span> @enderror
-                    <textarea type="text" wire:model="info" class="form-control"
+                    <textarea type="text" wire:model.defer="info" class="form-control"
                         id="info">{{{ $info ?? '' }}}</textarea>
                    
                 </div>
@@ -111,7 +111,8 @@
                 </div>
                 <div class="form-group">
                     <label for="address">Address:</label> @error('address') <span class="error text-danger">{{ $message }}</span> @enderror
-                    <textarea type="text" wire:model="address" class="form-control"
+
+                    <textarea type="text" wire:model.defer="address" class="form-control"
                         id="address">{{{ $address ?? '' }}}</textarea>
                    
                 </div>

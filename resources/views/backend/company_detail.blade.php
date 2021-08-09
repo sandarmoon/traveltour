@@ -145,19 +145,27 @@
                       <div class="row" >
                          <h6 class="heading-small text-muted mb-4">More Information</h6>
                          <table class="table-bordered border-collapse">
-                          
+                            @if($company->service_label_one !=null)     
                            <tr>
-                             <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;">{{$company->service_label_one}}</h5></td>
-                             <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;"></h5>{{$company->service_desc_one}}</td>
+                            {{--  <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;">{{$company->service_label_one}}</h5></td> --}}
+                             <td class="p-2 "><h2 class="heading-my ml-3 " style="transform: none;"> {!!$company->service_label_one!!}</h2> 
+                              {!!$company->service_desc_one!!}</td>
                            </tr>
+                           @endif
+                           @if($company->service_label_two !=null)
                            <tr>
-                             <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;">{{$company->service_label_two}}</h5></td>
-                             <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;"></h5>{{$company->service_desc_two}}</td>
+                            {{--  <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;">{{$company->service_label_one}}</h5></td> --}}
+                             <td class="p-2 "><h2 class="heading-my ml-3 " style="transform: none;"> {!!$company->service_label_two!!}</h2> 
+                              {!!$company->service_desc_two!!}</td>
                            </tr>
+                           @endif
+                            @if($company->service_label_three !=null)
                            <tr>
-                             <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;">{{$company->service_label_three}}</h5></td>
-                             <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;"></h5>{{$company->service_desc_three}}</td>
+                            {{--  <td class="p-2 "><h5 class="heading-my ml-3 " style="transform: none;">{{$company->service_label_one}}</h5></td> --}}
+                             <td class="p-2 "><h2 class="heading-my ml-3 " style="transform: none;"> {!!$company->service_label_three!!}</h2> 
+                              {!!$company->service_desc_three!!}</td>
                            </tr>
+                           @endif
                          </table>
                       </div>
                       @endif

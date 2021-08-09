@@ -134,6 +134,7 @@
                 {{-- form start here --}}
                 <form wire:submit.prevent="secondStepSubmit">
                     <div class="row">
+                        <h3 class="description small text-primary">General Information</h3>
                        <div class="col form-group mb-3">
                             <label for="name">Company Name:</label>@error('name') <span class="error text-danger">{{ $message }}</span> @enderror
                             <input type="text" wire:model="name" class="form-control" id="name">
@@ -149,7 +150,7 @@
                     
                     
                     <hr class="my-2">
-                    <h3 class="description small">InCharge Person Info</h3>
+                    <h3 class="description small text-primary">InCharge Person Info</h3>
                     <div class="form-group mb-3" wire:ignore>
                         <label for="incharge_name">Name</label>@error('incharge_name') <span class="error text-danger">{{ $message }}</span> @enderror
                         <input type="text" wire:model="incharge_name" class="form-control" id="incharge_name" />
@@ -170,36 +171,54 @@
                     <hr class="my-3">
                     
                     <div class="d-flex justify-content-between">
-                    <h3 class="description small">Company Service</h3>
-                    {{-- <Button class="btn btn-primary  float-left btn-newsec"   wire:click="$emit('addmore')" >Add New Section</Button> --}}
+                    <h3 class="description small text-primary">Company Service</h3>
+                   
                 </div>
-                    <h4 class="description small">
-                        Service One
-                    </h4>
+
+
 
                     
 
-                    <div class="mt-2 bg-white" wire:ignore>
-                      <div
-                        name="message"
-                           x-data
-                           x-ref="quillEditor"
-                           x-init="
-                             quill = new Quill($refs.quillEditor, {theme: 'snow'});
-                             quill.on('text-change', function () {
-                               setTimeout(() => {
-                                $dispatch('input', quill.root.innerHTML);
-                                },0);
+                    
+
+                    <div class="">
+
+                        <h4 class="description small">
+                           Express your company Here More!
+
+                        </h4>
+                            <h4 class="description small" for=""> Title</h4>
+                            <input type="text" wire:model="service_label_one">
+                        
+                            
+                            <div class="mt-2 bg-white "  wire:ignore>
+                                 <h4 class="description small" for=""> Description</h4>
+                                  <div
+                                    name="service_desc_one"
+                                       x-data 
+                                       x-ref="quillEditor"
+                                       x-init="
+                                         quill = new Quill($refs.quillEditor,
+                                          {
+                                            theme: 'snow'});
+                                         quill.on('text-change', function () {
+                                           setTimeout(() => {
+                                            $dispatch('input', quill.root.innerHTML);
+                                            },0);
 
 
-                               $dispatch('input', quill.root.innerHTML);
-                             });
-                           "
-                           wire:model.debounce.2000ms="message"
-                      >
-                        {!! $message !!}
-                      </div>
+                                           $dispatch('input', quill.root.innerHTML);
+                                         });
+                                       "
+                                       wire:model.debounce.2000ms="service_desc_one"
+                                  >
+                                    {!! $service_desc_one !!}
+                                  </div>
+                            </div>
+                        </div>
                     </div>
+
+                    
                    
                       
                    
@@ -226,6 +245,23 @@
 
 @push('script')
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+      $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script>
+    
 @endpush
 
 

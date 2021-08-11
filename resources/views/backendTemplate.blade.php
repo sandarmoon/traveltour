@@ -117,6 +117,36 @@
      white-space: unset;
     }
 
+    .inputfile {
+          width: 0.1px;
+          height: 0.1px;
+          opacity: 0;
+          overflow: hidden;
+          position: absolute;
+          z-index: -1;
+        }
+
+    .inputfile + label {
+          font-size: 1.10em;
+          font-weight: 700;
+          color: white;
+          background-color: orange;
+          display: inline-block;
+          padding: 2px 6px;
+          border-radius: 5px;
+          box-shadow: 2px 3px rgba(0, 0, 0, 0.2);
+          transition: box-shadow 1s;
+          cursor: pointer;
+
+      }
+
+    .inputfile:focus + label,
+    .inputfile + label:hover {
+        font-size: 1.20em;
+        box-shadow: 3px 4px rgba(0, 0, 0, 0.3);
+    }
+
+
   </style>
 </head>
 
@@ -237,7 +267,7 @@
               <i class="ni ni-single-02 text-yellow"></i> Cars
             </a>
           </li>
-          <li class="nav-item {{ Request::is('partnership*') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::segment(1) === 'partnerships' || Request::segment(1) === 'detail' ? 'active' : '' }}">
             <a class="nav-link  " href="{{route('partnership')}}">
               <i class="ni ni-bullet-list-67 text-red"></i> Partnership
             </a>

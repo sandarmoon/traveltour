@@ -104,6 +104,92 @@ class BackendController extends Controller
 
     // +================ nyi ye lin==========
 
+    public function edit_company_logo(Request $request)
+    {
+        // dd($request);
+        if($request->hasFile('file')){
+
+            $photo = $request->file('file');
+            $fileName = time().'_'.$photo->getClientOriginalName();
+             
+            $filepath =$photo->storeAs('logo',$fileName,'public');
+            $path = $filepath;
+            
+
+        }else{
+            $path = $request->old_image;
+        }
+   
+
+        $company = Company::find($request->company_id);
+        // dd($company->logo);
+        $company->logo = $path;
+        $company->save();
+        return response()->json(['success'=>'Successfully']);
+    }
+
+    public function edit_main_info(Request $request)
+    {
+       $company = Company::find($request->id);
+       $company->user->name = $request->username;
+       $company->user->email = $request->email;
+
+       $company->user->save();
+
+       $company->name = $request->company_name;
+       $company->ceo_name = $request->ceo_name;
+       $company->phone = $request->phone;
+       $company->addresss = $request->address;
+       $company->incharge_name = $request->incharge_name;
+       $company->incharge_phone = $request->incharge_phone;
+       $company->incharge_position = $request->incharge_position;
+       $company->save();
+       return response()->json(['success'=>'Successfully']);
+
+    }
+
+
+    public function edit_general_info(Request $request)
+    {
+        $tab=1;
+        $company = Company::find($request->id);
+        $company->service_label_one = $request->service_label_one;
+        $company->service_label_two = $request->service_label_two;
+        $company->service_label_three = $request->service_label_three;
+        $company->service_desc_one = $request->service_desc_one;
+        $company->service_desc_two = $request->service_desc_two;
+        $company->service_desc_three = $request->service_desc_three;
+        $company->save();
+       return response()->json(['success'=>'Successfully']);
+
+
+    }
+
+
+    public function edit_company_photo(Request $request)
+    {
+        // dd($request);
+        if($request->hasFile('photo')){
+
+            $photo = $request->file('photo');
+            $fileName = time().'_'.$photo->getClientOriginalName();
+             
+            $filepath =$photo->storeAs('license',$fileName,'public');
+            $path = $filepath;
+            
+
+        }else{
+            $path = $request->old_photo;
+        }
+   
+
+        $company = Company::find($request->company_id);
+        // dd($company->logo);
+        $company->photo = $path;
+        $company->save();
+        return response()->json(['success'=>'Successfully']);
+    }
+
     
 
 

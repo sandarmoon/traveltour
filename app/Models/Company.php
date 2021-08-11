@@ -13,6 +13,11 @@ class Company extends Model
 
     public function cars(){
         return $this->hasMany('App/Model/Car');
-     }
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
 }

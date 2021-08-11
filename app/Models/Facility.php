@@ -15,4 +15,8 @@ class Facility extends Model
     public function fcategory(){
         return $this->belongsTo(Fcategory::class);
     }
+
+    public function  rooms(){
+        return $this->belongsToMany(Room::class);
+    }
 }

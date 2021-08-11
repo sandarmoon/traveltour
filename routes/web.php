@@ -94,6 +94,28 @@ Route::post('ajax/edit_general_info',[BackendController::class,'edit_general_inf
 Route::post('ajax/edit_company_photo',[BackendController::class,'edit_company_photo'])->name('ajax.edit_company_photo');
 
 
+
+//Room Crud process 
+Route::prefix('room')->group(function () {
+
+Route::get('/',[BackendController::class,'roomIndex'])->name('room.index');
+Route::get('/create',[BackendController::class,'roomCreate'])->name('room.create');
+
+Route::get('/{id}',[BackendController::class,'roomShow'])->name('room.show');
+
+Route::post('/store',[BackendController::class,'roomStore'])->name('room.store');
+
+Route::get('/{id}/edit',[BackendController::class,'roomEdit'])->name('room.edit');
+
+Route::put('/{id}',[BackendController::class,'roomUpdate'])->name('room.update');
+
+Route::delete('/{id}',[BackendController::class,'roomDestroy'])->name('room.destroy');
+
+Route::get('/get/rooms',[BackendController::class,'getRoomAjax'])->name('ajax.getroomAjax');
+
+});
+
+
 require __DIR__.'/auth.php';
 
 

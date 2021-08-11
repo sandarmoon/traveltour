@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Datatable;
 use App\Models\Company;
 use App\Models\Booking;
+use App\Models\Room;
+use App\Models\Facility;
+use App\Models\Type;
 
 class BackendController extends Controller
 {
@@ -19,6 +22,7 @@ class BackendController extends Controller
     //for backend admin. view
     public function companyDetail($id){
         $company=Company::find($id);
+
         return view('backend.company_detail',compact('company'));
     }
 
@@ -99,12 +103,181 @@ class BackendController extends Controller
 
     public function carBookingDetail($id){
         $booking=Booking::find($id);
+
         return view('backend.car_booking_detail',compact('booking'));
     }
 
-    // +================ nyi ye lin==========
+    // +================Aco Room Controller==========
 
-    public function edit_company_logo(Request $request)
+    public function roomIndex(){
+        // echo "you make";
+        return view('backend.room');
+    }
+
+    public function roomCreate(){
+        $types=Type::where('parent_id',1)->get();
+
+        $facilities=Facility::whereHas('fcategory',function($q){
+            $q->where('type_id',1);
+        })->with('fcategory')->get();
+        $data=collect($facilities);
+        $data=$data->groupBy('fcategory.name')->toArray();
+
+        return view('backend.roomcrud', ['room' => new Room(),'types'=>$types,'facilities'=>$data]);
+    }
+
+    public function roomShow(Room $id){
+        echo "show it";
+    }
+
+    public function roomStore(Request $request){
+          dd($request);
+        $galary=[];
+        if($request->hasFile('galary')){
+
+            foreach($request->file('galary') as  $k=>$file){
+             $filenameWithExt = $file->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $file->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $file->storeAs('galary',$fileNameToStore,'public');
+              array_push($galary,$path);
+            
+           }
+        }
+
+       $room= Room::create([
+            'name'=>$request->name,
+            'type_id'=>$request->type_id,
+            'photos'=>json_encode($galary),
+            'wide'=>$request->wide,
+            'single'=>$request->single,
+            'double'=>$request->double,
+            'king'=>$request->king,
+            'queen'=>$request->queen,
+            'ppl'=>$request->people,
+            'pricepernight'=>$request->price,
+            'company_id'=>1,
+            'common'=>$request->common,
+            'status'=>1,
+
+        ]);
+
+       $room->facilities()->attach($request->facilities); 
+        // dd(json_encode($galary));
+
+       return redirect()->route('room.index')->with('status', 'Data added!');;
+
+
+    }
+
+    public function roomEdit($id){
+        $room=Room::find($id);
+        $types=Type::where('parent_id',1)->get();
+
+        $facilities=Facility::whereHas('fcategory',function($q){
+            $q->where('type_id',1);
+        })->with('fcategory')->get();
+
+
+        $data=collect($facilities);
+        $facilities=$data->groupBy('fcategory.name')->toArray();
+
+        return view('backend.roomcrud',compact('room','types','facilities'));
+    }
+   
+    public function roomUpdate(Request $request,$id){
+        $room=Room::find($id);
+
+         $oldphoto=json_decode($request->oldphoto,true);
+        // dd($request);
+         $galary=[];$photo='';
+        if($request->hasFile('galary')){
+
+            foreach($request->file('galary') as  $k=>$file){
+             $filenameWithExt = $file->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $file->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $file->storeAs('galary',$fileNameToStore,'public');
+              array_push($galary,$path);
+              $photo=json_encode($galary);
+
+              foreach($oldphoto as $v){
+                // dd($v);
+                unlink(storage_path('app/public/'.$v));
+               }
+            
+           }
+        }else{
+            $photo=json_encode($oldphoto);
+        }
+
+       $room= Room::find($id);
+            $room->name=$request->name;
+            $room->type_id=$request->type_id;
+            $room->photos=$photo;
+            $room->wide=$request->wide;
+            $room->single=$request->single;
+            $room->double=$request->double;
+            $room->king=$request->king;
+            $room->queen=$request->queen;
+            $room->ppl=$request->people;
+            $room->pricepernight=$request->price;
+            $room->company_id=1;
+            $room->common=$request->common;
+            $room->status=1;
+            $room->save();
+            $roomid=$room->id;
+            $room->facilities()->detach();
+       $room->facilities()->attach($request->facilities);
+
+        return redirect()->route('room.index')->with('status', 'Data updated!');
+
+    }
+
+    public function roomDestroy(Room $id){
+        echo "update it";
+    }
+
+   
+
+    
+    public function  getRoomAjax(){
+        $rooms= Room::with(['type','company','facilities'])->get();
+
+        $datatables=Datatable::of($rooms)
+            ->addColumn('action',function($room){
+
+                return "<button class='btn btn-danger btn-delete' data-id=".$room->id."><i class='fas fa-trash'></i></button>
+
+                <a href=room/$room->id/edit class='btn btn-warning btn-edit' data-id=".$room->id."><i class='fas fa-edit'></i></a>
+
+
+
+                <a href=room/$room->id class='btn btn-info btn-detail' data-id=".$room->id."><i class='fas fa-info-circle'></i></a>
+                ";
+            });
+
+       return $datatables->make(true);
+
+    }
+
+
+    // +================ end==========
+
+
+
+    // +=============== company detail  ============
+     public function edit_company_logo(Request $request)
     {
         // dd($request);
         if($request->hasFile('file')){
@@ -190,13 +363,7 @@ class BackendController extends Controller
         return response()->json(['success'=>'Successfully']);
     }
 
-    
-
-
-    // +================ nyi ye lin==========
-
-
-
+    // +============= end =======
 
 
 

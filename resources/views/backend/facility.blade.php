@@ -13,7 +13,7 @@
           <a class="ct-example text-white float-right border-0" data-toggle="modal"
            href="#newexampleModal">
             <i class="fas fa-plus-square me-1"></i>
-                <span class="error-name">Add New Facility</span>
+                <span class="">Add New Facility</span>
           </a>
 
           
@@ -189,6 +189,9 @@
         success:function(res){
 
           swal('Good job','successfully added!',"success").then(function(){
+            $('.error-name').html('');
+            $('.error-type_id').html('');
+            $('.error-price').html('');
             $('#facility-newform').trigger("reset");
              $('#newexampleModal').modal('hide');
              $('#facility-table').DataTable().ajax.reload();

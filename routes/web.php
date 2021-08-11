@@ -85,6 +85,27 @@ Route::get('ajax/getFacilites',[FacilityController::class,'getFacilityAjax'])->n
 Route::resource('brand',BrandController::class);
 Route::post('ajax/getBrand',[BrandController::class,'getBrand'])->name('ajax.getBrand');
 
+//Room Crud process 
+Route::prefix('room')->group(function () {
+
+Route::get('/',[BackendController::class,'roomIndex'])->name('room.index');
+Route::get('/create',[BackendController::class,'roomCreate'])->name('room.create');
+
+Route::get('/{id}',[BackendController::class,'roomShow'])->name('room.show');
+
+Route::post('/store',[BackendController::class,'roomStore'])->name('room.store');
+
+Route::get('/{id}/edit',[BackendController::class,'roomEdit'])->name('room.edit');
+
+Route::put('/{id}',[BackendController::class,'roomUpdate'])->name('room.update');
+
+Route::delete('/{id}',[BackendController::class,'roomDestroy'])->name('room.destroy');
+
+Route::get('/get/rooms',[BackendController::class,'getRoomAjax'])->name('ajax.getroomAjax');
+
+});
+
+
 require __DIR__.'/auth.php';
 
 

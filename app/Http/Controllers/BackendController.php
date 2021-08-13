@@ -116,6 +116,7 @@ class BackendController extends Controller
     }
 
     public function roomCreate(){
+
         $types=Type::where('parent_id',1)->get();
 
         $facilities=Facility::whereHas('fcategory',function($q){
@@ -185,10 +186,12 @@ class BackendController extends Controller
 
     public function roomEdit($id){
         $room=Room::find($id);
+        
         $types=Type::where('parent_id',1)->get();
 
         $facilities=Facility::whereHas('fcategory',function($q){
             $q->where('type_id',1);
+
         })->with('fcategory')->get();
 
 

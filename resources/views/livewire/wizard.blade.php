@@ -63,7 +63,7 @@
                         @php 
                         
                         
-                        $photos=json_decode($car['photo'],true);
+                        $photos=json_decode($car_photo,true);
                         $cover=$photos['cover'];
                         @endphp
 
@@ -76,23 +76,23 @@
                                         <p class="">{{$company_name}}</p>
                                         
                                     </div>
-                                    <h1 class="display-5 fw-bolder">{{$car['name']}}({{$car['model']}})</h1>
+                                    <h1 class="display-5 fw-bolder">{{$car_name}}({{$car_model}})</h1>
                                     <div class="fs-5 mb-2">
-                                        <span class="{{($car['discount'] ==0) ? 'text-danger':'text-decoration-line-through'}}">$
-                                        {{$car['priceperday']}}</span>
-                                        <h3 class=" d-inline float-left text-danger {{($car['discount'] ==0) ? 'd-none':''}}" >$40.00</h3>
+                                        <span class="{{($car_discount ==0) ? 'text-danger':'text-decoration-line-through'}}">$
+                                        {{$car_priceperday}}</span>
+                                        <h3 class=" d-inline float-left text-danger {{($car_discount ==0) ? 'd-none':''}}" >$40.00</h3>
 
-                                        <h4 class=" heading  {{($car['status']==1) ? '  text-success':'text-danger'}}">{{($car['status']==1) ? 'Avaliable':'Booked'}}</h4>
+                                        <h4 class=" heading  {{($car_status==1) ? '  text-success':'text-danger'}}">{{($car_status==1) ? 'Avaliable':'Booked'}}</h4>
                                     </div>
                                     <div>
                                         <ul class="">
                                             <li>{{$type_name}}</li>
-                                            <li>{{$car['doors']}} doors</li>
-                                            <li>{{$car['seats']}} people</li>
+                                            <li>{{$car_doors}} doors</li>
+                                            <li>{{$car_seats}} people</li>
                                             <li>Auto Gear </li>
                                             <li>Fuel info: full to full</li>
-                                            <li>{{($car['aircon']==1) ? 'Full Air Conditional':'Limited Air Conditional'}}</li>
-                                            <li>{{($car['bags'])}} air bags</li>
+                                            <li>{{($car_aircon==1) ? 'Full Air Conditional':'Limited Air Conditional'}}</li>
+                                            <li>{{($car_bags)}} air bags</li>
                                             
                                             <li>
                                                 <span class="text-danger">Please Choose Pickup location </span>
@@ -133,9 +133,9 @@
                 <div class="col-md-4 order-lg-2 order-sm-1">
                    <div class="card">
                        <div class="card-header rule">
-                           <p class="{{($car['discount'] ==0) ? 'text-danger':'text-decoration-line-through d-inline'}}">$
-                                        {{$car['priceperday']}}</p>
-                                        <p class="{{($car['discount'] ==0) ? 'd-none':'d-inline float-left text-danger ' }}" >$40.00</p>
+                           <p class="{{($car_discount ==0) ? 'text-danger':'text-decoration-line-through d-inline'}}">$
+                                        {{$car_priceperday}}</p>
+                                        <p class="{{($car_discount ==0) ? 'd-none':'d-inline float-left text-danger ' }}" >$40.00</p>
                           <ul class="list-unstyled">
                               <li> <small class="ct-toc-link">No refunable</small></li>
                            <li><small class="ct-lead">No Change and No Cancellation</small></li>
@@ -160,12 +160,12 @@
                                <table class="table ">
                                    <tr>
                                        <td>Pirce</td>
-                                       <td>{{$car['priceperday']}}</td>
+                                       <td>{{$car_priceperday}}</td>
                                        
                                    </tr>
                                    <tr>
                                        <td>Discount</td>
-                                       <td>{{$car['discount']}}</td>
+                                       <td>{{$car_discount}}</td>
                                    </tr>
                                    <tr>
                                        <td>Days</td>
@@ -179,8 +179,8 @@
                                    <tr>
                                        <td>Subtotal</td>
                                        <td>@php
-                                       $discount=$car['discount'];
-                                       $price=$car['priceperday'];
+                                       $discount=$car_discount;
+                                       $price=$car_priceperday;
                                        $total=0;
                                        if($discount ==0){
                                         $total=$price * $days;

@@ -21,11 +21,16 @@ class Wizard extends Component
     // starting
     public  $cars;
     public $car;
+   
+    public $car_name,$car_codeno,$car_photo,$car_model,$car_seats,$car_doors,$car_bags,$car_aircon,$car_status,$car_priceperday,$car_discount,$car_qty;
+  
     public $location=[];
     public $company_phone,$company_name,$city_name;
     public $type_name,$brand_name,$company_address;
 
     public $drop,$pickup,$sdate,$edate;
+
+
    
 
 
@@ -50,6 +55,7 @@ class Wizard extends Component
         $c=Car::find($id);
         $this->car=$c;
 
+        // dd($car['name']);
         foreach($c->pickuppivot as $p)
         {
             $fullname=$p->name;
@@ -58,6 +64,19 @@ class Wizard extends Component
             array_push($this->location, $format);
         }
         // dd($this->location);
+         // INSERT INTO `cars`(`id`, `name`, `codeno`, `photo`, `model`, `seats`, `doors`, `bags`, `aircon`, `status`, `brand_id`, `type_id`, `company_id`, `priceperday`, `discount`, `qty`, `deleted_at`, `created_at`, `updated_at`, `city_id`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14],[value-15],[value-16],[value-17],[value-18],[value-19],[value-20])
+        $this->car_name=$c->name;
+        $this->car_codeno=$c->codeno;
+        $this->car_photo=$c->photo;
+        $this->car_model=$c->model;
+        $this->car_seats=$c->seats;
+        $this->car_doors=$c->doors;
+        $this->car_bags=$c->bags;
+        $this->car_aircon=$c->aircon;
+        $this->car_status=$c->status;
+        $this->car_priceperday=$c->priceperday;
+        $this->car_discount=$c->discount;
+        $this->car_qty=$c->car_qty;
         $this->company_name=$c->company->name;
         $this->company_phone=$c->company->phone;
         $this->company_address=$c->company->addresss;

@@ -18,6 +18,10 @@
                 {{ session('status') }}
             </div>
         @endif
+
+         <div class="alert ajax-alert alert-success d-none">
+               
+            </div>
        
         
       </div>
@@ -66,6 +70,7 @@
 <script>
   var table;
   $(document).ready(function(){
+    
 
     $.ajaxSetup({
         headers: {
@@ -99,6 +104,27 @@
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
+
+     $('#room-table').on('click','.btn-delete',function(){
+        let id=$(this).data('id');
+        let ans=confirm('are you sure to delete?');
+        if(ans){
+          $.ajax({
+            url:'room/'+id,
+            type:"DELETE",
+            success:function(res){
+              if(res){
+                $('.ajax-alert').removeClass('d-none');
+                $('.ajax-alert').html(res.success);
+
+              }
+            },
+            error:function(err){
+              console.log(err);
+            }
+          })
+        }
+     })
 
 
 

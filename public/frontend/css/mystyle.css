@@ -108,6 +108,34 @@ header {
   color: #fff;
 }
 
+.price-desc {
+    position: relative;
+    top: -15px;
+    font-size: 0.56rem;
+}
+
+.total-desc {
+    position: relative;
+
+    left: -45px;
+}
+
+.fee-include{
+   position: relative;
+   left: 1px;
+   top: -11px;
+   font-size: 0.56rem;
+}
+
+.left-msg {
+    position: relative;
+    left: 95px;
+    top: -20px;
+    font-size: 0.56rem;
+}
+
+
+
 
 
 

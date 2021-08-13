@@ -74,24 +74,53 @@
 
                               <div class="row">
 
-                                 <div class="col-md-2">
-                                   
-                                    <img src="{{asset('/storage/'.$company->logo)}}" class="rounded-circle " width="150px" height="150px">
+                                 <div class="col-md-2 ">
+                                    
+                                    <div class="row row-cols-12">
+                                     
+                                       <img src="{{asset('/storage/'.$company->logo)}}" class="rounded-circle " width="150px" height="150px">
 
-                                    <form method="post" id="upload_company_logo" enctype="multipart/form-data">
-                                       @csrf
-                                     <div class="row">
-                                        <div class="col-md-4 mt-3 mx-auto">
-                                             <input type="hidden" name="company_id" value="{{$company->id}}" class="company_id">
-                                             <input type="hidden" name="old_image" value="{{$company->logo}}">
-                                             <input type="file" name="file" id="file" class="inputfile" />
-                                             <label for="file">
-                                                 <i class="fas fa-edit"></i>
-                                             </label>
-                                           
+                                       <form method="post" id="upload_company_logo" enctype="multipart/form-data">
+                                          @csrf
+                                        <div class="row">
+                                          <span class="text-center mt-2">Comapny Logo</span>
+                                           <div class="col-md-4 mt-2  mx-auto">
+                                                
+                                                <input type="hidden" name="company_id" value="{{$company->id}}" class="company_id">
+                                                <input type="hidden" name="old_image" value="{{$company->logo}}">
+                                                <input type="file" name="file" id="file" class="inputfile" />
+                                                <label for="file">
+                                                    <i class="fas fa-edit"></i>
+                                                </label>
+                                              
+                                           </div>
                                         </div>
-                                     </div>
-                                    </form>
+                                       </form>
+                                    </div>
+
+                                    <div class="row row-cols-12">
+                                   
+                                       <img src="{{asset('/storage/'.$company->photo)}}" class="rounded circle " width="200px" height="220px">
+
+                                       <form method="post" id="upload_company_photo" enctype="multipart/form-data">
+                                          @csrf
+                                        <div class="row">
+                                          <span class="text-center ml-3 mt-2">Comapny License</span>
+
+                                           <div class="col-md-2 mt-3 mx-auto">
+                                                <input type="hidden" name="company_id" value="{{$company->id}}" class="company_id">
+                                                <input type="hidden" name="old_photo" value="{{$company->photo}}">
+                                                <input type="file" name="photo" id="photo" class="inputfile " />
+                                                <label for="photo">
+                                                    <i class="fas fa-edit"></i>
+                                                </label>
+                                              
+                                           </div>
+                                        </div>
+                                       </form>
+
+                                        
+                                    </div>
 
                                      
                                  </div>
@@ -108,7 +137,7 @@
                                        </div>
 
                                        <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mt-2 ml-3" for="company_name">Comapny Name</label>
+                                          <label class="form-control-label col-md-4 mt-2 ml-3" for="company_name">Company Name</label>
 
                                           <div class="col-md-6 ">
                                              <input type="text" class="form-control company_name text-dark" readonly value="{{$company->name}}" name="company_name">
@@ -248,27 +277,7 @@
                            <div class="tab-pane fade general_nav_tab" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
                               <div class="row">
 
-                                 <div class="col-md-2">
-                                   
-                                    <img src="{{asset('/storage/'.$company->photo)}}" class="rounded circle " width="200px" height="220px">
-
-                                    <form method="post" id="upload_company_photo" enctype="multipart/form-data">
-                                       @csrf
-                                     <div class="row">
-                                        <div class="col-md-4 mt-3 mx-auto">
-                                             <input type="hidden" name="company_id" value="{{$company->id}}" class="company_id">
-                                             <input type="hidden" name="old_photo" value="{{$company->photo}}">
-                                             <input type="file" name="photo" id="photo" class="inputfile " />
-                                             <label for="photo">
-                                                 <i class="fas fa-edit"></i>
-                                             </label>
-                                           
-                                        </div>
-                                     </div>
-                                    </form>
-
-                                     
-                                 </div>
+                                 
                                 
                                  <div class="col-md-5 mx-auto general_info_update">
                                     

@@ -128,3 +128,5 @@ Route::get('/booking/{cid}',[BookingController::class,'booking'])->name('booking
 });
 
 
+Route::get('/bookingdetail',[FrontController::class,'bookingdetail'])->name('bookingdetail');
+

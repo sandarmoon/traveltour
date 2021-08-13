@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Car;
+use App\Models\Booking;
+use Auth;
+
 
 class FrontController extends Controller
 {
@@ -33,5 +36,13 @@ class FrontController extends Controller
          $cities=City::whereNull('parent_id')->get();
          // dd($cars);
         return view('frontend.result',compact('cities','cars','s_date','e_date','pickup','drop'));
+    }
+
+
+    // +=========== booking detail========
+    public function bookingdetail($value='')
+    {
+        $bookings = Booking::where('user_id',Auth::id())->get();
+        return view('frontend.bookingdetail',compact('bookings'));
     }
 }

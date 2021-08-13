@@ -40,14 +40,16 @@ class Wizard extends Component
     public function render()
     {
         $cars=$this->cars;
-        
+
         $cities=City::whereNull('parent_id')->get();
+
         return view('livewire.wizard',compact('cars','cities'));
     }
 
     public function firstStepSubmit($id)
     {
         $c=Car::find($id);
+        
         $this->car=$c;
 
         foreach($c->pickuppivot as $p)

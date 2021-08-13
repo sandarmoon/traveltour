@@ -26,4 +26,8 @@ class Booking extends Model
      public function car(){
         return $this->belongsTo(Car::class);
      }
+
+     public function pickup(){
+        return $this->belongsTo(City::class,'pickup_id');
+     }
 }

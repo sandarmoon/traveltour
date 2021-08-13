@@ -9,6 +9,7 @@ use App\Models\Booking;
 use App\Models\Room;
 use App\Models\Facility;
 use App\Models\Type;
+use Session;
 
 class BackendController extends Controller
 {
@@ -126,8 +127,15 @@ class BackendController extends Controller
         return view('backend.roomcrud', ['room' => new Room(),'types'=>$types,'facilities'=>$data]);
     }
 
-    public function roomShow(Room $id){
-        echo "show it";
+    public function roomShow($id){
+        $room=Room::find($id);
+        $facilities=$room->facilities;
+         $data=collect($facilities);
+        $data=$data->groupBy('fcategory.name')->toArray();
+
+        // dd($data);
+
+        return view('frontend.room_detail',compact('room','data'));
     }
 
     public function roomStore(Request $request){
@@ -196,6 +204,7 @@ class BackendController extends Controller
          $oldphoto=json_decode($request->oldphoto,true);
         // dd($request);
          $galary=[];$photo='';
+
         if($request->hasFile('galary')){
 
             foreach($request->file('galary') as  $k=>$file){
@@ -208,15 +217,19 @@ class BackendController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             // Upload Image
             $path = $file->storeAs('galary',$fileNameToStore,'public');
+
               array_push($galary,$path);
-              $photo=json_encode($galary);
+
+              
 
               foreach($oldphoto as $v){
                 // dd($v);
-                unlink(storage_path('app/public/'.$v));
+                 unlink(storage_path('app/public/'.$v));
                }
             
            }
+           $photo=json_encode($galary);
+
         }else{
             $photo=json_encode($oldphoto);
         }
@@ -244,8 +257,12 @@ class BackendController extends Controller
 
     }
 
-    public function roomDestroy(Room $id){
-        echo "update it";
+    public function roomDestroy($id){
+       $room=Room::find($id);
+       $room->delete();
+
+       // Session::flash('status', 'data deleted successfully!');
+       return response()->json(['success'=>"Successfully deleted"]);
     }
 
    

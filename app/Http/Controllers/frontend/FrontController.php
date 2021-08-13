@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Car;
+use App\Models\Room;
 
 class FrontController extends Controller
 {
     public function index()
     {
         $cities=City::whereNull('parent_id')->get();
-        return view('frontend.home',compact('cities'));
+
+        $rooms=Room::all();
+
+        return view('frontend.home',compact('cities','rooms'));
     }
 
     public function searchCar(Request $request){

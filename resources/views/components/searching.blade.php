@@ -63,7 +63,50 @@
               <!-- end here -->
           </form>
           </div>
-          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">..p.</div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+             <form action="{{route('search.hotel')}}" class="mx-5 d-flex flex-lg-row flex-column  justify-content-lg-between justify-content-center" method="post">
+             @csrf
+              <!-- start here -->
+              
+               <div class="mb-3 px-lg-3 px-md-3 flex-grow-1 px-sm-0 px-xs-0 px-0">
+                   <label for="inputPassword2" class="">Destination </label>
+
+                    <select class="example_select2 from-control"  name="d_city_id" style="width:100%">
+                      @foreach($cities as $c)
+                      <option value="{{$c->id}}">{{$c->name}}</option>
+                      @endforeach
+                    </select>
+
+               </div>
+               <div class="mb-3 px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
+                   <label for="inputPassword2" class="">Check In</label>
+                     <input type="date" class="form-control" name="start_date" id="inputPassword2" placeholder="">
+
+
+               </div>
+               <div class="mb-3 px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
+                   <label for="inputPassword2" class="">Check Out</label>
+                    <input type="date" class="form-control" name="end_date" id="inputPassword2" placeholder="">
+
+               </div>
+
+               <div class="mb-3 px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
+                   <label for="inputPassword2" class="">General Type</label>
+                    <select name="common_type" class="form-select" aria-label="Default select example">
+                      <option selected="selected" value="1">2 Travellers,1 Room</option>
+                      <option  value="2">3 Travellers,1 Room</option>
+                    </select>
+
+               </div>
+
+               <div class=" px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
+                               <label for="inputPassword2" class="visually-hidden">Submit</label>
+                <input type="submit" class=" btn btn-success form-control btn-submit " id="inputPassword2" value="Search ...!">
+
+               </div>
+              <!-- end here -->
+          </form>
+          </div>
           <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">..k.</div>
         </div>                
     </div>

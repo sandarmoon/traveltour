@@ -267,6 +267,16 @@
               <i class="ni ni-single-02 text-yellow"></i> Cars
             </a>
           </li>
+          <li class="nav-item {{ Request::is('fcategory*') ? 'active' : '' }}">
+            <a class="nav-link " href="{{route('fcategory.index')}}">
+              <i class="ni ni-single-02 text-yellow"></i> Facility Category
+            </a>
+          </li>
+          <li class="nav-item {{ Request::is('facility*') ? 'active' : '' }}">
+            <a class="nav-link " href="{{route('facility.index')}}">
+              <i class="ni ni-single-02 text-yellow"></i> Facility sub Category
+            </a>
+          </li>
           <li class="nav-item {{ Request::segment(1) === 'partnerships' || Request::segment(1) === 'detail' ? 'active' : '' }}">
             <a class="nav-link  " href="{{route('partnership')}}">
               <i class="ni ni-bullet-list-67 text-red"></i> Partnership

@@ -24,6 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('incharge_name')->nullable();
             $table->string('incharge_phone')->nullable();
             $table->string('incharge_position')->nullable();
+            $table->integer('type')->nullable();
             $table->integer('status')->default(1);
             $table->text('info')->nullable();
             $table->string('service_label_one')->nullable();
@@ -32,7 +33,12 @@ class CreateCompaniesTable extends Migration
             $table->text('service_desc_one')->nullable();
             $table->text('service_desc_two')->nullable();
             $table->text('service_desc_three')->nullable();
+            $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('user_id');
+            $table->foreign('city_id')
+                    ->references('id')
+                    ->on('cities')
+                    ->onDelete('cascade');
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')

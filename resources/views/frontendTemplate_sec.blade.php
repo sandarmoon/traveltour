@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>A Agency</title>
-         
+        @livewireStyles
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -17,18 +18,24 @@
         <link href="{{asset('frontend/css/styles.css')}}" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+ <link href="{{ asset('multiform.css') }}" rel="stylesheet" id="bootstrap">
         <link href="{{asset('frontend/css/mystyle.css')}}" rel="stylesheet" />
-       
+
     </head>
     <body>
         <!-- Navigation-->
-        <main>
-            @include('layouts/nav')
+        @include('layouts/nav')
        
-            @yield('main')
-       </main>
+      
+        <section class="container">
+             @yield('main-content')
+        </section>
+
+        
+            
+        
         <!-- Footer-->
-        <footer class="py-5 bg-dark" style="position: fixed; bottom: 0; width: 100%;">
+        <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
         </footer>
          <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
@@ -45,7 +52,7 @@
             });
             
         </script>
-
+        @livewireScripts
         @yield('script')
     </body>
 </html>

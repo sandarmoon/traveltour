@@ -19,6 +19,7 @@ class Company extends Component
 
     public $currentStep = 1;
     public $company;
+    public $cities;
     public $username,$email,$password,$password_confirmation;
     public $name, $price, $detail, $status = 1;
     public  $logo,$license,$info,$phone,$address;
@@ -26,6 +27,7 @@ class Company extends Component
     public $message="";
 
     public $ceo_name='';
+    public $city_id=0;
     public $incharge_name,$incharge_position,$incharge_phone;
     public $service_label_one,
             $service_label_two,
@@ -40,7 +42,10 @@ class Company extends Component
             $this->currentStep++;
         }
     }
-    
+    public function mount($cities){
+        $this->cities=$cities;
+        
+    }
 
     public function render()
     {
@@ -90,6 +95,7 @@ class Company extends Component
                     'info' => 'required',
                     'phone' => 'required',
                     'address' => 'required',
+                    'city_id'=>'required'
                 ]);
                 $filename=time();
 
@@ -109,7 +115,8 @@ class Company extends Component
                     'phone'=>$this->phone,
                     'addresss'=>$this->address,
                     'status'=>1,
-                    'user_id'=>Auth::user()->id
+                    'user_id'=>Auth::user()->id,
+                    'city_id'=>$this->city_id,
                  ]);
                   // $this->successMsg = 'Company already exists!';
                  $this->currentStep=3;

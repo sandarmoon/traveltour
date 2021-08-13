@@ -40,7 +40,8 @@ class FrontController extends Controller
         // }
          $cities=City::whereNull('parent_id')->get();
          // dd($cars);
-        return view('frontend.result',compact('cities','cars','s_date','e_date','pickup','drop'));
+         $search=1;
+        return view('frontend.result',compact('cities','cars','s_date','e_date','pickup','drop','search'));
     }
 
 
@@ -49,5 +50,21 @@ class FrontController extends Controller
     {
         $bookings = Booking::where('user_id',Auth::id())->get();
         return view('frontend.bookingdetail',compact('bookings'));
+    }
+
+    // ===================hotel bookin start now======================
+    public function searchHotel(Request $request){
+        // echo "helo worl";
+
+        $drop=$request->d_city_id;
+        $s_date=$request->start_date;
+        $e_date=$request->end_date;
+        $common_type=$request->common_type;
+
+       
+        $cities=City::whereNull('parent_id')->get();
+        $drop=City::find($drop);
+        $search=2;
+        return view('frontend.hotel',compact('cities','s_date','e_date','drop','search'));
     }
 }

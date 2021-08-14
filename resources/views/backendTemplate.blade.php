@@ -37,6 +37,10 @@
   {{-- datatable css --}}
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
+
+{{-- summernote --}}
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
   <!-- CSS Files -->
   <link href="{{asset('assets/css/argon-dashboard.css?v=1.1.1')}}" rel="stylesheet" />
   <style>
@@ -406,7 +410,8 @@
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+  {{-- summernote --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   <script>
     
     window.TrackJS &&
@@ -415,6 +420,10 @@
         application: "argon-dashboard-free"
       });
   </script>
+
+  <script>
+      $('.summernote').summernote();
+    </script>
     @yield('script')
 </body>
 

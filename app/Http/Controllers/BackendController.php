@@ -342,18 +342,48 @@ class BackendController extends Controller
     }
 
 
-    public function edit_general_info(Request $request)
+    public function edit_company_service_info(Request $request)
     {
-        $tab=1;
-        $company = Company::find($request->id);
-        $company->service_label_one = $request->service_label_one;
-        $company->service_label_two = $request->service_label_two;
-        $company->service_label_three = $request->service_label_three;
-        $company->service_desc_one = $request->service_desc_one;
-        $company->service_desc_two = $request->service_desc_two;
-        $company->service_desc_three = $request->service_desc_three;
-        $company->save();
-       return response()->json(['success'=>'Successfully']);
+        // dd($request);
+        if($request->service_label_one_data){
+
+            $company = Company::find($request->id);
+            $company->service_label_one = $request->service_label_one_data;
+            $company->save();
+
+        }elseif($request->service_label_two_data){
+
+            $company = Company::find($request->id);
+            $company->service_label_two = $request->service_label_two_data;
+            $company->save();
+
+        }elseif($request->service_label_three_data){
+
+            $company = Company::find($request->id);
+            $company->service_label_three = $request->service_label_three_data;
+            $company->save();
+
+        }elseif($request->service_desc_one_data){
+
+            $company = Company::find($request->id);
+            $company->service_desc_one = $request->service_desc_one_data;
+            $company->save();
+
+        }elseif($request->service_desc_two_data){
+           
+           $company = Company::find($request->id);
+           $company->service_desc_two = $request->service_desc_two_data;
+           $company->save();
+            
+        }elseif($request->service_desc_three_data){
+
+            $company = Company::find($request->id);
+            $company->service_desc_three = $request->service_desc_three_data;
+            $company->save();
+            
+        }
+        return response()->json(['success'=>'Successfully']);
+       
 
 
     }

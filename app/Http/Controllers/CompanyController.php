@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\City;
 
 class CompanyController extends Controller
 {
@@ -13,7 +14,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('frontend.company.partner_new');
+        $cities=City::whereNull('parent_id')->get();
+        // dd($cities);
+        return view('frontend.company.partner_new',compact('cities'));
     }
 
     /**

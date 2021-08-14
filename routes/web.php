@@ -113,6 +113,8 @@ Route::delete('/{id}',[BackendController::class,'roomDestroy'])->name('room.dest
 
 Route::get('/get/rooms',[BackendController::class,'getRoomAjax'])->name('ajax.getroomAjax');
 
+
+
 });
 
 
@@ -125,6 +127,13 @@ Route::get('/',[FrontController::class,'index'])->name('frontend.index');
 Route::post('/scar',[FrontController::class,'searchCar'])->name('search.car')->middleware('auth');
 // Booking survey start
 Route::get('/booking/{cid}',[BookingController::class,'booking'])->name('booking');
+
+// Hotel booking start here
+Route::post('/shotel',[FrontController::class,'searchHotel'])->name('search.hotel');
+
+// Hotel booking end here
+
+
 });
 
 

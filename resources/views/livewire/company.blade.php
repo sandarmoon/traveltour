@@ -109,6 +109,16 @@
                    
                 </div>
                 <div class="form-group mb-3">
+                    <label for="phone">City:</label> @error('city') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <select wire:model="city_id"  class="form-select" id="">
+                        <option value="">Please select</option>
+                        @foreach($cities as $c)
+                        <option value="{{$c->id}}">{{$c->name}}</option>
+                        @endforeach
+                    </select>
+                   
+                </div>
+                <div class="form-group mb-3">
                     <label for="phone">Phone:</label> @error('phone') <span class="error text-danger">{{ $message }}</span> @enderror
                     <input type="text" wire:model="phone" class="form-control"
                         id="phone" >

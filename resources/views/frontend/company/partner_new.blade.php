@@ -1,7 +1,7 @@
 @extends('frontendTemplate')
 @section('main')
 <!-- Header-->
-         <livewire:company :cities="$cities" />
+         <livewire:company :cities="$cities" :id="$id"/>
         
 @endsection
 @section('script')

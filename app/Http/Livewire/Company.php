@@ -20,6 +20,7 @@ class Company extends Component
     public $currentStep = 1;
     public $company;
     public $cities;
+    public $id;
     public $username,$email,$password,$password_confirmation;
     public $name, $price, $detail, $status = 1;
     public  $logo,$license,$info,$phone,$address;
@@ -42,8 +43,9 @@ class Company extends Component
             $this->currentStep++;
         }
     }
-    public function mount($cities){
+    public function mount($cities,$id){
         $this->cities=$cities;
+        $this->id=$id;
         
     }
 
@@ -115,6 +117,7 @@ class Company extends Component
                     'phone'=>$this->phone,
                     'addresss'=>$this->address,
                     'status'=>1,
+                    'type'=>$this->id,
                     'user_id'=>Auth::user()->id,
                     'city_id'=>$this->city_id,
                  ]);

@@ -28,6 +28,7 @@ use App\Http\Controllers\BrandController;
 Route::get('/',[FrontController::class,'index'])->name('frontend.index');
 
 Route::resource('company',CompanyController::class);
+Route::get('/company/index/{id}',[CompanyController::class,'getTypePartner'])->name('company.create.partner');
 
 Route::get('/dashboard', function () {
     return view('backend.car');

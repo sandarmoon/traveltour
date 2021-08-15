@@ -60,6 +60,7 @@ class FrontController extends Controller
         // echo "helo worl";
 
         $drop=$request->d_city_id;
+        // dd($drop);
         $s_date=$request->start_date;
         $e_date=$request->end_date;
         $common_type=$request->common_type;
@@ -73,7 +74,7 @@ class FrontController extends Controller
 
         })->with('room')->where('type','=','1')->get();
 
-        dd($hotels);
+        // dd($hotels);
 
 
         $cities=City::whereNull('parent_id')->get();

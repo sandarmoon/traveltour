@@ -276,7 +276,7 @@ class BackendController extends Controller
 
     
     public function  getRoomAjax(){
-        // dd(Auth::user()->company->id);
+        //  dd(Auth::user()->company->id);
         $rooms=null;
         if(Auth::check()){
             $role=Auth::user()->roles[0];

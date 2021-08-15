@@ -32,6 +32,7 @@
                         @else
                         <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>
                         <li><a class="dropdown-item" href="{{route('register')}}">SignUp</a></li>
+                        <li><a class="dropdown-item" href="{{route('company.index')}}">Partnership</a></li>
                         @endif
                     </ul>
                 </li>

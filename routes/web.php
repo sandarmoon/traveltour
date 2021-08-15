@@ -132,7 +132,7 @@ Route::get('/booking/{cid}',[BookingController::class,'booking'])->name('booking
 Route::post('/shotel',[FrontController::class,'searchHotel'])->name('search.hotel');
 
 // Hotel booking end here
-
+Route::get('/rooms/{id}',[FrontController::class,'roomsByHotelId'])->name('rooms.hotelid');
 
 });
 

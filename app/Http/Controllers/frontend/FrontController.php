@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Car;
+use App\Models\Company;
+use App\Models\Facility;
+use App\Models\Room;
 
 use App\Models\Booking;
 use Auth;
 
-use App\Models\Room;
+
 
 class FrontController extends Controller
 {
@@ -60,11 +63,47 @@ class FrontController extends Controller
         $s_date=$request->start_date;
         $e_date=$request->end_date;
         $common_type=$request->common_type;
+        // dd($common_type);
 
-       
+       // $hotels=Company::where('type',1)->where('city_id',$drop)
+       //  ->get();
+
+        $hotels=Company::whereHas('room',function($q){
+            $q->where('status','=','1')->orderBy('pricepernight','asc');
+
+        })->with('room')->where('type','=','1')->get();
+
+        // dd($hotels);
+
+
         $cities=City::whereNull('parent_id')->get();
         $drop=City::find($drop);
         $search=2;
-        return view('frontend.hotel',compact('cities','s_date','e_date','drop','search'));
+
+        // dd($hotels);
+        return view('frontend.hotelresult',compact('cities','s_date','e_date','drop','search','hotels'));
+    }
+
+    // rooms result from hotel id aco
+    public  function  roomsByHotelId($id){
+         $cities=City::whereNull('parent_id')->get();
+         $h=Company::find($id);
+
+         $rooms=Room::where('company_id',$h->id)->with('facilities')->get();
+
+         $facilities = Facility::whereHas('rooms', function($q) use($id) {
+                        $q->where('company_id', $id);
+                    })
+                    ->get();
+
+            $data=collect($facilities);
+            $popular_facilities=$data->groupBy('fcategory.name')->toArray();
+        
+
+         
+         
+
+         $rooms=Room::where('company_id',$h->id)->get();
+        return view('frontend.hotel_rooms_list',compact('cities','h','popular_facilities','rooms'));
     }
 }

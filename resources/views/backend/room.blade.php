@@ -3,28 +3,28 @@
 
 
 
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-7">
+  <div class="header bg-gradient-primary pb-8 pt-5 pt-md-7">
       <div class="container-fluid">
         <div class="my-ct-page-title text-white">
-          <h1 class="ct-title text-white" id="content">
-            Room Management
+          <h1 class="ct-title text-white d-inline-block" id="content">
+            Hotel Room 
           </h1>
-          <div class="avatar-group mt-3">
-          </div>
+         
+          <a class="ct-example text-white float-right border-0" href="{{route('room.create')}}">
+            <i class="fas fa-plus-square me-1"></i>
+                <span class="error-name">New Hotel Room</span>
+          </a>
+          
         </div>
-
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
-
-         <div class="alert ajax-alert alert-success d-none">
-               
-            </div>
-       
+        
+        @if ($message = Session::get('status'))
+              <div class="alert alert-success">
+                  <p>{{ $message }}</p>
+              </div>
+          @endif
         
       </div>
+
     </div>
     <div class="container-fluid mt--7">
       <div class="my-card">

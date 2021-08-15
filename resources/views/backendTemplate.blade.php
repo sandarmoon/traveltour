@@ -277,6 +277,12 @@
               <i class="ni ni-single-02 text-yellow"></i> Facility sub Category
             </a>
           </li>
+          <li class="nav-item {{ Request::is('room*') ? 'active' : '' }}">
+            <a class="nav-link " href="{{route('room.index')}}">
+              <i class="ni ni-single-02 text-yellow"></i> Hotel Room
+            </a>
+          </li>
+
           <li class="nav-item {{ Request::segment(1) === 'partnerships' || Request::segment(1) === 'detail' ? 'active' : '' }}">
             <a class="nav-link  " href="{{route('partnership')}}">
               <i class="ni ni-bullet-list-67 text-red"></i> Partnership

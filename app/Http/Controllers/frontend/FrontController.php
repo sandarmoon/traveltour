@@ -73,7 +73,7 @@ class FrontController extends Controller
 
         })->with('room')->where('type','=','1')->get();
 
-        dd($hotels);
+        // dd($hotels);
 
 
         $cities=City::whereNull('parent_id')->get();

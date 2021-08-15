@@ -32,7 +32,10 @@
                         @else
                         <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>
                         <li><a class="dropdown-item" href="{{route('register')}}">SignUp</a></li>
-                        <li><a class="dropdown-item" href="{{route('company.index')}}">Partnership</a></li>
+                        <li><a class="dropdown-item" >Partnership</a></li>
+                        <hr class="my-2">
+                        <li><a class="dropdown-item" href="{{route('company.create.partner',2)}}">Car Partnership</a></li>
+                        <li><a class="dropdown-item" href="{{route('company.create.partner',1)}}">Hotel Partnership</a></li>
                         @endif
                     </ul>
                 </li>

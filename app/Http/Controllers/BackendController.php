@@ -133,7 +133,7 @@ class BackendController extends Controller
 
     public function roomShow($id){
         $room=Room::find($id);
-        
+
         $facilities=$room->facilities;
          $data=collect($facilities);
         $data=$data->groupBy('fcategory.name')->toArray();
@@ -174,7 +174,7 @@ class BackendController extends Controller
             'queen'=>$request->queen,
             'ppl'=>$request->people,
             'pricepernight'=>$request->price,
-            'company_id'=>1,
+            'company_id'=>Auth::user()->company->id,
             'common'=>$request->common,
             'status'=>1,
 

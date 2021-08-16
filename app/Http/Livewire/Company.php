@@ -20,6 +20,7 @@ class Company extends Component
     public $currentStep = 1;
     public $company;
     public $cities;
+    public $id;
     public $username,$email,$password,$password_confirmation;
     public $name, $price, $detail, $status = 1;
     public  $logo,$license,$info,$phone,$address;
@@ -42,8 +43,9 @@ class Company extends Component
             $this->currentStep++;
         }
     }
-    public function mount($cities){
+    public function mount($cities,$id){
         $this->cities=$cities;
+        $this->id=$id;
         
     }
 
@@ -84,11 +86,53 @@ class Company extends Component
      */
     public function secondStepSubmit()
     {
-        // dd('helo');
+        
 
         if(Auth::user()->hasRole('company')){
             if(empty(Auth::user()->company)){
                 $validatedData = $this->validate([
+                    'name' => 'required|unique:companies',
+                    'logo' => 'required|image|max:1024',
+                    'license' => 'required|image|max:1024',
+                    'info' => 'required',
+                    'phone' => 'required',
+                    'address' => 'required',
+                    'city_id'=>'required'
+                ]);
+                $filename=time();
+
+                $path = $this->logo->storeAs('logo',$filename,'public');
+                 $license = $this->logo->storeAs('license','l-'.$filename,'public');
+
+                
+                // if(Auth::check() && Auth::user()->hasRole()){
+
+                // }
+                 
+                 $this->company=\App\Models\Company::create([
+                    'name'=>$this->name,
+                    'logo'=>$path,
+                    'photo'=>$license,
+                    'info'=>$this->info,
+                    'phone'=>$this->phone,
+                    'addresss'=>$this->address,
+                    'status'=>1,
+                    'type'=>$this->id,
+                    'user_id'=>Auth::user()->id,
+                    'city_id'=>$this->city_id,
+                 ]);
+                  // $this->successMsg = 'Company already exists!';
+                 $this->currentStep=3;
+                
+            }else{
+                
+                $this->currentStep=1;
+                $this->successMsg = 'Company already exists!';
+                
+                
+            }
+        }else{
+            $validatedData = $this->validate([
                     'name' => 'required|unique:companies',
                     'logo' => 'required|image|max:1024',
                     'license' => 'required|image|max:1024',
@@ -120,14 +164,6 @@ class Company extends Component
                  ]);
                   // $this->successMsg = 'Company already exists!';
                  $this->currentStep=3;
-                
-            }else{
-                
-                $this->currentStep=1;
-                $this->successMsg = 'Company already exists!';
-                
-                
-            }
         }
 
          

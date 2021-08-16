@@ -62,7 +62,7 @@
                 </div>
                 @php
                 $photos=json_decode($room->photos,true);
-                $s=1;
+                $s=0;
                 @endphp
                 <div class="col-md-7">
                    <div class="card">
@@ -88,6 +88,7 @@
                                     <span class="total-desc  small mb-2 text-dark ">{{$room->pricepernight+ 10}} total</span><br/>
                                      
                                     <span class="fee-include  small mb-2 text-dark ">includes tax and fees</span>
+                                    
                                 </div>
                                 <div>
                                      <span class="left-msg  small mb-2 text-danger ">We have 4 left!</span>

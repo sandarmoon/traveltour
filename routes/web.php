@@ -28,6 +28,7 @@ use App\Http\Controllers\BrandController;
 Route::get('/',[FrontController::class,'index'])->name('frontend.index');
 
 Route::resource('company',CompanyController::class);
+Route::get('/company/index/{id}',[CompanyController::class,'getTypePartner'])->name('company.create.partner');
 
 Route::get('/dashboard', function () {
     return view('backend.car');
@@ -132,7 +133,7 @@ Route::get('/booking/{cid}',[BookingController::class,'booking'])->name('booking
 Route::post('/shotel',[FrontController::class,'searchHotel'])->name('search.hotel');
 
 // Hotel booking end here
-
+Route::get('/rooms/{id}',[FrontController::class,'roomsByHotelId'])->name('rooms.hotelid');
 
 });
 

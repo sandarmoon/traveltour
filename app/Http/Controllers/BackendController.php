@@ -10,9 +10,12 @@ use App\Models\Room;
 use App\Models\Facility;
 use App\Models\Type;
 use Session;
+use  Auth;
 
 class BackendController extends Controller
+
 {
+
     public function partnership(){
         
 
@@ -130,6 +133,7 @@ class BackendController extends Controller
 
     public function roomShow($id){
         $room=Room::find($id);
+
         $facilities=$room->facilities;
          $data=collect($facilities);
         $data=$data->groupBy('fcategory.name')->toArray();
@@ -140,7 +144,7 @@ class BackendController extends Controller
     }
 
     public function roomStore(Request $request){
-          dd($request);
+          // dd($request);
         $galary=[];
         if($request->hasFile('galary')){
 
@@ -170,7 +174,7 @@ class BackendController extends Controller
             'queen'=>$request->queen,
             'ppl'=>$request->people,
             'pricepernight'=>$request->price,
-            'company_id'=>1,
+            'company_id'=>Auth::user()->company->id,
             'common'=>$request->common,
             'status'=>1,
 
@@ -248,7 +252,7 @@ class BackendController extends Controller
             $room->queen=$request->queen;
             $room->ppl=$request->people;
             $room->pricepernight=$request->price;
-            $room->company_id=1;
+            $room->company_id=Auth::user()->company->id;
             $room->common=$request->common;
             $room->status=1;
             $room->save();
@@ -272,8 +276,22 @@ class BackendController extends Controller
 
     
     public function  getRoomAjax(){
-        $rooms= Room::with(['type','company','facilities'])->get();
+        // dd(Auth::user()->company->id);
+        $rooms=null;
+        if(Auth::check()){
+            $role=Auth::user()->roles[0];
 
+            if($role->name=="company"){
+
+                $rooms= Room::with(['type','company','facilities'])
+                    ->where('company_id','=',Auth::user()->company->id)->get();
+
+            }
+        }else{
+            $rooms= Room::with(['type','company','facilities'])->get();
+
+        }
+        
         $datatables=Datatable::of($rooms)
             ->addColumn('action',function($room){
 

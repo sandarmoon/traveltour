@@ -9,12 +9,13 @@
         @include('layouts.slider')
         <x-searching :cities="$cities"  ></x-searching>
 
-        <div class="container mt-0 my-3">
+        <div class="d-none">
+            <div class="container mt-0 my-3">
             <div class="row ">
                 @foreach($rooms as $room)
                 @php
                 $photos=json_decode($room->photos,true);
-                $s=1;
+                $s=0;
                 @endphp
                 <div class="col-md-4">
                     <div class="card">
@@ -70,6 +71,7 @@
                 </div>
                 @endforeach
             </div>
+        </div>
         </div>
         
 @endsection

@@ -19,6 +19,14 @@ class CompanyController extends Controller
         return view('frontend.company.partner_new',compact('cities'));
     }
 
+    public function getTypePartner($id)
+    {
+        // dd('heo');
+        $cities=City::whereNull('parent_id')->get();
+        // dd($cities);
+        return view('frontend.company.partner_new',compact('cities','id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

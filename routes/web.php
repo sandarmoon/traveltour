@@ -137,5 +137,6 @@ Route::post('/shotel',[FrontController::class,'searchHotel'])->name('search.hote
 });
 
 
-Route::get('/bookingdetail',[FrontController::class,'bookingdetail'])->name('bookingdetail');
+Route::get('/bookinghistory',[FrontController::class,'bookinghistory'])->name('bookinghistory');
+Route::get('/bookingdetail/{id}',[FrontController::class,'bookingdetail'])->name('bookingdetail');
 

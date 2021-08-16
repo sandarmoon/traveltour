@@ -12,11 +12,9 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <div class="row">
-            <div class="col-md-10 mx-auto">
-                <div class="row">
+        
                     <div class="col-md-6">
-                        
+                        hell
                     </div>
                     <div class="col-md-6">
                         <form method="POST" action="{{ route('login') }}">
@@ -60,10 +58,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-            
-        </div>
+               
 
         
     </x-auth-card>

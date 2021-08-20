@@ -13,7 +13,7 @@
                 @if($view == 1)
                    <h2> Booking History </h2>       
                 @elseif($view == 2)
-                    <h2>Car Booking Detail</h2>
+                    <h2>Car Booking</h2>
                     <a href="{{route('bookinghistory')}}" class="mr-5 float-right btn btn-info text-white"><i class="fas fa-arrow-left"></i> Back</a>
                 @endif
                     

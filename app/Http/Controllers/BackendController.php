@@ -53,8 +53,7 @@ class BackendController extends Controller
 
                 return "<button class='btn btn-danger btn-delete' data-id=".$company->id."><i class='fas fa-trash'></i></button>
 
-                <a href=company/$company->id/edit class='btn btn-warning btn-edit' data-id=".$company->id."><i class='fas fa-edit'></i></a>
-
+               
 
 
                 <a href=detail/cp/$company->id class='btn btn-info btn-edit' data-id=".$company->id."><i class='fas fa-info-circle'></i></a>

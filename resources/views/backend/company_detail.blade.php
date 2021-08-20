@@ -276,9 +276,9 @@
                               <div class="row">
 
 
-                                 <span class="text-danger mb-4">
+                                 {{-- <span class="text-danger mb-4">
                                      <i class="fas fa-exclamation-triangle text-warning"></i>If you want edit your general Info, <h4 class="d-inline-block text-danger">click text</h4> .
-                                 </span>
+                                 </span> --}}
 
 
 
@@ -547,7 +547,7 @@
 
                                                    <div class="form-control service_desc_three_data summernote">
 
-                                                      {{$company->service_desc_three}}
+                                                      {!! $company->service_desc_three !!}
                                                    </div>
 
                                                    <div class="row row-cols-8 offset-1 mx-auto mt-2">
@@ -898,14 +898,19 @@
           localStorage.setItem('currentActiveTab', $(e.target).attr('id'));
       });
 
-      var selectedTab = localStorage.getItem('currentActiveTab');
+      var selectedlocal = localStorage.getItem('currentActiveTab');
+      if(selectedlocal == null){
+         var selectedTab = "tabs-icons-text-1-tab";
+      }
       
          var data = ('#'+selectedTab);
          $(data).tab('show'); 
-
+         console.log(selectedTab);
          if(selectedTab == "tabs-icons-text-1-tab"){
+
             tag = 0;
             showtag(tag);
+
          }else{
 
             tag = 1;

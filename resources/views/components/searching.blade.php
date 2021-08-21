@@ -8,7 +8,7 @@
                 <p class="label-text  mt-2" > Car</p>
             </div>
 
-            <div class="search-item col bg-light py-4  d-flex justify-content-center     " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+            <div class="search-item col bg-light py-4  d-flex justify-content-center " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
              <span class="icon icon-hotel"></span>
              <p class="label-text mt-2">Hotel</p>
             </div>
@@ -63,13 +63,13 @@
               <!-- end here -->
           </form>
           </div>
-          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <div class="tab-pane fade  " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
              <form action="{{route('search.hotel')}}" class="mx-5 d-flex flex-lg-row flex-column  justify-content-lg-between justify-content-center" method="post">
              @csrf
               <!-- start here -->
               
                <div class="mb-3 px-lg-3 px-md-3 flex-grow-1 px-sm-0 px-xs-0 px-0">
-                   <label for="inputPassword2" class="">Destination </label>
+                   <label for="inputPassword2" class="">Destination @error('d_city_id') <span class="text-danger">required</span> @enderror</label>
 
                     <select class="example_select2 from-control"  name="d_city_id" style="width:100%">
                       @foreach($cities as $c)
@@ -79,13 +79,14 @@
 
                </div>
                <div class="mb-3 px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
-                   <label for="inputPassword2" class="">Check In</label>
+                   <label for="inputPassword2" class="
+                   ">Check In @error('start_date') <span class="text-danger">required</span> @enderror </label>
                      <input type="date" class="form-control" name="start_date" id="inputPassword2" placeholder="">
 
 
                </div>
                <div class="mb-3 px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
-                   <label for="inputPassword2" class="">Check Out</label>
+                   <label for="inputPassword2" class="">Check Out  @error('end_date') <span class="text-danger">required</span> @enderror</label>
                     <input type="date" class="form-control" name="end_date" id="inputPassword2" placeholder="">
 
                </div>
@@ -111,3 +112,38 @@
         </div>                
     </div>
 </div>
+@push('script')
+
+
+
+   
+    
+       @if(!empty(Session::get('error_code')) && Session::get('error_code') == 2)
+        <script>
+        $(function() {
+             $('.nav-tabs .active').removeClass('active');
+             $('.tab-content .active').removeClass('active');
+            $('#nav-profile-tab').addClass('active');
+            $('#nav-profile').removeClass('fade');
+            $('#nav-profile').addClass('active');
+           
+        });
+        </script>
+        @endif
+        
+        @if(!empty(Session::get('error_code')) && Session::get('error_code') == 3)
+        <script>
+        $(function() {
+             
+           
+            $('#authModal').modal('show');
+           
+        });
+        </script>
+        @endif
+       
+
+    
+    
+
+@endpush

@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>A Agency</title>
         <!-- Favicon-->
         @livewireStyles
@@ -17,9 +18,10 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{asset('frontend/css/styles.css')}}" rel="stylesheet" />
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
          <link href="{{ asset('multiform.css') }}" rel="stylesheet" id="bootstrap">
         <link href="{{asset('frontend/css/mystyle.css')}}" rel="stylesheet" />
-          <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+         
         
        
         
@@ -43,6 +45,7 @@
                 min-height:200px;
             }
         </style>
+        @stack('style')
     </head>
     <body>
         <!-- Navigation-->
@@ -59,7 +62,7 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
         </footer>
-          <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
+          <script src="{{asset('assets/js/plugins/jquery/dist/jquery.min.js')}}"></script>
          <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -75,7 +78,7 @@
 
           
         @livewireScripts
-
+        
 
         @stack('script')
        

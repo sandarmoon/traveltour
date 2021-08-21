@@ -133,10 +133,18 @@ Route::get('/booking/{cid}',[BookingController::class,'booking'])->name('booking
 Route::post('/shotel',[FrontController::class,'searchHotel'])->name('search.hotel');
 
 // Hotel booking end here
-Route::get('/rooms/{id}',[FrontController::class,'roomsByHotelId'])->name('rooms.hotelid');
+Route::post('/rooms/h',[FrontController::class,'roomsByHotelId'])->name('rooms.hotelid');
 
 });
 
 
 Route::get('/bookingdetail',[FrontController::class,'bookingdetail'])->name('bookingdetail');
+Route::post('/filter/{count}/{id}',[FrontController::class,'filterByPplCount'])->name('filter.pplcount.room');
+
+// Room booking startng from user
+
+// Route::get('/booking/r',[FrontController::class,'rBookingPreview'])->name('preview.room.booking');
+
+Route::get('/booking/r/{id}',[FrontController::class,'bookingRoom'])->name('booking.room');
+Route::post('/rbooking/detail',[FrontController::class,'roomBookingDetail'])->name('room.rbooking.detail');
 

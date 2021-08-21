@@ -14,7 +14,17 @@
             </div>
         </header>
         <div class="col-md-10 offset-1 p-3 ">
-            
+            {{-- <input type="hidden" name="user_id" value="{{Auth::user()->id}}"> --}}
+            <form action="{{route('rooms.hotelid')}}" method="post"  >
+                @csrf
+                <input type="hidden" name="h_id" value="">
+                <input type="hidden" name="s_date" value="{{$s_date}}">
+                <input type="hidden" name="e_date" value="{{$e_date}}">
+                <input type="hidden" name="drop_id" value="{{$drop->id}}">
+                <input type="hidden" name="search" value="{{$search}}">
+                <input type="hidden" name="c_type" value="{{$common_type}}">
+                <input type="submit" class="d-none">
+            </form>
             <div class="row">
                 @foreach($hotels as $h)
                     <div class="col-md-6">
@@ -55,11 +65,15 @@
 @push('script')
 <script>
     $(document).ready(function(){
-       $('.card').click(function(){
-            let id=$(this).data('id');
-            window.location.href="rooms/"+id;
-       })
+            $('.card').click(function(){
+                
+                let h_id=$(this).data('id');
+                 $('input[name="h_id"]').val(h_id);
+                $('form').submit();
+            })
+            
+           
+
     })
-    
 </script>
 @endpush

@@ -291,6 +291,8 @@
             <a class="nav-link  " href="{{route('partnership')}}">
               <i class="ni ni-bullet-list-67 text-red"></i> Partnership
             </a>
+            <input type="hidden" name="url" value="{{Request::segment(1)}}" class="url">
+
           </li>
           <li class="nav-item {{ Request::is('list*') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('list.car')}}">
@@ -452,6 +454,13 @@
       });
     </script>
     @yield('script')
+    <script type="text/javascript">
+      $(document).ready(function(argument) {
+        if($('.url').val() != "detail"){
+          localStorage.clear();
+        }
+      })
+    </script>
 </body>
 
 </html>     

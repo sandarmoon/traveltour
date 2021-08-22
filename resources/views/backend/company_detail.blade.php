@@ -58,7 +58,6 @@
                   <div class="card-header pb-0">
                       
                       <ul class="nav nav-tabs" id="tabs-icons-text" role="tablist">
-                        
                           <li class="nav-item">
                               <a class="nav-link mb-sm-3 mb-md-0  main_nav" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true">
                                  Main Info
@@ -86,7 +85,9 @@
                                     
                                     <div class="row row-cols-12">
                                      
+                                    <a href="{{asset('/storage/'.$company->logo)}}" target="_blank">
                                        <img src="{{asset('/storage/'.$company->logo)}}" class="rounded-circle " width="150px" height="150px">
+                                    </a>
 
                                        <form method="post" id="upload_company_logo" enctype="multipart/form-data">
                                           @csrf
@@ -108,7 +109,9 @@
 
                                     <div class="row row-cols-12">
                                    
+                                    <a href="{{asset('/storage/'.$company->photo)}}" target="_blank">
                                        <img src="{{asset('/storage/'.$company->photo)}}" class="rounded circle " width="200px" height="220px">
+                                    </a>
 
                                        <form method="post" id="upload_company_photo" enctype="multipart/form-data">
                                           @csrf
@@ -688,6 +691,7 @@
 @section('script')
 <script type="text/javascript">
    $(document).ready(function(){
+
 
       $.ajaxSetup({
            headers: {

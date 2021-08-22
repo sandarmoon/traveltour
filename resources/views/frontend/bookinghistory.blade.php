@@ -6,7 +6,7 @@
             {{ session('message') }}
         </div>
     @endif
-       <section>
+       <div class="container-fluid" style="height: 100vh;">
 
            <div class="container mt-5">
                <div class="d-flex justify-content-between align-items-center">
@@ -30,7 +30,7 @@
                     {{-- booking history --}}
 
                    <div class="card shadow bookinghistory">
-                    @if($bookings != "No Data")
+                    @if($view ==1 && count($bookings) > 0)
                         <div class="card-header">
                             
 
@@ -40,14 +40,18 @@
                               <nav>
                                   <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
+                                    {{-- @if(Auth::user()->bookings) --}}
+
                                     <button class="nav-link active car_nav" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
                                         Car Booking
                                     </button>
+                                    {{-- @else --}}
 
                                     <button class="nav-link hotel_nav" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
                                          Hotel Booking
                                     </button>
 
+                                    {{-- @endif --}}
                                   </div>
                                 </nav>
 
@@ -126,6 +130,65 @@
                                   {{-- hotel info --}}
                                   <div class="tab-pane fade hotel_nav_tab" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                       
+
+                                    <table class="table table-responsive">
+                                       <thead class="bg-dark text-white">
+                                           <tr>
+                                               <th>No.</th>
+                                               <th>Name</th>
+                                               <th>Email</th>
+                                               <th>Room</th>
+                                               <th>Travellers</th>
+                                               <th>Booking Date</th>
+                                               <th>Status</th>
+                                               <th>Action</th>
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                        @php
+                                        $i=1;
+                                        @endphp
+                                        @foreach($bookings as $booking)
+                                           <tr>
+                                               <td>{{$i++}}.</td>
+                                               <td>{{$booking->user->name}}</td>
+                                               <td>{{$booking->user->email}}</td>
+                                               <td>{{$booking->car->name}}</td>
+                                               <td>{{$booking->car->brand->name}} / {{$booking->car->model}}</td>
+                                               <td>
+                                                    @php
+                                                    $date=date_create($booking->booking_date);
+                                                    $date= date_format($date,"d M Y");
+                                                    @endphp
+                                                    {{$date}}
+                                               </td>
+                                               <td>
+                                                  
+                                                    @if($booking->status == 1)
+
+                                                    <span class="col-md-7 text-primary">Pending</span>
+
+                                                    @elseif($booking->status == 2)
+
+                                                    <span class="col-md-7 text-success">Confirm</span>
+
+                                                    @elseif($booking->status == 3)
+                                                    <span class="col-md-7 text-danger">Cancel</span>
+
+                                                    @endif
+                                               </td>
+                                               <td>
+                                                    <a href="{{route('bookingdetail',$booking->id)}}" class="btn btn-info text-white">
+                                                       Detail
+                                                    </a>
+                                               </td>
+
+                                           </tr>
+                                        @endforeach
+                                       </tbody>
+                                   </table> 
+
+
                                   </div>
 
                                  
@@ -134,6 +197,14 @@
                            
                            </div>
                         </div>
+                    @else
+                        <div class="text-center my-3">
+                            <h2 class="text-center mt-4"> O o p s ... There is no booking  </h2>
+                            <p> Your car or hotel booking will appear here. </p>
+                            <p> What will your first book be? </p>
+                            <img src="{{asset('frontend/img/empty_booking_history.gif')}}" width="40%" height="50%" class="img-fluid">
+                        </div>
+                        
                     @endif
                    </div>
 
@@ -141,7 +212,8 @@
 
                     {{-- car bookingdetail --}}
                     <div class="card shadow car_bookingdetail">
-                        @if($booking != "No Data")
+                        @if($view == 2 && $booking)
+
                         <div class="card-body">
 
                             <div class="row">
@@ -297,13 +369,14 @@
                             </div>
                             
                         </div>
+                        
                         @endif
                     </div>
                 </div>
             </div>
 
           
-       </section>
+       </div>
 @endsection
 @push('script')
 <script type="text/javascript">
@@ -323,3 +396,4 @@
     })
 </script>
 @endpush
+

@@ -53,15 +53,16 @@ class FrontController extends Controller
     {
         $view = 1;
         $bookings = Booking::where('user_id',Auth::id())->get();
-        $booking = "No Data";
-        return view('frontend.bookinghistory',compact('bookings','view'));
+        $booking = array('data' => 'null');;
+
+        return view('frontend.bookinghistory',compact('bookings','view','booking'));
     }
 
 
     public function bookingdetail(Request $request,$id){
 
         $view = 2;
-        $bookings = 'No Data';
+        $bookings = array('data' => 'null');;
         $booking = Booking::find($id);
         return view('frontend.bookinghistory',compact('bookings','view','booking'));
 

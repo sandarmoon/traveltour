@@ -67,7 +67,9 @@
              <!-- end here -->
         </div>
         <div class="col-md-4">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque, deleniti! Commodi repudiandae placeat debitis dicta ipsa tenetur hic, quia corrupti voluptatem minima obcaecati amet laudantium optio? Quisquam natus recusandae amet.
+            <div class="card" style="background-color: #999c9e6e !important;color:#060708b5;">
+               <h4>Your Stay</h4>
+            </div>
         </div>
        </div>
 

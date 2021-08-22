@@ -140,7 +140,7 @@ class Wizard extends Component
         $car_id=$this->car->id;
 
         $from_city_id=$this->pickup->id;
-        $to_city_id=$this->pickup->id;
+        $to_city_id=$this->drop->id;
         
 
         $sd = new Carbon($this->sdate);

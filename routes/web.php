@@ -90,7 +90,7 @@ Route::post('ajax/getBrand',[BrandController::class,'getBrand'])->name('ajax.get
 Route::post('ajax/edit_company_logo',[BackendController::class,'edit_company_logo'])->name('ajax.edit_company_logo');
 Route::post('ajax/edit_main_info',[BackendController::class,'edit_main_info'])->name('ajax.edit_main_info');
 
-Route::post('ajax/edit_general_info',[BackendController::class,'edit_general_info'])->name('ajax.edit_general_info');
+Route::post('ajax/edit_company_service_info',[BackendController::class,'edit_company_service_info'])->name('ajax.edit_company_service_info');
 
 Route::post('ajax/edit_company_photo',[BackendController::class,'edit_company_photo'])->name('ajax.edit_company_photo');
 
@@ -138,6 +138,7 @@ Route::post('/rooms/h',[FrontController::class,'roomsByHotelId'])->name('rooms.h
 });
 
 
+
 Route::get('/bookingdetail',[FrontController::class,'bookingdetail'])->name('bookingdetail');
 Route::post('/filter/{count}/{id}',[FrontController::class,'filterByPplCount'])->name('filter.pplcount.room');
 
@@ -147,4 +148,8 @@ Route::post('/filter/{count}/{id}',[FrontController::class,'filterByPplCount'])-
 
 Route::get('/booking/r/{id}',[FrontController::class,'bookingRoom'])->name('booking.room');
 Route::post('/rbooking/detail',[FrontController::class,'roomBookingDetail'])->name('room.rbooking.detail');
+
+Route::get('/bookinghistory',[FrontController::class,'bookinghistory'])->name('bookinghistory');
+Route::get('/bookingdetail/{id}',[FrontController::class,'bookingdetail'])->name('bookingdetail');
+
 

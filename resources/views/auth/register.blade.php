@@ -197,8 +197,8 @@
                                         
                                     </div>
 
-                                    <div class="d-grid gap-2 mx-3 my-3">
-                                        <button class="ml-3 btn btn-outline-success d-block btn-block">
+                                    <div class="row mx-1 my-3">
+                                        <button class=" btn btn-outline-success d-block btn-block">
                                              {{ __('Register') }}
                                         </button>
                                     </div>

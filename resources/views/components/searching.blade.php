@@ -285,8 +285,11 @@ Session::get('error_code') == 2)
 
 <script>
     $(function () {
-        $("#btn-hotel-search").click(function (e) {
+        $(".btn-hotel-search").click(function (e) {
+            // console.log("data helelo");
+
             e.preventDefault();
+            alert("heo");
             let city = $('#hotel-search-div select[name="d_city_id"]').val();
             let check_in = $(
                 '#hotel-search-div input[name="start_date"]'

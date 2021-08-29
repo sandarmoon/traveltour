@@ -36,7 +36,15 @@
                          <div class="col-8">
                             {{-- <img src="" width="60" class="rounded-circle float-left d-inline-block mr-4 mt-3"> --}}
                            {{--  <h6 class="small text-muted mb-4">Company-Name: </h6> --}}
-                           <h3 class=" p-0 pr-4 mt-3 ">{{$company->name}}</h3>
+                           <h3 class=" p-0 pr-4 mt-3 ">{{$company->name}} 
+                              @if($company->status == 1)
+                                 <span class="text-success font-weight-bold"> ( Active )</span>
+
+                              @elseif($company->status == 2)
+                                 <span class="text-danger font-weight-bold"> ( Inactive )</span>
+
+                              @endif
+                           </h3>
                             
                          </div>
                          @role('Admin')
@@ -50,7 +58,6 @@
                   <div class="card-header pb-0">
                       
                       <ul class="nav nav-tabs" id="tabs-icons-text" role="tablist">
-                        
                           <li class="nav-item">
                               <a class="nav-link mb-sm-3 mb-md-0  main_nav" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true">
                                  Main Info
@@ -74,11 +81,13 @@
 
                               <div class="row">
 
-                                 <div class="col-md-2 ">
+                                 <div class="col-md-2">
                                     
                                     <div class="row row-cols-12">
                                      
+                                    <a href="{{asset('/storage/'.$company->logo)}}" target="_blank">
                                        <img src="{{asset('/storage/'.$company->logo)}}" class="rounded-circle " width="150px" height="150px">
+                                    </a>
 
                                        <form method="post" id="upload_company_logo" enctype="multipart/form-data">
                                           @csrf
@@ -100,7 +109,9 @@
 
                                     <div class="row row-cols-12">
                                    
+                                    <a href="{{asset('/storage/'.$company->photo)}}" target="_blank">
                                        <img src="{{asset('/storage/'.$company->photo)}}" class="rounded circle " width="200px" height="220px">
+                                    </a>
 
                                        <form method="post" id="upload_company_photo" enctype="multipart/form-data">
                                           @csrf
@@ -124,134 +135,124 @@
 
                                      
                                  </div>
-                                 {{-- <form method="post" action="" class="main_info_update"> --}}
-                                 <div class="col-md-5 mx-auto main_info_update">
-                                    
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mt-2 ml-3" for="ceo_name">Ceo Name</label>
+                                 
+                                 
+                                 <div class="col-md-10">
+                                    <div class="row">
+                                       
+                                       <div class="col-md-6 mx-auto main_info_update">
+                                          
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mt-2 ml-3" for="ceo_name">Ceo Name</label>
 
-                                          <div class="col-md-6 ">
-                                             <input type="text" class="form-control ceo_name text-dark" readonly value="{{$company->ceo_name}}" name="ceo_name">
+                                             <div class="col-md-6 ">
+                                                <input type="text" class="form-control ceo_name text-dark" readonly value="{{$company->ceo_name}}" name="ceo_name">
+                                             </div>
+                                          
+                                          </div>
+
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mt-2 ml-3" for="company_name">Company Name</label>
+
+                                             <div class="col-md-6 ">
+                                                <input type="text" class="form-control company_name text-dark" readonly value="{{$company->name}}" name="company_name">
+                                             </div>
+                                          
+                                          </div>
+
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="user_name">User Name</label>
+
+                                             <div class="col-md-6">
+                                                <input type="text" class="form-control user_name text-dark" readonly value="{{$company->user->name}}" name="user_name">
+                                             </div>
+                                          
+                                          </div>
+
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="email">Email</label>
+
+                                             <div class="col-md-6 mx-0">
+                                                <input type="text" class="form-control email text-dark" readonly value="{{$company->user->email}}" name="email">
+                                             </div>
+                                          
+                                          </div>
+
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="phone">Phone</label>
+
+                                             <div class="col-md-6 mx-0">
+                                                <input type="text" class="form-control phone text-dark" readonly value="{{$company->phone}}" name="phone">
+                                             </div>
+                                       
+                                          </div>
+
+
+                                       </div>
+
+
+                                       <div class="col-md-6 mx-auto main_info_update">
+                                          
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="incharge_name">Incharge Name</label>
+
+                                             <div class="col-md-6 mx-0">
+                                                <input type="text" class="form-control incharge_name text-dark" readonly value="{{$company->incharge_name}}" name="incharge_name">
+                                             </div>
+                                          
+                                          </div>
+
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="incharge_phone">Incharge Phone</label>
+
+                                             <div class="col-md-6 mx-0">
+                                                <input type="text" class="form-control incharge_phone text-dark" readonly value="{{$company->incharge_phone}}" name="incharge_phone">
+                                             </div>
+                                          
+                                          </div>
+
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="incharge_position">Incharge Position</label>
+
+                                             <div class="col-md-6 mx-0">
+                                                <input type="text" class="form-control incharge_position text-dark" readonly value="{{$company->incharge_position}}">
+                                             </div>
+                                          
+                                          </div>
+
+
+                                          <div class="row form-group">
+                                             <label class="form-control-label col-md-4 mx-0 ml-3" for="email">Register Date</label>
+
+                                             <div class="col-md-6 mx-0">
+                                                 @php
+                                                 $date=date_create($company->created_at);
+                                                 $date= date_format($date,"Y M dS ");
+                                                 @endphp
+                                                 
+                                                <span class="text-dark font-weight-normal">{{$date}}</span>
+                                                
+                                             </div>
+                                          
+                                          </div>
+                                         
+                                       </div>
+
+                                       <div class="row form-group main_info_update">
+                                          <label class="form-control-label col-md-2 mx-0 mt-2 ml-3" for="incharge_position">Address</label>
+
+                                          <div class="col-md-8 mx-0">
+                                            
+                                             <textarea class="form-control text-dark address" readonly name="info">{{$company->addresss}}</textarea>
                                           </div>
                                        
                                        </div>
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mt-2 ml-3" for="company_name">Company Name</label>
-
-                                          <div class="col-md-6 ">
-                                             <input type="text" class="form-control company_name text-dark" readonly value="{{$company->name}}" name="company_name">
-                                          </div>
-                                       
-                                       </div>
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="user_name">User Name</label>
-
-                                          <div class="col-md-6">
-                                             <input type="text" class="form-control user_name text-dark" readonly value="{{$company->user->name}}" name="user_name">
-                                          </div>
-                                       
-                                       </div>
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="email">Email</label>
-
-                                          <div class="col-md-6 mx-0">
-                                             <input type="text" class="form-control email text-dark" readonly value="{{$company->user->email}}" name="email">
-                                          </div>
-                                       
-                                       </div>
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="phone">Phone</label>
-
-                                          <div class="col-md-6 mx-0">
-                                             <input type="text" class="form-control phone text-dark" readonly value="{{$company->phone}}" name="phone">
-                                          </div>
-                                    
-                                       </div>
-
-                                       
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 ml-3" for="email">Status</label>
-
-                                          <div class="col-md-6 mx-0">
-                                             @if($company->status == 1)
-                                                <span class="text-success font-weight-bold">active</span>
-                                             @endif
-                                          </div>
-                                       
-                                       </div>
-                                    
-
+                                    </div>
                                  </div>
-
-
-                                 <div class="col-md-5 mx-auto main_info_update">
-                                    {{-- <form method="post" action="" class="main_info_update"> --}}
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="incharge_name">Incharge Name</label>
-
-                                          <div class="col-md-6 mx-0">
-                                             <input type="text" class="form-control incharge_name text-dark" readonly value="{{$company->incharge_name}}" name="incharge_name">
-                                          </div>
-                                       
-                                       </div>
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="incharge_phone">Incharge Phone</label>
-
-                                          <div class="col-md-6 mx-0">
-                                             <input type="text" class="form-control incharge_phone text-dark" readonly value="{{$company->incharge_phone}}" name="incharge_phone">
-                                          </div>
-                                       
-                                       </div>
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="incharge_position">Incharge Position</label>
-
-                                          <div class="col-md-6 mx-0">
-                                             <input type="text" class="form-control incharge_position text-dark" readonly value="{{$company->incharge_position}}">
-                                          </div>
-                                       
-                                       </div>
-
-
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="incharge_position">Address</label>
-
-                                          <div class="col-md-6 mx-0">
-                                             <textarea class="form-control address text-dark" rows="3" readonly>
-                                                {{$company->addresss}}
-                                             </textarea>
-                                          </div>
-                                       
-                                       </div>
-
-                                       <div class="row form-group">
-                                          <label class="form-control-label col-md-4 mx-0 ml-3" for="email">Register Date</label>
-
-                                          <div class="col-md-6 mx-0">
-                                              @php
-                                              $date=date_create($company->created_at);
-                                              $date= date_format($date,"Y M dS ");
-                                              @endphp
-                                              
-                                             <span class="text-dark font-weight-normal">{{$date}}</span>
-                                             
-                                          </div>
-                                       
-                                       </div>
-                                    {{-- </form> --}}
-
-                                 </div>
-                                 {{-- </form> --}}
 
                               </div>
+
+
 
                               <div class="row">
                                  <div class="col-md-5 mx-auto">
@@ -264,7 +265,7 @@
                               <div class="row">
                                  <div class="col-md-5 mx-auto">
                                     <button class="btn btn-warning btn-block btn_edit">
-                                       Click Here!If you want edit your profile.
+                                      Click Here!If you want edit your profile.
                                     </button>
                                  </div>
                               </div>
@@ -277,9 +278,303 @@
                            <div class="tab-pane fade general_nav_tab" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
                               <div class="row">
 
+
+                                 {{-- <span class="text-danger mb-4">
+                                     <i class="fas fa-exclamation-triangle text-warning"></i>If you want edit your general Info, <h4 class="d-inline-block text-danger">click text</h4> .
+                                 </span> --}}
+
+
+
+                                 <div class="accordion accordion-flush" id="accordionFlushExample">
+
+
+                                   <div class="accordion-item">
+                                     {{-- <h2 class="accordion-header" id="flush-headingOne"> --}}
+                                       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
+                                         Service Label One
+                                       </button>
+                                     {{-- </h2> --}}
+                                     <div id="flush-collapseOne" class="accordion-collapse show collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                       <div class="accordion-body">
+
+                                          <div class="row">
+                                             <div class="row">
+                                                <div class="col-md-3">
+
+
+                                                   {{-- <h2 class="mt-2 service_label_one_label" for="service_label_one">
+                                                   {{$company->service_label_one}}
+                                                   </h2> --}}
+
+                                                   <h2 class="service_label_one_label" for="service_label_one">
+                                                   {{$company->service_label_one}}
+                                                   <i class="fas fa-edit btn btn-sm btn-warning mb-5 btn_service_label_one_label"></i>
+                                                   </h2>
+                                                   
+
+                                                   
+
+
+                                                   <div class=" service_label_one_input">
+                                                      <div class="input-group">
+                                                         
+                                                      
+                                                         <input type="text" name="service_label_one" value="{{$company->service_label_one}}" class="form-control service_label_one_data text-dark" aria-describedby="basic-addon1">
+                                                         {{-- <button class="input-group-text text-dark service_label_one_input_close" id="basic-addon1">
+                                                            x
+                                                         </button> --}}
+                                                      </div>
+                                                      <div class="row row-cols-6  mx-auto mt-2">
+                                                         <button class="btn btn-success btn-block btn-sm btn_service_label_one_data">
+                                                            Submit
+                                                         </button>
+                                                      </div>
+
+                                                      <div class="row row-cols-6  mx-auto mt-2">
+                                                         <button class="btn btn-danger btn-block btn-sm service_label_one_input_close">
+                                                            Cancel
+                                                         </button>
+                                                      </div>
+
+                                                   </div>
+                                                   
+                                                   
+                                                </div>
+
+                                             <div class="col-md-9">
+
+                                                <div class="service_desc_one_para">
+                                                  
+                                                   <p >
+                                                      {!! $company->service_desc_one !!}
+                                                   </p>
+
+                                                   <div class="row row-cols-8 offset-1 mx-auto mt-2">
+                                                      <button class="btn btn-warning btn-block btn_service_desc_one_para">
+                                                         Edit Service Description!!
+                                                      </button>
+                                                   </div>
+                                                </div>
+
+                                                <div class="service_desc_one_input">
+                                                   <div class="row row-cols-1 offset-11 mr-3">
+                                                      <button class="btn btn-danger btn-sm service_desc_one_input_close">
+                                                         x
+                                                      </button>
+                                                   </div>
+
+                                                  
+                                                   <div class="service_desc_one_data summernote">
+
+                                                      {!! $company->service_desc_one !!}
+                                                      
+                                                   </div >
+
+                                                   <div class="row row-cols-8 offset-1 mx-auto mt-2">
+                                                      <button class="btn btn-success btn-block btn_service_desc_one_data">
+                                                         Submit
+                                                      </button>
+                                                   </div>
+                                                   
+                                                   
+                                                </div>
+                                                
+                                                
+                                             </div>
+                                          </div>
+
+
+                                       </div>
+                                     </div>
+                                   </div>
+
+
+                                   <div class="accordion-item">
+                                     {{-- <h2 class="accordion-header" id="flush-headingTwo"> --}}
+                                       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                         Service Label Two
+                                       </button>
+                                     {{-- </h2> --}}
+                                     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                       <div class="accordion-body">
+
+                                          <div class="row">
+                                             
+                                             <div class="row">
+                                                <div class="col-md-3">
+                                                   <h2 class="service_label_two_label" for="service_label_two">
+                                                   {{$company->service_label_two}}
+                                                   <i class="fas fa-edit btn btn-sm btn-warning mb-5 btn_service_label_two_label"></i>
+                                                </h2>
+
+                                                   <div class=" service_label_two_input">
+                                                      <div class="input-group">
+                                                        
+                                                         <input type="text" name="service_label_two" value="{{$company->service_label_two}}" class="form-control service_label_two_data text-dark" aria-describedby="basic-addon2">
+                                                         {{-- <button  class="input-group-text text-dark service_label_two_input_close" id="basic-addon2">
+                                                            x
+                                                         </button> --}}
+                                                      </div>
+
+                                                         <div class="row row-cols-6  mx-auto mt-2">
+                                                            <button class="btn btn-success btn-block btn-sm btn_service_label_two_data">
+                                                               Submit
+                                                            </button>
+                                                         </div>
+
+                                                         <div class="row row-cols-6  mx-auto mt-2">
+                                                            <button class="btn btn-danger btn-block btn-sm service_label_two_input_close">
+                                                               Cancel
+                                                            </button>
+                                                         </div>
+                                                      </div>
+
+                                                   </div>
+
+                                               
+
+                                             <div class="col-md-9">
+
+                                                <div class="service_desc_two_para">
+                                                  
+                                                   <p >
+                                                      {!! $company->service_desc_two !!}
+                                                   </p>
+
+                                                   <div class="row row-cols-8 offset-1 mx-auto mt-2">
+                                                      <button class="btn btn-warning btn-block btn_service_desc_two_para">
+                                                         Edit Service Description!!
+                                                      </button>
+                                                   </div>
+                                                </div>
+
+                                                <div class="service_desc_two_input">
+                                                   
+                                                
+                                                   <div class="row row-cols-1 offset-11 mr-3">
+                                                      <button class="btn btn-danger btn-sm service_desc_two_input_close">
+                                                         x
+                                                      </button>
+                                                   </div>
+
+
+                                                   <div class="service_desc_two_data summernote">
+
+                                                      {!! $company->service_desc_two !!}
+                                                   </div>
+
+                                                   <div class="row row-cols-8 offset-1 mx-auto mt-2">
+                                                      <button class="btn btn-success btn-block btn_service_desc_two_data">
+                                                         Submit
+                                                      </button>
+                                                   </div>
+
+                                                </div>
+
+                                             </div>
+                                          </div>
+
+                                       </div>
+                                     </div>
+                                   </div>
+                                  </div>
+
+
+                                   <div class="accordion-item">
+                                     {{-- <h2 class="accordion-header" id="flush-headingThree"> --}}
+                                       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                         Service Label Three
+                                       </button>
+                                     {{-- </h2> --}}
+                                     <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                       <div class="accordion-body">
+                                          
+                                          <div class="row">
+                                             <div class="col-md-3">
+                                                <h2 class="service_label_three_label" for="service_label_one">
+                                                {{$company->service_label_three}}
+                                                <i class="fas fa-edit btn btn-sm btn-warning mb-5 btn_service_label_three_label"></i>
+                                             </h2>
+
+                                                <div class=" service_label_three_input">
+
+                                                   <div class="input-group">
+                                                      
+                                                   
+                                                   <input type="text" name="service_label_three" value="{{$company->service_label_three}}" class="form-control service_label_three_data text-dark" aria-describedby="basic-addon3">
+
+                                                  {{--  <button class="input-group-text text-dark service_label_three_input_close" id="basic-addon3">
+                                                      x
+                                                   </button> --}}
+                                                   </div>
+
+                                                   <div class="row row-cols-6  mx-auto mt-2">
+                                                      <button class="btn btn-success btn-block btn-sm btn_service_label_three_data">
+                                                         Submit
+                                                      </button>
+                                                   </div>
+
+                                                   <div class="row row-cols-6  mx-auto mt-2">
+                                                      <button class="btn btn-danger btn-block btn-sm service_label_three_input_close">
+                                                         Cancel
+                                                      </button>
+                                                   </div>
+                                                   
+
+                                                </div>
+
+                                             </div>
+                                             
+                                             <div class="col-md-9">
+
+                                                <div class="service_desc_three_para">
+                                                  
+                                                   <p >
+                                                      {!! $company->service_desc_three !!}
+                                                   </p>
+
+                                                   <div class="row row-cols-8 offset-1 mx-auto mt-2">
+                                                      <button class="btn btn-warning btn-block btn_service_desc_three_para">
+                                                         Edit Service Description!!
+                                                      </button>
+                                                   </div>
+                                                </div>
+                                                <div class="service_desc_three_input">
+                                                   
+                                                
+                                                  <div class="row row-cols-1 offset-11 mr-3">
+                                                      <button class="btn btn-danger btn-sm service_desc_three_input_close">
+                                                         x
+                                                      </button>
+                                                   </div>
+
+                                                   <div class="form-control service_desc_three_data summernote">
+
+                                                      {!! $company->service_desc_three !!}
+                                                   </div>
+
+                                                   <div class="row row-cols-8 offset-1 mx-auto mt-2">
+                                                      <button class="btn btn-success btn-block btn_service_desc_three_data">
+                                                         Submit
+                                                      </button>
+                                                   </div>
+
+                                                </div>
+
+
+                                             </div>
+                                          </div>
+
+                                       </div>
+                                     </div>
+                                   </div>
+                                 </div>
+
+
+
                                  
                                 
-                                 <div class="col-md-5 mx-auto general_info_update">
+                                {{--  <div class="col-md-5 mx-auto general_info_update">
                                     
                                        <div class="row form-group">
                                           <label class="form-control-label col-md-4 mt-2 ml-5" for="service_label_one">Service Label One</label>
@@ -312,7 +607,6 @@
 
 
                                  <div class="col-md-5 mx-auto general_info_update">
-                                    {{-- <form method="post" action="" class="main_info_update"> --}}
 
                                        <div class="row form-group">
                                           <label class="form-control-label col-md-4 mx-0 mt-2 ml-3" for="service_desc_one">Service Desc One</label>
@@ -347,9 +641,7 @@
                                           <label class="form-control-label col-md-4 mx-0 ml-3" for="info">Info</label>
 
                                           <div class="col-md-6 mx-0">
-                                             <textarea class="form-control info text-dark" readonly name="info">
-                                                {{$company->info}}
-                                             </textarea>
+                                             <textarea class="form-control info text-dark" readonly name="info">{{$company->info}}</textarea>
                                              
                                           </div>
                                        
@@ -358,9 +650,9 @@
                                     </div>
                                     
 
-                                 </div>
+                                 </div> --}}
 
-                                 <div class="row">
+                                 {{-- <div class="row">
                                     <div class="col-md-5 mx-auto">
                                        <button class="btn btn-success btn-block btn_submit_general">
                                           Submit
@@ -374,7 +666,7 @@
                                           Click Here!If you want edit your general Info.
                                        </button>
                                     </div>
-                                 </div>
+                                 </div> --}}
                                  
 
                               </div>
@@ -399,8 +691,204 @@
 @section('script')
 <script type="text/javascript">
    $(document).ready(function(){
+
+
+      $.ajaxSetup({
+           headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+      });
+
       $('.btn_submit').hide();
       $('.btn_submit_general').hide();
+
+      $('.service_label_one_input').hide();
+      $('.service_label_two_input').hide();
+      $('.service_label_three_input').hide();
+
+      $('.service_desc_one_input').hide();
+      $('.service_desc_two_input').hide();
+      $('.service_desc_three_input').hide();
+
+
+      // service label one
+      $('.btn_service_label_one_label').click(function() {
+         $('.service_label_one_input').show();
+         $('.service_label_one_label').hide();
+      })
+
+      $('.service_label_one_input_close').click(function() {
+         $('.service_label_one_input').hide();
+         $('.service_label_one_label').show();
+      })
+
+
+      // service lable two
+      $('.service_label_two_label').click(function() {
+         $('.service_label_two_input').show();
+         $('.service_label_two_label').hide();
+      })
+
+      $('.service_label_two_input_close').click(function() {
+         $('.service_label_two_input').hide();
+         $('.service_label_two_label').show();
+      })
+
+      // service label three
+      $('.service_label_three_label').click(function() {
+         $('.service_label_three_input').show();
+         $('.service_label_three_label').hide();
+      })
+
+      $('.service_label_three_input_close').click(function() {
+         $('.service_label_three_input').hide();
+         $('.service_label_three_label').show();
+      })
+
+
+
+      // service desc one
+      $('.btn_service_desc_one_para').click(function() {
+         $('.service_desc_one_input').show();
+         $('.service_desc_one_para').hide();
+      })
+
+      $('.service_desc_one_input_close').click(function() {
+         $('.service_desc_one_input').hide();
+         $('.service_desc_one_para').show();
+      })
+
+      // service desc two
+      $('.btn_service_desc_two_para').click(function() {
+         $('.service_desc_two_input').show();
+         $('.service_desc_two_para').hide();
+      })
+
+      $('.service_desc_two_input_close').click(function() {
+         $('.service_desc_two_input').hide();
+         $('.service_desc_two_para').show();
+      })
+
+
+      // service desc three
+      $('.btn_service_desc_three_para').click(function() {
+         $('.service_desc_three_input').show();
+         $('.service_desc_three_para').hide();
+      })
+
+      $('.service_desc_three_input_close').click(function() {
+         $('.service_desc_three_input').hide();
+         $('.service_desc_three_para').show();
+      })
+
+
+      // service update process
+
+      $('.btn_service_label_one_data').click(function() {
+         var id = $('.company_id').val();
+         var service_label_one_data = $('.service_label_one_data').val();
+         var value = {};
+         value['id'] = id;
+         value['service_label_one_data'] = service_label_one_data;
+         var array = new Array;
+         array.push(value);
+         service_data_update(value);
+      })
+
+      $('.btn_service_label_two_data').click(function() {
+         var id = $('.company_id').val();
+         var service_label_two_data = $('.service_label_two_data').val();
+         var value = {};
+         value['id'] = id;
+         value['service_label_two_data'] = service_label_two_data;
+         var array = new Array;
+         array.push(value);
+         service_data_update(value);
+      })
+
+      $('.btn_service_label_three_data').click(function() {
+         var id = $('.company_id').val();
+         var service_label_three_data = $('.service_label_three_data').val();
+         var value = {};
+         value['id'] = id;
+         value['service_label_three_data'] = service_label_three_data;
+         var array = new Array;
+         array.push(value);
+         service_data_update(value);
+      })
+
+
+      
+
+
+
+      // service_desc_ update process
+
+      $('.btn_service_desc_one_data').click(function() {
+         var id = $('.company_id').val(); 
+         var service_desc_one_data =$('.service_desc_one_data').summernote('code');
+
+         var value = {};
+         value['id'] = id;
+         value['service_desc_one_data'] = service_desc_one_data;
+         var array = new Array;
+         array.push(value);
+         service_data_update(value);
+
+      })
+
+      $('.btn_service_desc_two_data').click(function() {
+         var id = $('.company_id').val(); 
+         var service_desc_two_data =$('.service_desc_two_data').summernote('code');
+         
+         var value = {};
+         value['id'] = id;
+         value['service_desc_two_data'] = service_desc_two_data;
+         var array = new Array;
+         array.push(value);
+         service_data_update(value);
+
+      })
+
+      $('.btn_service_desc_three_data').click(function() {
+         var id = $('.company_id').val(); 
+         var service_desc_three_data =$('.service_desc_three_data').summernote('code');
+         
+         var value = {};
+         value['id'] = id;
+         value['service_desc_three_data'] = service_desc_three_data;
+         var array = new Array;
+         array.push(value);
+         service_data_update(value);
+
+      })
+
+
+      function service_data_update(result) {
+         console.log(result);
+         $.ajax({
+            url:'/ajax/edit_company_service_info',
+            type:"POST",
+            data:result,
+           
+            success:function(data){
+               location.reload();
+               showtag();
+            },
+            error:function(err){
+              console.log(err);
+            }
+          })
+      }
+
+
+
+
+
+
+
+
+
 
       showtag();
 
@@ -414,14 +902,19 @@
           localStorage.setItem('currentActiveTab', $(e.target).attr('id'));
       });
 
-      var selectedTab = localStorage.getItem('currentActiveTab');
+      var selectedlocal = localStorage.getItem('currentActiveTab');
+      if(selectedlocal == null){
+         var selectedTab = "tabs-icons-text-1-tab";
+      }
       
          var data = ('#'+selectedTab);
          $(data).tab('show'); 
-
+         console.log(selectedTab);
          if(selectedTab == "tabs-icons-text-1-tab"){
+
             tag = 0;
             showtag(tag);
+
          }else{
 
             tag = 1;
@@ -454,11 +947,7 @@
          }
       }
 
-      $.ajaxSetup({
-           headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-      });
+      
 
       $('#upload_company_logo').change(function(e){
 
@@ -515,15 +1004,6 @@
 
       })
 
-         $('.btn_edit_general').click(function() {
-            $('.btn_edit_general').hide(1000);
-            $('.btn_submit_general').show(1000);
-
-            $('.general_info_update input').attr('readonly',false);
-            $('.general_info_update textarea').attr('readonly',false);
-
-         })
-
 
       $('.btn_submit').click(function(e){
 
@@ -559,40 +1039,6 @@
          
       })
 
-
-
-      $('.btn_submit_general').click(function(e){
-
-         var id = $('.company_id').val();
-         var service_label_one = $('.service_label_one').val();
-         var service_label_two = $('.service_label_two').val();
-         var service_label_three = $('.service_label_three').val();
-         var service_desc_one = $('.service_desc_one').val();
-         var service_desc_two = $('.service_desc_two').val();
-         var service_desc_three = $('.service_desc_three').val();
-         
-
-         $.ajax({
-            url:'/ajax/edit_general_info',
-            type:"POST",
-            data:{id:id,
-                  service_label_one:service_label_one,
-                  service_label_two:service_label_two,
-                  service_label_three:service_label_three,
-                  service_desc_one:service_desc_one,
-                  service_desc_two:service_desc_two,
-                  service_desc_three:service_desc_three},
-            
-            success:function(data){
-               location.reload();
-               showtag(data);
-            },
-            error:function(err){
-              console.log(err);
-            }
-          })
-         
-      })
       
 
    })

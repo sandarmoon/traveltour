@@ -49,10 +49,23 @@ class FrontController extends Controller
 
 
     // +=========== booking detail========
-    public function bookingdetail($value='')
+    public function bookinghistory($value='')
     {
+        $view = 1;
         $bookings = Booking::where('user_id',Auth::id())->get();
-        return view('frontend.bookingdetail',compact('bookings'));
+        $booking = array('data' => 'null');;
+
+        return view('frontend.bookinghistory',compact('bookings','view','booking'));
+    }
+
+
+    public function bookingdetail(Request $request,$id){
+
+        $view = 2;
+        $bookings = array('data' => 'null');;
+        $booking = Booking::find($id);
+        return view('frontend.bookinghistory',compact('bookings','view','booking'));
+
     }
 
     // ===================hotel bookin start now======================

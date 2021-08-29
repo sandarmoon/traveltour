@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
 header {
    min-height: 600px;
     width: 100vw;
@@ -224,10 +226,28 @@ header {
     appearance: none;
     border-radius: 0;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}{
+
    border: 1px solid ;
 }
 
+
+
+/* for room booking detail start */
+.br-title{
+   font-family: 'Playfair Display', serif;
+   font-weight: 300;
+}
+.b-date{
+   font-weight: 200;
+}
+
+.pre-room-booking{
+   background-color: #fff !important;
+   color:#060708b5;
+   box-shadow: 2px 3px 2px 3px#060708b5;
+}
+
+/* for room booking detail end */
 
 
 /*=============================================================================================================================================================================================================================*/
@@ -258,6 +278,4 @@ header {
 }
 
 }
-/* for room booking detail start */
 
-/* for room booking detail end */

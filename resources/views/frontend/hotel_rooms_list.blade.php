@@ -419,7 +419,7 @@
 			// generateing code
 			let code="mycounting";
 			// generateing code
-			mycart(desti, s, e,code);
+			//mycart(desti, s, e,code);
 
 			getCartData(code);
 		})
@@ -474,45 +474,7 @@
 
 		
 
-		 function mycart(desti, s_date, end_date,code) {
-			// console.log(desti,s_date,end_date,s_type,c_type);
-			
-			let rooms = new Array();
-			let exit = 0;
-			let room = {
-				
-				'rno': 1,
-				'r_id': 0,
-				'child': 0,
-				'adult': 1,
-				'total': 1
-			};
-
-			rooms.push(room);
-
-
-			let item = {
-				'codeno':code,
-				'desti': desti,
-				'start': s_date,
-				'end': end_date,
-				'r': rooms
-
-			};
-			
-			let mycart = localStorage.getItem(code);
-			if (!mycart) {
-				let mycart = localStorage.getItem(code);
-				
-				let cartobj = JSON.parse(mycart);
-				cartobj=item;
-				localStorage.setItem(code, JSON.stringify(cartobj));
-				alert('Your chosen item is added to cart!');
-			} else {
-				alert('it is  no');
-			}
-
-		}
+		 
 
 	// starting 
 	  $('.room-div').on('click', '.btn-add-adult', function () {

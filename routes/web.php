@@ -153,3 +153,7 @@ Route::get('/bookinghistory',[FrontController::class,'bookinghistory'])->name('b
 Route::get('/bookingdetail/{id}',[FrontController::class,'bookingdetail'])->name('bookingdetail');
 
 
+//hotel booking email validation
+Route::post('/custom/validation',[FrontController::class,'customEmailValidation'])->name('hotel.booking.validation');
+
+Route::post('/hotel/checkout',[FrontController::class,'hotelBookingCheckout'])->name('hotel.booking.checkout');

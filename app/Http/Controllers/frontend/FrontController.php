@@ -10,7 +10,10 @@ use App\Models\Car;
 use App\Models\Company;
 use App\Models\Facility;
 use App\Models\Room;
-
+use App\Models\User;
+use App\Models\HotelBooking;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use App\Models\Booking;
 use Auth;
 
@@ -89,7 +92,7 @@ class FrontController extends Controller
         $drop=$request->d_city_id;
         $s_date=$request->start_date;
         $e_date=$request->end_date;
-        $common_type=$request->common_type;
+        $common_type=1;
         // dd($common_type);
 
        // $hotels=Company::where('type',1)->where('city_id',$drop)
@@ -197,4 +200,73 @@ class FrontController extends Controller
         
 
     }
+
+    //hotel-email-booking-validation
+    public function customEmailValidation(Request $request){
+      
+         $validated = $request->validate([
+        'email' => 'required|unique:users|max:255',
+        
+        ]);
+
+        return response()->json(['msg'=>'0']);
+    }
+
+
+    //hotel-booking-chcekout
+    public function hotelBookingCheckout(Request $request){
+      return response()->json(['success'=>'Success booking']);
+         $booking_date=date("d/m/Y");
+         $tax=10;
+        
+        $booking_code = $this->generateRandomString(5);
+
+        if(empty($request->user_id)){
+             $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+             event(new Registered($user));
+            $user->assignRole('customer');
+             Auth::login($user);
+             $request->user_id=$user->id;
+        }
+
+        $room=Room::find($request->room_id);
+        $price=$room->pricepernight;
+        $total=($price * $request->days) + $tax;
+
+        
+        HotelBooking::create([
+            'user_id'=>$request->user_id,
+            'codeno'=>$booking_code,
+            'booking_date'=>$booking_date,
+            'check_in'=>$request->check_in,
+            'check_out'=>$request->check_out,
+            'room_id'=>$room->id,
+            'days'=>$request->days,
+            'total'=>$total,
+            'taxfee'=>$tax,
+            'adult'=>$request->adult,
+            'child'=>$request->child,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+            'msg'=>$request->msg
+            ]);
+
+        return response()->json(['success'=>'Success booking']);
+
+
+    }
+
+    function generateRandomString($length = 20) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
 }

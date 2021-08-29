@@ -91,11 +91,7 @@
                                                        <td>{{$booking->car->name}}</td>
                                                        <td>{{$booking->car->brand->name}} / {{$booking->car->model}}</td>
                                                        <td>
-                                                            @php
-                                                            $date=date_create($booking->booking_date);
-                                                            $date= date_format($date,"d M Y");
-                                                            @endphp
-                                                            {{$date}}
+                                                            {{$booking->booking_date}}
                                                        </td>
                                                        <td>
                                                           
@@ -156,11 +152,7 @@
                                                <td>{{$booking->car->name}}</td>
                                                <td>{{$booking->car->brand->name}} / {{$booking->car->model}}</td>
                                                <td>
-                                                    @php
-                                                    $date=date_create($booking->booking_date);
-                                                    $date= date_format($date,"d M Y");
-                                                    @endphp
-                                                    {{$date}}
+                                                   {{$booking->booking_date}}
                                                </td>
                                                <td>
                                                   

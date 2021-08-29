@@ -275,13 +275,13 @@
 								                       @error('price-per-day')
 																    <span class="text-danger">{{ 'is required' }}</span>
 																@enderror
-								                       <input type="text" id="input-price-per-day" name="price_per_day" class="form-control form-control-alternative">
+								                       <input type="number" id="input-price-per-day" name="price_per_day" class="form-control form-control-alternative" value="0">
 								                    </div>
 								                </div>
 								                <div class="col-lg-4">
 								                    <div class="form-group">
 								                       <label class="form-control-label" for="input-discoutn">Discount</label>
-								                       <input type="text" id="input-discoutn" name="Discount" class="form-control form-control-alternative" value="0">
+								                       <input type="number" id="input-discoutn" name="Discount" class="form-control form-control-alternative" value="0">
 								                    </div>
 								                </div>
 								                <div class="col-lg-12">

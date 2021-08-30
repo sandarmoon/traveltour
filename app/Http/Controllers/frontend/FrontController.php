@@ -17,6 +17,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Models\Booking;
 use Auth;
 use DB;
+use Carbon;
 
 
 
@@ -153,13 +154,26 @@ class FrontController extends Controller
         $drop_id=$request->drop_id;
         $s_date=$request->s_date;
         $e_date=$request->e_date;
+        $sdate=date_create($request->s_date );
+         $start_date=date_format($sdate,"m/d/Y");
+        
+
+        $edate=date_create($request->e_date );
+         $end_date=date_format($edate,"m/d/Y");
+        
+       
         $search=$request->search;
         $common_type=$request->c_type;
 
          $cities=City::whereNull('parent_id')->get();
          $h=Company::find($h_id);
 
-         $rooms=Room::where('company_id',$h->id)->with(['facilities','type'])->get();
+         $rooms=Room::whereDoesntHave('hotelBookings',function($q) use ($start_date,$end_date){
+                $q->whereDate('check_in','>=',$start_date)
+                ->whereDate('check_out','<=',$end_date);
+         })->where('company_id',$h->id)->with(['facilities','type'])->get();
+        
+        
          
 
          $facilities = Facility::whereHas('rooms', function($q) use($h_id) {
@@ -174,7 +188,7 @@ class FrontController extends Controller
          
          
 
-         $rooms=Room::where('company_id',$h->id)->get();
+         
         return view('frontend.hotel_rooms_list',compact('cities','h','popular_facilities','rooms','drop_id','s_date','e_date'));
     }
 
@@ -246,7 +260,7 @@ class FrontController extends Controller
 
     //hotel-booking-chcekout
     public function hotelBookingCheckout(Request $request){
-      return response()->json(['success'=>'Success booking']);
+     
          $booking_date=date("d/m/Y");
          $tax=10;
         

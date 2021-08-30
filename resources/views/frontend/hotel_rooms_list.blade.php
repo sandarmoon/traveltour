@@ -66,7 +66,7 @@
 
 					  {{-- //for rooms --}}
 					  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					  <div class="container">
+					  <div class="col-md-8 mx-auto p-2">
 					  	<form action="{{route('search.hotel')}}" class="mx-5 d-flex flex-lg-row flex-column  justify-content-lg-between justify-content-center" method="post">
 							@csrf
 							<!-- start here -->
@@ -88,14 +88,15 @@
 
 							<div class="mb-3 px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0 counting-people">
 								<label for="inputPassword2" >General Type</label>
-									<select name="common_type" class="form-select" aria-label="Default select example">
+								<input type="text" name="common_type" class="form-control" value="2 Travellers,1 Room">
+									<!-- <select name="common_type" class="form-select" aria-label="Default select example">
 									<option selected="selected" value="1">2 Travellers,1 Room</option>
 									<option  value="2">3 Travellers,1 Room</option>
-									</select>
+									</select> -->
 
 							</div>
 
-							<div class=" px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
+							<div class=" px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0 d-none">
 											<label for="inputPassword2" class="visually-hidden">Submit</label>
 								<input type="submit" class=" btn btn-success form-control btn-submit " id="inputPassword2" value="Search ...!">
 

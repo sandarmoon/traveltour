@@ -172,7 +172,11 @@
                                        <td> @php
                                        $sd = new Carbon\Carbon($sdate);
                                        $ed = new Carbon\Carbon($edate);
-                                       $days=$sd->diffInDays($ed);
+                                       Carbon\Carbon::setTestNow($ed);
+                                       $ed=new Carbon\Carbon('tomorrow'); 
+                                       
+                                        $days=$sd->diffInDays($ed);
+                                            
                                        echo $days
                                        @endphp</td>
                                    </tr>
@@ -252,12 +256,16 @@
                                             Contact:{{$company_address}}/{{$company_phone}}
                                         </p>
                                         {{-- <p>Company:{{$company_name}}/{{$company_address}}-{{$company_phone}}</p> --}}
-                                        <p>Rent for Day: @php
-                                               $sd = new Carbon\Carbon($sdate);
-                                               $ed = new Carbon\Carbon($edate);
-                                               $days=$sd->diffInDays($ed);
-                                               echo $days
-                                               @endphp</p>
+                                        <p>Rent for Day:  @php
+                                       $sd = new Carbon\Carbon($sdate);
+                                       $ed = new Carbon\Carbon($edate);
+                                       Carbon\Carbon::setTestNow($ed);
+                                       $ed=new Carbon\Carbon('tomorrow'); 
+                                       
+                                        $days=$sd->diffInDays($ed);
+                                            
+                                       echo $days
+                                       @endphp</p>
                                            <p>To -> <span class="text-danger">{{$drop->name}}</span></p>
                                            <p></p>Drop Time -><span class="text-success">{{$edate}}</span></p>
                                        </div>

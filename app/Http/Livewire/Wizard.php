@@ -145,13 +145,16 @@ class Wizard extends Component
 
         $sd = new Carbon($this->sdate);
         $ed = new Carbon($this->edate);
+         
+        Carbon::setTestNow($ed);
+        $ed=new Carbon('tomorrow'); 
+                                       
         $day=$sd->diffInDays($ed);
-
 
        $discount=$this->car->discount;
        $price=$this->car->priceperday;
        $subtotal=0;
-       if($discount ==0){
+       if($discount=== 0){
         $subtotal=$price * $day;
        }else{
         $subtotal=$discount * $day;

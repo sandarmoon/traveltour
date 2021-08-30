@@ -295,6 +295,7 @@ Session::get('error_code') == 2)
                 '#hotel-search-div input[name="start_date"]'
             ).val();
             let check_out = $('#hotel-search-div input[name="end_date"]').val();
+            localStorage.clear();
             mycart(city, check_in, check_out, "mycounting");
 
             $("#hotel-search-div").submit();
@@ -328,7 +329,7 @@ Session::get('error_code') == 2)
             let cartobj = JSON.parse(mycart);
             cartobj = item;
             localStorage.setItem(code, JSON.stringify(cartobj));
-            alert("Your chosen item is added to cart!");
+            // alert("Your chosen item is added to cart!");
         } else {
             // alert("it is  no");
         }

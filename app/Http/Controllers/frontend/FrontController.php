@@ -246,7 +246,7 @@ class FrontController extends Controller
 
     //hotel-booking-chcekout
     public function hotelBookingCheckout(Request $request){
-      return response()->json(['success'=>'Success booking']);
+     
          $booking_date=date("d/m/Y");
          $tax=10;
         

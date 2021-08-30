@@ -30,7 +30,7 @@
                     {{-- booking history --}}
 
                    <div class="card shadow bookinghistory">
-                    @if($view ==1 && count($bookings) > 0)
+                    @if($view ==1 && count($bookings) > 0 || count($booking_historys) > 0)
                         <div class="card-header">
                             
 
@@ -83,6 +83,8 @@
                                                 @php
                                                 $i=1;
                                                 @endphp
+
+                                                @if(count($bookings) > 0)
                                                 @foreach($bookings as $booking)
                                                    <tr>
                                                        <td>{{$i++}}.</td>
@@ -116,6 +118,13 @@
 
                                                    </tr>
                                                 @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="8" class="text-center my-5 py-4">
+                                                        <h４ class="text-danger font-weight-bold">There is no car bookings</h4>
+                                                    </td>
+                                                </tr>
+                                                @endif
                                                </tbody>
                                            </table> 
                                         </div>
@@ -134,7 +143,7 @@
                                                <th>Name</th>
                                                <th>Email</th>
                                                <th>Room</th>
-                                               <th>Travellers</th>
+                                               <th>Check in/out</th>
                                                <th>Booking Date</th>
                                                <th>Status</th>
                                                <th>Action</th>
@@ -144,39 +153,64 @@
                                         @php
                                         $i=1;
                                         @endphp
-                                        @foreach($bookings as $booking)
+                                        @if(count($booking_historys) > 0)
+                                        @foreach($booking_historys as $booking_date => $booking_history)
+                                
                                            <tr>
+                                               
                                                <td>{{$i++}}.</td>
-                                               <td>{{$booking->user->name}}</td>
-                                               <td>{{$booking->user->email}}</td>
-                                               <td>{{$booking->car->name}}</td>
-                                               <td>{{$booking->car->brand->name}} / {{$booking->car->model}}</td>
                                                <td>
-                                                   {{$booking->booking_date}}
+                                                
+                                                    {{$booking_history[0]->user->name}}
+                                               
+                                               </td>
+                                               <td>
+                                                    {{$booking_history[0]->user->email}}
+
+                                                </td>
+                                               <td>
+                                                   {{count($booking_history)}}
+                                               </td>
+
+                                               
+                                               <td>
+                                                   {{$booking_history[0]->check_in}} - {{$booking_history[0]->check_out}}
+                                               </td>
+
+                                               <td>
+                                                @php
+                                                    $b_date = date_create($booking_date);
+                                                    $date= date_format($b_date,"m/d/Y ");
+                                                @endphp
+                                                   {{$date}}
                                                </td>
                                                <td>
                                                   
-                                                    @if($booking->status == 1)
+                                                    @if($booking_history[0]->status == 1)
 
                                                     <span class="col-md-7 text-primary">Pending</span>
 
-                                                    @elseif($booking->status == 2)
+                                                    @elseif($booking_history[0]->status == 2)
 
                                                     <span class="col-md-7 text-success">Confirm</span>
 
-                                                    @elseif($booking->status == 3)
+                                                    @elseif($booking_history[0]->status == 3)
                                                     <span class="col-md-7 text-danger">Cancel</span>
 
                                                     @endif
                                                </td>
                                                <td>
-                                                    <a href="{{route('bookingdetail',$booking->id)}}" class="btn btn-info text-white">
+                                                    <a href="{{route('roombookingdetail',$booking_date)}}" class="btn btn-info text-white">
                                                        Detail
                                                     </a>
                                                </td>
 
                                            </tr>
+
+                                          
+
                                         @endforeach
+                                        @endif
                                        </tbody>
                                    </table> 
 
@@ -364,6 +398,167 @@
                         
                         @endif
                     </div>
+
+
+                    {{-- hotel booking --}}
+                    <div class="card shadow hotel_bookingdetail">
+                        @if($view == 3 && $hotelbooking)
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                   
+                                </div>
+
+                                <div class="col-md-8 mx-auto">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5>Booking</h5>
+                                            {{$hotelbooking}}
+                                            {{-- @foreach($hotelbooking as $data)
+                                            {{$data}}
+                                            @endforeac --}}h
+                                            {{-- <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5 ">Booking Code :</span>
+                                                <span class="col-md-7">{{$booking->booking_code}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Booking Date :</span>
+                                                <span class="col-md-7">{{$booking->booking_date}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">From - To City :</span>
+                                                <span class="col-md-7">{{$booking->from->name}} - {{$booking->to->name}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Day : </span>
+                                                <span class="col-md-7">{{$booking->day}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Pickup : </span>
+                                                <span class="col-md-7">{{$booking->pickup->name}},{{$booking->pickup->parent->name}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Time : </span>
+                                                <span class="col-md-7">{{$booking->pickup_time}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Detaure Date : </span>
+
+                                                @php
+                                                $departure_date=date_create($booking->departure_date);
+                                                $departure_date= date_format($departure_date,"d / M / Y");
+                                                @endphp
+                                               
+                                                <span class="col-md-7">{{$departure_date}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Arrival Date : </span>
+
+                                                @php
+                                                $arrival_date=date_create($booking->arrival_date);
+                                                $arrival_date= date_format($arrival_date,"d / M / Y");
+                                                @endphp
+                                               
+                                                <span class="col-md-7">{{$arrival_date}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Status : </span>
+                                                @if($booking->status == 1)
+
+                                                <span class="col-md-7 text-primary">Pending</span>
+
+                                                @elseif($booking->status == 2)
+
+                                                <span class="col-md-7 text-success">Confirm</span>
+
+                                                @elseif($booking->status == 3)
+                                                <span class="col-md-7 text-danger">Cancel</span>
+
+                                                @endif
+                                            </div> --}}
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            {{-- <h5>Car Info</h5>
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Name :</span>
+                                                <span class="col-md-7">{{$booking->car->name}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Brand : </span>
+
+                                                
+                                                <span class="col-md-7">{{$booking->car->brand->name}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Car Model :</span>
+                                                <span class="col-md-7">{{$booking->car->model}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Type : </span>
+
+                                                
+                                                <span class="col-md-7">{{$booking->car->type->name}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Seats :</span>
+                                                <span class="col-md-7">{{$booking->car->seats}} </span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Doors : </span>
+                                                <span class="col-md-7">{{$booking->car->doors}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Air Bag : </span>
+                                                <span class="col-md-7">{{$booking->car->bags}}</span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Aircon : </span>
+                                                <span class="col-md-7">
+                                                    @if($booking->car->aircon == 0)
+                                                        <span>No</span>
+                                                    @elseif($booking->car->aircon == 1)
+                                                        <span>Yes</span>
+
+                                                    @endif
+                                                </span>
+                                            </div>
+
+                                            <div class="row row-cols-10 mt-2">
+                                                <span class="col-md-5">Price Per Day: </span>
+                                                <span class="col-md-7">${{$booking->car->priceperday}}</span>
+                                            </div>
+ --}}
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        @endif
+                    </div>
                 </div>
             </div>
 
@@ -378,11 +573,22 @@
         if(view == 1){
             $('.bookinghistory').show();
             $('.car_bookingdetail').hide();
+            $('.hotel_bookingdetail').hide();
+
 
         }else if(view == 2){
 
             $('.bookinghistory').hide();
             $('.car_bookingdetail').show();
+            $('.hotel_bookingdetail').hide();
+
+
+        }else if(view == 3){
+
+            $('.bookinghistory').hide();
+            $('.car_bookingdetail').hide();
+            $('.hotel_bookingdetail').show();
+
 
         }
     })

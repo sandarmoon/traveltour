@@ -140,6 +140,7 @@ Route::post('/rooms/h',[FrontController::class,'roomsByHotelId'])->name('rooms.h
 
 
 Route::get('/bookingdetail',[FrontController::class,'bookingdetail'])->name('bookingdetail');
+
 Route::post('/filter/{count}/{id}',[FrontController::class,'filterByPplCount'])->name('filter.pplcount.room');
 
 // Room booking startng from user
@@ -151,6 +152,7 @@ Route::post('/rbooking/detail',[FrontController::class,'roomBookingDetail'])->na
 
 Route::get('/bookinghistory',[FrontController::class,'bookinghistory'])->name('bookinghistory');
 Route::get('/bookingdetail/{id}',[FrontController::class,'bookingdetail'])->name('bookingdetail');
+Route::get('/roombookingdetail/{slug}',[FrontController::class,'roombookingdetail'])->name('roombookingdetail');
 
 
 //hotel booking email validation

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Models\Booking;
 use Auth;
+use DB;
 
 
 
@@ -57,20 +58,50 @@ class FrontController extends Controller
     {
         $view = 1;
         $bookings = Booking::where('user_id',Auth::id())->get();
-        $booking = array('data' => 'null');;
+        $booking_historys = HotelBooking::where('user_id',Auth::id())->get()->groupBy(function($data){
 
-        return view('frontend.bookinghistory',compact('bookings','view','booking'));
+            $date = $data->created_at->format('Y-m-d');
+            // $check_in = $data->check_in;
+            $array = array(
+                        'date' =>$date,  
+                        );
+            return $array;
+
+        });
+
+        $booking = array();;
+
+        return view('frontend.bookinghistory',compact('bookings','booking_historys','view','booking'));
     }
 
 
     public function bookingdetail(Request $request,$id){
-
+        
         $view = 2;
-        $bookings = array('data' => 'null');;
+        $booking_historys = array();
+
+        $bookings = array();;
         $booking = Booking::find($id);
-        return view('frontend.bookinghistory',compact('bookings','view','booking'));
+        return view('frontend.bookinghistory',compact('bookings','view','booking','booking_historys'));
 
     }
+
+
+    public function roombookingdetail(Request $request,$data){
+
+        $view = 3;
+        $booking_historys = array();
+        $bookings = array();
+        $booking = array();
+        $hotelbooking = HotelBooking::where('user_id',Auth::id())->whereDate('created_at',$data)->get();
+        // dd($hotelbooking);
+
+        return view('frontend.bookinghistory',compact('bookings','view','booking','hotelbooking','booking_historys'));
+
+    }
+
+
+
 
     // ===================hotel bookin start now======================
     public function searchHotel(Request $request){

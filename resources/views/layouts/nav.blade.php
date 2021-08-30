@@ -13,6 +13,7 @@
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="#!">Popular Items</a></li> --}}
                         @if(Auth::check())
+                        <li><a class="dropdown-item" href="{{route('bookinghistory')}}">Booking History</a></li>
                         <li> <a class="dropdown-item preview-item" href="route('logout')" class="d-inline" 
                                     onclick="event.preventDefault();
                                                 document.getElementById('logoutform').closest('form').submit();">
@@ -28,6 +29,9 @@
                                                 
                                             </form>
                                 </a></li>
+
+                            
+
 
                         @else
                         <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>

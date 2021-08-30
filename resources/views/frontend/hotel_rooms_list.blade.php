@@ -442,7 +442,7 @@
 					'r_id': 0,
 					'child': 0,
 					'adult': 1,
-					'total': 0
+					'total': 1
 				};
 
 

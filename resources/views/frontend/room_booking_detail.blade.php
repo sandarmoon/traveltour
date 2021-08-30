@@ -66,17 +66,7 @@
                     
                         <input type="hidden" name="user_id" value="{{(Auth::check() ? Auth::user()->id : '')}}">
                            
-                        @if(!Auth::check())
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password *"
-                                        aria-describedby="passwordId">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+                       
                     </div>
                     
                     <div class="row">
@@ -149,8 +139,11 @@
                 
                 </table>
                 
+                @if(Auth::check())
                 <button class="btn btn-success btn-hotel-checkout">Book Now!</button>
-
+                @else
+                <a href="{{route('login')}}" class="btn btn-success ">SignIn/SignUp to Book!</a>
+                @endif
             </div>
         </div>
        </div>
@@ -308,7 +301,7 @@
             check_out=gettime(check_out);
 
             let diff=(check_out - check_in)/(1000 * 3600 * 24);
-            
+                diff=Math.max(1,diff);
             let check_in_date=getDateString(check_in);
             // console.log(check_in_date);
 

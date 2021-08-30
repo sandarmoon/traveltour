@@ -11,7 +11,7 @@
                   <p>{{ $message }}</p>
               </div>
           @endif
-          <a class="ct-example text-white float-right border-0" href="{{route('list.car')}}">
+          <a class="ct-example text-white float-right border-0" href="{{URL::previous()}}">
             <i class="ni ni-bold-left"></i>
                 <span class="error-name">Back</span>
           </a>
@@ -35,10 +35,10 @@
                      
                      <tr>
                        <td class="p-2">Price</td>
-                       <td>{{$booking->car->priceperday}}</td>
+                       <td>{{$booking->room->pricepernight}}</td>
                      </tr>
                      <td class="p-2">Discount</td>
-                       <td>{{$booking->car->discount}}</td>
+                       <td>-</td>
                      </tr>
                      <tr>
                        <td class="p-2">Day</td>
@@ -48,15 +48,13 @@
                        <td class="p-2">Subtotal</td>
                        <td>
                          @php
-                         $days=$booking->day;
-                         $discount=$booking->car->discount;
-                         $price=$booking->car->priceperday;
+                         $days=$booking->days;
+                         
+                         $price=$booking->room->pricepernight;
                          $total=0;
-                         if($discount ==0){
-                          $total=$price * $days;
-                         }else{
-                          $total=$discount * $days;
-                         }
+                         
+                          $total=$price * $days + 10;
+                        
                          echo $total.'$';
                          @endphp
                        </td>
@@ -136,33 +134,36 @@
                        <td>{{$booking->user->name}} </td>
                      </tr>
                      <tr>
-                       <td class="p-2">Departure City</td>
-                       <td>{{$booking->from->name}}</td>
+                       <td class="p-2">Customer's Phone</td>
+                       <td>{{$booking->phone}} </td>
+                     </tr>
+                     
+                     <tr>
+                       <td class="p-2">Check IN Date</td>
+                       <td> 23 6 199s6</td>
                      </tr>
                      <tr>
-                       <td class="p-2">Arrival City</td>
-                       <td>{{$booking->to->name}}</td>
+                       <td class="p-2">Check OUT Date</td>
+                       <td>24 6 1996</td>
                      </tr>
                      <tr>
-                       <td class="p-2">Departure Date</td>
-                       <td> {{$booking->departure_date}}</td>
+                       <td class="p-2">Stay/Room </td>
+                       <td>{{$booking->room->type->name}}, 
+			                            {{($booking->room->single ) ? '': $booking->room->single}}
+			                            {{($booking->room->double ) ? '': $booking->room->double}}
+			                            {{($booking->room->king) ? '': $booking->room->king}}
+			                            {{($booking->room->queen) ? '': $booking->room->queen}}
+			                             Beds</td>
                      </tr>
                      <tr>
-                       <td class="p-2">Arrival Date</td>
-                       <td>{{$booking->arrival_date}}</td>
+                       <td class="p-2">Hotel Name</td>
+                       <td >{{$booking->room->company->name}}</td>
                      </tr>
                      <tr>
-                       <td class="p-2">Vehicle/Car </td>
-                       <td>{{$booking->car->name}}({{$booking->car->type->name}}-{{$booking->car->model}})</td>
+                       <td class="p-2">Message from Customer</td>
+                       <td >{{$booking->msg}}</td>
                      </tr>
-                     <tr>
-                       <td class="p-2">Car Rental</td>
-                       <td >{{$booking->car->company->name}}</td>
-                     </tr>
-                     <tr>
-                       <td class="p-2">Pickup Place</td>
-                       <td>{{$booking->pickup->name}}</td>
-                     </tr>
+                     
                      
                      
 

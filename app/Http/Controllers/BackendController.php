@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Booking;
 use App\Models\Room;
 use App\Models\Facility;
+use App\Models\HotelBooking;
 use App\Models\Type;
 use Session;
 use  Auth;
@@ -85,23 +86,47 @@ class BackendController extends Controller
         return  view('backend.carbookinglist',compact('bookings'));
     }
 
-    public function bookingConfirmed($id,$status){
+    public function bookingConfirmed($id,$status,$type){
         //1 for pending
         //2 for confirm
         //3 for cancel
+        $booking=null;
 
-        $booking=Booking::find($id);
-        if($status ==2){
-            $booking->status =2;
-        }
+       if($type== 1){
+           //hotel confirm
+           $booking=HotelBooking::find($id);
+           if($status ==2){
+                $booking->status =2;
+            }
 
-        if($status == 3){
-            $booking->status =3;
-        }
+            if($status == 3){
+                $booking->status =3;
+            }
 
-        $booking->save();
+            $booking->save();
+       }
 
-        return back();
+       if($type ==2){
+           //car confirm
+            $booking=Booking::find($id);
+            if($status ==2){
+                $booking->status =2;
+            }
+
+            if($status == 3){
+                $booking->status =3;
+            }
+
+            $booking->save();
+
+            
+       }
+
+       if($type==3){
+           //package confirm
+       }
+
+       return back();
     }
 
     public function carBookingDetail($id){
@@ -432,10 +457,19 @@ class BackendController extends Controller
 
     // +============= end =======
 
-    // starting for room booking 
+    // hotel booking list for admin
+
+    public function  getBackendHotelBooking(){
+        $bookings=HotelBooking::all();
+        return view('backend.hotel_booking_list',compact('bookings'));
+    }
 
 
+    public function hotelBookingDetail($id){
+        $booking=HotelBooking::find($id);
 
+        return view('backend.hotel_booking_detail',compact('booking'));
+    }
 
 
 

@@ -69,10 +69,11 @@ Route::get('list/car',[BackendController::class,'carBookingList'])->name('list.c
 
 //booking confirm and cancel for car
 //sid means status
-Route::get('/confirm/{id}/{sid}',[BackendController::class,'bookingConfirmed'])->name('carbooking.confirm');
+Route::get('/confirm/{id}/{sid}/{type}',[BackendController::class,'bookingConfirmed'])->name('bookinglist.confirm');
 
 //carbooking detail
 Route::get('/list/{id}/bc',[BackendController::class,'carBookingDetail'])->name('car.booking.detail');
+
 
 //Fcategory view for admin
 Route::resource('fcategory',FcategoryController::class);
@@ -114,9 +115,15 @@ Route::delete('/{id}',[BackendController::class,'roomDestroy'])->name('room.dest
 
 Route::get('/get/rooms',[BackendController::class,'getRoomAjax'])->name('ajax.getroomAjax');
 
-
+//admin for hotel-booking list
+Route::get('/hotel/bookings',[BackendController::class,'getBackendHotelBooking'])->name('backend.hotel.bookinglist');
 
 });
+
+//hotelbooking detail
+Route::get('/list/{id}/bh',[BackendController::class,'hotelBookingDetail'])->name('hotel.booking.detail');
+
+
 
 
 require __DIR__.'/auth.php';

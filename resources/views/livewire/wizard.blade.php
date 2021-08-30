@@ -370,3 +370,8 @@
     
     
 </div>
+@push('script')
+<script>
+    alert('helo');
+</script>
+@endpush

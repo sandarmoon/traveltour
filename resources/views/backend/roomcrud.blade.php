@@ -4,7 +4,7 @@
   <div class="container-fluid">
     <div class="my-ct-page-title text-white">
       <h1 class="ct-title text-white d-inline-block" id="content">
-        New Vehicle Adding 
+        New Hotel Room Adding 
       </h1>
       <a class="ct-example text-white float-right border-0" href="{{route('car.index')}}">
         <i class="ni ni-bold-left"></i>

@@ -459,6 +459,7 @@
                                 Facility sub Category
                             </a>
                         </li>
+
                         <li
                             class="nav-item {{ Request::is('room*') ? 'active' : '' }}"
                         >
@@ -488,6 +489,14 @@
                                 class="url"
                             />
                         </li>
+                    </ul>
+                    <!-- booking url div  -->
+                    <!-- Divider -->
+                    <hr class="my-3" />
+                    <!-- Heading -->
+                    <h6 class="navbar-heading text-muted">Booking list</h6>
+                    <!-- Navigation -->
+                    <ul class="navbar-nav mb-md-3">
                         <li
                             class="nav-item {{ Request::is('list*') ? 'active' : '' }}"
                         >
@@ -501,13 +510,15 @@
                         >
                             <a
                                 class="nav-link"
-                                href="../examples/register.html"
+                                href="{{ route('backend.hotel.bookinglist') }}"
                             >
                                 <i class="ni ni-circle-08 text-pink"></i>
-                                Register
+                                Hotel-Booking
                             </a>
                         </li>
                     </ul>
+                    <!-- booking url div end -->
+                    <!-- booking url div  -->
                     <!-- Divider -->
                     <hr class="my-3" />
                     <!-- Heading -->

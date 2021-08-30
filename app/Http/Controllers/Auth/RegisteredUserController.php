@@ -20,6 +20,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        if (!session()->has('url.intended')) {
+                session(['url.intended' => url()->previous()]);
+         }
         return view('auth.register');
     }
 
@@ -49,6 +52,15 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        if (session()->has('url.intended')) {
+                $redirectTo = session()->get('url.intended');
+                session()->forget('url.intended');
+            }
+        
+        if ($redirectTo) {
+            return redirect($redirectTo);
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }

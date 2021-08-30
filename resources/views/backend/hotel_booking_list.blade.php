@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="my-ct-page-title text-white">
           <h1 class="ct-title text-white d-inline-block" id="content">
-            Car Booking list
+            Hotel Booking list
           </h1>
           @if ($message = Session::get('success'))
               <div class="alert alert-success">
@@ -39,11 +39,11 @@
                       <tr>
                         <th scope="col"> booking Code</th>
                         
-                        <th scope="col">Car</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">Room</th>
+                         <th scope="col">From-to</th>
                         
-                        <th scope="col">Day</th>
-                        <th scope="col">From-to</th>
+                        <th scope="col">Stay</th>
+                       
                         <th scope="col">Status</th>
                         <th scope="col">Customer</th>
                         <th scope="col">Action</th>
@@ -57,16 +57,10 @@
                         <td scope="col">No:{{$b->booking_code}}<br/>
                         {{$b->booking_date}}</td>
                         
-                        <td scope="col">{{$b->car->name}}({{$b->car->type->name}}-{{$b->car->model}})</td>
-                        <td scope="col">
-                          @php
-                          $date=date_create($b->departure_date);
-                          $date=date_format($date,'Y M d');
-                          echo $date;
-                          @endphp
-                        </td>
-                        <td scope="col">{{$b->day}}</td>
-                        <td scope="col">{{$b->from->name}}-{{$b->to->name}}</td>
+                        <td scope="col">{{$b->room->name}},<br/>{{$b->room->company->name}}</td>
+                        <td>{{$b->check_in}} - {{$b->check_out}}</td>
+                        <td scope="col">{{$b->days}}</td>
+                        
                          <td scope="col">
                            @if($b->status ==1)
                            <h1 class="badge badge-warning" style="font-size: 0.8rem;">Pending</h1>
@@ -86,10 +80,10 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu  text-center " role="menu" aria-labelledby="dLabel">
-                              <li><a class="dropdown-item" href="{{route('bookinglist.confirm',[$b->id,'2',2])}}">Confirm</a></li>
-                              <li><a class="dropdown-item" href="{{route('bookinglist.confirm',[$b->id,'3',2])}}">Cancel</a></li>
+                              <li><a class="dropdown-item" href="{{route('bookinglist.confirm',[$b->id,'2',1])}}">Confirm</a></li>
+                              <li><a class="dropdown-item" href="{{route('bookinglist.confirm',[$b->id,'3',1])}}">Cancel</a></li>
                               
-                              <li><a class="dropdown-item" href="{{route('car.booking.detail',$b->id)}}">Detail</a></li>
+                              <li><a class="dropdown-item" href="{{route('hotel.booking.detail',$b->id)}}">Detail</a></li>
                               
                             </ul>
                           </div>

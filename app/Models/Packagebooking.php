@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Package extends Model
+class Packagebooking extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable=['name','desc','depart_id','arrive_id','start','end','priceperperson','discount','days','ppl','company_hotel_id','company_car_id','status']
-      
+    protected $fillable=['codeno','user_id','package_id','msg','phone','address','ppl','total'];
 }

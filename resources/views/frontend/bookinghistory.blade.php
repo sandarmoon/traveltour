@@ -1,4 +1,4 @@
-@extends('frontendTemplate')
+@extends('frontendnew')
 @section('main')
 <!-- Header-->
  @if (session()->has('message'))
@@ -242,6 +242,22 @@
                     <div class="card shadow car_bookingdetail">
                         @if($view == 2 && $booking)
 
+                        <div class="card-header">
+                            <h5 class="d-inline mr-4">{{$booking->booking_date}}</h5>
+                            
+                            @if($booking->status == 1)
+                            ( <span class="mx-2 text-primary"> Pending </span> )
+
+                            @elseif($booking->status == 2)
+
+                            ( <span class="mx-2 text-success"> Confirm </span> )
+
+                            @elseif($booking->status == 3)
+                            ( <span class="mx-2 text-danger"> Cancel </span> )
+
+                            @endif
+                        </div>
+
                         <div class="card-body">
 
                             <div class="row">
@@ -261,133 +277,154 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h5>Booking</h5>
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5 ">Booking Code :</span>
-                                                <span class="col-md-7">{{$booking->booking_code}}</span>
-                                            </div>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Booking Date :</span>
-                                                <span class="col-md-7">{{$booking->booking_date}}</span>
-                                            </div>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">From - To City :</span>
-                                                <span class="col-md-7">{{$booking->from->name}} - {{$booking->to->name}}</span>
-                                            </div>
+                                            <table class="table">
+                                                <tr>
+                                                    <td> Code :</td>
+                                                    <td>{{$booking->booking_code}}</td>
+                                                </tr>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Day : </span>
-                                                <span class="col-md-7">{{$booking->day}}</span>
-                                            </div>
+                                                <tr>
+                                                    <td>  From - To City :</td>
+                                                    <td>{{$booking->from->name}} - {{$booking->to->name}}
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Pickup : </span>
-                                                <span class="col-md-7">{{$booking->pickup->name}},{{$booking->pickup->parent->name}}</span>
-                                            </div>
+                                                    </td>
+                                                </tr>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Time : </span>
-                                                <span class="col-md-7">{{$booking->pickup_time}}</span>
-                                            </div>
+                                                <tr>
+                                                    <td> Time :</td>
+                                                    <td>
+                                                        {{$booking->pickup_time}}
+                                                    </td>
+                                                </tr>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Detaure Date : </span>
 
-                                                @php
-                                                $departure_date=date_create($booking->departure_date);
-                                                $departure_date= date_format($departure_date,"d / M / Y");
-                                                @endphp
+
+                                                <tr>
+                                                    <td> Detaure Date  :</td>
+                                                    <td>
+                                                        @php
+                                                        $departure_date=date_create($booking->departure_date);
+                                                        $departure_date= date_format($departure_date,"d / M / Y");
+                                                        @endphp
+                                                       {{$departure_date}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Arrival Date  :</td>
+                                                    <td>
+                                                        @php
+                                                        $arrival_date=date_create($booking->arrival_date);
+                                                        $arrival_date= date_format($arrival_date,"d / M / Y");
+                                                        @endphp
+                                                       {{$arrival_date}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Day :</td>
+                                                    <td>
+                                                        {{$booking->day}}@if($booking->day==1)day
+                                                        @elseif($booking->day != 0)
+                                                        days
+                                                        @endif
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Location :</td>
+                                                    <td>
+                                                        {{$booking->pickup->name}},{{$booking->pickup->name}},{{$booking->pickup->parent->name}}
+                                                    </td>
+                                                </tr>
+
                                                
-                                                <span class="col-md-7">{{$departure_date}}</span>
-                                            </div>
+                                            </table>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Arrival Date : </span>
-
-                                                @php
-                                                $arrival_date=date_create($booking->arrival_date);
-                                                $arrival_date= date_format($arrival_date,"d / M / Y");
-                                                @endphp
-                                               
-                                                <span class="col-md-7">{{$arrival_date}}</span>
-                                            </div>
-
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Status : </span>
-                                                @if($booking->status == 1)
-
-                                                <span class="col-md-7 text-primary">Pending</span>
-
-                                                @elseif($booking->status == 2)
-
-                                                <span class="col-md-7 text-success">Confirm</span>
-
-                                                @elseif($booking->status == 3)
-                                                <span class="col-md-7 text-danger">Cancel</span>
-
-                                                @endif
-                                            </div>
 
                                         </div>
 
                                         <div class="col-md-6">
                                             <h5>Car Info</h5>
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Name :</span>
-                                                <span class="col-md-7">{{$booking->car->name}}</span>
-                                            </div>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Brand : </span>
 
-                                                
-                                                <span class="col-md-7">{{$booking->car->brand->name}}</span>
-                                            </div>
+                                            <table class="table">
+                                                <tr>
+                                                    <td> Name :</td>
+                                                    <td>{{$booking->car->name}}</td>
+                                                </tr>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Car Model :</span>
-                                                <span class="col-md-7">{{$booking->car->model}}</span>
-                                            </div>
+                                                <tr>
+                                                    <td>  Brand :</td>
+                                                    <td>{{$booking->car->brand->name}}
+                                                    </td>
+                                                </tr>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Type : </span>
+                                                <tr>
+                                                    <td> Car Model :</td>
+                                                    <td>
+                                                        {{$booking->car->model}}
+                                                    </td>
+                                                </tr>
 
-                                                
-                                                <span class="col-md-7">{{$booking->car->type->name}}</span>
-                                            </div>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Seats :</span>
-                                                <span class="col-md-7">{{$booking->car->seats}} </span>
-                                            </div>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Doors : </span>
-                                                <span class="col-md-7">{{$booking->car->doors}}</span>
-                                            </div>
+                                                <tr>
+                                                    <td>Type :</td>
+                                                    <td>
+                                                       {{$booking->car->type->name}}
+                                                    </td>
+                                                </tr>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Air Bag : </span>
-                                                <span class="col-md-7">{{$booking->car->bags}}</span>
-                                            </div>
+                                                <tr>
+                                                    <td> Seats  :</td>
+                                                    <td>
+                                                        {{$booking->car->seats}} @if($booking->car->seats == 1)Seat @elseif($booking->car->seats != 0) Seats @endif
+                                                    </td>
+                                                </tr>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Aircon : </span>
-                                                <span class="col-md-7">
-                                                    @if($booking->car->aircon == 0)
-                                                        <span>No</span>
-                                                    @elseif($booking->car->aircon == 1)
-                                                        <span>Yes</span>
+                                                <tr>
+                                                    <td> Doors :</td>
+                                                    <td>
+                                                        {{$booking->car->doors}} @if($booking->car->doors == 1)Door @elseif($booking->car->doors != 0) Doors @endif
+                                                    </td>
+                                                </tr>
 
-                                                    @endif
-                                                </span>
-                                            </div>
+                                                <tr>
+                                                    <td> Air Bag :</td>
+                                                    <td>
+                                                        {{$booking->car->bags}} @if($booking->car->bags == 1)Bag @elseif($booking->car->bags != 0) Bags @endif
+                                                    </td>
+                                                </tr>
 
-                                            <div class="row row-cols-10 mt-2">
-                                                <span class="col-md-5">Price Per Day: </span>
-                                                <span class="col-md-7">${{$booking->car->priceperday}}</span>
-                                            </div>
+
+                                                <tr>
+                                                    <td> Air Con :</td>
+                                                    <td>
+                                                        @if($booking->car->aircon == 0)
+                                                            <span class="text-danger">No</span>
+                                                        @elseif($booking->car->aircon == 1)
+                                                            <span class="text-success">Yes</span>
+
+                                                        @endif
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>  Price Per Day :</td>
+                                                    <td>
+                                                        ${{$booking->car->priceperday}}
+                                                    </td>
+                                                </tr>
+                                               
+
+                                               
+                                            </table>
+
+
 
                                         </div>
                                        
@@ -406,6 +443,24 @@
                     <div class="card shadow hotel_bookingdetail">
                         @if($view == 3 && $hotelbooking)
 
+                        <div class="card-header mb-4 py-3">
+                            <h5 class="d-inline mr-4">{{$hotelbooking[0]->booking_date}}</h5>
+                            
+                            @if($hotelbooking[0]->status == 1)
+                            ( <span class="mx-2 text-primary"> Pending </span> )
+
+                            @elseif($hotelbooking[0]->status == 2)
+
+                            ( <span class="mx-2 text-success"> Confirm </span> )
+
+                            @elseif($hotelbooking[0]->status == 3)
+                            ( <span class="mx-2 text-danger"> Cancel </span> )
+
+                            @endif
+                            
+                        </div>
+
+
                         <div class="card-body">
 
                             <div class="row">
@@ -421,155 +476,182 @@
                                     <div class="row mt-3">
                                         <div class="col-md-6 col-lg-6 col-sm-12 ">
                                             <h5>Booking</h5>
-                                            <ul>
-                                                <li class="my-2 ">
-                                                    
-                                                    <span>Booking Code :</span>
-                                                    <span class="mx-4">{{$hotelbooking[0]->codeno}}</span>
-                                                    
-                                                </li>
+                                            <table class="table">
+                                                <tr>
+                                                    <td> Code :</td>
+                                                    <td>{{$hotelbooking[0]->codeno}}</td>
+                                                </tr>
 
-                                                <li class="my-2 ">
-                                                    
-                                                        <span >Booking Date :</span>
-                                                        <span class="mx-4">
-                                                           {{--  @php
-                                                                $b_date = date_create($hotelbooking[0]->booking_date);
-                                                                $date= date_format($b_date,"m/d/Y ");
-                                                            @endphp --}}
-                                                               
-                                                            {{$hotelbooking[0]->booking_date}}</span>
-                                                    
-                                                </li>
-
-
-                                                <li class="my-2 ">
-                                                     
-                                                    <span >Day : </span>
-                                                    <span class="mx-5">{{$hotelbooking[0]->days}}@if($hotelbooking[0]->days==1)day
+                                                <tr>
+                                                    <td>  Day :</td>
+                                                    <td>{{$hotelbooking[0]->days}}@if($hotelbooking[0]->days==1)day
                                                         @else 
                                                         days
                                                         @endif
-                                                    </span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Check in Date :</td>
+                                                    <td>
+                                                        {{$hotelbooking[0]->check_in}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Check out Date :</td>
+                                                    <td>
+                                                        {{$hotelbooking[0]->check_out}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Hotel Name :</td>
+                                                    <td>
+                                                        {{$hotelbooking[0]->room->company->name}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Hotel Phone :</td>
+                                                    <td>
+                                                        {{$hotelbooking[0]->room->company->phone}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr >
+                                                    <td width="46%"> Hotel Address :</td>
+                                                    <td width="100%">
+                                                        {{$hotelbooking[0]->room->company->addresss}}{{$hotelbooking[0]->room->company->city->name}}
+                                                    </td>
                                                     
-                                                </li>
+                                                </tr>
+                                               
+                                            </table>
 
-                                                <li class="my-2">
-                                                    <span>Check in:</span>
-                                                    <span class="mx-4">{{$hotelbooking[0]->check_in}}</span>
-                                                </li>
-
-                                                <li class="my-2">
-                                                    <span >Check out :</span>
-                                                    <span class="mx-4">{{$hotelbooking[0]->check_out}}</span>
-                                                </li>
-
-                                                <li class="my-2 ">
-                                                    
-                                                    <span>Hotel Name :</span>
-                                                    <span class="mx-4">{{$hotelbooking[0]->room->company->name}}</span>
-                                                    
-                                                </li>
-
-                                                <li class="my-2 ">
-                                                    
-                                                    <span>Hotel Phone :</span>
-                                                    <span class="mx-4">{{$hotelbooking[0]->room->company->phone}}</span>
-                                                    
-                                                </li>
-
-                                                <li class="my-2 ">
-                                                    
-                                                    <span>Hotel Address :</span>
-                                                    <span class="mx-4">{{$hotelbooking[0]->room->company->addresss}}{{$hotelbooking[0]->room->company->city->name}}</span>
-                                                    
-                                                </li>
-
-                                                <hr>
-
-                                                <li class="my-2">
-                                                    <span >Room : </span>
-                                                    <span class="mx-4">{{count($hotelbooking)}}
-                                                        @if(count($hotelbooking) == 1)Room
-                                                            @else
-                                                            Rooms
-                                                        @endif
-                                                    </span>
-                                                </li>
-
-                                                <li class="my-2">
-                                                    <span >Room Total Price : </span>
-                                                    <span class="mx-4">
-                                                        @php
-                                                            $price = 0;
-                                                        @endphp
-                                                        @foreach($hotelbooking as $data)
-                                                            @php
-                                                            $price +=$data->room->pricepernight
-                                                            @endphp
-                                                        @endforeach
-                                                       $ {{$price}}
-                                                    </span>
-                                                </li>
-
-                                                <li class="my-2">
-                                                    <span >Tax : </span>
-                                                    <span class="mx-5 px-5">
-                                                        @php
-                                                        $tax = 0;
-                                                        @endphp
-                                                        @foreach($hotelbooking as $data)
-                                                            @php
-                                                                $tax += $data->taxfee;
-                                                            @endphp
-                                                        @endforeach
-                                                        $ {{$tax}}
-                                                    </span>
-                                                    
-                                                </li>
-
-
-                                                <li class="my-2">
-                                                    <span >Grand Total Price : </span>
-                                                    <span class="mx-4">
-                                                        @php
-                                                            $price = 0;
-                                                        @endphp
-                                                        @foreach($hotelbooking as $data)
-                                                            @php
-                                                            $price +=$data->total;
-                                                            @endphp
-                                                        @endforeach
-                                                       $ {{$price}}
-                                                    </span>
-                                                </li>
-
-                                                
-                                                <li class="my-2">
-                                                    
-                                                    <span >Status : </span>
-                                                    @if($hotelbooking[0]->status == 1)
-
-                                                    <span class="mx-4 text-primary">Pending</span>
-
-                                                    @elseif($hotelbooking[0]->status == 2)
-
-                                                    <span class="mx-4 text-success">Confirm</span>
-
-                                                    @elseif($hotelbooking[0]->status == 3)
-                                                    <span class="mx-4 text-danger">Cancel</span>
-
-                                                    @endif
-                                                   
-
-                                                </li>
-                                            </ul>
                                             
                                         </div>
 
                                         <div class="col-md-6 col-lg-6 col-sm-12">
                                             <h5>Traveller Info</h5>
-                                                <ul>
+
+                                            <table class="table">
+                                                <tr>
+                                                    <td>Total Traveller :</td>
+                                                    <td>@php
+                                                            $traveller = 0;
+                                                        @endphp
+                                                        @foreach($hotelbooking as $data)
+                                                            @php
+                                                                $traveller += $data->adult + $data->child;
+                                                            @endphp
+                                                        @endforeach
+                                                        {{$traveller}} @if($traveller == 1)person @else people @endif 
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> Adult / Child: </td>
+                                                    <td>
+                                                        @php
+                                                            $adult = 0;
+                                                            $child = 0;
+                                                        @endphp
+                                                        @foreach($hotelbooking as $data)
+                                                            @php
+                                                                $adult += $data->adult;
+                                                                $child += $data->child;
+                                                            @endphp
+                                                        @endforeach
+                                                        {{$adult}} @if($adult == 1)person @else people @endif / 
+                                                        {{$child}} @if($child == 1)person @elseif($child != 0) people @endif
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="30%">Message :</td>
+                                                    <td width="100%">{{$hotelbooking[0]->msg}}</td>
+                                                </tr>
+                                            </table>
+
+                                            <div class="accordion accordionExample" >
+                                                <h5>Room Info</h5>
+                                                @foreach($hotelbooking as $key=>$data)
+                                                  <div class="accordion-item">
+
+                                                    <h2 class="accordion-header heading{{$key}}">
+                                                      <button class="accordion-button text-dark collapsed" type="button" data-bs-toggle="collapse" data-bs-target=".collapse{{$key}}" 
+                                                      @if($key==0) aria-expanded="true"  @endif
+                                                       aria-controls="collapse{{$key}}">
+                                                        {{$data->room->type->name}} - {{$data->room->name}}
+                                                      </button>
+                                                    </h2>
+
+                                                    <div class="collapse{{$key}} accordion-collapse collapse " aria-labelledby="heading{{$key}}" data-bs-parent=".accordionExample">
+                                                      <div class="accordion-body">
+                                                        
+                                                        <ul>
+                                                            
+                                                            <li class="my-2">
+                                                                <span >Price per night : </span>
+                                                                <span class="mx-4">
+                                                                   $ {{$data->room->pricepernight}}
+                                                                </span>
+                                                                
+                                                            </li>
+
+                                                            <li class="my-2">
+                                                                <span >Wide : </span>
+                                                                <span class="mx-4">
+                                                                    {{$data->room->wide}}
+                                                                </span>
+                                                                
+                                                            </li>
+
+                                                            <li class="my-2">
+                                                                <span >Sleep : </span>
+                                                                <span class="mx-4">
+                                                                    {{$data->room->ppl}}
+                                                                </span>
+                                                                
+                                                            </li>
+
+                                                            <li class="my-2">
+                                                                <div class="row">
+                                                                    
+                                                                
+                                                                <div class="col-md-3">Bed :</div>
+                                                                <div class="col-md-9">
+                                                                    @if($data->room->single)
+                                                                       ( Single - {{$data->room->single}} )
+                                                                    @endif
+
+                                                                    @if($data->room->double)
+                                                                        ( Double - {{$data->room->double}} )
+                                                                    @endif
+
+                                                                    @if($data->room->king)
+                                                                       ( King : {{$data->room->king}} )
+                                                                    @endif
+
+                                                                    @if($data->room->queen)
+                                                                       ( Queen : {{$data->room->queen}} )
+                                                                    @endif
+
+                                                                </div>
+                                                                </div>
+                                                                
+                                                            </li>
+                                                        </ul>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                @endforeach
+
+                                                </div>
+
+
+                                                {{-- <ul>
                                                     <li class="my-2">
                                                         <span >Total Traveller :</span>
                                                         <span class="mx-4">
@@ -622,21 +704,20 @@
                                                         </p>
                                                     </li>
 
-                                                    {{--  <li class="my-2">
+                                                     <li class="my-2">
                                                         <span >Address :</span>
                                                         <span class="mx-4">
                                                             {{$hotelbooking[0]->address}} 
                                                         </span>
-                                                    </li> --}}
-                                                </ul>
+                                                    </li>
+                                                </ul> --}}
                                                 
                                             
                                         </div>
                                        
                                     </div>
-                                    <hr>
-
-                                    <div class="row">
+                                    
+                                    {{-- <div class="row">
                                         <div class="col-md-12 col-lg-12 col-sm-12">
                                             <h5 class="text-center">Room Info</h5>
 
@@ -712,7 +793,7 @@
                                                 
                                                 @endforeach
 
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

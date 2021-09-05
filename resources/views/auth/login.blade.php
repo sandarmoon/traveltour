@@ -187,7 +187,7 @@
                                             
                                         </div>
                                         <div class="row  my-3">
-                                            <button class="btn btn-outline-success d-block btn-block">
+                                            <button class="btn btn-outline-primary d-block btn-block">
                                                 {{ __('Log in') }}
                                             </button>
                                         </div>

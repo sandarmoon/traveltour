@@ -1,4 +1,4 @@
-@extends('frontendTemplate')
+@extends('frontendnew')
 @section('main')
 <!-- Header-->
  @if (session()->has('message'))

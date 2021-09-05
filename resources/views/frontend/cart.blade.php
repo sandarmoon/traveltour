@@ -1,4 +1,4 @@
-@extends('frontendTemplate')
+@extends('frontendnew')
 @section('main')
 <!-- Header-->
         <header class=" py-2 banner ">

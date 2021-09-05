@@ -1,4 +1,4 @@
-@extends('frontendTemplate')
+@extends('frontendnew')
 @section('main')
 <!-- Header-->
          <livewire:company :cities="$cities" :id="$id"/>

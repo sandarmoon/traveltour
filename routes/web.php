@@ -124,6 +124,46 @@ Route::get('/hotel/bookings',[BackendController::class,'getBackendHotelBooking']
 Route::get('/list/{id}/bh',[BackendController::class,'hotelBookingDetail'])->name('hotel.booking.detail');
 
 
+//Tour Crud process 
+Route::prefix('tour')->group(function () {
+
+Route::get('/',[BackendController::class,'tourIndex'])->name('tour.index');
+Route::get('/create',[BackendController::class,'tourCreate'])->name('tour.create');
+
+Route::get('/{id}',[BackendController::class,'tourShow'])->name('tour.show');
+
+Route::post('/store',[BackendController::class,'tourStore'])->name('tour.store');
+
+Route::get('/{id}/edit',[BackendController::class,'tourEdit'])->name('tour.edit');
+
+Route::put('/{id}',[BackendController::class,'tourUpdate'])->name('tour.update');
+
+Route::delete('/{id}',[BackendController::class,'tourDestroy'])->name('tour.destroy');
+
+Route::get('/get/rooms',[BackendController::class,'getTourAjax'])->name('ajax.gettourAjax');
+
+});
+
+//Package Crud process 
+Route::prefix('package')->group(function () {
+
+Route::get('/',[BackendController::class,'packageIndex'])->name('package.index');
+Route::get('/create',[BackendController::class,'packageCreate'])->name('package.create');
+
+Route::get('/{id}',[BackendController::class,'packageShow'])->name('package.show');
+
+Route::post('/store',[BackendController::class,'packageStore'])->name('package.store');
+
+Route::get('/{id}/edit',[BackendController::class,'packageEdit'])->name('package.edit');
+
+Route::put('/{id}',[BackendController::class,'packageUpdate'])->name('package.update');
+
+Route::delete('/{id}',[BackendController::class,'packageDestroy'])->name('package.destroy');
+
+Route::get('/get/rooms',[BackendController::class,'getPackageAjax'])->name('ajax.getpackageAjax');
+
+});
+
 
 
 require __DIR__.'/auth.php';

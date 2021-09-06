@@ -517,7 +517,37 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- booking url div end -->
+                    <!-- booking package url div end -->
+                    <hr class="my-3" />
+                    <!-- Heading -->
+                    <h6 class="navbar-heading text-muted">Package</h6>
+                    <!-- Navigation -->
+                    <ul class="navbar-nav mb-md-3">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="{{ route('tour.index') }}"
+                            >
+                                <i class="ni ni-spaceship"></i> Tour Places
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html"
+                            >
+                                <i class="ni ni-palette"></i> Packages
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html"
+                            >
+                                <i class="ni ni-ui-04"></i> Package Booknig
+                            </a>
+                        </li>
+                    </ul>
                     <!-- booking url div  -->
                     <!-- Divider -->
                     <hr class="my-3" />

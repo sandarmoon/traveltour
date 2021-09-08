@@ -160,7 +160,7 @@ Route::put('/{id}',[BackendController::class,'packageUpdate'])->name('package.up
 
 Route::delete('/{id}',[BackendController::class,'packageDestroy'])->name('package.destroy');
 
-Route::get('/get/rooms',[BackendController::class,'getPackageAjax'])->name('ajax.getpackageAjax');
+Route::get('/get/packages',[BackendController::class,'getPackageAjax'])->name('ajax.getpackageAjax');
 
 });
 

@@ -8,7 +8,11 @@ use App\Models\Company;
 use App\Models\Booking;
 use App\Models\Room;
 use App\Models\Facility;
+use App\Models\Tour;
+use App\Models\Car;
+use App\Models\City;
 use App\Models\HotelBooking;
+use App\Models\Package;
 use App\Models\Type;
 use Session;
 use  Auth;
@@ -470,6 +474,149 @@ class BackendController extends Controller
 
         return view('backend.hotel_booking_detail',compact('booking'));
     }
+
+
+
+    // +============= end =======
+
+    // hotel booking list for user
+
+    public function packageIndex(){
+        return view('backend.package_list');  
+    }
+
+    public function packageCreate(){
+        $tours=Tour::all();
+        
+        $cities=City::whereNull('parent_id')->get();
+        $hotels=Company::where('type',1)->where('status',1)->get();
+        $cars=Car::where('seats','>=',5)->where('status',1)->get();
+        
+        return view('backend.package_crud', ['package' => new Package(),'tours'=>$tours,'hotels'=>$hotels,'cars'=>$cars,'cities'=>$cities]); 
+    }
+
+    public function packageStore(Request $request){
+        // start date 
+        $start_date = $request->start;
+
+        // end date 
+        $end_date = $request->end;
+
+        // call dateDifference() function to find the number of days between two dates
+        $dateDiff = $this->dateDifference($start_date, $end_date);
+
+       $package= Package::create([
+            'name'=>$request->name,
+            'desc'=>$request->desc,
+            'depart_id'=>$request->departure,
+            'arrive_id'=>$request->destination,
+            'start'=>$request->start,
+            'end'=>$request->end,
+            'priceperperson'=>$request->priceperperson,
+            'discount'=>$request->discount,
+            'days'=>$dateDiff,
+            'ppl'=>$request->ppl,
+            'company_hotel_id'=>$request->hotel,
+            'company_car_id'=>$request->car,
+
+        ]);
+        $package->tours()->attach($request->tours);
+        return back();
+    }
+
+
+    public function packageEdit($id){
+        $package=Package::find($id);
+        $tours=Tour::all();
+        
+        $cities=City::whereNull('parent_id')->get();
+        $hotels=Company::where('type',1)->where('status',1)->get();
+        $cars=Car::where('seats','>=',5)->where('status',1)->get();
+        
+        return view('backend.package_crud', ['package' => $package,'tours'=>$tours,'hotels'=>$hotels,'cars'=>$cars,'cities'=>$cities]); 
+    }
+
+    public function packageUpdate(Request $request,$id){
+         $start_date = $request->start;
+
+        // end date 
+        $end_date = $request->end;
+
+        // call dateDifference() function to find the number of days between two dates
+        $dateDiff = $this->dateDifference($start_date, $end_date);
+
+       $package= Package::find($id);
+            $package->name=$request->name;
+            $package->desc=$request->desc;
+            $package->depart_id=$request->departure;
+            $package->arrive_id=$request->destination;
+            $package->start=$request->start;
+            $package->end=$request->end;
+            $package->priceperperson=$request->priceperperson;
+            $package->discount=$request->discount;
+            $package->days=$dateDiff;
+            $package->ppl=$request->ppl;
+            $package->company_hotel_id=$request->hotel;
+            $package->company_car_id=$request->car;
+
+            $package->save();
+        $package->tours()->detach();
+        $package->tours()->attach($request->tours);
+        return redirect()->route('package.index');
+    }
+
+    function packageShow($id){
+        $package=Package::find($id);
+        return view('backend.package_detail',compact('package'));
+    }
+
+    function packageDestroy($id){
+       
+        $package=Package::find($id);
+       $package->delete();
+
+       // Session::flash('status', 'data deleted successfully!');
+       return response()->json(['success'=>"Successfully deleted"]);
+    }
+
+    function getPackageAjax(){
+        $package=Package::with(['depart','destination','hotel','car'=>function($q){
+            return $q->with('company')->get();
+        }])->get();
+
+        $datatables=Datatable::of($package)
+            ->addColumn('action',function($package){
+
+                return "<button class='btn btn-danger btn-delete' data-id=".$package->id."><i class='fas fa-trash'></i></button>
+
+                <a href=package/$package->id/edit class='btn btn-warning btn-edit' data-id=".$package->id."><i class='fas fa-edit'></i></a>
+
+
+
+                <a href=package/$package->id class='btn btn-info btn-detail' data-id=".$package->id."><i class='fas fa-info-circle'></i></a>
+                ";
+            });
+
+       return $datatables->make(true);
+
+    }
+
+    
+    function dateDifference($start_date, $end_date)
+    {
+        // calulating the difference in timestamps 
+        $diff = strtotime($start_date) - strtotime($end_date);
+        
+        // 1 day = 24 hours 
+        // 24 * 60 * 60 = 86400 seconds
+        return ceil(abs($diff / 86400));
+    }
+
+
+    
+
+    
+
 
 
 

@@ -534,7 +534,7 @@
                         <li class="nav-item">
                             <a
                                 class="nav-link"
-                                href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html"
+                                href="{{ route('package.index') }}"
                             >
                                 <i class="ni ni-palette"></i> Packages
                             </a>

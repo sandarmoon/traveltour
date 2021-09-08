@@ -12,4 +12,7 @@ class Tour extends Model
     use HasFactory,SoftDeletes;
     protected $fillable=['city_id','photo','title','desc'];
         
+    public function city(){
+        return $this->belongsTo('App\Models\City');
+    }
 }

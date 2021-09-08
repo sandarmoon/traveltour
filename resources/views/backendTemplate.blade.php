@@ -106,6 +106,8 @@
                 }
             }
 
+
+
             .sfont {
                 font-size: 0.875rem;
             }
@@ -803,6 +805,9 @@
                     ["insert", ["link"]],
                 ],
             });
+
+            $('.summernote_tour').summernote();
+
         </script>
         @yield('script')
         <script type="text/javascript">

@@ -10,7 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Tour extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table="tours";
     protected $fillable=['city_id','photo','title','desc'];
+
+    public function packages(){
+        return $this->BelongsToMany(Package::class)->withPivot('status');
+    }
         
     public function city(){
         return $this->belongsTo('App\Models\City');

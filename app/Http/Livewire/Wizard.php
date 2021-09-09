@@ -28,7 +28,7 @@ class Wizard extends Component
     public $company_phone,$company_name,$city_name;
     public $type_name,$brand_name,$company_address;
 
-    public $drop,$pickup,$sdate,$edate;
+    public $drop='',$pickup='',$sdate='',$edate='';
 
 
    
@@ -45,8 +45,12 @@ class Wizard extends Component
     public function render()
     {
         $cars=$this->cars;
+        
+        
 
         $cities=City::whereNull('parent_id')->get();
+
+
 
         return view('livewire.wizard',compact('cars','cities'));
     }

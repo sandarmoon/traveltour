@@ -15,9 +15,10 @@ use App\Models\HotelBooking;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Models\Booking;
+use App\Models\Package;
 use Auth;
 use DB;
-use Carbon;
+use Carbon\Carbon;
 
 
 
@@ -28,11 +29,18 @@ class FrontController extends Controller
         $cities=City::whereNull('parent_id')->get();
 
         $rooms=Room::all();
+        
+        $today=Carbon::today();
+        $packages=Package::where('start','>=',$today)
+                            ->orWhere('end','<=',$today)->get();
+        
+        
 
-        return view('frontend.home',compact('cities','rooms'));
+        return view('frontend.home',compact('cities','rooms','packages'));
     }
 
     public function searchCar(Request $request){
+    
         $pickup=$request->p_city_id;
         $drop=$request->d_city_id;
         $s_date=$request->start_date;

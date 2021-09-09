@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <!-- ===============================================-->
+        <!--    Document Title-->
+        <!-- ===============================================-->
+        <title>Advance Agency</title>
 
-    <!-- ===============================================-->
-    <!--    Document Title-->
-    <!-- ===============================================-->
-    <title>Advance Agency</title>
-
-     @livewireStyles
+        @livewireStyles
         <link
             rel="icon"
             type="image/x-icon"
             href="{{ asset('frontend/assets/travel.svg') }}"
         />
 
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-    {{-- <link rel="apple-touch-icon" sizes="180x180" href="{{asset('frontnew/assets/img/favicons/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('frontnew/assets/img/favicons/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('frontnew/assets/img/favicons/favicon-16x16.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontnew/assets/img/favicons/favicon.ico')}}"> --}}
     <link rel="manifest" href="{{asset('frontnew/assets/img/favicons/manifest.json')}}">
     <meta name="msapplication-TileImage" content="{{asset('frontnew/assets/img/favicons/mstile-150x150.png')}}">
     <meta name="theme-color" content="#ffffff">
@@ -37,7 +29,7 @@
     <link href="{{asset('frontnew/assets/css/theme.css')}}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{{asset('frontnew/assets/css/mystyle.css')}}">
 
-    <!-- Bootstrap icons-->
+  
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
             rel="stylesheet"
@@ -56,7 +48,9 @@
         />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
-        {{-- <link href="{{ asset('frontend/css/styles.css') }}" rel="stylesheet" /> --}}
+        {{--
+        <link href="{{ asset('frontend/css/styles.css') }}" rel="stylesheet" />
+        --}}
         <link
             href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
             rel="stylesheet"
@@ -66,7 +60,8 @@
             rel="stylesheet"
             id="bootstrap"
         />
-        {{-- <link href="{{ asset('frontend/css/mystyle.css') }}" rel="stylesheet" /> --}}
+
+        <link href="{{ asset('frontend/css/mystyle.css') }}" rel="stylesheet" />
 
         <style>
             .select2-selection__rendered {
@@ -88,67 +83,65 @@
             }
         </style>
         @stack('style')
+    </head>
 
-  </head>
+    <body>
+        <!-- ===============================================-->
+        <!--    Main Content-->
+        <!-- ===============================================-->
+        <main class="main" id="top">
+            @include('layouts.navnew') @yield('header')
 
+            <!-- ============================================-->
+            <!-- <section> begin ============================-->
+            <section class="py-0 overflow-hidden mt-5">
+                @yield('main-content')
 
-  <body>
+               
+                <!-- <section> close ============================-->
+                <!-- ============================================-->
+            </section>
+        </main>
+        <!-- ===============================================-->
+        <!--    End of Main Content-->
+        <!-- ===============================================-->
 
-    <!-- ===============================================-->
-    <!--    Main Content-->
-    <!-- ===============================================-->
-    <main class="main" id="top">
-      
-        @include('layouts.navnew')
-        @yield('header')
+        <!-- ===============================================-->
+        <!--    JavaScripts-->
+        <!-- ===============================================-->
+        <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
+        <script src="{{
+                asset('frontnew/vendors/@popperjs/popper.min.js')
+            }}"></script>
 
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-0 overflow-hidden mt-5">
+        <script src="{{
+                asset('frontnew/vendors/bootstrap/bootstrap.min.js')
+            }}"></script>
+        <script src="{{ asset('frontnew/vendors/is/is.min.js') }}"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+        <script src="{{
+                asset('frontnew/vendors/fontawesome/all.min.js')
+            }}"></script>
+        <script src="{{ asset('frontnew/assets/js/theme.js') }}"></script>
 
-        @yield('main')
-      
-       
-      
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-      </section>
-    
-    </main>
-    <!-- ===============================================-->
-    <!--    End of Main Content-->
-    <!-- ===============================================-->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&amp;display=swap"
+            rel="stylesheet"
+        />
 
-
-
-
-    <!-- ===============================================-->
-    <!--    JavaScripts-->
-    <!-- ===============================================-->
-    <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
-    <script src="{{asset('frontnew/vendors/@popperjs/popper.min.js')}}"></script>
-
-    <script src="{{asset('frontnew/vendors/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{asset('frontnew/vendors/is/is.min.js')}}"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="{{asset('frontnew/vendors/fontawesome/all.min.js')}}"></script>
-    <script src="{{asset('frontnew/assets/js/theme.js')}}"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
-
-
-
-    {{-- old --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script> --}}
-      <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"
-          integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg=="
-          crossorigin="anonymous"
-      ></script>
+        {{-- old --}}
+        {{--
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        --}}
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"
+            integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg=="
+            crossorigin="anonymous"
+        ></script>
 
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
         <script src="{{ asset('frontend/js/scripts.js') }}}"></script>
 
         <script
@@ -156,7 +149,7 @@
             defer
         ></script>
 
-     @livewireScripts @stack('script')
+        @livewireScripts @stack('script')
 
         <script>
             $(document).ready(function () {
@@ -181,6 +174,5 @@
                 $(".example_select2").select2();
             });
         </script>
-  </body>
-
+    </body>
 </html>

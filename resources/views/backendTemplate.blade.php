@@ -89,6 +89,20 @@
             body {
                 height: 100%;
             }
+
+            .my-row-flex {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            [class*="col-"] {
+                margin-bottom: 30px;
+            }
+
+            .content {
+                height: 100%;
+                padding: 20px 20px 10px;
+            }
             @media (max-width: 720px) {
                 .profilemedia {
                     text-align: center;
@@ -105,8 +119,6 @@
                     padding-right: 20px !important;
                 }
             }
-
-
 
             .sfont {
                 font-size: 0.875rem;
@@ -536,7 +548,7 @@
                         <li class="nav-item">
                             <a
                                 class="nav-link"
-                                href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html"
+                                href="{{ route('package.index') }}"
                             >
                                 <i class="ni ni-palette"></i> Packages
                             </a>
@@ -806,8 +818,7 @@
                 ],
             });
 
-            $('.summernote_tour').summernote();
-
+            $(".summernote_tour").summernote();
         </script>
         @yield('script')
         <script type="text/javascript">

@@ -1,6 +1,6 @@
 <div class="row pt-4">
    
-        <div>
+        <div class="container">
             @if(!empty($successMsg))
             <div class="alert alert-success">
                 {{ $successMsg }}

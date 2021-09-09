@@ -249,6 +249,43 @@ header {
 
 /* for room booking detail end */
 
+/* for frontend package start */
+.my-img{
+   position: relative;
+}
+
+.packageprice {
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 500;
+    background: rgb(241, 93, 48);
+    padding: 8px;
+    transition: all 0.3s ease 0s;
+}
+
+.project-wrap .my-img .packageprice:before {
+    width: 0;
+    right: -8px;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 0 8px;
+    border-color: transparent transparent transparent #c7390d;
+}
+
+.project-wrap .my-img .packageprice:after {
+    left: -8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 8px 8px;
+    border-color: transparent transparent #c7390d transparent;
+}
+/* for frontend package end */
+
 
 /*=============================================================================================================================================================================================================================*/
 /*making car to be valid or not*/

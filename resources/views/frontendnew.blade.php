@@ -101,9 +101,8 @@
             rel="stylesheet"
             id="bootstrap"
         />
-        {{--
+
         <link href="{{ asset('frontend/css/mystyle.css') }}" rel="stylesheet" />
-        --}}
 
         <style>
             .select2-selection__rendered {

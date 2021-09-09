@@ -158,7 +158,7 @@
 
 </div>
 <!-- Section for card-->
-
+@include('layouts.foot')
 @endsection
 @push('script')
 <script>

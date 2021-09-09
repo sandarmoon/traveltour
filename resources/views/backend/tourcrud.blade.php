@@ -114,7 +114,7 @@
                         <div class="row form-group my-4">
                             <label class="form-control-label col-md-2 mx-auto" id="title">Description</label>
                             <div class="col-md-10 mx-auto">
-                                <textarea class="summernote_tour" name="description">{{old('description')}} @if($tour->exists) {!! $tour->desc !!} @endif</textarea>
+                                <textarea class="summernote" name="description">{{old('description')}} @if($tour->exists) {!! $tour->desc !!} @endif</textarea>
                                 @error('description')
                                     <span class="text-danger">{{ $errors->first('description') }}</span>
                                 @enderror

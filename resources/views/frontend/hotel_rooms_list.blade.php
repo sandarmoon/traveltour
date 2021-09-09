@@ -252,7 +252,7 @@
 		</div>
 		
         {{-- modal end here --}}
-        
+        @include('layouts.foot')
 @endsection
 @push('script')
 <script>

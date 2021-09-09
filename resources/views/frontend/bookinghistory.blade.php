@@ -809,6 +809,7 @@
 
           
        </div>
+    @include('layouts.foot')
 @endsection
 @push('script')
 <script type="text/javascript">

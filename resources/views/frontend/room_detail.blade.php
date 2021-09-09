@@ -101,7 +101,7 @@
             </div>
             </div>
         </div>
-        
+        @include('layouts.foot')
 @endsection
 @section('script')
 <script>

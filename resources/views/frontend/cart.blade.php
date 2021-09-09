@@ -14,7 +14,7 @@
             </div>
         </header>
         <!-- Section for card-->
-        
+        @include('layouts.foot')
 @endsection
 @section('script')
 <script>

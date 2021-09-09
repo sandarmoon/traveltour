@@ -1,5 +1,5 @@
 @extends('frontendnew')
-@section('main')
+@section('main-content')
 <!-- Header-->
 <section class="   ">
     <div class="container px-4 px-lg-5 my-3  ">

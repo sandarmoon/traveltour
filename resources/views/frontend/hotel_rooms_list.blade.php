@@ -1,5 +1,5 @@
 @extends('frontendnew')
-@section('main')
+@section('main-content')
 <!-- Header-->
         
         <div class="col-md-10 offset-1 p-3 ">

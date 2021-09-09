@@ -1,106 +1,170 @@
-@extends('backendTemplate') @section('main')
-<!-- Header-->
-@if (session()->has('message'))
-<div class="alert alert-success">
-    {{ session("message") }}
-</div>
-@endif
-
-<div class="card container mt-3 my-3 p-3">
-    <div class="d-flex justify-content-between my-3 mx-2">
-        <h5 class="description d-inline-block">Package Infromation</h5>
-        <a href="{{url()->previous()}}" class="btn-close float-left"></a>
-    </div>
-
-    <div class="col-md-10 offset-1">
-        <div class="row">
-            <div class="col-md-5">
-                <h4 class="mb-0">
-                    {{$package->name}} -> {{$package->days}} Days Trip
-                </h4>
-
-                <p class="small text-muted">{{$package->days}} Days</p>
-                {{-- accordian start --}}
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" style="font-size: 1.135rem">
-                        <i class="fas fa-user-friends"></i>
-                        {{$package->ppl}} Travellers
-                    </li>
-                    <li class="list-group-item" style="font-size: 1.135rem">
-                        <i class="fas fa-hotel"></i>{{$package->hotel->name}}
-                    </li>
-                    <li class="list-group-item" style="font-size: 1.135rem">
-                        <i class="fas fa-car"></i
-                        >{{$package->car->name}} ({{$package->car->type->name
-
-
-
-                        }}-{{$package->car->model
-
-
-                        }}),{{$package->car->company->name}}
-                    </li>
-                    <li class="list-group-item" style="font-size: 1.135rem">
-                        <i class="fas fa-check"></i> Reserve Now,Pay Later
-                    </li>
-                </ul>
-
-                <h5 class="my-3">Room Amenities</h5>
-                <ul class="list-group list-unstyled">
-                    <li
-                        class="
-                            list-group-item
-                            d-flex
-                            justify-content-between
-                            align-items-start
-                        "
-                    >
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold"></div>
-                            <ul></ul>
-                        </div>
-                    </li>
-                </ul>
+@extends('backendTemplate') @section('main-content')
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-7">
+    <div class="container-fluid">
+        <div class="my-ct-page-title text-white">
+            <h1 class="ct-title text-white d-inline-block" id="content">
+                {{$package->name}} -> {{$package->days}} Days Trip
+            </h1>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
             </div>
-
-            <div class="col-md-7">
-                <div class="card">
-                    <div
-                        id="carouselExampleSlidesOnly"
-                        class="carousel slide"
-                        data-bs-ride="carousel"
-                    >
-                        <div class="carousel-inner"></div>
-                    </div>
-                </div>
-                <h4 class="description mt-3">Package Option</h4>
-                <div class="card mt-2">
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <h4 class="mb-0">
-                                    ${{$package->priceperperson}}
-                                </h4>
-                                <span class="price-desc small mb-2 text-muted"
-                                    >per person</span
-                                >
-                            </div>
-                            <div>
-                                <span class="left-msg small mb-2 text-danger"
-                                    >We have 4 left!</span
-                                >
-                                <a href="#" class="btn btn-primary mt-3"
-                                    >Reserve Now!</a
-                                >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endif
+            <a
+                class="ct-example text-white float-right border-0"
+                href="{{ route('package.index') }}"
+            >
+                <i class="ni ni-bold-left"></i>
+                <span class="error-name">Back</span>
+            </a>
         </div>
     </div>
 </div>
+<div class="container-fluid mt--8">
+    <div class="my-card mb-3">
+        <div class="card-body container p-0">
+            <div class="row p-2 my-row-flex ">
+                <div class="col-sm-6   order-2">
+                    <div class="card  content">
+                        <div class="card-header">Tour Introduction</div>
+                        <div class="card-body">
+                            <div class="card">
+                                <div
+                                    id="carouselExampleSlidesOnly"
+                                    class="carousel slide"
+                                    data-bs-ride="carousel"
+                                >
+                                    <div class="carousel-inner">
+                                        @php $s=0;
+                                        $tours=$package->tours;
+                                        $photos=[];
+                                        foreach($tours as $t){
+                                           $places= json_decode($t->photo,true);
+                                            foreach($places as $v){
+                                                array_push($photos,$v);
+                                            }
+                                        }
+                                        
+                                        
+                                        @endphp
+                                        @foreach($photos as $k=>$p)
+                                        <div
+                                            class="carousel-item {{
+                                                $s == $k ? 'active' : ''
+                                            }}"
+                                        >
+                                            <img
+                                                src="{{ asset('storage/'.$p) }}"
+                                                class="d-block w-100"
+                                                alt="..."
+                                            />
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-12">
+                                    {{$package->desc}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6    order-1">
+                    <div class="card content">
+                        <div class="card-header">
+                            Package Detail @if($package->status ==1)
+                            <span class="text-warning float-right">Valid</span>
 
-@endsection @section('script')
-<script></script>
-@endsection
+                            @elseif($package->status==2)
+                            <span class="text-success float-right"> full </span>
+
+                            @else
+                            <span class="text-danger float-right"
+                                >Expire Package</span
+                            >
+                            @endif
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <table class="table table-hover dt-responsive">
+                                    <tr>
+                                        <td >Departure City</td>
+                                        <td>
+                                            {{$package->depart->name}}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td >destination City</td>
+                                        <td>{{$package->destination->name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td >Departure Date</td>
+                                        <td>{{$package->start}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td >Arrival Date</td>
+                                        <td>{{$package->end}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td >Days</td>
+                                        <td>{{$package->days}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td >Price per person</td>
+                                        <td>{{$package->priceperperson}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td >Vehicle/Car</td>
+                                        <td>
+                                            {{$package->car->name
+
+
+
+                                            }}({{$package->car->type->name
+
+
+
+                                            }}-{{$package->car->model
+
+
+
+                                            }})/{{$package->car->company->name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td >Stay/Hotel</td>
+                                        <td>
+                                            {{$package->hotel->name}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="my-3 p-3">
+                                <h4>Package Trip Planning</h4>
+                                <ul>
+                                    @php $i=1; @endphp @foreach($package->tours
+                                    as $tour)
+                                    <li>
+                                        <p>{{$tour->title}}</p>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+<x-footer-component/>
+
+@endsection @section('script') @endsection

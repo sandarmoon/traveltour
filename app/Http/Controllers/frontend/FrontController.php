@@ -33,6 +33,7 @@ class FrontController extends Controller
     }
 
     public function searchCar(Request $request){
+    
         $pickup=$request->p_city_id;
         $drop=$request->d_city_id;
         $s_date=$request->start_date;

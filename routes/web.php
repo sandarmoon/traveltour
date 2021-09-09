@@ -140,9 +140,12 @@ Route::put('/{id}',[BackendController::class,'tourUpdate'])->name('tour.update')
 
 Route::delete('/{id}',[BackendController::class,'tourDestroy'])->name('tour.destroy');
 
-Route::get('/get/rooms',[BackendController::class,'getTourAjax'])->name('ajax.gettourAjax');
+Route::get('/get/tours',[BackendController::class,'getTourAjax'])->name('ajax.gettourAjax');
 
 });
+
+
+
 
 //Package Crud process 
 Route::prefix('package')->group(function () {

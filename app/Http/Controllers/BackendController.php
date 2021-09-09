@@ -16,7 +16,7 @@ use App\Models\Package;
 use App\Models\Type;
 use Session;
 use  Auth;
-
+use DB;
 class BackendController extends Controller
 
 {
@@ -620,10 +620,161 @@ class BackendController extends Controller
 
 
 
+    // Tour 
+
+    public function tourIndex(){
+        $tour = Tour::all();
+        return view('backend/tour',compact('tour'));
+    }
+
+    public function getTourAjax($value='')
+    {
+        // DB::statement(DB::raw('set @rownum=0'));
+        // $tours = Tour::select([
+        //     DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
+       
+
+        DB::statement(DB::raw('set @rownum=0'));
+        $tours = Tour::select([
+            DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+            'id',
+            'title',
+            'city_id',
+            'photo',
+            'desc',
+            'created_at',
+            'updated_at']);
+
+        // $tours = Tour::all();
+        $datatables = Datatable::of($tours)->with(['city'])
+
+            ->addColumn('title',function($tours){
+                return $tours->title;
+            } )
+            ->addColumn('city',function($tours){
+                return $tours->city->name;
+            } )
+            ->addColumn('action',function($tours){
+            return '<td class="dropdown"><a class="btn btn-default actionButton"
+                    data-toggle="dropdown" href="#"> Action </a></td>
+                    <ul id="contextMenu" class="dropdown-menu" role="menu">
+                        <li>'."<a href='#' class='nav-link text-danger btn-delete' data-id=".$tours->id.">Delete</a>".'</li>
+                        <li>'."<a href=tour/$tours->id/edit class='nav-link text-warning btn-edit' data-id=".$tours->id.">Edit</a>".'</li>
+                        <li>'."<a href=tour/$tours->id class='nav-link text-info btn-edit' data-id=".$tours->id.">Detail</a>".'</li>
+                        
+                      </ul>';
+           });
+
+        // if ($keyword = $request->get('search')['value']) {
+        //      $datatables->filterColumn('rownum', function($q,$keyword){
+        //         $q->whereRaw("@rownum +1  like ?", ["%{$keyword}%"]);
+        //      });
+            
+        // }
+
+        return $datatables->make(true);
+    }
 
 
+    public function tourCreate($value='')
+    {
+        $cities = City::all();
+        return view('backend.tourcrud',['tour' => new Room(),'cities'=>$cities]);
+    }
+
+    public function tourStore(Request $request)
+    {
+        $request->validate(['title'=>'required',
+                            'city' => 'required',
+                            'photo' => 'required',
+                            'description' => 'required']);
+
+        $galary=[];
+        if($request->hasFile('photo')){
+
+            foreach($request->file('photo') as  $k=>$file){
+             $filenameWithExt = $file->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $file->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $file->storeAs('tour',$fileNameToStore,'public');
+              array_push($galary,$path);
+            
+           }
+        }
 
 
+        $tour = new Tour;
+        $tour->title = $request->title;
+        $tour->city_id = $request->city;
+        $tour->photo = json_encode($galary);
+        $tour->desc = $request->description;
+        $tour->save();
+        return redirect()->route('tour.index');
+    }
+
+    public function tourEdit(Request $request,$id)
+    {
+        $tour = Tour::find($id);
+        $cities = City::all();
+        return view('backend.tourcrud',compact('tour','cities'));
+    }
+
+    public function tourUpdate(Request $request,$id)
+    {
+        $request->validate(['title'=>'required',
+                            'city' => 'required',
+                            
+                            'description' => 'required']);
+
+        $galary=[];
+        if($request->hasFile('photo')){
+
+
+            foreach($request->file('photo') as  $k=>$file){
+             $filenameWithExt = $file->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $file->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $file->storeAs('tour',$fileNameToStore,'public');
+              array_push($galary,$path);
+            
+           }
+           $path = json_encode($galary);
+        }else{
+            $path = $request->oldphoto;
+        }
+
+
+        $tour = Tour::find($id);
+        $tour->title = $request->title;
+        $tour->city_id = $request->city;
+        $tour->photo = $path;
+        $tour->desc = $request->description;
+        $tour->save();
+        return redirect()->route('tour.index');
+    }
+
+    public function tourShow($id)
+    {
+        $tour = Tour::find($id);
+        return view('backend.tourshow',compact('tour'));
+    }
+
+    public function tourDestroy($id)
+    {
+        $tour = Tour::find($id);
+        $tour->delete();
+        return response()->json(['success'=>'Successfully updated!']);
+    }
 
 
 

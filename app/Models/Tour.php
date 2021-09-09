@@ -17,4 +17,7 @@ class Tour extends Model
         return $this->BelongsToMany(Package::class)->withPivot('status');
     }
         
+    public function city(){
+        return $this->belongsTo('App\Models\City');
+    }
 }

@@ -14,14 +14,13 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        
+    {     
         
         $this->call([
 
-            // TypeSeeder::class,
+            TypeSeeder::class,
             BrandSeeder::class,
-            // FcategorySeeder::class,
+            FcategorySeeder::class,
         ]);    
 
         Type::create([

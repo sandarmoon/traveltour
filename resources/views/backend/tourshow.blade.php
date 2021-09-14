@@ -29,7 +29,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8 mx-auto">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                           <div class="carousel-inner">
                             @php
@@ -54,9 +54,10 @@
                           </button>
                         </div>
                     </div>
-                    
-                    <div class="col-md-6">
-                       <h2>Description</h2>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-9 mx-auto">
+                       <h2 class="font-weight-bold">Description</h2>
                        {!! $tour->desc !!}
                     </div>
                 </div>

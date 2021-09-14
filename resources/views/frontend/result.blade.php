@@ -1,3 +1,4 @@
+
 @extends('frontendnew') @section('main-content')
 <div class="container">
     <livewire:wizard

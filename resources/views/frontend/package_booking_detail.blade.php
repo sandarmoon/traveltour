@@ -183,7 +183,7 @@ $places.=$tours->title.',';
 
     </div>
     <!-- not used at all  -->
-
+@include('layouts.footer')
 @endsection
 @push('script')
 <script>

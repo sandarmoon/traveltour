@@ -86,7 +86,8 @@
         }
 
         body{
-            background: linear-gradient(to right,rgba(250,158,27,0.7),rgba(141,79,255,0.7));
+            background: linear-gradient(to right,rgba(250,158,27,0.8),rgba(48, 17, 188,0.9));
+
         }
 
         .btn_submit{

@@ -1,5 +1,5 @@
 @extends('frontendnew')
-@section('main')
+@section('main-content')
 <!-- Header-->
  @if (session()->has('message'))
         <div class="alert alert-success">
@@ -101,7 +101,7 @@
             </div>
             </div>
         </div>
-        
+        @include('layouts.foot')
 @endsection
 @section('script')
 <script>

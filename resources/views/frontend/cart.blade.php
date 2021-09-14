@@ -1,5 +1,5 @@
 @extends('frontendnew')
-@section('main')
+@section('main-content')
 <!-- Header-->
         <header class=" py-2 banner ">
             <div class="container px-4 px-lg-5 my-5  ">
@@ -14,7 +14,7 @@
             </div>
         </header>
         <!-- Section for card-->
-        
+        @include('layouts.foot')
 @endsection
 @section('script')
 <script>

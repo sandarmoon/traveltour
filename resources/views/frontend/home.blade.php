@@ -489,6 +489,7 @@
         </div>
     </div>
 </section>
+@include('layouts.footer')
 
 
 model for cart of package booking star
@@ -551,3 +552,4 @@ model for cart of package booking star
     })
 </script>
 @endpush
+

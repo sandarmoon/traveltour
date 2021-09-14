@@ -167,6 +167,10 @@ Route::get('/get/packages',[BackendController::class,'getPackageAjax'])->name('a
 
 });
 
+//for admin package booking list 
+Route::get('/pb/list',[BackendController::class,'packageBookingList'])->name('backend.package.bookinglist');
+
+Route::get('/bookinglist/pid/{id}',[BackendController::class,'boolingListByPackageId'])->name('bookinglist.pid');
 
 
 require __DIR__.'/auth.php';

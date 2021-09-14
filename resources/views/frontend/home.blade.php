@@ -527,8 +527,20 @@ model for cart of package booking star
              cancelButtonText: "No, cancel!",
              confirmButtonText: "Go to booking",
              reverseButtons: !0,
+               allowOutsideClick: false,
              showLoaderOnConfirm: true,
+            inputValidator: ((value) => {
                 
+                if(value >= 11){
+                    return 'please give us a clall!';
+                }
+
+                if(value <=0){
+                    return 'please select from more than one or one person';
+                }
+                
+                
+            }),
   
             }).then((e)=>{
                   if (e.value) {

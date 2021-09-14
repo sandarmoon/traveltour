@@ -1,5 +1,5 @@
 @extends('frontendnew')
-@section('main')
+@section('main-content')
 <!-- Header-->
          <livewire:company :cities="$cities" :id="$id"/>
         

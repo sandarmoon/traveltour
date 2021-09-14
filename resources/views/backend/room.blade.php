@@ -10,7 +10,7 @@
             Hotel Room 
           </h1>
          
-          <a class="ct-example text-white float-right border-0" href="{{route('package.create')}}">
+          <a class="ct-example text-white float-right border-0" href="{{route('room.create')}}">
             <i class="fas fa-plus-square me-1"></i>
                 <span class="error-name">New Package</span>
           </a>

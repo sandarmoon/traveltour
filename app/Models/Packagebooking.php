@@ -10,5 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Packagebooking extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table="package_bookings";
     protected $fillable=['codeno','user_id','package_id','msg','phone','address','ppl','total'];
 }

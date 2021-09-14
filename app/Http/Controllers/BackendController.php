@@ -678,7 +678,7 @@ class BackendController extends Controller
 
     public function tourCreate($value='')
     {
-        $cities = City::all();
+        $cities = City::whereNull('parent_id')->get();
         return view('backend.tourcrud',['tour' => new Room(),'cities'=>$cities]);
     }
 

@@ -12,6 +12,7 @@ use App\Models\Facility;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\HotelBooking;
+use App\Models\Packagebooking;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Models\Booking;
@@ -321,5 +322,43 @@ class FrontController extends Controller
                 $randomString .= $characters[rand(0, $charactersLength - 1)];
             }
             return $randomString;
+        }
+
+        // ----- ----- ----- ----- -- package booking of user view start  ----- ----- ----- ----- ----- ----- ----- -----
+        public function packagebooking($id,$ppl){
+           
+           $package=Package::find($id);
+           return view('frontend.package_booking_detail',compact('ppl','package'));
+
+        }
+
+        public function packageBookingCheckout(Request $request){
+            $data=(object)$request->data;
+
+           $ppl=$data->ppl;
+           $msg=$data->msg;
+           $phone=$data->phone;
+           $address=$data->address;
+           $package=Package::find($data->id);
+            $codeno=$this->generateRandomString(5);
+            $userid=Auth::user()->id;
+            $total=$package->priceperperson * $ppl;
+            
+
+            Packagebooking::create([
+                'codeno'=>$codeno,
+                'user_id'=>$userid,
+                'package_id'=>$package->id,
+                'msg'=>$msg,
+                'phone'=>$phone,
+                'ppl'=>$ppl,
+                'total'=>$total,
+                'address'=>$address
+            ]);
+
+            return response()->json(['msg'=>'1']);
+            
+            
+
         }
 }

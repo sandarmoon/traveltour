@@ -205,6 +205,11 @@ Route::get('/bookingdetail/{id}',[FrontController::class,'bookingdetail'])->name
 Route::get('/roombookingdetail/{slug}',[FrontController::class,'roombookingdetail'])->name('roombookingdetail');
 
 
+//package booking of user view start here
+Route::get('/p/booking/{id}/{num}',[FrontController::class,'packageBooking'])->name('booking.package');
+
+Route::post('/p/checkout',[FrontController::class,'packageBookingCheckout'])->name('package.booking.checkout');
+//pakage booking of user view end here
 //hotel booking email validation
 Route::post('/custom/validation',[FrontController::class,'customEmailValidation'])->name('hotel.booking.validation');
 

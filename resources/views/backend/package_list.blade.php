@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="my-ct-page-title text-white">
           <h1 class="ct-title text-white d-inline-block" id="content">
-            Hotel Room 
+           Tour Package
           </h1>
          
-          <a class="ct-example text-white float-right border-0" href="{{route('room.create')}}">
+          <a class="ct-example text-white float-right border-0" href="{{route('package.create')}}">
             <i class="fas fa-plus-square me-1"></i>
-                <span class="error-name">New Hotel Room</span>
+                <span class="error-name">New Tour Package</span>
           </a>
           
         </div>
@@ -31,7 +31,7 @@
             <div class="col">
               <div class="card shadow">
                 <div class="card-header border-0">
-                  <h3 class="mb-0">Room List</h3>
+                  <h3 class="mb-0">Tour Package List</h3>
                 </div>
                 <div class="table-responsive  p-1">
                   <table class="table align-items-center table-flush" id="package-table">
@@ -89,6 +89,14 @@
           }},
           {data:'days'},
           {data:'priceperperson'},
+          {data:function(data){
+            let html='';
+            if(data.status ==1)
+            html='valid';
+            else
+            html='booking full';
+            return html;
+          }},
           {data:'action',name:'action',orderable:false,searchable:false}
         ]
     })

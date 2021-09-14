@@ -162,7 +162,7 @@
                                 @endforeach
                             </div>
                             <button
-                                class="carousel-control-prev"
+                                class="carousel-control-prev visually-hidden"
                                 type="button"
                                 data-bs-target="#carouselExampleControls"
                                 data-bs-slide="prev"
@@ -174,7 +174,7 @@
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button
-                                class="carousel-control-next"
+                                class="carousel-control-next visually-hidden"
                                 type="button"
                                 data-bs-target="#carouselExampleControls"
                                 data-bs-slide="next"
@@ -192,7 +192,7 @@
                     </div>
                     <div class="text p-4">
                         <span class="days">{{$package->days}} Days Tour</span>
-                        <h3><a href="#">{{$package->name}}</a></h3>
+                        <h3 class="mb-2"><a href="#">{{$package->name}}</a></h3>
                         <p class="location">
                             <span class="fa fa-map-marker"></span>
                             @php $len=count($package->tours);
@@ -210,7 +210,7 @@
                             {{$places}}
                         </p>
                         
-                        <p><i class="fas fa-car fa_car_icon"></i> {{$package->car->type->name}} Type</p>
+                        <p><i class="fas fa-car fa_car_icon"></i> {{$package->car->name}} ({{$package->car->model}}-{{$package->car->type->name}}) </p>
                         <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$package->hotel->name}}</p>
                         <ul class="text-center">
                            
@@ -218,7 +218,11 @@
                                 <a href="#"><span class="flaticon-mountains"></span>More info</a>
                             </li>
                         </ul>
-                        <button class="btn btn-secondary form-control my-2">book Now</button>
+                        @if(Auth::check())
+                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2">book Now!</button>
+                        @else 
+                        <a href="/login" class=" btn btn-secondary form-control my-2">book Now!</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -486,6 +490,64 @@
     </div>
 </section>
 
-@endsection @section('script')
-<script></script>
-@endsection
+
+model for cart of package booking star
+<!-- Modal -->
+<div class="modal fade" id="packageBookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Package Booking</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@endsection 
+@push('script')
+<script>
+    $(document).ready(function(){
+        $('.package-booking-btn').click(function(){
+           let id=$(this).data('id');
+           console.log(id);
+
+          Swal.fire({
+            title: 'How many people with you for tour?',
+            input: 'number',
+            showCancelButton: !0,
+             cancelButtonText: "No, cancel!",
+             confirmButtonText: "Go to booking",
+             reverseButtons: !0,
+             showLoaderOnConfirm: true,
+                
+  
+            }).then((e)=>{
+                  if (e.value) {
+                   window.location.href="/p/booking/"+id+"/"+e.value
+                  }else{
+                      console.log('enter');
+                  }
+            })
+
+            
+
+          
+                
+
+        })
+
+
+          
+
+            
+    })
+</script>
+@endpush

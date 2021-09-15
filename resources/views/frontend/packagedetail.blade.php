@@ -8,7 +8,7 @@
     @endif
         
 
-        <div class="card container mt-8 my-3 p-3">
+        <div class="card container mt-7 my-5 p-3">
             <div class="d-flex justify-content-between my-3 mx-2">
                 <h3 class="description d-inline-block "> {{$package->name}} Package</h3>
                 <a href="{{url()->previous()}}" class="btn-close float-left"></a>
@@ -53,7 +53,7 @@
                                     </li>
 
                                      <li class="list-group-item" style="font-size: 1.135rem;">
-                                       <i class="fas fa-car"></i><a href="" class="nav-link"> {{$package->car->name}} </a>
+                                       <i class="fas fa-car me-2"></i> {{$package->car->name}} - {{$package->car->type->name}} {{$package->car->model}} 
                                     </li>
 
 
@@ -119,8 +119,8 @@
                                     
                                 </div>
                                 <div>
-                                     <span class="left-msg  small mb-2 text-danger ">We have 4 left!</span>
-                                     <a href="#" class="btn btn-primary mt-3">Reserve Now!</a>
+                                     {{-- <span class="left-msg  small mb-2 text-danger ">We have 4 left!</span> --}}
+                                     <a href="#" class="btn btn-secondary mt-3">Reserve Now!</a>
                                 </div>
                             </div>
                         </div>

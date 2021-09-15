@@ -67,8 +67,9 @@ class FrontController extends Controller
     public function bookinghistory($value='')
     {
         $view = 1;
-        $bookings = Booking::where('user_id',Auth::id())->get();
-        $booking_historys = HotelBooking::where('user_id',Auth::id())->get()->groupBy(function($data){
+        $bookings = Booking::where('user_id',Auth::id())->orderBy('id','DESC')->get();
+
+        $booking_historys = HotelBooking::where('user_id',Auth::id())->orderBy('id','DESC')->get()->groupBy(function($data){
 
             $date = $data->created_at->format('Y-m-d');
             // $check_in = $data->check_in;
@@ -79,9 +80,11 @@ class FrontController extends Controller
 
         });
 
+        $packages_booking = Packagebooking::where('user_id',Auth::id())->orderBy('id','DESC')->get();
+
         $booking = array();;
 
-        return view('frontend.bookinghistory',compact('bookings','booking_historys','view','booking'));
+        return view('frontend.bookinghistory',compact('bookings','booking_historys','view','booking','packages_booking'));
     }
 
 
@@ -89,10 +92,12 @@ class FrontController extends Controller
         
         $view = 2;
         $booking_historys = array();
-
+        $package_booking = array();
+        $packages_booking = array();
         $bookings = array();;
         $booking = Booking::find($id);
-        return view('frontend.bookinghistory',compact('bookings','view','booking','booking_historys'));
+
+        return view('frontend.bookinghistory',compact('bookings','view','booking','booking_historys','packages_booking','package_booking'));
 
     }
 
@@ -103,11 +108,27 @@ class FrontController extends Controller
         $booking_historys = array();
         $bookings = array();
         $booking = array();
+        $package_booking = array();
+        $packages_booking = array();
         $hotelbooking = HotelBooking::where('user_id',Auth::id())->whereDate('created_at',$data)->get();
         // dd($hotelbooking);
 
-        return view('frontend.bookinghistory',compact('bookings','view','booking','hotelbooking','booking_historys'));
+        return view('frontend.bookinghistory',compact('bookings','view','booking','hotelbooking','booking_historys','package_booking','packages_booking'));
 
+    }
+
+
+    public function pacakgebooking_detail($id)
+    {
+        $view = 4;
+        $package_booking = Packagebooking::find($id);
+        $booking_historys = array();
+        $bookings = array();
+        $booking = array();
+        $packages_booking = array();
+        $hotelbooking = array();
+
+        return view('frontend.bookinghistory',compact('bookings','view','booking','hotelbooking','booking_historys','packages_booking','package_booking'));
     }
 
 

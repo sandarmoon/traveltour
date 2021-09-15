@@ -61,6 +61,11 @@
             id="bootstrap"
         />
 
+        <link rel="stylesheet"  href="{{asset('frontnew/assets/owlcarousel/owl.carousel.min.css')}}">
+
+        <link rel="stylesheet" href="{{asset('frontnew/assets/owlcarousel/owl.theme.default.min.css')}}">
+
+
         <link href="{{ asset('frontend/css/mystyle.css') }}" rel="stylesheet" />
 
         <style>
@@ -123,6 +128,8 @@
                 asset('frontnew/vendors/fontawesome/all.min.js')
             }}"></script>
         <script src="{{ asset('frontnew/assets/js/theme.js') }}"></script>
+        <script src="{{ asset('frontnew/assets/owlcarousel/owl.carousel.min.js') }}"></script>
+
 
         <link
             href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&amp;display=swap"
@@ -172,7 +179,21 @@
                 // domain editing end
 
                 $(".example_select2").select2();
+
+
+                 $('.owl-carousel').owlCarousel({
+                    items:4,
+                    loop:false,
+                    center:true,
+                    margin:10,
+                    URLhashListener:true,
+                    autoplayHoverPause:true,
+                    startPosition: 'URLHash'
+                });
+                
             });
         </script>
+
+
     </body>
 </html>

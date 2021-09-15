@@ -1122,3 +1122,47 @@ section{
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+
+/*  partnership   */
+
+.partnership_div{
+  position: relative;
+  
+}
+
+
+.partnership_name_div{
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 97%;
+}
+
+.partnership_name{
+ color: white;
+ text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

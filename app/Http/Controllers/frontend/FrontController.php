@@ -322,4 +322,13 @@ class FrontController extends Controller
             }
             return $randomString;
         }
+
+
+
+    // packagedetail
+    public function packagedetail($id)
+    {
+        $package = Package::find($id);
+        return view('frontend.packagedetail',compact('package'));
+    }
 }

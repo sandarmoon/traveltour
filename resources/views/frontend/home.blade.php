@@ -107,8 +107,8 @@
 
 {{-- popular packages --}}
 
-<section>
-    <div class="container">
+<section class="py-0">
+    <div class="container mt-5">
         <div class="row justify-content-center pb-4">
             <div
                 class="
@@ -125,10 +125,21 @@
         </div>
 
         <div class="row">
-            @foreach($packages as $package) @php $s=0; $tours=$package->tours;
-            $photos=[]; foreach($tours as $t){ $places=
-            json_decode($t->photo,true); foreach($places as $v){
-            array_push($photos,$v); } } @endphp
+
+            @foreach($packages as $package) 
+
+            @php 
+                $s=0; 
+                $tours=$package->tours;
+                $photos=[]; 
+                foreach($tours as $t){ 
+                    $places=json_decode($t->photo,true); 
+                    foreach($places as $v){
+                        array_push($photos,$v); 
+                    } 
+                } 
+            @endphp
+
             <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
                 <div class="project-wrap">
                     <!-- <a
@@ -215,7 +226,7 @@
                         <ul class="text-center">
                            
                             <li class="">
-                                <a href="#"><span class="flaticon-mountains"></span>More info</a>
+                                <a href="{{route('frontend_package_detail',$package->id)}}"><span class="flaticon-mountains"></span>More info</a>
                             </li>
                         </ul>
                         @if(Auth::check())
@@ -233,9 +244,9 @@
 </section>
 
 {{-- feedback --}}
-<section>
-    <div class="container my-5">
-        <div class="row my-5">
+<section class="py-0">
+    <div class="container mt-5">
+        <div class="row mt-5">
             <div class="col-md-12 justify-content-center">
                 <h1 class="text-center">Feedbacks</h1>
             </div>
@@ -489,10 +500,143 @@
         </div>
     </div>
 </section>
-@include('layouts.footer')
+
+{{-- partnership --}}
+<section class="pt-0">
+    <div class="container mt-5">
+        <div class="row mt-5">
+            <div class="col-md-12 justify-content-center">
+                <h1 class="text-center">Partnerships</h1>
+            </div>
+        </div>
+
+        <div class="col-12">
+
+              <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active" data-bs-interval="10000">
+                    <div class="row h-100 align-items-center g-2">
+                        <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
+
+                            <div class="partnership_name_div">
+                                <h4 class="partnership_name">Company name</h4>  
+                            </div>
+
+                            <img
+                                src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}"
+                                width="100%"
+                                alt="..."
+                            />
+                        </div>
+
+                        <div class="col-md-4 mb-3 mb-md-0 h-100">
+                            <img
+                                src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}"
+                                width="100%"
+                                alt="..."
+                            />
+                        </div>
+
+                        <div class="col-md-4 mb-3 mb-md-0 h-100">
+                            <img
+                                src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}"
+                                width="100%"
+                                alt="..."
+                            />
+                        </div>
 
 
-model for cart of package booking star
+                        
+                    </div>
+                  </div>
+
+
+                  <div class="carousel-item" data-bs-interval="10000">
+                    <div class="row h-100 align-items-center g-2">
+                        <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
+
+                            <div class="partnership_name_div">
+                                <h4 class="partnership_name">Company he</h4>  
+                            </div>
+
+                            <img
+                                src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}"
+                                width="100%"
+                                alt="..."
+                            />
+                        </div>
+
+                        <div class="col-md-4 mb-3 mb-md-0 h-100">
+                            <img
+                                src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}"
+                                width="100%"
+                                alt="..."
+                            />
+                        </div>
+
+                        <div class="col-md-4 mb-3 mb-md-0 h-100">
+                            <img
+                                src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}"
+                                width="100%"
+                                alt="..."
+                            />
+                        </div>
+
+
+                        
+                    </div>
+                  </div>
+              
+
+
+                  <div class="row">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next                                    </span></button>
+                  </div>
+                </div>
+                <div class="row flex-center mt-2">
+                  <div class="col-auto position-relative z-index-2">
+                    <ol class="carousel-indicators me-xxl-7 me-xl-4 me-lg-7">
+                      <li class="active" data-bs-target="#carouselTestimonials" data-bs-slide-to="0"></li>
+                      <li data-bs-target="#carouselTestimonials" data-bs-slide-to="1"></li>
+                      
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+</section>
+
+
+
+    @include('layouts.footer')
+
 <!-- Modal -->
 <div class="modal fade" id="packageBookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

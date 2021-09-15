@@ -218,3 +218,7 @@ Route::post('/p/checkout',[FrontController::class,'packageBookingCheckout'])->na
 Route::post('/custom/validation',[FrontController::class,'customEmailValidation'])->name('hotel.booking.validation');
 
 Route::post('/hotel/checkout',[FrontController::class,'hotelBookingCheckout'])->name('hotel.booking.checkout');
+
+
+// package detail
+Route::get('/package_detail/{id}',[FrontController::class,'packagedetail'])->name('frontend_package_detail');

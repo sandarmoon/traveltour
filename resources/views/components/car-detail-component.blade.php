@@ -28,7 +28,7 @@
                         <li>{{($car->bags)}} air bags</li>
                         
                         <li>
-                            <span class="text-warning"> Pickup Gate </span>
+                            <span class="text-warning btn-click-pickup" data-id="{{$car->id}}"> Pickup Gate </span>
                             <ul class="list-inside ">
 
                                 @foreach($car->pickuppivot as $location)
@@ -45,9 +45,10 @@
                         {{($car->status==1) ? 'Valid':'Booked'}}
                     </button>
                    
-                    <a href="" class="btn btn-warning"> Edit</a>
+                    <a href="{{route('car.edit',$car->id)}}" class="btn btn-warning"> Edit</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+

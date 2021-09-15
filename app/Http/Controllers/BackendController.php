@@ -12,7 +12,7 @@ use App\Models\Tour;
 use App\Models\Car;
 use App\Models\City;
 use App\Models\HotelBooking;
-use App\Models\PackageBooking;
+use App\Models\Packagebooking;
 use App\Models\Package;
 use App\Models\Type;
 use Session;
@@ -792,7 +792,7 @@ class BackendController extends Controller
 
     public function boolingListByPackageId($id){
         $package=Package::find($id);
-        $bookings=PackageBooking::where('package_id',$id)
+        $bookings=Packagebooking::where('package_id',$id)
                 ->orderBy('id','desc')
                 ->get();
         return view('backend.pbookinglist_by_pid',compact('bookings','package'));

@@ -183,7 +183,7 @@ $places.=$tours->title.',';
 
     </div>
     <!-- not used at all  -->
-@include('layouts.footer')
+@include('layouts.foot')
 @endsection
 @push('script')
 <script>
@@ -217,7 +217,7 @@ $places.=$tours->title.',';
            
 
             let total=price * numppl;
-            $('.package-total-amount').html(total);
+            $('.package-total-amount').html('$'+total);
 
             let payday=new Date(startdate);
             payday.setDate(payday.getDate()-1);

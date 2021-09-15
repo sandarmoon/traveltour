@@ -32,6 +32,6 @@ class Package extends Model
     }
 
     public function pbookings(){
-        return $this->hasMany(PackageBooking::class);
+        return $this->hasMany(Packagebooking::class);
     }
 }

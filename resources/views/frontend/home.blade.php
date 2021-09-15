@@ -500,11 +500,6 @@
         </div>
     </div>
 </section>
-@include('layouts.footer')
-
-
-<<<<<<< HEAD
-
 
 {{-- partnership --}}
 <section class="pt-0">
@@ -641,8 +636,7 @@
 
 
     @include('layouts.footer')
-=======
-model for cart of package booking star
+
 <!-- Modal -->
 <div class="modal fade" id="packageBookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -652,7 +646,6 @@ model for cart of package booking star
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
->>>>>>> 31d523908b420f5a85f9b9fe16c900dd2297f946
         
       </div>
       <div class="modal-footer">

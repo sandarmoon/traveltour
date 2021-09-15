@@ -49,6 +49,23 @@ class Company extends Component
         
     }
 
+     
+
+   
+
+    protected $rules = [
+        
+        'username' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|confirmed'
+        
+    ];
+
+    public function updated($propertyName) {
+
+        $this->validateOnly($propertyName);
+    }
+
     public function render()
     {
         
@@ -59,12 +76,7 @@ class Company extends Component
      */
     public function firstStepSubmit()
     {
-        $validatedData = $this->validate([
-             'username' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
+        $validatedData = $this->validate();
         //dd('you made it');
         $user = User::create([
             'name' => $this->username,

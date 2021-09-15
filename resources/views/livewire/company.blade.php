@@ -50,11 +50,11 @@
                 <div class="form-group mb-3">
                     <label for="username">Username:</label>@error('username') <span class="error text-danger">{{ $message }}</span> @enderror
                     <input type="text" wire:model="username" class="form-control" id="username">
-                    
+                    @error('username') <span class="error">{{ $message }}</span> @enderror
                 </div>
                 
                 <div class="form-group mb-3">
-                    <label for="email">Email</label>@error('logo') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <label for="email">Email</label>@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                     <input type="email" wire:model="email" class="form-control" id="email" />
                     
                 </div>
@@ -237,7 +237,9 @@
                         {{-- form end here --}}
                         
                         <button class="btn btn-danger nextBtn  pull-left float-right" type="button" wire:click="back(2)">Back</button>
+
                         <button id="submit" class="btn btn-success  pull-left float-right" wire:click="submitForm" type="button">Complete Task!</button>
+                        
 
                        </div>
                        <div class="text-center my-2">

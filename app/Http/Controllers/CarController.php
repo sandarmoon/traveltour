@@ -141,7 +141,7 @@ class CarController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             // Upload Image
             // $path = $request->file('cover')->storeAs('public/cover',$fileNameToStore);
-            // $path = $request->file->storeAs('zipfile',$fileName,'public');          $zipfilepath = "/storage/".$path; 
+            // $path = $request->file->storeAs('zipfile',$fileName,'public');        $zipfilepath = "/storage/".$path;
 
             $path = $request->file('cover')->storeAs('cover',$fileNameToStore,'public');
              $input['image']['cover'] = "$path";
@@ -250,7 +250,8 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('backend.car_detail',compact('car'));
+        $locations=City::whereNotNull('parent_id')->get();
+        return view('backend.car_detail',compact('car','locations'));
     }
 
     /**
@@ -305,7 +306,7 @@ class CarController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             // Upload Image
             // $path = $request->file('cover')->storeAs('public/cover',$fileNameToStore);
-            // $path = $request->file->storeAs('zipfile',$fileName,'public');          $zipfilepath = "/storage/".$path; 
+            // $path = $request->file->storeAs('zipfile',$fileName,'public');        $zipfilepath = "/storage/".$path;
 
             $path = $request->file('cover')->storeAs('cover',$fileNameToStore,'public');
              $input['image']['cover'] = "$path";

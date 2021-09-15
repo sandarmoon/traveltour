@@ -167,6 +167,10 @@ Route::get('/get/packages',[BackendController::class,'getPackageAjax'])->name('a
 
 });
 
+//for admin package booking list 
+Route::get('/pb/list',[BackendController::class,'packageBookingList'])->name('backend.package.bookinglist');
+
+Route::get('/bookinglist/pid/{id}',[BackendController::class,'boolingListByPackageId'])->name('bookinglist.pid');
 
 
 require __DIR__.'/auth.php';
@@ -205,6 +209,11 @@ Route::get('/bookingdetail/{id}',[FrontController::class,'bookingdetail'])->name
 Route::get('/roombookingdetail/{slug}',[FrontController::class,'roombookingdetail'])->name('roombookingdetail');
 
 
+//package booking of user view start here
+Route::get('/p/booking/{id}/{num}',[FrontController::class,'packageBooking'])->name('booking.package');
+
+Route::post('/p/checkout',[FrontController::class,'packageBookingCheckout'])->name('package.booking.checkout');
+//pakage booking of user view end here
 //hotel booking email validation
 Route::post('/custom/validation',[FrontController::class,'customEmailValidation'])->name('hotel.booking.validation');
 

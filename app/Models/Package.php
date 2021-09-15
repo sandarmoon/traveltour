@@ -30,4 +30,8 @@ class Package extends Model
      public function car(){
         return $this->belongsTo(Car::class,'company_car_id');
     }
+
+    public function pbookings(){
+        return $this->hasMany(PackageBooking::class);
+    }
 }

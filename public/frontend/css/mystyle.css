@@ -284,11 +284,93 @@ header {
     border-width: 0 0 8px 8px;
     border-color: transparent transparent #c7390d transparent;
 }
+
+/*=============================================================================================================================================================================================================================*/
+/*frontend package-booking start*/
+.package-banner{
+   position: relative;
+   height: 40.9vw;
+   max-height: 700px;
+   background-color: #333;
+   z-index: 11;
+}
+.package-photo-slides{
+   position:absolute;
+   z-index: 1;
+   overflow: hidden;
+   width: 100%;
+   height: 100%;
+}
+
+.package-photo-slides img{
+   object-fit: cover;
+}
+.package-header-content{
+
+   position: absolute;
+   bottom: 0px;
+   width: 100%;
+   z-index: 1;
+   padding: 1.875rem 15px .9375rem;
+   background: linear-gradient(to bottom,rgba(0, 0, 0, 0) 0%,rgba(0,0,0,0.4) 30%,rgba(0,0,0,0.6) 45%,rgba(0,0,0,0.7) 60%,rgba(0,0,0,0.8) 100%);
+}
+
+.package-title{
+   width: 100%;
+   max-width: 1150px;
+   padding: 0 25px;
+   margin:0 auto;
+}
+ .tour-name{
+   font-size: 2.457rem;
+   color:#39434D !important;
+   /* font-family: 'Lato', sans-serif; */
+}
+.package-title .tour-desc{
+   font-size: 1.4375rem;
+    clear: both;
+    margin: .625rem 0 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 1px 6px rgb(0 0 0 / 90%);
+    font-family: 'Lato', sans-serif;
+}
+.tour-trip-date{
+   font-weight: bold;
+   color:#5f11bc;
+}
+
+.package-Travelers{
+   margin: 30px 0px;
+}
+
+.traveler-count,.travel-package {
+   padding: 20px  ;
+   background-color: #f7f6f6;
+}
+
+.sub-title{
+   font-size: 1.367rem;
+}
+
+.price-list-item{
+   padding: 10px;
+   color:#0f1010;
+}
+
+.price-list-item > div:nth-child(2){
+   text-align: end;
+}
+
+
+/*frontend package-booking end*/
+
+
+
 /* for frontend package end */
 
 
-/*=============================================================================================================================================================================================================================*/
-/*making car to be valid or not*/
+
 
 
 
@@ -312,6 +394,7 @@ header {
 .search-div nav{
    max-width: calc(80rem + 3rem);
    margin: auto;
+   
 }
 
 }

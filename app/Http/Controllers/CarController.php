@@ -22,11 +22,28 @@ class CarController extends Controller
     public function index()
     {
         $locations=City::whereNotNull('parent_id')->with('parent')->get();
+
         return view('backend.car',compact('locations'));
     }
 
     public function getCars(){
-        $cars=Car::all();
+        $cars=null;
+
+       if(Auth::check()){
+          
+            $role=Auth::user()->roles[0];
+            if($role->name =='company'){
+                $cars=Car::where('company_id',Auth::user()->company->id)->get();
+            }else{
+                $cars=Car::all();
+            }
+            
+       }
+
+       
+
+       if($cars){
+
         $datatables = Datatable::of($cars)->with(['type','company'])
             ->addColumn('codeno',function($car){
                 return $car->codeno;
@@ -61,6 +78,9 @@ class CarController extends Controller
                       </ul>';
            });
              return $datatables->make(true);
+       }else{
+           return response()->json([]);
+       }
 
             
     }

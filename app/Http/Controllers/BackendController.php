@@ -12,6 +12,7 @@ use App\Models\Tour;
 use App\Models\Car;
 use App\Models\City;
 use App\Models\HotelBooking;
+use App\Models\PackageBooking;
 use App\Models\Package;
 use App\Models\Type;
 use Session;
@@ -521,7 +522,7 @@ class BackendController extends Controller
 
         ]);
         $package->tours()->attach($request->tours);
-        return back();
+        return redirect()->route('package.index');
     }
 
 
@@ -678,7 +679,7 @@ class BackendController extends Controller
 
     public function tourCreate($value='')
     {
-        $cities = City::all();
+        $cities = City::whereNull('parent_id')->get();
         return view('backend.tourcrud',['tour' => new Room(),'cities'=>$cities]);
     }
 
@@ -778,7 +779,24 @@ class BackendController extends Controller
 
 
 
+    //admin packagebooking list 
+    public function packageBookingList(){
+        $packages=Package::withCount('pbookings')
+                    ->orderBy('start','asc')
+                    ->get();
+                   
+        
+         return view('backend.package_booking_list',compact('packages'));
 
+    }
+
+    public function boolingListByPackageId($id){
+        $package=Package::find($id);
+        $bookings=PackageBooking::where('package_id',$id)
+                ->orderBy('id','desc')
+                ->get();
+        return view('backend.pbookinglist_by_pid',compact('bookings','package'));
+    }
 
 
 

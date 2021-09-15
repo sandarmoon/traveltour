@@ -10,7 +10,8 @@
         <!--    Document Title-->
         <!-- ===============================================-->
         <title>Advance Agency</title>
-
+        
+        <link rel="stylesheet" href="{{asset('js/sweetalert2.min.css')}}">
         @livewireStyles
         <link
             rel="icon"
@@ -18,6 +19,49 @@
             href="{{ asset('frontend/assets/travel.svg') }}"
         />
 
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+
+        <!-- ===============================================-->
+        <!--    Favicons-->
+        <!-- ===============================================-->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="{{
+                asset('frontnew/assets/img/favicons/apple-touch-icon.png')
+            }}"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="{{ asset('frontnew/assets/img/favicons/favicon-32x32.png') }}"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="{{ asset('frontnew/assets/img/favicons/favicon-16x16.png') }}"
+        />
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="{{ asset('frontnew/assets/img/favicons/favicon.ico') }}"
+        />
+        <link
+            rel="manifest"
+            href="{{ asset('frontnew/assets/img/favicons/manifest.json') }}"
+        />
+        <meta
+            name="msapplication-TileImage"
+            content="{{
+                asset('frontnew/assets/img/favicons/mstile-150x150.png')
+            }}"
+        />
+        <meta name="theme-color" content="#ffffff" />
     <link rel="manifest" href="{{asset('frontnew/assets/img/favicons/manifest.json')}}">
     <meta name="msapplication-TileImage" content="{{asset('frontnew/assets/img/favicons/mstile-150x150.png')}}">
     <meta name="theme-color" content="#ffffff">
@@ -87,7 +131,9 @@
                 min-height: 200px;
             }
         </style>
+        
         @stack('style')
+        
     </head>
 
     <body>
@@ -114,7 +160,7 @@
         <!-- ===============================================-->
         <!--    JavaScripts-->
         <!-- ===============================================-->
-        <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
+        <script src="{{asset('assets/js/plugins/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{
                 asset('frontnew/vendors/@popperjs/popper.min.js')
             }}"></script>
@@ -149,14 +195,16 @@
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-        <script src="{{ asset('frontend/js/scripts.js') }}}"></script>
+        
 
         <script
             src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js"
             defer
         ></script>
+        <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
 
-        @livewireScripts @stack('script')
+        @livewireScripts 
+        @stack('script')
 
         <script>
             $(document).ready(function () {
@@ -181,19 +229,10 @@
                 $(".example_select2").select2();
 
 
-                 $('.owl-carousel').owlCarousel({
-                    items:4,
-                    loop:false,
-                    center:true,
-                    margin:10,
-                    URLhashListener:true,
-                    autoplayHoverPause:true,
-                    startPosition: 'URLHash'
-                });
+                
                 
             });
         </script>
-
 
     </body>
 </html>

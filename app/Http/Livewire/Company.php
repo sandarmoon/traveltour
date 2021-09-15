@@ -65,7 +65,7 @@ class Company extends Component
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // dd('you made it');
+        //dd('you made it');
         $user = User::create([
             'name' => $this->username,
             'email' => $this->email,

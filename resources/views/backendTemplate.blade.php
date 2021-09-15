@@ -199,6 +199,10 @@
                 font-size: 1.2em;
                 box-shadow: 3px 4px rgba(0, 0, 0, 0.3);
             }
+            .package-card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+                transition: 1s;
+                }
         </style>
     </head>
 
@@ -556,7 +560,7 @@
                         <li class="nav-item">
                             <a
                                 class="nav-link"
-                                href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html"
+                                href="{{route('backend.package.bookinglist')}}"
                             >
                                 <i class="ni ni-ui-04"></i> Package Booknig
                             </a>
@@ -791,18 +795,18 @@
         <script src="{{
                 asset('assets/js/argon-dashboard.min.js?v=1.1.1')
             }}"></script>
-        <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+        <!-- <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         {{-- summernote --}}
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-        <script>
+        <!-- <script>
             window.TrackJS &&
                 TrackJS.install({
                     token: "ee6fab19c5a04ac1a32a645abde4613a",
                     application: "argon-dashboard-free",
                 });
-        </script>
+        </script> -->
 
         <script>
             $(".summernote").summernote({

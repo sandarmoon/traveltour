@@ -3,7 +3,7 @@
 
 
 
-<div>
+<div class="container my-2">
     @if(!empty($successMsg))
     <div class="alert alert-success">
         {{ $successMsg }}

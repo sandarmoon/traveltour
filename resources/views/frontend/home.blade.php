@@ -2,6 +2,9 @@
 
 <x-searchingnew :cities="$cities"></x-searchingnew>
 
+
+
+
 @endsection @section('main-content')
 <!-- Header-->
 
@@ -246,6 +249,290 @@
         </div>
     </div>
 </section>
+
+
+
+{{-- popular cars --}}
+<section class="py-0">
+    <div class="container mt-5">
+        <div class="row justify-content-center pb-4">
+            <div
+                class="
+                    col-md-12
+                    heading-section
+                    text-center
+                    ftco-animate
+                    fadeInUp
+                    ftco-animated
+                "
+            >
+                <h2 class="mb-4">Popular Cars</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            
+            @foreach($cars as $car) 
+
+
+
+
+
+            @php
+                // $car=(object)$booking->car;
+               
+                $photos=json_decode($car->photo,true);
+
+                $cover=$photos['cover'];
+            @endphp 
+            <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+                <div class="project-wrap">
+                   
+                    <div class="my-img">
+
+                        <div
+                            id="carouselExampleControls"
+                            class="carousel slide"
+                            data-bs-ride="carousel"
+                        >
+                            <div class="carousel-inner">
+                                <img src="{{asset('storage/'.$cover)}}" class="img-fluid" >
+                            
+                            </div>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                        <span class="packageprice"
+                            >${{$car->priceperday}}/day</span
+                        >
+                    </div>
+                    <div class="text p-4">
+                        <span class="days"></span>
+                        <h3 class="mb-2"><a href="#"></a></h3>
+                        <p><i class="fas fa-car fa_car_icon"></i> {{$car->name}} ( {{$car->model}} )</p>
+                        <p class="location">
+                            <i class="fas fa-car-battery"></i>
+                            {{$car->type->name}}
+                            
+                        </p>
+                        
+                        
+                        <p><i class="fas fa-briefcase"></i> {{$car->bags}} air bag </p>
+                        <ul class="text-center">
+                            <div class="rating-input" data-car_id ="{{$car->id}}" data-type_id = "{{$car->type->parent_id}}">
+
+
+                                
+                                <span class="starone" >
+                                    <i class="fas fa-star star_one star_blank 
+                                    @foreach($car->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 1)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="1" title="One Star"></i>
+                                </span>
+
+                                <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
+                                    @foreach($car->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 2)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="2"></i></span>
+
+                                <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
+                                    @foreach($car->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 3)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="3"></i></span>
+
+                                <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
+                                    @foreach($car->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 4)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="4"></i></span>
+
+                                <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
+                                    @foreach($car->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate == 5)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="5"></i></span>
+
+                                    <br>
+{{--                                 <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p>
+ --}}                            </div>
+
+
+                        </ul>
+                        
+                        @if(Auth::check())
+                        <button  data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
+                        @else 
+                        <a href="/login" class=" btn btn-secondary form-control my-2">Detail</a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+{{-- popular hotel --}}
+<section class="py-0">
+    <div class="container mt-5">
+        <div class="row justify-content-center pb-4">
+            <div
+                class="
+                    col-md-12
+                    heading-section
+                    text-center
+                    ftco-animate
+                    fadeInUp
+                    ftco-animated
+                "
+            >
+                <h2 class="mb-4">Popular Hotel</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            
+            @foreach($hotels as $hotel) 
+
+            <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+                <div class="project-wrap">
+                   
+                    <div class="my-img">
+
+                        <div
+                            id="carouselExampleControls"
+                            class="carousel slide"
+                            data-bs-ride="carousel"
+                        >
+                            <div class="carousel-inner">
+                                <img src="{{asset('storage/'.$hotel->logo)}}" class="img-fluid" >
+                            
+                            </div>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                        <span class="packageprice"
+                            >{{$hotel->city->name}}</span
+                        >
+                    </div>
+                    <div class="text p-4">
+                        <span class="days"></span>
+                        <h3 class="mb-2"><a href="#"></a></h3>
+                        <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel->name}} ( {{$car->model}} )</p>
+                        <p class="location">
+                            <i class="fas fa-phone"></i>
+                            {{$hotel->phone}}
+                            
+                        </p>
+                        
+                        
+                        <p><i class="fas fa-location-arrow"></i> {{$hotel->addresss}} </p>
+                        <ul class="text-center">
+                            <div class="rating-input" data-hotel_id ="{{$hotel->id}}" data-type_id = "1">
+
+                                <span class="starone" >
+                                    <i class="fas fa-star star_one star_blank 
+                                    @foreach($hotel->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 1)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="1" title="One Star"></i>
+                                </span>
+
+                                <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
+                                    @foreach($hotel->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 2)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="2"></i></span>
+
+                                <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
+                                    @foreach($hotel->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 3)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="3"></i></span>
+
+                                <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
+                                    @foreach($hotel->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 4)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="4"></i></span>
+
+                                <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
+                                    @foreach($hotel->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate == 5)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="5"></i></span>
+
+                                    <br>
+                                {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p> --}}
+                            </div>
+
+
+                        </ul>
+                        
+                        @if(Auth::check())
+                        <button  data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
+                        @else 
+                        <a href="/login" class=" btn btn-secondary form-control my-2">Detail</a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
 
 {{-- feedback --}}
 <section class="py-0">

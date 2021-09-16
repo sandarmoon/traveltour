@@ -21,36 +21,21 @@
 
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+
+
+
+        {{-- rating --}}
+        
+
+        <link href="{{asset('frontnew/assets/css/rating.css')}}" media="all" rel="stylesheet" type="text/css"/>
+        
 
         <!-- ===============================================-->
         <!--    Favicons-->
         <!-- ===============================================-->
-        {{-- <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="{{
-                asset('frontnew/assets/img/favicons/apple-touch-icon.png')
-            }}"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="{{ asset('frontnew/assets/img/favicons/favicon-32x32.png') }}"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="{{ asset('frontnew/assets/img/favicons/favicon-16x16.png') }}"
-        />
-        <link
-            rel="shortcut icon"
-            type="image/x-icon"
-            href="{{ asset('frontnew/assets/img/favicons/favicon.ico') }}"
-        /> --}}
+        
         <link
             rel="manifest"
             href="{{ asset('frontnew/assets/img/favicons/manifest.json') }}"
@@ -144,6 +129,15 @@
                 font-family: 'Caveat', cursive;
                 font-size: 30px;
             }
+
+            .star_blank{
+                font-size: 20px;
+            }
+
+            .star_color {
+                color: orange;
+            }
+
         </style>
         
         @stack('style')
@@ -217,11 +211,15 @@
         ></script>
         <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
 
+
+
         @livewireScripts 
         @stack('script')
 
         <script>
             $(document).ready(function () {
+                var text =$('.rating-container > .filled-stars').removeAttr('style');
+                console.log(text);
                 //domain editng start
                 var dtToday = new Date();
 
@@ -245,11 +243,58 @@
 
                 // for clicking booking of package
                 
-
                 
                 
             });
         </script>
+
+
+
+
+        <script>
+
+
+            $(document).ready(function () {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+
+                
+
+                $('.rating-input').on('click','.star_one , .star_two , .star_three , .star_four, .star_five',function(){
+                    // console.log($(this).data('value'));
+                    var car_id = $(this).parents('.rating-input').data('car_id');
+
+                    var hotel_id = $(this).parents('.rating-input').data('hotel_id');
+
+                    var type_id = $(this).parents('.rating-input').data('type_id');
+
+                    var rating = $(this).data('value');
+                    console.log(car_id,hotel_id,type_id,rating);
+                    $.ajax({
+                    url:"{{route('rating')}}",
+                    type:"POST",
+                    data:{car_id:car_id,type_id:type_id,rating:rating,hotel_id:hotel_id},
+                    success:function(res){
+                          window.location.reload();
+                    },
+                    error:function(err){
+                        console.log(err);
+                    }
+                })
+                })
+            })
+
+             
+        
+
+
+      
+    </script>
 
     </body>
 </html>

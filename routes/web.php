@@ -225,4 +225,4 @@ Route::get('/package_detail/{id}',[FrontController::class,'packagedetail'])->nam
 
 Route::get('/pacakgebooking_detail/{id}',[FrontController::class,'pacakgebooking_detail'])->name('frontend_pacakgebooking_detail');
 
-
+Route::post('/rating',[FrontController::class,'rating'])->name('rating');

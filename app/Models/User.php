@@ -50,4 +50,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Booking');
     }
+
+    public function rating($value='')
+    {
+        return $this->hasMany('App\Models\Rating');
+    }
+
+
 }

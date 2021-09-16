@@ -84,7 +84,12 @@ class Company extends Component
             'password' => Hash::make($this->password),
         ]);
 
-        $user->assignRole('company');
+        if($this->id == 1){
+            $user->assignRole('hotel');
+        }else{
+            $user->assignRole('car');
+        }
+        
 
         event(new Registered($user));
 

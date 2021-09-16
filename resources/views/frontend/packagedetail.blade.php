@@ -10,17 +10,18 @@
 
         <div class="card container mt-7 my-5 p-3">
             <div class="d-flex justify-content-between my-3 mx-2">
-                <h3 class="description d-inline-block "> {{$package->name}} Package</h3>
+                <h3 class="description d-inline-block "> {{$package->name}} Package</h3> 
+
                 <a href="{{url()->previous()}}" class="btn-close float-left"></a>
             </div>
 
             <div class="col-md-10 offset-1">
                 <div class="row">
                 <div class="col-md-5">
-                     
-                        <h5 class="text-dark">{{$package->days}}Days  Package</h5>
+                     @php $left_ppl=$package->ppl - $package->pbookings->sum('ppl'); @endphp
+                        <h5 class="text-dark mb-0 ">{{$package->days}}Days  Package</h5><span class="text-danger">{{$left_ppl == 0 ? 'full':"$left_ppl avaliable" }} </span>
                             {{-- accordian start --}}
-                                <ul class="list-group list-group-flush">
+                                <ul class="list-group list-group-flush mt-2">
                                     <li class="list-group-item" style="font-size: 1.135rem;"><i class="fas fa-map-marker-alt me-2"></i> 
 
                                         From <span class="text-dark">{{$package->depart->name}}</span>  - 
@@ -144,10 +145,12 @@
                             <span class="text-danger " id="booking-warning"></span>
                         </div>
                         <div class="mx-auto">
+
+                        @php $booked_ppl=$package->pbookings->sum('ppl'); @endphp
                             @if(Auth::check())
-                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary  m-3">book Now!</button>
+                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary  m-3 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
                         @else 
-                        <a href="/login" class=" btn btn-secondary m-3">book Now!</a>
+                        <a href="/login" class=" btn btn-secondary m-3 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
                         @endif
                         </div>
                     </div>
@@ -232,8 +235,9 @@
 <script>
     const price="{{$package->priceperperson}}";
     $(document).ready(function(){
-        $('#num-travelers').change(function(){
-            let num=$(this).val();
+        calculate();    
+        function calculate(){
+            let num=$('#num-travelers').val();
             let total=price * num;
             $('.result-ppl').html(num);
             $('.total-price').html('$'+total);
@@ -244,7 +248,10 @@
                 $('#estimate-data table').removeClass('d-none');
                 $('#booking-warning').html('');
             }
+        }
+        $('#num-travelers').change(function(){
             
+            calculate();
         })
         $('.package-booking-btn').click(function(){
            let id=$(this).data('id');

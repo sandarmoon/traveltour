@@ -12,6 +12,7 @@ use App\Models\Tour;
 use App\Models\Car;
 use App\Models\City;
 use App\Models\HotelBooking;
+use App\Models\Emailcontact;
 use App\Models\Packagebooking;
 use App\Models\Package;
 use App\Models\Type;
@@ -796,6 +797,25 @@ class BackendController extends Controller
                 ->orderBy('id','desc')
                 ->get();
         return view('backend.pbookinglist_by_pid',compact('bookings','package'));
+    }
+
+
+    //for email contact user message accept
+
+    public function contactedWithEmail(Request $request){
+     
+         
+       
+        $result = Emailcontact::create([
+            'name'=>$request->name,
+            'email'=>$request->name,
+            'message'=>$request->message,
+        ]);
+        if($result){ 
+        	$arr = array('msg' => 'Contact Added Successfully!', 'status' => true);
+        }
+        return Response()->json($arr);
+        
     }
 
 

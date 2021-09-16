@@ -15,7 +15,7 @@
                       
                       <div class="col-md-10 mx-auto card-body">
                         
-                        <form action="" method="post">
+                        <form id="contact-email-form" action="" method="post">
                           <div class="form-group row my-3">
                             <label for="name" class="col-md-2 form-control-label">Name</label>
                             <div class="col-md-10">
@@ -23,6 +23,8 @@
 
                             </div>
                           </div>
+
+                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
                           <div class="form-group row my-3">
                             <label for="email" class="col-md-2 form-control-label">Email</label>
@@ -36,14 +38,14 @@
                           <div class="form-group row my-3">
                             <label for="message" class="col-md-2 form-control-label">Message</label>
                             <div class="col-md-10">
-                                <textarea class="form-control" id="message"></textarea>
+                                <textarea class="form-control" name="message" id="message"></textarea>
                             </div>
                           </div>
 
                           <div class="form-group row my-3">
                           
                             <div class="col-md-12 d-grid gap-2">
-                                <button class="btn btn-primary d-inline-block btn-lg">Send Message</button>
+                                <input type="submit"  class="btn btn-primary d-inline-block btn-lg" value="Send Message"/>
                             </div>
                           </div>
                         </form>
@@ -89,3 +91,4 @@
         
 
       </section>
+      

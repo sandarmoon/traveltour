@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             "parent_id"=>null
         ]);
 
-         $array=['admin','customer','company'];
+         $array=['admin','customer','car','hotel'];
            foreach($array as $a){
              Role::create([
                 'name'=>$a

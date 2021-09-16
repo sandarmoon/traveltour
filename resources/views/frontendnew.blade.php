@@ -231,6 +231,11 @@
 
                 // for clicking booking of package
                 
+                $('#contact-email-form').submit(function(e){
+                    e.preventDefault();
+                    
+                    alert('jeo');
+                })
 
                 
                 

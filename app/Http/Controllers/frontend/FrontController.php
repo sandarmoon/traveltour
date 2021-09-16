@@ -32,21 +32,18 @@ class FrontController extends Controller
         $rooms=Room::all();
         
         $today=Carbon::today();
-       $packages=Package::where('start','>=',$today)
+        $packages=Package::where('start','>=',$today)
                             ->orWhere('end','<=',$today)
                             ->get();
 
+
+        //car ->status-> 1 -> not book
+        //car -> status ->2 ->booked
         $cars=Car::where('status','=',1)->get();
 
         //company -> type -> 1 ->hotel
         //company -> type ->2 ->car
         $hotels=Company::where('type','=',1)->get();
-
-      
-        
-       
-        
-        
 
         return view('frontend.home',compact('cities','rooms','packages','cars','rooms'));
     }

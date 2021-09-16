@@ -1,6 +1,6 @@
 @extends('frontendnew') @section('header')
 
-<x-searchingnew :cities="$cities"></x-searchingnew>
+<x-searchingnew :cities="$cities" :packages="$packages"></x-searchingnew>
 
 @endsection @section('main-content')
 <!-- Header-->
@@ -10,6 +10,8 @@
     {{ session("message") }}
 </div>
 @endif
+
+
 
 <div class="d-none">
     <div class="container mt-0 my-3">
@@ -234,9 +236,9 @@
                         
                         @endphp
                         @if(Auth::check())
-                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2{{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
+                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
                         @else 
-                        <a href="/login" class=" btn btn-secondary form-control my-2{{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
+                        <a href="/login" class=" btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
                         @endif
                     </div>
                 </div>
@@ -248,7 +250,7 @@
 </section>
 
 {{-- feedback --}}
-<section class="py-0">
+<section class="py-0 d-none">
     <div class="container mt-5">
         <div class="row mt-5">
             <div class="col-md-12 justify-content-center">
@@ -664,6 +666,12 @@
 @push('script')
 <script>
     $(document).ready(function(){
+         $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
         $('.package-booking-btn').click(function(){
            let id=$(this).data('id');
            console.log(id);
@@ -704,6 +712,53 @@
                 
 
         })
+
+        $('#contact-email-form').submit(function(e){
+            e.preventDefault();
+            let formData=$(this).serialize();
+            let token=$('meta[name="csrf-token"]').attr('content');
+            
+            $.ajax({
+                url:'/front/contact',
+                type:'POST',
+                data:formData,
+                beforeSend: function() {
+                    swal.fire({
+                        
+                        html: '<h5>Loading...</h5>',
+                        showConfirmButton: false,
+                       
+                    });
+                },
+                success: function(json) {
+                        if(json){
+                            swal.fire({
+                        
+                                title:'Your message is send',
+                                text:'Thank you so much',
+                                type:'success',
+                                showConfirmButton: true,
+                            
+                            }).then(()=>{
+                                $('#contact-email-form').trigger('reset');
+                            });
+                        }
+                }
+            })
+
+        })
+
+         <!-- searching-veiw-clicking-package search  -->
+
+        $('#package-search-div').submit(function(e){
+            e.preventDefault();
+            let packageid=$('#package-search-from').val();
+
+            window.location.href="/package_detail/"+packageid;
+            
+        })
+
+
 
 
           

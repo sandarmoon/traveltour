@@ -8,15 +8,17 @@ class searching extends Component
 {
    public $cities;
    public $left;
+   public $packages
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($cities,$left=0)
+    public function __construct($cities,$left=0,$packages)
     {
         $this->cities=$cities;
         $this->left=$left;
+        $this->packages=$packages;
     }
 
     /**
@@ -26,6 +28,6 @@ class searching extends Component
      */
     public function render()
     {
-        return view('components.searching');
+        return view('components.searchingnew');
     }
 }

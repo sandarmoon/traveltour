@@ -9,7 +9,7 @@
         <!-- ===============================================-->
         <!--    Document Title-->
         <!-- ===============================================-->
-        <title>Advance Agency</title>
+        <title>Lucky 7</title>
         
         <link rel="stylesheet" href="{{asset('js/sweetalert2.min.css')}}">
         @livewireStyles
@@ -112,6 +112,15 @@
 
         <link href="{{ asset('frontend/css/mystyle.css') }}" rel="stylesheet" />
 
+
+        {{-- google font --}}
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+
         <style>
             .select2-selection__rendered {
                 line-height: 35px !important;
@@ -129,6 +138,11 @@
 
             .ql-editor {
                 min-height: 200px;
+            }
+
+            .font_lucky_7{
+                font-family: 'Caveat', cursive;
+                font-size: 30px;
             }
         </style>
         

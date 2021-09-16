@@ -36,14 +36,19 @@ class FrontController extends Controller
                             ->orWhere('end','<=',$today)
                             ->get();
 
-        
+        $cars=Car::where('status','=',1)->get();
+
+        //company -> type -> 1 ->hotel
+        //company -> type ->2 ->car
+        $hotels=Company::where('type','=',1)->get();
+
       
         
        
         
         
 
-        return view('frontend.home',compact('cities','rooms','packages'));
+        return view('frontend.home',compact('cities','rooms','packages','cars','rooms'));
     }
 
     public function searchCar(Request $request){

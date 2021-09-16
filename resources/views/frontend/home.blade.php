@@ -229,10 +229,14 @@
                                 <a href="{{route('frontend_package_detail',$package->id)}}"><span class="flaticon-mountains"></span>More info</a>
                             </li>
                         </ul>
+                        @php 
+                        $booked_ppl=$package->pbookings->sum('ppl');
+                        
+                        @endphp
                         @if(Auth::check())
-                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2">book Now!</button>
+                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2{{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
                         @else 
-                        <a href="/login" class=" btn btn-secondary form-control my-2">book Now!</a>
+                        <a href="/login" class=" btn btn-secondary form-control my-2{{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
                         @endif
                     </div>
                 </div>

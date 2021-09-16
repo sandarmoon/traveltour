@@ -222,3 +222,7 @@ Route::post('/hotel/checkout',[FrontController::class,'hotelBookingCheckout'])->
 
 // package detail
 Route::get('/package_detail/{id}',[FrontController::class,'packagedetail'])->name('frontend_package_detail');
+
+Route::get('/pacakgebooking_detail/{id}',[FrontController::class,'pacakgebooking_detail'])->name('frontend_pacakgebooking_detail');
+
+

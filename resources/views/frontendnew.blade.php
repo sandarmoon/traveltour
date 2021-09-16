@@ -27,7 +27,7 @@
         <!-- ===============================================-->
         <!--    Favicons-->
         <!-- ===============================================-->
-        <link
+        {{-- <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="{{
@@ -50,7 +50,7 @@
             rel="shortcut icon"
             type="image/x-icon"
             href="{{ asset('frontnew/assets/img/favicons/favicon.ico') }}"
-        />
+        /> --}}
         <link
             rel="manifest"
             href="{{ asset('frontnew/assets/img/favicons/manifest.json') }}"

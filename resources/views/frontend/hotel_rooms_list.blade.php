@@ -163,7 +163,7 @@
 												</div>
 											</div>
 											<div>
-												<span class="left-msg d-none  small mb-2 text-danger ">We have 4 left!</span>
+												<span class="left-msg d-none  small mb-2 text-danger "></span>
 												<button type="submit" class="btn btn-primary mt-3 btn-reserve" data-id="{{$room->id}}">Reserve
 													Now!</button>
 							

@@ -32,8 +32,18 @@ class FrontController extends Controller
         $rooms=Room::all();
         
         $today=Carbon::today();
-        $packages=Package::where('start','>=',$today)
-                            ->orWhere('end','<=',$today)->get();
+        $packages=Package::whereHas('pbookings',function($q){
+            $count=$q->sum('ppl');
+
+            return $q->where('ppl','<=',$count);
+
+        })
+                            ->where('start','>=',$today)
+                            ->orWhere('end','<=',$today)
+                            ->withCount('pbookings')
+                            ->get();
+        
+       
         
         
 
@@ -329,7 +339,8 @@ class FrontController extends Controller
     // packagedetail
     public function packagedetail($id)
     {
-        $package = Package::find($id);
+        $package = Package::withCount('pbookings')->find($id);
+        
         return view('frontend.packagedetail',compact('package'));
     }
     // ----- ----- ----- ----- -- package booking of user view start  ----- ----- ----- ----- ----- ----- ----- -----

@@ -14,11 +14,7 @@
           
         </div>
         
-        @if ($message = Session::get('status'))
-              <div class="alert alert-success">
-                  <p>{{ $message }}</p>
-              </div>
-          @endif
+       
         
       </div>
 
@@ -65,6 +61,11 @@
     </div> 
 @endsection 
 @section('script')
+@if (Session::has('sweet_alert.alert'))
+  <script>
+    swal({!! Session::get('sweet_alert.alert') !!});
+  </script>
+  @endif
 <script >
 
   $(document).ready(function(){

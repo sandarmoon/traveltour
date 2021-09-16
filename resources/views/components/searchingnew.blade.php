@@ -57,7 +57,7 @@
                             </button>
 
                             <button
-                                class="nav-link"
+                                class="nav-link d-none"
                                 id="nav-contact-tab"
                                 data-bs-toggle="tab"
                                 data-bs-target="#nav-contact"

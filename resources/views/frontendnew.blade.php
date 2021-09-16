@@ -229,6 +229,9 @@
                 $(".example_select2").select2();
 
 
+                // for clicking booking of package
+                
+
                 
                 
             });

@@ -18,7 +18,7 @@
                 <div class="row">
                 <div class="col-md-5">
                      
-                        <h5 class="text-dark">{{$package->days}} days Package</h5>
+                        <h5 class="text-dark">{{$package->days}}Days  Package</h5>
                             {{-- accordian start --}}
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item" style="font-size: 1.135rem;"><i class="fas fa-map-marker-alt me-2"></i> 
@@ -101,30 +101,55 @@
                         </div>
 
                    </div>
-                   <h4 class="description mt-3 ">Package Option</h4>
-                   <div class="card mt-2">
-                       
-                        <div class="card-footer">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h4 class="mb-0"></h4>
-                                    <span class=" small mb-2 text-muted">{{$package->days}} days Package</span>
-
-                                    <span class=" small mb-2 text-dark ">{{$package->priceperperson}}$  for one traveller.
-
-
-                                    <span class=" small mb-2 text-dark "> Total ( {{$package->ppl}} ) Travellers</span><br/>
-                                     
-                                    <span class="fee-include  small mb-2 text-dark ">includes tax and fees</span>
-                                    
-                                </div>
-                                <div>
-                                     <span class="left-msg  small mb-2 text-danger ">We have 4 left!</span>
-                                     <a href="#" class="btn btn-primary mt-3">Reserve Now!</a>
+                   
+                    <!-- start here  -->
+                    <div class="card border-warning col-md-8 mt-4  mx-auto">
+                        <div class="card-header bg-secondary ">
+                            <h5 class="mb-0 text-white">Check price & book now</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="  mb-3 row">
+                                <label for="staticEmail" class="col-sm-5 col-form-label text-dark"> travelers</label>
+                                <div class="col">
+                                <select class="form-select" id="num-travelers" aria-label="Default select example">
+                                <option value="1" selected>One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                <option value="4">Four</option>
+                                <option value="5">Five</option>
+                                <option value="6">Six</option>
+                                <option value="7">Seven</option>
+                                <option value="8">Eight</option>
+                                <option value="9">Nine</option>
+                                <option value="10">Ten</option>
+                                </select>
                                 </div>
                             </div>
                         </div>
-                   </div>
+                        <div class="px-4" id="estimate-data">
+                            <table class="table">
+                                <tr>
+                                    <td>Package<br>
+                                        <span class="small">per person</span>
+                                     </td>
+                                    <td>${{$package->priceperperson}}</td>
+                                </tr>
+                                <tr>
+                                    <td>total for <span class="text-danger result-ppl">3</span> </td>
+                                    <td class="total-price">$300</td>
+                                </tr>
+                            </table>
+                            <span class="text-danger " id="booking-warning"></span>
+                        </div>
+                        <div class="mx-auto">
+                            @if(Auth::check())
+                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary  m-3">book Now!</button>
+                        @else 
+                        <a href="/login" class=" btn btn-secondary m-3">book Now!</a>
+                        @endif
+                        </div>
+                    </div>
+                    <!-- end here  -->
                 </div>
             </div>
 
@@ -201,8 +226,35 @@
         </div>
         @include('layouts.foot')
 @endsection
-@section('script')
+@push('script')
 <script>
-    
+    const price="{{$package->priceperperson}}";
+    $(document).ready(function(){
+        $('#num-travelers').change(function(){
+            let num=$(this).val();
+            let total=price * num;
+            $('.result-ppl').html(num);
+            $('.total-price').html('$'+total);
+            if(num > 4){
+                $('#estimate-data table').addClass('d-none');
+                $('#booking-warning').html('Please give us a call first before booking!');
+            }else{
+                $('#estimate-data table').removeClass('d-none');
+                $('#booking-warning').html('');
+            }
+            
+        })
+        $('.package-booking-btn').click(function(){
+           let id=$(this).data('id');
+           console.log(id);
+            let ppl=$('#num-travelers').val();
+            window.location.href="/p/booking/"+id+"/"+ppl;
+        })
+
+
+          
+
+            
+    })
 </script>
-@endsection
+@endpush

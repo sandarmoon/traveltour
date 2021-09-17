@@ -56,14 +56,15 @@
 
                                     @if(count($booking_historys) > 0)
 
-                                    <button class="nav-link hotel_nav @if(count($bookings) > 0 && count($bookings) == 0 ) active @endif" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                    <button class="nav-link hotel_nav @if(count($booking_historys) > 0 && count($bookings) == 0 ) active @endif" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
                                          Hotel Booking
                                     </button>
                                     @endif
 
                                     @if(count($packages_booking) > 0)
 
-                                    <button class="nav-link package_nav @if(count($bookings) == 0 && count($bookings) == 0) active @endif" id="nav-package-tab" data-bs-toggle="tab" data-bs-target="#nav-package" type="button" role="tab" aria-controls="nav-package" aria-selected="false">
+                                    <button class="nav-link package_nav @if(count($packages_booking) > 0 && count($bookings) == 0 && count($booking_historys) == 0) 
+                                        active @endif" id="nav-package-tab" data-bs-toggle="tab" data-bs-target="#nav-package" type="button" role="tab" aria-controls="nav-package" aria-selected="false">
                                          Package Booking
                                     </button>
 
@@ -81,7 +82,7 @@
 
                                 <div class="tab-content" id="nav-tabContent">
                                     {{-- car info --}}
-                                  <div class="tab-pane fade show active car_nav_tab" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                  <div class="tab-pane fade @if(count($bookings) > 0)  show active @endif car_nav_tab" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                     <div class="row">
                                         <div class="col-md-12 mx-auto table-bordered table-responsive">
                                            <table class="table ">
@@ -152,7 +153,7 @@
 
 
                                   {{-- hotel info --}}
-                                  <div class="tab-pane fade hotel_nav_tab" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                  <div class="tab-pane fade @if(count($booking_historys) > 0 && count($bookings) == 0 ) show active @endif hotel_nav_tab" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                       
                                     <div class="row">
                                         <div class="col-md-12 mx-auto table-bordered table-responsive">
@@ -180,11 +181,7 @@
                                                        
                                                        <td>{{$i++}}.</td>
                                                        <td>{{$booking_history[0]->codeno}}</td>
-                                                       <td>
-                                                        
-                                                            {{$booking_history[0]->user->name}}
                                                        
-                                                       </td>
                                                        <td>
                                                             {{$booking_history[0]->user->email}}
 
@@ -203,7 +200,7 @@
                                                             $b_date = date_create($booking_date);
                                                             $date= date_format($b_date,"m/d/Y ");
                                                         @endphp
-                                                           {{$date}}
+                                                           {{$booking_date}}
                                                        </td>
                                                        <td>
                                                           
@@ -243,7 +240,10 @@
 
 
                                   {{-- Package info --}}
-                                  <div class="tab-pane fade package_nav_tab" id="nav-package" role="tabpanel" aria-labelledby="nav-package-tab">
+                                  <div class="tab-pane fade 
+                                        @if(count($packages_booking) > 0 && count($bookings) == 0 && count($booking_historys) == 0) 
+                                            show active @endif
+                                         package_nav_tab" id="nav-package" role="tabpanel" aria-labelledby="nav-package-tab">
                                       
                                     <div class="row">
                                         <div class="col-md-12 mx-auto table-bordered table-responsive">
@@ -387,7 +387,11 @@
                         <div class="card-body">
 
                             <div class="row">
-                                <div class="col-md-4">
+
+                                <div class="card-body">
+                                    
+                                
+                                <div class="col-md-4 mx-auto">
                                     @php
                                         $car=(object)$booking->car;
                                        
@@ -395,12 +399,12 @@
 
                                         $cover=$photos['cover'];
                                     @endphp 
-                                    <img src="{{asset('storage/'.$cover)}}" class="rounded-circle img-fluid" >
+                                    <img src="{{asset('storage/'.$cover)}}" class="rounded-circle img-fluid mb-4" >
                                 </div>
 
-                                <div class="col-md-8 mx-auto">
+                                <div class="col-md-8 mx-auto border">
                                     
-                                    <div class="row">
+                                    <div class="row mx-4 mt-4">
                                         <div class="col-md-6">
                                             <h5>Booking</h5>
 
@@ -431,10 +435,10 @@
                                                     <td> Detaure Date  :</td>
                                                     <td>
                                                         @php
-                                                        $departure_date=date_create($booking->departure_date);
-                                                        $departure_date= date_format($departure_date,"d / M / Y");
+                                                        // $departure_date=date_create($booking->departure_date);
+                                                        // $departure_date= date_format($departure_date,"d / M / Y");
                                                         @endphp
-                                                       {{$departure_date}}
+                                                       {{$booking->departure_date}}
                                                     </td>
                                                 </tr>
 
@@ -442,10 +446,10 @@
                                                     <td> Arrival Date  :</td>
                                                     <td>
                                                         @php
-                                                        $arrival_date=date_create($booking->arrival_date);
-                                                        $arrival_date= date_format($arrival_date,"d / M / Y");
+                                                        // $arrival_date=date_create($booking->arrival_date);
+                                                        // $arrival_date= date_format($arrival_date,"d / M / Y");
                                                         @endphp
-                                                       {{$arrival_date}}
+                                                       {{$booking->arrival_date}}
                                                     </td>
                                                 </tr>
 
@@ -556,6 +560,9 @@
                                        
                                     </div>
                                 </div>
+
+
+                                </div>
                                 
                             </div>
                             
@@ -590,16 +597,21 @@
                         <div class="card-body">
 
                             <div class="row">
-                                <div class="col-md-3 mx-auto">
-                                   <div>
+                                
+                                <div class="card-body">
+                                    
+                                
+                                
+                                <div class="col-md-3 mx-auto ">
+                                   <div class="mb-4">
                                        <img src="{{asset('storage/'.$hotelbooking[0]->room->company->logo)}}" class="rounded circle img-fluid">
                                    </div>
                                     
                                 </div>
 
-                                <div class="col-md-8 mx-auto">
+                                <div class="col-md-8 mx-auto border">
                                     
-                                    <div class="row mt-3">
+                                    <div class="row mt-3 mx-5 mt-4">
                                         <div class="col-md-6 col-lg-6 col-sm-12 ">
                                             <h5>Booking</h5>
                                             <table class="table">
@@ -923,6 +935,10 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                </div>
+
+                                
                                 
                             </div>
                             
@@ -1184,12 +1200,15 @@
             $('.package_bookingdetail').hide();
 
 
+
         }else if(view == 2){
 
             $('.bookinghistory').hide();
             $('.car_bookingdetail').show();
             $('.hotel_bookingdetail').hide();
             $('.package_bookingdetail').hide();
+            $('.style_height').removeAttr('style');
+
 
 
         }else if(view == 3){
@@ -1198,6 +1217,8 @@
             $('.car_bookingdetail').hide();
             $('.hotel_bookingdetail').show();
             $('.package_bookingdetail').hide();
+            $('.style_height').removeAttr('style');
+
 
 
         }else if(view == 4){

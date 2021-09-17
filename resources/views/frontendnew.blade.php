@@ -263,6 +263,37 @@
                 });
 
 
+                $('.rating_login').on('click','.star_one , .star_two , .star_three , .star_four, .star_five',function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'You can give rating if you are not Login!',
+                    // showCancelButton: !0,
+                    cancelButtonText: "Ok!",
+                    reverseButtons: !0,
+                    allowOutsideClick: false,
+                    showLoaderOnConfirm: true,
+                    inputValidator: ((value) => {
+                        
+                        if(value >= 11){
+                            return 'please give us a clall!';
+                        }
+
+                        if(value <=0){
+                            return 'please select from more than one or one person';
+                        }
+                        
+                        
+                    }),
+          
+                    }).then((e)=>{
+                          if (e.value) {
+                           window.location.href="/p/booking/"+id+"/"+e.value
+                          }else{
+                              console.log('enter');
+                          }
+                    })
+                })
+
                 
 
                 $('.rating-input').on('click','.star_one , .star_two , .star_three , .star_four, .star_five',function(){

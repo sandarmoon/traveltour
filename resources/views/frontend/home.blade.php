@@ -321,7 +321,7 @@
                         
                         <p><i class="fas fa-briefcase"></i> {{$car->bags}} air bag </p>
                         <ul class="text-center">
-                            <div class="rating-input" data-car_id ="{{$car->id}}" data-type_id = "{{$car->type->parent_id}}">
+                            <div class="@if(Auth::user()) rating-input @else rating_login @endif" data-car_id ="{{$car->id}}" data-type_id = "{{$car->type->parent_id}}">
 
 
                                 

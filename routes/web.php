@@ -189,6 +189,9 @@ Route::post('/shotel',[FrontController::class,'searchHotel'])->name('search.hote
 // Hotel booking end here
 Route::post('/rooms/h',[FrontController::class,'roomsByHotelId'])->name('rooms.hotelid');
 
+//sending massage using email from home blade
+Route::post('/contact',[BackendController::class,'contactedWithEmail'])->name('front.contact.email');
+
 });
 
 

@@ -57,7 +57,7 @@
                             </button>
 
                             <button
-                                class="nav-link d-none"
+                                class="nav-link "
                                 id="nav-contact-tab"
                                 data-bs-toggle="tab"
                                 data-bs-target="#nav-contact"
@@ -318,93 +318,36 @@
                                 role="tabpanel"
                                 aria-labelledby="nav-contact-tab"
                             >
-                                <form class="row g-4 mt-5">
-                                    <div class="col-sm-6 col-md-6 col-xl-5">
+                                <form class="row g-4 mt-2" id="package-search-div">
+                                    <div class="col-sm-8 col-md-8 col-xl-8">
                                         <div class="input-group-icon">
-                                            <input
-                                                class="
-                                                    form-control
+                                            <label for="package-search-from">Pick Up Any Package for your Previous Time</label>
+                                            <select name="" id="package-search-from" class="form-control 
                                                     input-box
-                                                    form-voyage-control
-                                                "
-                                                id="inputDateFive"
-                                                type="date"
-                                            /><span
+                                                    form-voyage-control" id="">
+                                                    @foreach($packages as $package)
+                                                    <option value="{{$package->id}}">{{$package->name}}-{{$package->days}} Nights Trip</option>
+                                                    @endforeach
+                                                    
+                                                </select>
+                                            <span
                                                 class="
                                                     nav-link-icon
                                                     text-800
                                                     fs--1
-                                                    input-box-icon
+                                                    input-box-icon mt-3
                                                 "
-                                                ><i class="fas fa-calendar"></i
+                                                ><i class="fas fa-suitcase-rolling"></i
                                             ></span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-xl-5">
-                                        <div class="input-group-icon">
-                                            <input
-                                                class="
-                                                    form-control
-                                                    input-box
-                                                    form-voyage-control
-                                                "
-                                                id="inputDateSix"
-                                                type="date"
-                                            /><span
-                                                class="
-                                                    nav-link-icon
-                                                    text-800
-                                                    fs--1
-                                                    input-box-icon
-                                                "
-                                                ><i class="fas fa-calendar"></i
-                                            ></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-xl-5">
-                                        <div class="input-group-icon">
-                                            <label
-                                                class="
-                                                    form-label
-                                                    visually-hidden
-                                                "
-                                                for="inputPeopleThree"
-                                                >Person</label
-                                            >
-                                            <select
-                                                class="
-                                                    form-select
-                                                    form-voyage-select
-                                                    input-box
-                                                "
-                                                id="inputPeopleThree"
-                                            >
-                                                <option selected="selected">
-                                                    2 Adults
-                                                </option>
-                                                <option>
-                                                    2 Adults 1 children
-                                                </option>
-                                                <option>
-                                                    2 Adults 2 children
-                                                </option></select
-                                            ><span
-                                                class="
-                                                    nav-link-icon
-                                                    text-800
-                                                    fs--1
-                                                    input-box-icon
-                                                "
-                                                ><i class="fas fa-user"> </i
-                                            ></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-10 d-grid mt-6">
+                                    
+                                    <div class="col-10 d-grid mt-6 ">
                                         <button
                                             class="btn btn-secondary"
                                             type="submit"
                                         >
-                                            Search Package !
+                                            View Package !
                                         </button>
                                     </div>
                                 </form>

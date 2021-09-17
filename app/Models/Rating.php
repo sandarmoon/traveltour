@@ -9,5 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Rating extends Model
 {
     use HasFactory,SoftDeletes;
-     protected $fillable=['user_id','item_id','type_id','rate'];
+     protected $fillable=['user_id','car_id','company_hotel_id','type_id','rate'];
+
+
+    public function car($value='')
+    {
+        return $this->belongsTo('App\Models\Car');
+    }
 }

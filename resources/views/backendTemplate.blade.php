@@ -306,33 +306,12 @@
                             </div>
                             <a
                                 href="./examples/profile.html"
-                                class="dropdown-item"
+                                class="dropdown-item d-none"
                             >
                                 <i class="ni ni-single-02"></i>
                                 <span>My profile</span>
                             </a>
-                            <a
-                                href="./examples/profile.html"
-                                class="dropdown-item"
-                            >
-                                <i class="ni ni-settings-gear-65"></i>
-                                <span>Settings</span>
-                            </a>
-                            <a
-                                href="./examples/profile.html"
-                                class="dropdown-item"
-                            >
-                                <i class="ni ni-calendar-grid-58"></i>
-                                <span>Activity</span>
-                            </a>
-                            <a
-                                href="./examples/profile.html"
-                                class="dropdown-item"
-                            >
-                                <i class="ni ni-support-16"></i>
-                                <span>Support</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
+                            
                             <a
                                 href="route('logout')"
                                 class="dropdown-item"
@@ -416,106 +395,127 @@
                     </form>
                     <!-- Navigation -->
                     <ul class="navbar-nav">
-                        <li
-                            class="nav-item {{ Request::is('city*') ? 'active' : '' }} "
-                        >
-                            <a
-                                class="nav-link"
-                                href="{{ route('city.index') }}"
+                        <!-- admin/car/hotel start -->
+                        @hasanyrole('admin|car|hotel')
+                            <!-- city  -->
+                            <li
+                                class="nav-item {{ Request::is('city*') ? 'active' : '' }} "
                             >
-                                <i class="ni ni-tv-2 text-primary"></i> City
-                            </a>
-                        </li>
-                        <li
-                            class="nav-item {{ Request::is('pickup*') ? 'active' : '' }}"
-                        >
-                            <a
-                                class="nav-link"
-                                href="{{ route('pickup.index') }}"
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('city.index') }}"
+                                >
+                                    <i class="ni ni-tv-2 text-primary"></i> City
+                                </a>
+                            </li>
+                            <!-- type -->
+                            <li
+                                class="nav-item {{ Request::is('type*') ? 'active' : '' }}"
                             >
-                                <i class="ni ni-planet text-blue"></i>
-                                Pickup_location
-                            </a>
-                        </li>
-                        <li
-                            class="nav-item {{ Request::is('type*') ? 'active' : '' }}"
-                        >
-                            <a
-                                class="nav-link"
-                                href="{{ route('type.index') }}"
-                            >
-                                <i class="ni ni-pin-3 text-orange"></i> Type
-                            </a>
-                        </li>
-                        <li
-                            class="nav-item {{ Request::is('brand*') ? 'active' : '' }}"
-                        >
-                            <a
-                                class="nav-link"
-                                href="{{ route('brand.index') }}"
-                            >
-                                <i class="ni ni-pin-3 text-orange"></i> Brand
-                            </a>
-                        </li>
-                        <li
-                            class="nav-item {{ Request::is('car*') ? 'active' : '' }}"
-                        >
-                            <a class="nav-link" href="{{ route('car.index') }}">
-                                <i class="ni ni-single-02 text-yellow"></i> Cars
-                            </a>
-                        </li>
-                        <li
-                            class="nav-item {{ Request::is('fcategory*') ? 'active' : '' }}"
-                        >
-                            <a
-                                class="nav-link"
-                                href="{{ route('fcategory.index') }}"
-                            >
-                                <i class="ni ni-single-02 text-yellow"></i>
-                                Facility Category
-                            </a>
-                        </li>
-                        <li
-                            class="nav-item {{ Request::is('facility*') ? 'active' : '' }}"
-                        >
-                            <a
-                                class="nav-link"
-                                href="{{ route('facility.index') }}"
-                            >
-                                <i class="ni ni-single-02 text-yellow"></i>
-                                Facility sub Category
-                            </a>
-                        </li>
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('type.index') }}"
+                                >
+                                    <i class="ni ni-pin-3 text-orange"></i> Type
+                                </a>
+                            </li>
+                        @endhasanyrole
 
-                        <li
-                            class="nav-item {{ Request::is('room*') ? 'active' : '' }}"
-                        >
-                            <a
-                                class="nav-link"
-                                href="{{ route('room.index') }}"
+                        @hasanyrole('admin|car')
+                        <!-- admin/car -->
+                            <!-- pickup location -->
+                            <li
+                                class="nav-item {{ Request::is('pickup*') ? 'active' : '' }}"
                             >
-                                <i class="ni ni-single-02 text-yellow"></i>
-                                Hotel Room
-                            </a>
-                        </li>
-
-                        <li
-                            class="nav-item {{ Request::segment(1) === 'partnerships' || Request::segment(1) === 'detail' ? 'active' : '' }}"
-                        >
-                            <a
-                                class="nav-link"
-                                href="{{ route('partnership') }}"
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('pickup.index') }}"
+                                >
+                                    <i class="ni ni-planet text-blue"></i>
+                                    Pickup_location
+                                </a>
+                            </li>
+                            <!-- brand for car -->
+                            <li
+                                class="nav-item {{ Request::is('brand*') ? 'active' : '' }}"
                             >
-                                <i class="ni ni-bullet-list-67 text-red"></i>
-                                Partnership
-                            </a>
-                            <input
-                                type="hidden"
-                                name="url"
-                                value="{{Request::segment(1)}}"
-                                class="url"
-                            />
-                        </li>
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('brand.index') }}"
+                                >
+                                    <i class="ni ni-pin-3 text-orange"></i> Brand
+                                </a>
+                            </li>
+                            <!-- car  -->
+                            <li
+                                class="nav-item {{ Request::is('car*') ? 'active' : '' }}"
+                            >
+                                <a class="nav-link" href="{{ route('car.index') }}">
+                                    <i class="ni ni-single-02 text-yellow"></i> Cars
+                                </a>
+                            </li>
+                        @endhasanyrole
+                        
+                        @hasanyrole('admin|hotel')
+                        <!-- admin/hotel -->
+                            <!-- Facility Category -->
+                            <li
+                                class="nav-item {{ Request::is('fcategory*') ? 'active' : '' }}"
+                            >
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('fcategory.index') }}"
+                                >
+                                    <i class="ni ni-single-02 text-yellow"></i>
+                                    Facility Category
+                                </a>
+                            </li>
+                            <!-- sub-facilties -->
+                            <li
+                                class="nav-item {{ Request::is('facility*') ? 'active' : '' }}"
+                            >
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('facility.index') }}"
+                                >
+                                    <i class="ni ni-single-02 text-yellow"></i>
+                                    Facility sub Category
+                                </a>
+                            </li>
+                            <!-- hotel room -->
+                            <li
+                                class="nav-item {{ Request::is('room*') ? 'active' : '' }}"
+                            >
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('room.index') }}"
+                                >
+                                    <i class="ni ni-single-02 text-yellow"></i>
+                                    Hotel Room
+                                </a>
+                            </li>
+                        @endhasanyrole
+                        @role('admin')
+                        <!-- admin  -->
+                            <!-- partnership  -->
+                            <li
+                                class="nav-item {{ Request::segment(1) === 'partnerships' || Request::segment(1) === 'detail' ? 'active' : '' }}"
+                            >
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('partnership') }}"
+                                >
+                                    <i class="ni ni-bullet-list-67 text-red"></i>
+                                    Partnership
+                                </a>
+                                <input
+                                    type="hidden"
+                                    name="url"
+                                    value="{{Request::segment(1)}}"
+                                    class="url"
+                                />
+                            </li>
+                        @endrole
                     </ul>
                     <!-- booking url div  -->
                     <!-- Divider -->
@@ -545,7 +545,7 @@
                         </li>
                     </ul>
                     <!-- booking package url div end -->
-                    <hr class="my-3" />
+                   @role('admin')
                     <!-- Heading -->
                     <h6 class="navbar-heading text-muted">Package</h6>
                     <!-- Navigation -->
@@ -581,6 +581,7 @@
                     <!-- Heading -->
                     <h6 class="navbar-heading text-muted"></h6>
                     <!-- Navigation -->
+                    @endrole
                     
                 </div>
             </div>
@@ -683,35 +684,14 @@
                                 <div class="dropdown-header noti-title">
                                     <h6 class="text-overflow m-0">Welcome!</h6>
                                 </div>
-                                <a
+                                <!-- <a
                                     href="../examples/profile.html"
                                     class="dropdown-item"
                                 >
                                     <i class="ni ni-single-02"></i>
                                     <span>My profile</span>
-                                </a>
-                                <a
-                                    href="../examples/profile.html"
-                                    class="dropdown-item"
-                                >
-                                    <i class="ni ni-settings-gear-65"></i>
-                                    <span>Settings</span>
-                                </a>
-                                <a
-                                    href="../examples/profile.html"
-                                    class="dropdown-item"
-                                >
-                                    <i class="ni ni-calendar-grid-58"></i>
-                                    <span>Activity</span>
-                                </a>
-                                <a
-                                    href="../examples/profile.html"
-                                    class="dropdown-item"
-                                >
-                                    <i class="ni ni-support-16"></i>
-                                    <span>Support</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
+                                </a> -->
+                                
                                 <a
                                     href="route('logout')"
                                     class="dropdown-item"

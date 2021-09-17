@@ -1,13 +1,17 @@
 @extends('backendTemplate')
 @section('main-content')
-
+@php 
+$date_now = date("Y-m-d");
+@endphp
 
 
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-7">
       <div class="container-fluid">
         <div class="my-ct-page-title text-white">
           <h1 class="ct-title text-white d-inline-block" id="content">
-            {{$package->name}}/{{$package->days}} days Trip
+            {{$package->name}}/{{$package->days}} days Trip   
+
+            <span class="badge {{$date_now >= $package->start ? 'bg-danger':'bg-warning'}} rounded-pill">{{$date_now >= $package->start ? 'In-Valid':'Valid'}}</span>
           </h1>
           @if ($message = Session::get('success'))
               <div class="alert alert-success">

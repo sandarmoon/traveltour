@@ -1,6 +1,6 @@
 @extends('frontendnew') @section('header')
 
-<x-searchingnew :cities="$cities"></x-searchingnew>
+<x-searchingnew :cities="$cities" :packages="$packages"></x-searchingnew>
 
 
 
@@ -13,6 +13,8 @@
     {{ session("message") }}
 </div>
 @endif
+
+
 
 <div class="d-none">
     <div class="container mt-0 my-3">
@@ -237,9 +239,9 @@
                         
                         @endphp
                         @if(Auth::check())
-                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2{{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
+                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
                         @else 
-                        <a href="/login" class=" btn btn-secondary form-control my-2{{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
+                        <a href="/login" class=" btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
                         @endif
                     </div>
                 </div>
@@ -271,11 +273,41 @@
         </div>
 
         <div class="row">
-            
-            @foreach($cars as $car) 
 
 
 
+            @php
+                $car_arry =[];
+            @endphp
+            @foreach($cars as $car)
+
+                @php
+                    $rating = 0;
+                    foreach($car->rating as $data){
+                        $rating += $data->rate;
+
+                    }
+
+                    $car_arry[$rating] = $car;
+
+                    
+                @endphp
+
+            @endforeach
+
+            @php
+                if(count($car->rating) > 0){
+                    krsort($car_arry);
+                }else{
+                    $car_arry = $cars;
+                }
+                
+                
+                
+               
+            @endphp
+
+            @foreach($car_arry as $car)
 
 
             @php
@@ -317,9 +349,25 @@
                             {{$car->type->name}}
                             
                         </p>
-                        
+
+
                         
                         <p><i class="fas fa-briefcase"></i> {{$car->bags}} air bag </p>
+
+                        <p class="rating">
+                            <i class="fas fa-star-half-alt"></i>
+                            @php
+                                $rating = 0;
+                                foreach($car->rating as $data){
+                                    $rating += $data->rate;
+                                }
+                                
+                            @endphp
+                            {{$rating}}
+                            Stars
+                            
+                        </p>
+
                         <ul class="text-center">
                             <div class="@if(Auth::user()) rating-input @else rating_login @endif" data-car_id ="{{$car->id}}" data-type_id = "{{$car->type->parent_id}}">
 
@@ -417,8 +465,34 @@
         </div>
 
         <div class="row">
+
+            @php
+                $hotel_array =[];
+            @endphp
+            @foreach($hotels as $hotel)
+
+                @php
+                    $rating = 0;
+                    foreach($hotel->rating as $data){
+                        $rating += $data->rate;
+
+                    }
+
+                    $hotel_array[$rating] = $hotel;
+
+                @endphp
+
+            @endforeach
+
+            @php
+                if(count($hotel->rating) > 0){
+                    krsort($hotel_array);
+                }else{
+                    $hotel_array = $hotels;
+                }
+            @endphp
             
-            @foreach($hotels as $hotel) 
+            @foreach($hotel_array as $hotel) 
 
             <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
                 <div class="project-wrap">
@@ -446,15 +520,33 @@
                     <div class="text p-4">
                         <span class="days"></span>
                         <h3 class="mb-2"><a href="#"></a></h3>
-                        <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel->name}} ( {{$car->model}} )</p>
+                        <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel->name}} </p>
                         <p class="location">
                             <i class="fas fa-phone"></i>
                             {{$hotel->phone}}
                             
                         </p>
+
+
                         
                         
                         <p><i class="fas fa-location-arrow"></i> {{$hotel->addresss}} </p>
+
+                        <p class="rating">
+                            <i class="fas fa-star-half-alt"></i>
+                            @php
+                                $rating = 0;
+                                foreach($hotel->rating as $data){
+                                    $rating += $data->rate;
+                                }
+                                
+                            @endphp
+                            {{$rating}}
+                            Stars
+                            
+                        </p>
+
+
                         <ul class="text-center">
                             <div class="rating-input" data-hotel_id ="{{$hotel->id}}" data-type_id = "1">
 
@@ -535,7 +627,7 @@
 
 
 {{-- feedback --}}
-<section class="py-0">
+<section class="py-0 d-none">
     <div class="container mt-5">
         <div class="row mt-5">
             <div class="col-md-12 justify-content-center">
@@ -951,6 +1043,12 @@
 @push('script')
 <script>
     $(document).ready(function(){
+         $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
         $('.package-booking-btn').click(function(){
            let id=$(this).data('id');
            console.log(id);
@@ -991,6 +1089,53 @@
                 
 
         })
+
+        $('#contact-email-form').submit(function(e){
+            e.preventDefault();
+            let formData=$(this).serialize();
+            let token=$('meta[name="csrf-token"]').attr('content');
+            
+            $.ajax({
+                url:'/front/contact',
+                type:'POST',
+                data:formData,
+                beforeSend: function() {
+                    swal.fire({
+                        
+                        html: '<h5>Loading...</h5>',
+                        showConfirmButton: false,
+                       
+                    });
+                },
+                success: function(json) {
+                        if(json){
+                            swal.fire({
+                        
+                                title:'Your message is send',
+                                text:'Thank you so much',
+                                type:'success',
+                                showConfirmButton: true,
+                            
+                            }).then(()=>{
+                                $('#contact-email-form').trigger('reset');
+                            });
+                        }
+                }
+            })
+
+        })
+
+         <!-- searching-veiw-clicking-package search  -->
+
+        $('#package-search-div').submit(function(e){
+            e.preventDefault();
+            let packageid=$('#package-search-from').val();
+
+            window.location.href="/package_detail/"+packageid;
+            
+        })
+
+
 
 
           

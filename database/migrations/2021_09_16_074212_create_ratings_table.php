@@ -46,6 +46,30 @@ class CreateRatingsTable extends Migration
 
            
         });
+
+         Schema::create('feedbacks', function (Blueprint $table) {
+            $table->id();
+            $table->BigInteger('user_id')->unsigned();
+            $table->text('message')->nullable();
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
+
+            $table->softDeletes();
+            $table->timestamps();
+
+           
+        });
+
+         Schema::create('emailcontacts', function (Blueprint $table) {
+            $table->id();
+            $table->text('name')->nullable();
+            $table->string('email')->nullable();
+            $table->text('message')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
     }
 
     /**

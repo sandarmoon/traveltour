@@ -33,18 +33,46 @@ class FrontController extends Controller
         $rooms=Room::all();
         
         $today=Carbon::today();
-       $packages=Package::where('start','>=',$today)
+        $packages=Package::where('start','>=',$today)
                             ->orWhere('end','<=',$today)
                             ->get();
 
+        // $rating = Rating::where('car_id','!=','null')
+        //                     ->get()
+        //                     ->groupBy(function($q){
+        //                         $data = $q->car_id; 
+        //                         $num = $data->sum('rate');
+        //                         return $num;
+        //                     });
+        // dd($rating);
+                            
+        // foreach($rating as $rate){
+        //     dd($rate);
+        // }
+        
+        //car ->status-> 1 -> not book
+        //car -> status ->2 ->booked
         $cars=Car::where('status','=',1)->get();
+        // dd($cars);
 
+        
+
+        // $num = 0;
+        // foreach($cars as $car){
+        //     foreach($car->rating as $data){
+        //         $num += $data->rate; 
+        //     }
+
+            
+        // }
+        // dd($num);
         //company -> type -> 1 ->hotel
         //company -> type ->2 ->car
         $hotels=Company::where('type','=',1)->get();
-      
+
 
         return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels'));
+
     }
 
     public function searchCar(Request $request){

@@ -21,10 +21,15 @@
             @foreach($packages as $package)
             <div class="col-md-4 ">
                 <div class="card package-card">
-            
+            @php 
+                $start_trip=new DateTime($package->start);
+                $end_trip=new DateTime($package->end);
+            @endphp
                     <div class="card-body">
                         <h5 class="card-title">{{$package->days}} Days Trip</h5>
-                        <h2 class="card-text">{{$package->name}}</h2>
+                        <h2 class="card-text mb-0">{{$package->name}}</h2>
+                        <span class="small">
+                {{date_format($start_trip, 'M j, Y')}} - {{date_format($end_trip, 'M j, Y')}}</span>
                     </div>
                     
                    
@@ -35,7 +40,7 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Booked
-                                <span class="badge bg-primary rounded-pill">{{$package->pbookings_count}}</span>
+                                <span class="badge bg-primary rounded-pill">{{$package->pbookings->sum('ppl')}}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Counted To the Trip
@@ -45,10 +50,22 @@
                                 $datediff =  $your_date-$now;
 
                                 $d=round($datediff / (60 * 60 * 24));
+                                
+                                $date_now = date("Y-m-d"); // this format is string comparable
+
+                               
                                 @endphp
+
+
+                                @if($date_now >= $package->start)
+                                <span class="badge btn-danger  rounded-pill">
+                                   invalid
+                                </span>
+                                @else
                                 <span class="badge  {{$d > 2 ? 'btn-primary':'btn-danger'}} rounded-pill">
                                     {{$d}}
                                 </span>
+                                @endif
                             </li>
                             <li  class="list-group-item ">
                                 <a  href="{{route('bookinglist.pid',$package->id)}}" class="btn btn-info btn-more float-right"  class="form-control">More Report</a>

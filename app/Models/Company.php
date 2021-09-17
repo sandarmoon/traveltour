@@ -31,6 +31,11 @@ class Company extends Model
     public function city(){
          return $this->belongsTo(City::class,'city_id');
     }
+
+    public function rating($value='')
+    {
+        return $this->hasMany(Rating::class,'company_hotel_id');
+    }
     
     
 }

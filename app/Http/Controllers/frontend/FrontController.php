@@ -20,6 +20,7 @@ use App\Models\Package;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use App\Models\Rating;
 
 
 
@@ -45,7 +46,9 @@ class FrontController extends Controller
         //company -> type ->2 ->car
         $hotels=Company::where('type','=',1)->get();
 
-        return view('frontend.home',compact('cities','rooms','packages','cars','rooms'));
+
+        return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels'));
+
     }
 
     public function searchCar(Request $request){
@@ -399,4 +402,88 @@ class FrontController extends Controller
         
 
     }
+
+
+    // Rating
+    public function rating(Request $request)
+    {
+        $array = [];
+        $hotel_array = [];
+        $rate = Rating::where('user_id',Auth::id())->get();
+
+        
+            if($request->car_id){
+                if(count($rate) > 0){
+                    foreach($rate as $value){
+
+                        if($value->car_id == $request->car_id){
+                            array_push($array,$request->car_id);
+                        }
+                    }
+
+                }
+            }
+
+
+            if($request->hotel_id){
+                if(count($rate) > 0){
+                    foreach($rate as $value){
+                        if($value->company_hotel_id == $request->hotel_id){
+                            array_push($hotel_array,$value->rate);
+                        }
+                    }
+
+                }
+            }
+
+            if(count($array) > 0){
+
+                $rating = Rating::where('car_id',$request->car_id)->where('user_id',Auth::id())->first();
+
+            }elseif(count($hotel_array) > 0){
+
+                $rating = Rating::where('company_hotel_id',$request->hotel_id)->where('user_id',Auth::id())->first();
+
+            }
+
+            else{
+
+                $rating = new Rating;
+
+            }
+        
+
+        
+        if($request->car_id){
+
+            $rating->car_id = $request->car_id;
+
+        }elseif($request->hotel_id){
+
+            $rating->company_hotel_id = $request->hotel_id;
+
+        }
+        $rating->type_id = $request->type_id;
+        $rating->rate = $request->rating;
+
+        $rating->user_id = Auth::id();
+        $rating->save();
+        return "Ok";
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

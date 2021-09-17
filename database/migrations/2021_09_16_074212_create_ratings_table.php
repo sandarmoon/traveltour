@@ -16,13 +16,25 @@ class CreateRatingsTable extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->BigInteger('user_id')->unsigned();
-            $table->BigInteger('item_id')->unsigned();
+            $table->BigInteger('car_id')->unsigned()->nullable();
+            $table->BigInteger('company_hotel_id')->unsigned()->nullable();
+
             $table->BigInteger('type_id')->unsigned();
             $table->integer('rate')->default(0);
 
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')
+                    ->onDelete('cascade');
+
+            $table->foreign('car_id')
+                    ->references('id')
+                    ->on('cars')
+                    ->onDelete('cascade');
+
+            $table->foreign('company_hotel_id')
+                    ->references('id')
+                    ->on('companies')
                     ->onDelete('cascade');
 
             $table->foreign('type_id')

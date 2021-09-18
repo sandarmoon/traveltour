@@ -9,7 +9,7 @@
         <!-- ===============================================-->
         <!--    Document Title-->
         <!-- ===============================================-->
-        <title>Lucky 7</title>
+        <title>Lucky Seven</title>
         
         <link rel="stylesheet" href="{{asset('js/sweetalert2.min.css')}}">
         @livewireStyles

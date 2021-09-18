@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand" href="index.html">
         {{-- <img class="d-inline-block" src="assets/img/gallery/logo.png" width="50" alt="logo" /> --}}
-        <span class="fw-bold text-primary ms-2 ">Lucky <span class="font_lucky_7">7</span></span></a>
+        <span class="fw-bold text-primary ms-2 ">Lucky Seven</span></a>
 
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 

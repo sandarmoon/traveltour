@@ -56,5 +56,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Rating');
     }
 
+    public function carRating(){
+        return $this->hasOne(Rating::class,'car_id');
+    }
 
 }

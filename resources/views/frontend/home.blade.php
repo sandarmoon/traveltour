@@ -23,20 +23,13 @@
             $photos=json_decode($room->photos,true); $s=0; @endphp
             <div class="col-md-4">
                 <div class="card">
-                    <div
-                        id="carouselExampleSlidesOnly"
-                        class="carousel slide"
-                        data-bs-ride="carousel"
-                    >
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             @foreach($photos as $k=>$p)
-                            <div
-                                class="carousel-item {{
+                            <div class="carousel-item {{
                                     $s == $k ? 'active' : ''
-                                }}"
-                            >
-                                <img src="{{ asset("storage/$p") }}"
-                                class="d-block w-100" alt="...">
+                                }}">
+                                <img src="{{ asset("storage/$p") }}" class="d-block w-100" alt="...">
                             </div>
                             @endforeach
                         </div>
@@ -70,35 +63,21 @@
                                 Later
                             </li>
                             <li>
-                                <a
-                                    href="{{route('room.show',$room->id)}}"
-                                    class="text-decoration-none"
-                                    >More Details ></a
-                                >
+                                <a href="{{route('room.show',$room->id)}}" class="text-decoration-none">More Details ></a>
                             </li>
                         </ul>
                         <hr class="mx-2" />
                         <div class="d-flex justify-content-between">
                             <div>
                                 <h4 class="mb-0">${{$room->pricepernight}}</h4>
-                                <span class="price-desc small mb-2 text-muted"
-                                    >per night</span
-                                >
-                                <span class="total-desc small mb-2 text-dark"
-                                    >{{$room->pricepernight+ 10}} total</span
-                                ><br />
+                                <span class="price-desc small mb-2 text-muted">per night</span>
+                                <span class="total-desc small mb-2 text-dark">{{$room->pricepernight+ 10}} total</span><br />
 
-                                <span class="fee-include small mb-2 text-dark"
-                                    >includes tax and fees</span
-                                >
+                                <span class="fee-include small mb-2 text-dark">includes tax and fees</span>
                             </div>
                             <div>
-                                <span class="left-msg small mb-2 text-danger"
-                                    >We have 4 left!</span
-                                >
-                                <a href="#" class="btn btn-primary mt-3"
-                                    >Reserve Now!</a
-                                >
+                                <span class="left-msg small mb-2 text-danger">We have 4 left!</span>
+                                <a href="#" class="btn btn-primary mt-3">Reserve Now!</a>
                             </div>
                         </div>
                         {{-- accordian end --}}
@@ -115,34 +94,32 @@
 <section class="py-0">
     <div class="container mt-5">
         <div class="row justify-content-center pb-4">
-            <div
-                class="
+            <div class="
                     col-md-12
                     heading-section
                     text-center
                     ftco-animate
                     fadeInUp
                     ftco-animated
-                "
-            >
+                ">
                 <h2 class="mb-4">Popular Packages</h2>
             </div>
         </div>
 
         <div class="row">
 
-            @foreach($packages as $package) 
+            @foreach($packages as $package)
 
-            @php 
-                $s=0; 
-                $tours=$package->tours;
-                $photos=[]; 
-                foreach($tours as $t){ 
-                    $places=json_decode($t->photo,true); 
-                    foreach($places as $v){
-                        array_push($photos,$v); 
-                    } 
-                } 
+            @php
+            $s=0;
+            $tours=$package->tours;
+            $photos=[];
+            foreach($tours as $t){
+            $places=json_decode($t->photo,true);
+            foreach($places as $v){
+            array_push($photos,$v);
+            }
+            }
             @endphp
 
             <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
@@ -157,54 +134,26 @@
                         <span class="price">$550/person</span>
                     </a> -->
                     <div class="my-img">
-                        <div
-                            id="carouselExampleControls"
-                            class="carousel slide"
-                            data-bs-ride="carousel"
-                        >
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 @foreach($photos as $k=>$p)
-                                <div
-                                    class="carousel-item {{
+                                <div class="carousel-item {{
                                         $s == $k ? 'active' : ''
-                                    }}"
-                                >
-                                    <img
-                                        src="{{ asset('storage/'.$p) }}"
-                                        class="d-block w-100"
-                                        alt="..."
-                                    />
+                                    }}">
+                                    <img src="{{ asset('storage/'.$p) }}" class="d-block w-100" alt="..." />
                                 </div>
                                 @endforeach
                             </div>
-                            <button
-                                class="carousel-control-prev visually-hidden"
-                                type="button"
-                                data-bs-target="#carouselExampleControls"
-                                data-bs-slide="prev"
-                            >
-                                <span
-                                    class="carousel-control-prev-icon"
-                                    aria-hidden="true"
-                                ></span>
+                            <button class="carousel-control-prev visually-hidden" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button
-                                class="carousel-control-next visually-hidden"
-                                type="button"
-                                data-bs-target="#carouselExampleControls"
-                                data-bs-slide="next"
-                            >
-                                <span
-                                    class="carousel-control-next-icon"
-                                    aria-hidden="true"
-                                ></span>
+                            <button class="carousel-control-next visually-hidden" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <span class="packageprice"
-                            >${{$package->priceperperson}}/person</span
-                        >
+                        <span class="packageprice">${{$package->priceperperson}}/person</span>
                     </div>
                     <div class="text p-4">
                         <span class="days">{{$package->days}} Days Tour</span>
@@ -212,35 +161,35 @@
                         <p class="location">
                             <span class="fa fa-map-marker"></span>
                             @php $len=count($package->tours);
-                             $lastindex=$len-1;
+                            $lastindex=$len-1;
                             $places='';
-                             
-                             
-                            foreach($package->tours  as $k=>$tours) {
-                            if($k == $lastindex) 
+
+
+                            foreach($package->tours as $k=>$tours) {
+                            if($k == $lastindex)
                             $places.=$tours->title;
-                            else 
+                            else
                             $places.=$tours->title.',';
                             }
                             @endphp
                             {{$places}}
                         </p>
-                        
+
                         <p><i class="fas fa-car fa_car_icon"></i> {{$package->car->name}} ({{$package->car->model}}-{{$package->car->type->name}}) </p>
                         <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$package->hotel->name}}</p>
                         <ul class="text-center">
-                           
+
                             <li class="">
                                 <a href="{{route('frontend_package_detail',$package->id)}}"><span class="flaticon-mountains"></span>More info</a>
                             </li>
                         </ul>
-                        @php 
+                        @php
                         $booked_ppl=$package->pbookings->sum('ppl');
-                        
+
                         @endphp
                         @if(Auth::check())
-                        <button  data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
-                        @else 
+                        <button data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
+                        @else
                         <a href="/login" class=" btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
                         @endif
                     </div>
@@ -258,33 +207,64 @@
 <section class="py-0">
     <div class="container mt-5">
         <div class=" justify-content-start ">
-            <div
-                class="
+            <div class="
                     col-md-12
                     heading-section
                     
                     ftco-animate
                     fadeInUp
                     ftco-animated
-                "
-            >
+                ">
                 <h2 class="mb-4">Popular Cars</h2>
             </div>
         </div>
         <div class="row">
-            @foreach($cars as $car) 
 
 
 
 
 
             @php
-                // $car=(object)$booking->car;
-               
-                $photos=json_decode($car->photo,true);
+            $car_arry =[];
+            @endphp
+            @foreach($cars as $car)
 
-                $cover=$photos['cover'];
-            @endphp 
+            @php
+            $rating = 0;
+            foreach($car->rating as $data){
+            $rating += $data->rate;
+
+            }
+
+            $car_arry[$rating] = $car;
+
+
+            @endphp
+
+            @endforeach
+
+            @php
+            if(count($car->rating) > 0){
+            krsort($car_arry);
+            }else{
+            $car_arry = $cars;
+            }
+
+
+
+
+            @endphp
+
+            @foreach($car_arry as $car)
+
+
+            @php
+            // $car=(object)$booking->car;
+
+            $photos=json_decode($car->photo,true);
+
+            $cover=$photos['cover'];
+            @endphp
             <div class="col-md-4">
                 <div class="project-wrap">
                     <!-- <a
@@ -296,22 +276,40 @@
                     </a> -->
                     <div class="my-img">
                         <div class=" " style="height:280px;max-height: 260px;width: 100%;overflow: hidden;">
-                            <img  src="{{asset('storage/'.$cover)}}"  class="img-fluid " alt="photo">
-                            
+                            <img src="{{asset('storage/'.$cover)}}" class="img-fluid " alt="photo">
+
                         </div>
                         <span class="packageprice">$50/person</span>
                     </div>
+
                     <div class="text p-4" style="background-color: #e8e8e866;box-shadow: 0px 10px 23px -8px rgb(0 0 0 / 33%);">
                         <span class="text-muted  d-block text-center text-uppercase">{{$car->company->name}}</span>
                         <h3 class="text-center my-2">{{$car->name}}/{{$car->model}}<span style="font-size: 2rem; color: #f15d30;padding-left: 5px;">{{$car->priceperday}}$</span></h3>
                         <hr style="border:1px solid #f15d30 ;">
                         <!-- start strart here  -->
+
+
+
+                        <p class="rating text-center">
+                            <i class="fas fa-star-half-alt"></i>
+                            @php
+                            $rating = 0;
+                            foreach($car->rating as $data){
+                            $rating += $data->rate;
+                            }
+
+                            @endphp
+                            {{$rating}}
+                            Stars
+
+                        </p>
+
                         <ul class="text-center">
-                            <div class="rating-input" data-car_id ="{{$car->id}}" data-type_id = "{{$car->type->parent_id}}">
+                            <div class="@if(Auth::user()) rating-input @else rating_login @endif" data-car_id="{{$car->id}}" data-type_id="{{$car->type->parent_id}}">
 
 
-                                
-                                <span class="starone" >
+
+                                <span class="starone">
                                     <i class="fas fa-star star_one star_blank 
                                     @foreach($car->rating as $rate)
                                         @if($rate->user_id == Auth::id())
@@ -329,7 +327,10 @@
                                                 star_color
                                             @endif
                                         @endif
-                                    @endforeach" data-value="2"></i></span>
+                                    @endforeach
+                                    
+                                    
+                                    " data-value="2"></i></span>
 
                                 <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
                                     @foreach($car->rating as $rate)
@@ -358,25 +359,25 @@
                                         @endif
                                     @endforeach" data-value="5"></i></span>
 
-                                    <br>
-{{--                                 <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p>
---}}                            </div>
+                                <br>
+                                {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p>
+--}} </div>
 
 
 
                         </ul>
                         <!-- start end here  -->
-                        <p class="text-center mb-0"><a href=""><span class="flaticon-mountains"></span>More info</a></p>
+                        <p class="text-center mb-0"><a href="" class="btn-car-detail" data-id="{{$car->id}}"><span class="flaticon-mountains"></span>More info</a></p>
                         @if(Auth::check())
-                        <button  data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
-                        @else 
+                        <button data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
+                        @else
                         <a href="/login" class=" btn btn-secondary form-control my-2">Book Now</a>
                         @endif
                     </div>
                 </div>
             </div>
 
-             @endforeach
+            @endforeach
         </div>
     </div>
 </section>
@@ -391,63 +392,99 @@
 <section class="py-0 ">
     <div class="container mt-5">
         <div class="row justify-content-center pb-4">
-            <div
-                class="
+            <div class="
                     col-md-12
                     heading-section
                     text-center
                     ftco-animate
                     fadeInUp
                     ftco-animated
-                "
-            >
+                ">
                 <h2 class="mb-4">Popular Hotel</h2>
             </div>
         </div>
 
         <div class="row">
-            
-            @foreach($hotels as $hotel) 
+
+            @php
+            $hotel_array =[];
+            @endphp
+            @foreach($hotels as $hotel)
+
+            @php
+            $rating = 0;
+            foreach($hotel->rating as $data){
+            $rating += $data->rate;
+
+            }
+
+            $hotel_array[$rating] = $hotel;
+
+            @endphp
+
+            @endforeach
+
+            @php
+            if(count($hotel->rating) > 0){
+            krsort($hotel_array);
+            }else{
+            $hotel_array = $hotels;
+            }
+            @endphp
+
+            @foreach($hotel_array as $hotel)
 
             <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
                 <div class="project-wrap">
-                   
+
                     <div class="my-img">
 
-                        <div
-                            id="carouselExampleControls"
-                            class="carousel slide"
-                            data-bs-ride="carousel"
-                        >
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <img src="{{asset('storage/'.$hotel->logo)}}" class="img-fluid" >
-                            
+                                <img src="{{asset('storage/'.$hotel->logo)}}" class="img-fluid">
+
                             </div>
-                            
+
                         </div>
                         <div>
-                            
+
                         </div>
-                        <span class="packageprice"
-                            >{{$hotel->city->name}}</span
-                        >
+                        <span class="packageprice">{{$hotel->city->name}}</span>
                     </div>
                     <div class="text p-4">
                         <span class="days"></span>
                         <h3 class="mb-2"><a href="#"></a></h3>
-                        <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel->name}} ( {{$car->model}} )</p>
+                        <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel->name}} </p>
                         <p class="location">
                             <i class="fas fa-phone"></i>
                             {{$hotel->phone}}
-                            
-                        </p>
-                        
-                        
-                        <p><i class="fas fa-location-arrow"></i> {{$hotel->addresss}} </p>
-                        <ul class="text-center">
-                            <div class="rating-input" data-hotel_id ="{{$hotel->id}}" data-type_id = "1">
 
-                                <span class="starone" >
+                        </p>
+
+
+
+
+                        <p><i class="fas fa-location-arrow"></i> {{$hotel->addresss}} </p>
+
+                        <p class="rating">
+                            <i class="fas fa-star-half-alt"></i>
+                            @php
+                            $rating = 0;
+                            foreach($hotel->rating as $data){
+                            $rating += $data->rate;
+                            }
+
+                            @endphp
+                            {{$rating}}
+                            Stars
+
+                        </p>
+
+
+                        <ul class="text-center">
+                            <div class="rating-input" data-hotel_id="{{$hotel->id}}" data-type_id="1">
+
+                                <span class="starone">
                                     <i class="fas fa-star star_one star_blank 
                                     @foreach($hotel->rating as $rate)
                                         @if($rate->user_id == Auth::id())
@@ -494,16 +531,16 @@
                                         @endif
                                     @endforeach" data-value="5"></i></span>
 
-                                    <br>
+                                <br>
                                 {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p> --}}
                             </div>
 
 
                         </ul>
-                        
+
                         @if(Auth::check())
-                        <button  data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
-                        @else 
+                        <button data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
+                        @else
                         <a href="/login" class=" btn btn-secondary form-control my-2">Detail</a>
                         @endif
                     </div>
@@ -535,48 +572,25 @@
         <div class="row justify-content-center">
             <div class="col-sm-9 col-md-4 mb-3 mb-md-0 h-100">
                 <div class="card card-span text-white h-100">
-                    <img
-                        class="img-card h-100"
-                        src="{{
+                    <img class="img-card h-100" src="{{
                             asset('frontnew/assets/img/file/myanmar.jpeg')
-                        }}"
-                        alt="..."
-                    />
+                        }}" alt="..." />
                     <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                        <div
-                            class="
+                        <div class="
                                 d-flex
                                 justify-content-between
                                 align-items-center
                                 bg-100
                                 mt-n5
                                 me-auto
-                            "
-                        >
-                            <img
-                                src="{{
+                            ">
+                            <img src="{{
                                     asset(
                                         'frontnew/assets/img/file/myanmar.jpeg'
                                     )
-                                }}"
-                                width="60"
-                                alt="..."
-                            />
+                                }}" width="60" alt="..." />
                             <div class="d-flex flex-1 justify-content-around">
-                                <span class="text-900 text-center"
-                                    ><i class="fas fa-heart text-primary"></i
-                                    ><span class="text-900 ms-2"
-                                        >355</span
-                                    ></span
-                                ><span class="text-900 text-center"
-                                    ><i class="fas fa-eye text-primary"></i
-                                    ><span class="text-900 ms-2"
-                                        >234</span
-                                    ></span
-                                ><span class="text-900 text-center"
-                                    ><i class="fas fa-share text-primary"></i
-                                    ><span class="text-900 ms-2">14</span></span
-                                >
+                                <span class="text-900 text-center"><i class="fas fa-heart text-primary"></i><span class="text-900 ms-2">355</span></span><span class="text-900 text-center"><i class="fas fa-eye text-primary"></i><span class="text-900 ms-2">234</span></span><span class="text-900 text-center"><i class="fas fa-share text-primary"></i><span class="text-900 ms-2">14</span></span>
                             </div>
                         </div>
                         <h5 class="text-900 mt-3">
@@ -590,73 +604,40 @@
                             The structure of the trip blog is only a white
                             canvas to highlight the atmospheric and immersive.
                         </p>
-                        <a
-                            class="
+                        <a class="
                                 btn btn-lg
                                 text-900
                                 fs-1
                                 px-0
                                 hvr-icon-forward
-                            "
-                            href="#!"
-                            role="button"
-                            >Read more
-                            <svg
-                                class="bi bi-arrow-right-short hover-icon"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="30"
-                                height="30"
-                                fill="currentColor"
-                                viewBox="0 0 16 16"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                                ></path>
-                                </svg></a>
+                            " href="#!" role="button">Read more
+                            <svg class="bi bi-arrow-right-short hover-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                            </svg></a>
                     </div>
                 </div>
             </div>
             <div class="col-sm-9 col-md-4 mb-3 mb-md-0 h-100">
                 <div class="card card-span text-white h-100">
-                    <img
-                        class="img-card h-100"
-                        src="{{
+                    <img class="img-card h-100" src="{{
                             asset('frontnew/assets/img/file/myanmar.jpeg')
-                        }}"
-                        alt="..."
-                    />
+                        }}" alt="..." />
                     <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                        <div
-                            class="
+                        <div class="
                                 d-flex
                                 justify-content-between
                                 align-items-center
                                 bg-100
                                 mt-n5
                                 me-auto
-                            "
-                        >
-                            <img
-                                src="{{
+                            ">
+                            <img src="{{
                                     asset(
                                         'frontnew/assets/img/file/myanmar.jpeg'
                                     )
-                                }}"
-                                width="60"
-                                alt="..."
-                            />
+                                }}" width="60" alt="..." />
                             <div class="d-flex flex-1 justify-content-around">
-                                <span class="text-900 text-center"
-                                    ><i class="fas fa-heart text-primary"></i
-                                    ><span class="text-900 ms-2">35</span></span
-                                ><span class="text-900 text-center"
-                                    ><i class="fas fa-eye text-primary"></i
-                                    ><span class="text-900 ms-2">23</span></span
-                                ><span class="text-900 text-center"
-                                    ><i class="fas fa-share text-primary"></i
-                                    ><span class="text-900 ms-2">14</span></span
-                                >
+                                <span class="text-900 text-center"><i class="fas fa-heart text-primary"></i><span class="text-900 ms-2">35</span></span><span class="text-900 text-center"><i class="fas fa-eye text-primary"></i><span class="text-900 ms-2">23</span></span><span class="text-900 text-center"><i class="fas fa-share text-primary"></i><span class="text-900 ms-2">14</span></span>
                             </div>
                         </div>
                         <h5 class="text-900 mt-3">
@@ -670,73 +651,40 @@
                             I first discovered about famous road in california
                             when I flew with KLM to Europe in 2018.
                         </p>
-                        <a
-                            class="
+                        <a class="
                                 btn btn-lg
                                 text-900
                                 fs-1
                                 px-0
                                 hvr-icon-forward
-                            "
-                            href="#!"
-                            role="button"
-                            >Read more
-                            <svg
-                                class="bi bi-arrow-right-short hover-icon"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="30"
-                                height="30"
-                                fill="currentColor"
-                                viewBox="0 0 16 16"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                                ></path></svg
-                        ></a>
+                            " href="#!" role="button">Read more
+                            <svg class="bi bi-arrow-right-short hover-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                            </svg></a>
                     </div>
                 </div>
             </div>
             <div class="col-sm-9 col-md-4 mb-3 mb-md-0 h-100">
                 <div class="card card-span text-white h-100">
-                    <img
-                        class="img-card h-100"
-                        src="{{
+                    <img class="img-card h-100" src="{{
                             asset('frontnew/assets/img/file/myanmar.jpeg')
-                        }}"
-                        alt="..."
-                    />
+                        }}" alt="..." />
                     <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                        <div
-                            class="
+                        <div class="
                                 d-flex
                                 justify-content-between
                                 align-items-center
                                 bg-100
                                 mt-n5
                                 me-auto
-                            "
-                        >
-                            <img
-                                src="{{
+                            ">
+                            <img src="{{
                                     asset(
                                         'frontnew/assets/img/file/myanmar.jpeg'
                                     )
-                                }}"
-                                width="60"
-                                alt="..."
-                            />
+                                }}" width="60" alt="..." />
                             <div class="d-flex flex-1 justify-content-around">
-                                <span class="text-900 text-center"
-                                    ><i class="fas fa-heart text-primary"></i
-                                    ><span class="text-900 ms-2">35</span></span
-                                ><span class="text-900 text-center"
-                                    ><i class="fas fa-eye text-primary"></i
-                                    ><span class="text-900 ms-2">23</span></span
-                                ><span class="text-900 text-center"
-                                    ><i class="fas fa-share text-primary"></i
-                                    ><span class="text-900 ms-2">14</span></span
-                                >
+                                <span class="text-900 text-center"><i class="fas fa-heart text-primary"></i><span class="text-900 ms-2">35</span></span><span class="text-900 text-center"><i class="fas fa-eye text-primary"></i><span class="text-900 ms-2">23</span></span><span class="text-900 text-center"><i class="fas fa-share text-primary"></i><span class="text-900 ms-2">14</span></span>
                             </div>
                         </div>
                         <h5 class="text-900 mt-3">
@@ -750,30 +698,16 @@
                             On this very stunning rail ride from Vancouver to
                             Calgary, take in the stunning vistas andspectacular.
                         </p>
-                        <a
-                            class="
+                        <a class="
                                 btn btn-lg
                                 text-900
                                 fs-1
                                 px-0
                                 hvr-icon-forward
-                            "
-                            href="#!"
-                            role="button"
-                            >Read more
-                            <svg
-                                class="bi bi-arrow-right-short hover-icon"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="30"
-                                height="30"
-                                fill="currentColor"
-                                viewBox="0 0 16 16"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                                ></path></svg
-                        ></a>
+                            " href="#!" role="button">Read more
+                            <svg class="bi bi-arrow-right-short hover-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                            </svg></a>
                     </div>
                 </div>
             </div>
@@ -792,254 +726,231 @@
 
         <div class="col-12">
 
-              <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
+            <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
                 <div class="carousel-inner">
 
-                  <div class="carousel-item active" data-bs-interval="10000">
-                    <div class="row h-100 align-items-center g-2">
-                        <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <div class="row h-100 align-items-center g-2">
+                            <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
 
-                            <div class="partnership_name_div">
-                                <h4 class="partnership_name">Company name</h4>  
+                                <div class="partnership_name_div">
+                                    <h4 class="partnership_name">Company name</h4>
+                                </div>
+
+                                <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
                             </div>
 
-                            <img
-                                src="{{
+                            <div class="col-md-4 mb-3 mb-md-0 h-100">
+                                <img src="{{
                                     asset(
                                         'frontnew/assets/img/file/myanmar.jpeg'
                                     )
-                                }}"
-                                width="100%"
-                                alt="..."
-                            />
-                        </div>
-
-                        <div class="col-md-4 mb-3 mb-md-0 h-100">
-                            <img
-                                src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}"
-                                width="100%"
-                                alt="..."
-                            />
-                        </div>
-
-                        <div class="col-md-4 mb-3 mb-md-0 h-100">
-                            <img
-                                src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}"
-                                width="100%"
-                                alt="..."
-                            />
-                        </div>
-
-
-                        
-                    </div>
-                  </div>
-
-
-                  <div class="carousel-item" data-bs-interval="10000">
-                    <div class="row h-100 align-items-center g-2">
-                        <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
-
-                            <div class="partnership_name_div">
-                                <h4 class="partnership_name">Company he</h4>  
+                                }}" width="100%" alt="..." />
                             </div>
 
-                            <img
-                                src="{{
+                            <div class="col-md-4 mb-3 mb-md-0 h-100">
+                                <img src="{{
                                     asset(
                                         'frontnew/assets/img/file/myanmar.jpeg'
                                     )
-                                }}"
-                                width="100%"
-                                alt="..."
-                            />
+                                }}" width="100%" alt="..." />
+                            </div>
+
+
+
                         </div>
-
-                        <div class="col-md-4 mb-3 mb-md-0 h-100">
-                            <img
-                                src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}"
-                                width="100%"
-                                alt="..."
-                            />
-                        </div>
-
-                        <div class="col-md-4 mb-3 mb-md-0 h-100">
-                            <img
-                                src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}"
-                                width="100%"
-                                alt="..."
-                            />
-                        </div>
-
-
-                        
                     </div>
-                  </div>
-              
 
 
-                  <div class="row">
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next                                    </span></button>
-                  </div>
+                    <div class="carousel-item" data-bs-interval="10000">
+                        <div class="row h-100 align-items-center g-2">
+                            <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
+
+                                <div class="partnership_name_div">
+                                    <h4 class="partnership_name">Company he</h4>
+                                </div>
+
+                                <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+                            </div>
+
+                            <div class="col-md-4 mb-3 mb-md-0 h-100">
+                                <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+                            </div>
+
+                            <div class="col-md-4 mb-3 mb-md-0 h-100">
+                                <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next </span></button>
+                    </div>
                 </div>
                 <div class="row flex-center mt-2">
-                  <div class="col-auto position-relative z-index-2">
-                    <ol class="carousel-indicators me-xxl-7 me-xl-4 me-lg-7">
-                      <li class="active" data-bs-target="#carouselTestimonials" data-bs-slide-to="0"></li>
-                      <li data-bs-target="#carouselTestimonials" data-bs-slide-to="1"></li>
-                      
-                    </ol>
-                  </div>
+                    <div class="col-auto position-relative z-index-2">
+                        <ol class="carousel-indicators me-xxl-7 me-xl-4 me-lg-7">
+                            <li class="active" data-bs-target="#carouselTestimonials" data-bs-slide-to="0"></li>
+                            <li data-bs-target="#carouselTestimonials" data-bs-slide-to="1"></li>
+
+                        </ol>
+                    </div>
                 </div>
-              </div>
             </div>
+        </div>
     </div>
 </section>
 
 
 
-    @include('layouts.footer')
+@include('layouts.footer')
 
 <!-- Modal -->
 <div class="modal fade" id="packageBookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Package Booking</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Package Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-@endsection 
+@endsection
 @push('script')
 <script>
-    $(document).ready(function(){
-         $.ajaxSetup({
-      headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-  });
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-        $('.package-booking-btn').click(function(){
-           let id=$(this).data('id');
-           console.log(id);
+        $('.package-booking-btn').click(function() {
+            let id = $(this).data('id');
+            console.log(id);
 
-          Swal.fire({
-            title: 'How many people with you for tour?',
-            input: 'number',
-            showCancelButton: !0,
-             cancelButtonText: "No, cancel!",
-             confirmButtonText: "Go to booking",
-             reverseButtons: !0,
-               allowOutsideClick: false,
-             showLoaderOnConfirm: true,
-            inputValidator: ((value) => {
-                
-                if(value >= 11){
-                    return 'please give us a clall!';
+            Swal.fire({
+                title: 'How many people with you for tour?'
+                , input: 'number'
+                , showCancelButton: !0
+                , cancelButtonText: "No, cancel!"
+                , confirmButtonText: "Go to booking"
+                , reverseButtons: !0
+                , allowOutsideClick: false
+                , showLoaderOnConfirm: true
+                , inputValidator: ((value) => {
+
+                    if (value >= 11) {
+                        return 'please give us a clall!';
+                    }
+
+                    if (value <= 0) {
+                        return 'please select from more than one or one person';
+                    }
+
+
+                }),
+
+            }).then((e) => {
+                if (e.value) {
+                    window.location.href = "/p/booking/" + id + "/" + e.value
+                } else {
+                    console.log('enter');
                 }
-
-                if(value <=0){
-                    return 'please select from more than one or one person';
-                }
-                
-                
-            }),
-  
-            }).then((e)=>{
-                  if (e.value) {
-                   window.location.href="/p/booking/"+id+"/"+e.value
-                  }else{
-                      console.log('enter');
-                  }
             })
 
-            
 
-          
-                
+
+
+
 
         })
 
-        $('#contact-email-form').submit(function(e){
+        $('#contact-email-form').submit(function(e) {
             e.preventDefault();
-            let formData=$(this).serialize();
-            let token=$('meta[name="csrf-token"]').attr('content');
-            
+            let formData = $(this).serialize();
+            let token = $('meta[name="csrf-token"]').attr('content');
+
             $.ajax({
-                url:'/front/contact',
-                type:'POST',
-                data:formData,
-                beforeSend: function() {
+                url: '/front/contact'
+                , type: 'POST'
+                , data: formData
+                , beforeSend: function() {
                     swal.fire({
-                        
-                        html: '<h5>Loading...</h5>',
-                        showConfirmButton: false,
-                        allowOutsideClick:false,
-                       
+
+                        html: '<h5>Loading...</h5>'
+                        , showConfirmButton: false
+                        , allowOutsideClick: false,
+
                     });
-                },
-                success: function(json) {
-                        if(json){
-                            swal.fire({
-                        
-                                title:'Your message is send',
-                                text:'Thank you so much',
-                                type:'success',
-                                showConfirmButton: true,
-                            
-                            }).then(()=>{
-                                $('#contact-email-form').trigger('reset');
-                            });
-                        }
+                }
+                , success: function(json) {
+                    if (json) {
+                        swal.fire({
+
+                            title: 'Your message is send'
+                            , text: 'Thank you so much'
+                            , type: 'success'
+                            , showConfirmButton: true,
+
+                        }).then(() => {
+                            $('#contact-email-form').trigger('reset');
+                        });
+                    }
                 }
             })
 
         })
 
-         <!-- searching-veiw-clicking-package search  -->
 
-        $('#package-search-div').submit(function(e){
+
+
+        $('#package-search-div').submit(function(e) {
             e.preventDefault();
-            let packageid=$('#package-search-from').val();
+            let packageid = $('#package-search-from').val();
 
-            window.location.href="/package_detail/"+packageid;
-            
+            window.location.href = "/package_detail/" + packageid;
+
         })
 
 
 
 
-          
 
-            
+
+
     })
+
 </script>
 @endpush
-

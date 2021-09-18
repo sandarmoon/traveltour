@@ -254,15 +254,15 @@
 
 
 
-{{-- popular cars --}}
+{{-- popular aco written cars --}}
 <section class="py-0">
     <div class="container mt-5">
-        <div class="row justify-content-center pb-4">
+        <div class=" justify-content-start ">
             <div
                 class="
                     col-md-12
                     heading-section
-                    text-center
+                    
                     ftco-animate
                     fadeInUp
                     ftco-animated
@@ -271,9 +271,7 @@
                 <h2 class="mb-4">Popular Cars</h2>
             </div>
         </div>
-
         <div class="row">
-            
             @foreach($cars as $car) 
 
 
@@ -287,41 +285,27 @@
 
                 $cover=$photos['cover'];
             @endphp 
-            <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+            <div class="col-md-4">
                 <div class="project-wrap">
-                   
+                    <!-- <a
+                        href="#"
+                        class="img"
+                        style="background-image:url(http://localhost:8000/frontnew/assets/img/file/myanmar.jpeg)"
+                    >
+                        <span class="price">$550/person</span>
+                    </a> -->
                     <div class="my-img">
-
-                        <div
-                            id="carouselExampleControls"
-                            class="carousel slide"
-                            data-bs-ride="carousel"
-                        >
-                            <div class="carousel-inner">
-                                <img src="{{asset('storage/'.$cover)}}" class="img-fluid" >
-                            
-                            </div>
+                        <div class=" " style="height:280px;max-height: 260px;width: 100%;overflow: hidden;">
+                            <img  src="{{asset('storage/'.$cover)}}"  class="img-fluid " alt="photo">
                             
                         </div>
-                        <div>
-                            
-                        </div>
-                        <span class="packageprice"
-                            >${{$car->priceperday}}/day</span
-                        >
+                        <span class="packageprice">$50/person</span>
                     </div>
-                    <div class="text p-4">
-                        <span class="days"></span>
-                        <h3 class="mb-2"><a href="#"></a></h3>
-                        <p><i class="fas fa-car fa_car_icon"></i> {{$car->name}} ( {{$car->model}} )</p>
-                        <p class="location">
-                            <i class="fas fa-car-battery"></i>
-                            {{$car->type->name}}
-                            
-                        </p>
-                        
-                        
-                        <p><i class="fas fa-briefcase"></i> {{$car->bags}} air bag </p>
+                    <div class="text p-4" style="background-color: #e8e8e866;box-shadow: 0px 10px 23px -8px rgb(0 0 0 / 33%);">
+                        <span class="text-muted  d-block text-center text-uppercase">{{$car->company->name}}</span>
+                        <h3 class="text-center my-2">{{$car->name}}/{{$car->model}}<span style="font-size: 2rem; color: #f15d30;padding-left: 5px;">{{$car->priceperday}}$</span></h3>
+                        <hr style="border:1px solid #f15d30 ;">
+                        <!-- start strart here  -->
                         <ul class="text-center">
                             <div class="rating-input" data-car_id ="{{$car->id}}" data-type_id = "{{$car->type->parent_id}}">
 
@@ -376,24 +360,27 @@
 
                                     <br>
 {{--                                 <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p>
- --}}                            </div>
+--}}                            </div>
+
 
 
                         </ul>
-                        
+                        <!-- start end here  -->
+                        <p class="text-center mb-0"><a href=""><span class="flaticon-mountains"></span>More info</a></p>
                         @if(Auth::check())
                         <button  data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
                         @else 
-                        <a href="/login" class=" btn btn-secondary form-control my-2">Detail</a>
+                        <a href="/login" class=" btn btn-secondary form-control my-2">Book Now</a>
                         @endif
                     </div>
                 </div>
             </div>
 
-            @endforeach
+             @endforeach
         </div>
     </div>
 </section>
+<!-- popular car aco end  -->
 
 
 
@@ -401,7 +388,7 @@
 
 
 {{-- popular hotel --}}
-<section class="py-0">
+<section class="py-0 ">
     <div class="container mt-5">
         <div class="row justify-content-center pb-4">
             <div
@@ -1014,6 +1001,7 @@
                         
                         html: '<h5>Loading...</h5>',
                         showConfirmButton: false,
+                        allowOutsideClick:false,
                        
                     });
                 },

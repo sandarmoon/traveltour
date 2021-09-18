@@ -396,7 +396,7 @@
                     <!-- Navigation -->
                     <ul class="navbar-nav">
                         <!-- admin/car/hotel start -->
-                        @hasanyrole('admin|car|hotel')
+                        @hasanyrole('admin')
                             <!-- city  -->
                             <li
                                 class="nav-item {{ Request::is('city*') ? 'active' : '' }} "

@@ -270,6 +270,7 @@
 
 		$('.rooms-div').on('click','.btn-reserve',function(){
 			let id = $(this).data('id');
+			// alert('helo');
 			let cart=localStorage.getItem('mycounting');
 			if(cart){
 				cart = JSON.parse(cart);

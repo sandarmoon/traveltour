@@ -84,11 +84,11 @@
              <!-- end here -->
         </div>
         <div class="col-md-4">
-            <div class="card px-3 py-4 pre-room-booking" >
+            <div class="card px-3 py-4  pre-room-booking" >
                <h3 class="br-title">Your Stay</h3>
 
                <!-- checkin and checkout -->
-                <section class="row mt-2 ">
+                <div class="row mt-2 p-2 ">
                     <div class="col">
                         <strong><p class="mb-0">Check-in</p></strong>                        After 12:00 PM
                     </div>
@@ -97,7 +97,7 @@
                         <strong><p class="mb-0">Check-out</p></strong>
                         Before 12:00 PM
                     </div>
-                </section>
+                </div>
                 <hr class="my-3">
                 <p class="b-date mb-0"></p>
                 <span class="ppl-total">2 Adults</span>
@@ -140,7 +140,7 @@
                 </table>
                 
                 @if(Auth::check())
-                <button class="btn btn-success btn-hotel-checkout">Book Now!</button>
+                <button class="btn btn-secondary btn-hotel-checkout">Book Now!</button>
                 @else
                 <a href="{{route('login')}}" class="btn btn-success ">SignIn/SignUp to Book!</a>
                 @endif
@@ -223,29 +223,50 @@
                 url:"{{route('hotel.booking.checkout')}}",
                 type:"POST",
                 data:formdata,
+                beforeSend: function() {
+                    swal.fire({
+                        
+                        html: '<h5>Loading...</h5>',
+                        showConfirmButton: false,
+                        allowOutsideClick:false,
+                       
+                    });
+                },
                 success:function(res){
+
+                    
                    if(res.success){
-                       window.location.href="{{route('bookinghistory')}}";
-                    //    cartObj.r.splice(0,1);
-                    //    localStorage.setItem('mycounting',JSON.stringify(cartObj));
+                       swal.fire({
+                        
+                                title:'Your message is send',
+                                text:'Thank you so much',
+                                type:'success',
+                                showConfirmButton: true,
+                            
+                            }).then(()=>{
+                                let len = cartObj.r.length;
+                                    console.log(len);
+                                    if(len === 1){
+                                        console.log('he');
+                                        cartObj.r[0]={
+                                            'rno': 1,
+                                            'r_id': 0,
+                                            'child': 0,
+                                            'adult': 1,
+                                            'total': 0
+                                        };
+                                    }else{
+                                    console.log('ye')
+                                    cartObj.r.splice(0,1);
+                                }
 
-                    let len = cartObj.r.length;
-                    console.log(len);
-                    if(len === 1){
-                        console.log('he');
-                        cartObj.r[0]={
-                            'rno': 1,
-                            'r_id': 0,
-                            'child': 0,
-                            'adult': 1,
-                            'total': 0
-                        };
-                    }else{
-                       console.log('ye')
-                       cartObj.r.splice(0,1);
-                   }
+                                localStorage.setItem('mycounting',JSON.stringify(cartObj));
+                                 window.location.href="{{route('bookinghistory')}}";
 
-                   localStorage.setItem('mycounting',JSON.stringify(cartObj));
+                            });
+                      
+
+                    
                 }},
                 error:function(err){
                     console.log(err);

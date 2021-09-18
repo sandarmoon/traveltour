@@ -218,9 +218,12 @@
                                             <label
                                                 class="form-label text-800"
                                                 for="inputAddress2"
-                                                >Destination</label
-                                            >
-                                            <select class="form-control">
+                                                >Destination
+                                                @error('d_city_id')
+                                                <span class="text-danger">required</span>
+                                                @enderror
+                                            </label >
+                                            <select class="example_select2 from-control" style="width: 100%" name="d_city_id">
                                                 @foreach($cities as $c)
                                                 <option value="{{$c->id}}">
                                                     {{$c->name}}
@@ -234,14 +237,18 @@
                                             <label
                                                 class="form-label text-800"
                                                 for="inputAddress2"
-                                                >Check In</label
-                                            >
+                                                >Check In
+                                                @error('start_date')
+                                                <span class="text-danger">required</span> 
+                                                @enderror
+                                            </label>
                                             <input
                                                 class="
                                                     form-control
                                                     input-box
                                                     form-voyage-control
                                                 "
+                                                name="start_date"
                                                 id="inputdateOne"
                                                 type="date"
                                             /><span
@@ -259,8 +266,11 @@
                                             <label
                                                 class="form-label text-800"
                                                 for="inputAddress2"
-                                                >Check Out</label
-                                            >
+                                                >Check Out 
+                                                @error('end_date')
+                                                <span class="text-danger">required</span>
+                                                @enderror
+                                            </label>
 
                                             <input
                                                 class="
@@ -268,6 +278,7 @@
                                                     input-box
                                                     form-voyage-control
                                                 "
+                                                name="end_date"
                                                 id="inputDateTwo"
                                                 type="date"
                                             /><span

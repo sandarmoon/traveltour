@@ -48,17 +48,17 @@ class AuthenticatedSessionController extends Controller
                 session()->forget('url.intended');
             }
         } 
-
-        if(auth()->check() && auth()->user()->hasRole('admin')|auth()->user()->hasRole('company')) {
+         if(auth()->check() && auth()->user()->hasRole('admin')|auth()->user()->hasRole('car')) {
             // dd('helo2');
            return redirect()->to('/car');
         }
 
-          if ($redirectTo) {
-            return redirect($redirectTo);
+        if(auth()->check() && auth()->user()->hasRole('admin')|auth()->user()->hasRole('hotel')) {
+            // dd('helo2');
+           return redirect()->to('/room');
         }
 
-        return redirect()->intended('/');
+         return redirect()->intended('/'); 
     }
 
     /**

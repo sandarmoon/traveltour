@@ -37,41 +37,16 @@ class FrontController extends Controller
                             ->orWhere('end','<=',$today)
                             ->get();
 
-        // $rating = Rating::where('car_id','!=','null')
-        //                     ->get()
-        //                     ->groupBy(function($q){
-        //                         $data = $q->car_id; 
-        //                         $num = $data->sum('rate');
-        //                         return $num;
-        //                     });
-        // dd($rating);
-                            
-        // foreach($rating as $rate){
-        //     dd($rate);
-        // }
         
-        //car ->status-> 1 -> not book
-        //car -> status ->2 ->booked
         $cars=Car::where('status','=',1)->get();
-        // dd($cars);
-
-        
-
-        // $num = 0;
-        // foreach($cars as $car){
-        //     foreach($car->rating as $data){
-        //         $num += $data->rate; 
-        //     }
-
-            
-        // }
-        // dd($num);
+       
         //company -> type -> 1 ->hotel
         //company -> type ->2 ->car
+        $partners = Company::all();
         $hotels=Company::where('type','=',1)->get();
 
 
-        return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels'));
+        return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels','partners'));
 
     }
 
@@ -96,6 +71,19 @@ class FrontController extends Controller
          $search=1;
         return view('frontend.result',compact('cities','cars','s_date','e_date','pickup','drop','search'));
     }
+
+     //car detail view from home blade  
+    public function carDetailUserView($id){
+       return view('frontend.car_user_detail');
+    }
+
+    //car detail get by carid using ajax
+    public function carDetailbyIdAjax($id){
+       $car=Car::with('pickuppivot.parent','company')->find($id);
+
+       return response()->json(['car'=>$car]);
+    }
+
 
 
     // +=========== booking detail========
@@ -496,18 +484,3 @@ class FrontController extends Controller
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

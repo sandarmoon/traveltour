@@ -8,7 +8,7 @@ class searching extends Component
 {
    public $cities;
    public $left;
-   public $packages
+   public $packages;
     /**
      * Create a new component instance.
      *

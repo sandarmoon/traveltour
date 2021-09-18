@@ -192,6 +192,11 @@ Route::post('/rooms/h',[FrontController::class,'roomsByHotelId'])->name('rooms.h
 //sending massage using email from home blade
 Route::post('/contact',[BackendController::class,'contactedWithEmail'])->name('front.contact.email');
 
+//car detail view for user 
+Route::get('/car/detail/{id}',[FrontController::class,'carDetailUserView'])->name('front.car.detail');
+
+//ajxa car detail for model view
+Route::get('/car/detail/ajax/{id}',[FrontController::class,'carDetailbyIdAjax'])->name('front.car.detail.ajax');
 });
 
 

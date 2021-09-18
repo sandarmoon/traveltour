@@ -37,4 +37,8 @@ class Car extends Model
     {
        return $this->hasMany('App\Models\Rating');
     }
+
+    public function userRating(){
+        return $this->belongsTo(User::class);
+    }
 }

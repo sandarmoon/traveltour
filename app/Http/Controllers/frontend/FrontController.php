@@ -71,9 +71,22 @@ class FrontController extends Controller
         $hotels=Company::where('type','=',1)->get();
 
 
-        return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels'));
+        return view('frontend.home',compact('rooms','cars','rooms','hotels'));
 
     }
+
+    public  function showAllCars(){
+        $cities=City::all();
+        $packages=Package::all();
+        return view('frontend.show_all_cars',compact('cities','packages'));
+    }
+
+    public function showAllHotels(){
+    $cities=City::all();
+    $packages=Package::all();
+    return view('frontend.show_all_hotels',compact('packages'));
+    }
+
 
     public function searchCar(Request $request){
     
@@ -222,7 +235,7 @@ class FrontController extends Controller
         $search=1;
 
         // dd($hotels);
-        return view('frontend.hotelresult',compact('cities','s_date','e_date','drop','search','hotels','common_type'));
+        return view('frontend.hotelresult',compact('s_date','e_date','drop','search','hotels','common_type'));
     }
 
     // rooms result from hotel id aco

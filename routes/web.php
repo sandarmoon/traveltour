@@ -178,6 +178,14 @@ require __DIR__.'/auth.php';
 
 // frontend start
 Route::prefix('front')->group(function () {
+
+//all car view
+Route::get('/cars',[FrontController::class,'showAllCars'])->name('frontend.cars');
+
+//all hotel view
+Route::get('/hotels',[FrontController::class,'showAllHotels'])->name('frontend.hotels');
+
+
 Route::get('/',[FrontController::class,'index'])->name('frontend.index');
 Route::post('/scar',[FrontController::class,'searchCar'])->name('search.car')->middleware('auth');
 // Booking survey start

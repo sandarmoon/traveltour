@@ -21,7 +21,7 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 use App\Models\Rating;
-
+use App\Models\Tour;
 
 
 class FrontController extends Controller
@@ -44,9 +44,12 @@ class FrontController extends Controller
         //company -> type ->2 ->car
         $partners = Company::all();
         $hotels=Company::where('type','=',1)->get();
+        $tours_carousel = Tour::all();
+
+        // $tours = Tour::inRandomOrder()->get();
 
 
-        return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels','partners'));
+        return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels','partners','tours_carousel'));
 
     }
 
@@ -483,4 +486,30 @@ class FrontController extends Controller
         return "Ok";
 
     }
+
+
+    public function tour_guide_detail($id)
+    {
+        $tour_guide = Tour::find($id);
+        $cities = City::all();
+        return view('frontend.tour_guide_detail',compact('tour_guide','cities'));
+    }
+
+
+
+
+    public function ajax_tour_guide(Request $request)
+    {
+        $tour_guide = Tour::find($request->id);
+        $cities = City::with('tours')->get();
+        $array = array('city'=>$cities,'tour_guide'=>$tour_guide);
+        
+
+
+        return $array;
+    }
+
+
+
+
 }

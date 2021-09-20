@@ -360,8 +360,8 @@
                                     @endforeach" data-value="5"></i></span>
 
                                 <br>
-                                {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p>
---}} </div>
+                                
+                         </div>
 
 
 
@@ -384,6 +384,55 @@
 <!-- popular car aco end  -->
 
 
+
+
+{{-- tip and guide --}}
+
+
+<section class="py-0">
+    <div class="container mt-5">
+        <div class=" justify-content-start ">
+            <div class="
+                    col-md-12
+                    heading-section
+                    
+                    ftco-animate
+                    fadeInUp
+                    ftco-animated
+                ">
+                <h2 class="mb-4">Tips And Guides</h2>
+            </div>
+        </div>
+
+            <div class="your-class">
+
+                @foreach($tours_carousel as $tour)
+                <div>
+
+
+                    <div class="card" style="width: 18rem;">
+                      @php
+                        $photo = json_decode($tour->photo);
+
+                        $photo_array = array_rand($photo,1);
+                      @endphp  
+
+                      <img src="{{asset('storage/'.$photo[$photo_array])}}" class="card-img-top img-fluid h-50 w-100" alt="...">
+                      <div class="card-body">
+                        <h4 class=" text-center">{{$tour->title}}</h4>
+                        <h6 class="card-text text-center font-weight-normal text-uppercase my-2" style="font-size: 17px; color: #f15d30">{{$tour->city->name}}</h6>
+                        <a href="{{route('frontend.tour_guide_detail',$tour->id)}}" class="btn btn-secondary form-control my-2">Detail</a>
+                      </div>
+                    </div>
+                   
+                </div>
+                @endforeach
+
+            </div>
+
+            
+       
+</section>
 
 
 
@@ -940,9 +989,36 @@
 
 
 
+    // $(document).ready(function(){
+      $('.your-class').slick({
+          autoplay: true,
+          autoplaySpeed: 2000,
+          centerMode: true,
+          centerPadding: '60px',
+          slidesToShow: 3,
 
-
-
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                arrows: false,
+                centerMode: true,
+                centerPadding: '40px',
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                arrows: true,
+                centerMode: true,
+                centerPadding: '40px',
+                slidesToShow: 1
+              }
+            }
+          ]
+      });
+   
 
     })
 

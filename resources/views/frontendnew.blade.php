@@ -66,9 +66,11 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
     <link href="{{ asset('multiform.css') }}" rel="stylesheet" id="bootstrap" />
 
-    <link rel="stylesheet" href="{{asset('frontnew/assets/owlcarousel/owl.carousel.min.css')}}">
 
-    <link rel="stylesheet" href="{{asset('frontnew/assets/owlcarousel/owl.theme.default.min.css')}}">
+    {{-- slick carousel --}}
+    <link rel="stylesheet" href="{{asset('frontnew/assets/slickcarousel/slick.css')}}">
+
+    <link rel="stylesheet" href="{{asset('frontnew/assets/slickcarousel/slick-theme.css')}}">
 
 
     <link href="{{ asset('frontend/css/mystyle.css') }}" rel="stylesheet" />
@@ -114,6 +116,20 @@
 
         .star_color {
             color: orange;
+        }
+
+        .accordion_custom_color:hover{
+            background-color: orange !important;
+        }
+
+        .accordion-button{
+            transition: 0.2s;
+            background-color: orange !important;
+        }
+
+        .collapsed{
+           
+            background-color: white !important;
         }
 
     </style>
@@ -202,7 +218,11 @@
                 }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('frontnew/assets/js/theme.js') }}"></script>
-    <script src="{{ asset('frontnew/assets/owlcarousel/owl.carousel.min.js') }}"></script>
+
+    {{-- slick carousel --}}
+
+
+    <script src="{{ asset('frontnew/assets/slickcarousel/slick.min.js') }}"></script>
 
 
 

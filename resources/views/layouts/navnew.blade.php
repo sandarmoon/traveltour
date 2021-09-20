@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block " data-navbar-on-scroll="data-navbar-on-scroll">
 
  <div class="container">
-  <a class="navbar-brand" href="index.html">
+  <a class="navbar-brand" href="/">
    {{-- <img class="d-inline-block" src="assets/img/gallery/logo.png" width="50" alt="logo" /> --}}
    <span class="fw-bold text-primary ms-2 ">Lucky Seven</span></a>
 

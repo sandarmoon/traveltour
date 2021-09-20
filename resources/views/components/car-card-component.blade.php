@@ -29,7 +29,11 @@
 
    <div class="text p-4" style="background-color: #e8e8e866;box-shadow: 0px 10px 23px -8px rgb(0 0 0 / 33%);">
     <span class="text-muted  d-block text-center text-uppercase">{{$car->company->name}}</span>
-    <h3 class="text-center my-2">{{$car->name}}/{{$car->model}}<span style="font-size: 2rem; color: #f15d30;padding-left: 5px;">{{$car->priceperday}}$</span></h3>
+    <h3 class="text-center my-2">{{$car->name}}/{{$car->model}}
+    <span style="font-size: 1.6rem; color: red;">${{$car->discount}}</span>
+     <span style="font-size: 1rem; color: #f15d30;" class="text-decoration-line-through" >${{$car->priceperday}}</span>
+     
+    </h3>
     <hr style="border:1px solid #f15d30 ;">
     <!-- start strart here  -->
 

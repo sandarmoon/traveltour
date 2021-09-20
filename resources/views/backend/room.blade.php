@@ -34,7 +34,7 @@
             <div class="col">
               <div class="card shadow">
                 <div class="card-header border-0">
-                  <h3 class="mb-0">Package List</h3>
+                  <h3 class="mb-0">Room List</h3>
                 </div>
                 <div class="table-responsive  p-1">
                   <table class="table align-items-center table-flush" id="room-table">

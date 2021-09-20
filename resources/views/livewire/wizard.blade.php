@@ -78,9 +78,9 @@
         </div>
         <h1 class="display-5 fw-bolder">{{$car_name}}({{$car_model}})</h1>
         <div class="fs-5 mb-2">
-         <span class="{{($car_discount ==0) ? 'text-danger':'text-decoration-line-through'}}">$
+         <span class="{{($car_discount ==0) ? 'text-danger':'text-danger text-decoration-line-through'}}">$
           {{$car_priceperday}}</span>
-         <h3 class=" d-inline float-left text-danger {{($car_discount ==0) ? 'd-none':''}}">$40.00</h3>
+         <h3 class=" d-inline float-left text-danger {{($car_discount ==0) ? 'd-none':''}}">${{$car_discount}}</h3>
 
          <h4 class=" heading  {{($car_status==1) ? '  text-success':'text-danger'}}">{{($car_status==1) ? 'Avaliable':'Booked'}}</h4>
         </div>
@@ -140,9 +140,11 @@
        <li> <small class="ct-toc-link">No refunable</small></li>
        <li><small class="ct-lead">No Change and No Cancellation</small></li>
        <li><small class="ct-lead">Pay and Save</small></li>
-       @error('loc') <li class="text-danger">
-        <h4 class="error">{{ $message }}</h4>
-       </li> @enderror
+       @error('loc') 
+       <li class="text-danger">
+        <h4 class="error text-danger">{{ $message }}</h4>
+       </li>
+        @enderror
       </ul>
      </div>
      <div class="card-body">
@@ -379,9 +381,4 @@
 
 
 </div>
-@push('script')
-<script>
- alert('helo');
 
-</script>
-@endpush

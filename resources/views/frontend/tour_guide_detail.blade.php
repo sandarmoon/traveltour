@@ -36,15 +36,28 @@
 				    <div id="collapse{{$key}}" class="accordion-collapse collapse @if($tour_guide->city_id  == $city->id) show @endif " aria-labelledby="heading{{$key}}" data-bs-parent="#accordionExample">
 				      <div class="accordion-body">
 				        <ul>
+				        	@if(count($city->tours) > 0)
 				        	@foreach($city->tours as $tour)
 				        	<li class="d-grid gap-2 ">
 				        		
 				        		<button class="btn @if($tour_guide->id == $tour->id) btn-secondary @endif btn_tour_guide" data-id = "{{$tour->id}}">
-				        		{{$tour->title}}
+				        		
+				        			{{$tour->title}}
+				        		
 				        		</button>
 				        	</li>
 				        	<div class="dropdown-divider"></div>
 				        	@endforeach
+				        	@else
+				        		<li class="d-grid gap-2 ">
+				        		
+					        		<button class="btn">
+					        		
+					        			Not Yet
+					        		
+					        		</button>
+					        	</li>
+				        	@endif
 				        </ul>
 				      </div>
 				    </div>
@@ -170,17 +183,28 @@
                         html+= `" aria-labelledby="heading${i}" data-bs-parent="#accordionExample">
                           <div class="accordion-body">
                             <ul>`;
-                                $.each(v.tours ,function(a,b){
-					        	html += `<li class="d-grid gap-2 ">
-					        		
-					        		<button class="btn `
-					        		 if(tour_guide.id == b.id) { html += `btn-secondary ` }
-					        		 	html += `btn_tour_guide" data-id = "${b.id}">
-					        		${b.title}
-					        		</button>
-					        	</li>
-					        	<div class="dropdown-divider"></div>`
-					        	})
+                            	if(v.tours.length > 0){
+	                                $.each(v.tours ,function(a,b){
+						        	html += `<li class="d-grid gap-2 ">
+						        		
+						        		<button class="btn `
+						        		 if(tour_guide.id == b.id) { html += `btn-secondary ` }
+						        		 	html += `btn_tour_guide" data-id = "${b.id}">
+						        		${b.title}
+						        		</button>
+						        	</li>
+						        	<div class="dropdown-divider"></div>`
+						        	})
+					        	}else{
+					        		html += `<li class="d-grid gap-2 ">
+				        		
+								        		<button class="btn">
+								        		
+								        			Not Yet
+								        		
+								        		</button>
+								        	</li>`
+					        	}
                             html+=`</ul>
                           </div>
                         </div>

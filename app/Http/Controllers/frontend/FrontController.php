@@ -48,7 +48,7 @@ class FrontController extends Controller
         $tour = Tour::all();
 
         if(count($tour) > 10){
-            $tours_carousel = Tour::all()->random(4);
+            $tours_carousel = Tour::all()->random(10);
         }else{
             $tours_carousel = Tour::orderBy('id','DESC')->get();
         }

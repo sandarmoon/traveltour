@@ -89,6 +89,41 @@
     </div>
 </div>
 
+
+
+<section class="py-0">
+    <div class="container mt-5">
+        <div class="row shadow">
+            <div class="col-md-4 col-sm-12 col-lg-4  py-3 px-3 bg-light">
+                
+                <h4> <i class="fas fa-tag text-secondary d-inline me-2" style="font-size: 20px;"></i> Best Price</h4>
+                <p class="py-3 ms-4" style="font-size: 17px;">You can find the cheapest price among many car or hotel and package.</p>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-lg-4  py-3 px-3 bg-light">
+                
+                
+                <h4><i class="fas fa-save d-inline me-2 text-secondary" style="font-size: 20px;"></i> Easy & Secure</h4>
+                <p class="py-3 ms-4" style="font-size: 17px;">
+                    Booking and Payment process is totally protected and secured.
+                </p>
+            </div>
+
+
+            <div class="col-md-4 col-sm-12 col-lg-4  py-3 px-3 bg-light">
+                <i class="fas fa-clock text-secondary d-inline me-2" style="font-size: 20px;"></i>
+                <h4 class=" d-inline">24/7 Support</h4>
+                <p class="py-3 ms-4" style="font-size: 17px;">
+                    We are support you at any moment of your needs.
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
 {{-- popular packages --}}
 
 <section class="py-0">
@@ -219,9 +254,6 @@
             </div>
         </div>
         <div class="row">
-
-
-
 
 
             @php

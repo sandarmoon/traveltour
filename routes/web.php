@@ -242,3 +242,12 @@ Route::get('/package_detail/{id}',[FrontController::class,'packagedetail'])->nam
 Route::get('/pacakgebooking_detail/{id}',[FrontController::class,'pacakgebooking_detail'])->name('frontend_pacakgebooking_detail');
 
 Route::post('/rating',[FrontController::class,'rating'])->name('rating');
+
+Route::get('/tour_guide_detail/{id}',[FrontController::class,'tour_guide_detail'])->name('frontend.tour_guide_detail');
+
+Route::post('/ajax_tour_guide',[FrontController::class,'ajax_tour_guide'])->name('ajax_tour_guide');
+
+
+
+
+

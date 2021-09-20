@@ -936,13 +936,7 @@
 
 
 
-  $('#package-search-div').submit(function(e) {
-   e.preventDefault();
-   let packageid = $('#package-search-from').val();
 
-   window.location.href = "/package_detail/" + packageid;
-
-  })
 
 
 

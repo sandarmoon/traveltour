@@ -239,11 +239,7 @@
                 </button>
                 <!-- Brand -->
                 <a class="navbar-brand pt-0" href="../index.html">
-                    <img
-                         src="{{ asset('assets/img/brand/blue.png') }}"
-                        class="navbar-brand-img"
-                        alt="..."
-                    /> 
+                    <img class="d-inline-block mb-3" src="{{ asset('frontend/assets/travel.svg') }}" width="40" alt="logo" /><span class="fw-bold fs-4 text-primary ms-2">Lucky Seven</span>
                     
                 </a>
                 <!-- User -->

@@ -24,5 +24,10 @@ class City extends Model
     public function  carpivot(){
         return $this->belongsToMany('App\Models\Car')->withPivot('id');
     }
+
+    public function tours($value='')
+    {
+        return $this->hasMany('App\Models\Tour');
+    }
 }
 

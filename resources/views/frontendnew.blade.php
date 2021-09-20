@@ -132,6 +132,23 @@
             background-color: white !important;
         }
 
+        blockquote{
+            font-style: italic;
+            padding: 2px;
+            line-height: 145%;
+        }
+
+        blockquote:before { 
+            content: open-quote; 
+            font-size: 30px;
+        }
+
+        blockquote:after { 
+            content: close-quote; 
+            color: black;
+            height: 0;
+        }   
+
     </style>
 
     @stack('style')

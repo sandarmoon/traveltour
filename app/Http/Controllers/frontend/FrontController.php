@@ -22,6 +22,7 @@ use DB;
 use Carbon\Carbon;
 use App\Models\Rating;
 use App\Models\Tour;
+use App\Models\Feedback;
 
 
 class FrontController extends Controller
@@ -44,12 +45,30 @@ class FrontController extends Controller
         //company -> type ->2 ->car
         $partners = Company::all();
         $hotels=Company::where('type','=',1)->get();
-        $tours_carousel = Tour::all();
+        $tour = Tour::all();
+
+        if(count($tour) > 10){
+            $tours_carousel = Tour::all()->random(4);
+        }else{
+            $tours_carousel = Tour::orderBy('id','DESC')->get();
+        }
+        
+
 
         // $tours = Tour::inRandomOrder()->get();
+        $feedbacks = Feedback::all();
+        if(count($feedbacks) > 8){
+
+            $feedback_data = Feedback::all()->random(8);
+
+        }else{
+
+            $feedback_data = Feedback::orderBy('id','DESC')->get();
+
+        }
 
 
-        return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels','partners','tours_carousel'));
+        return view('frontend.home',compact('cities','rooms','packages','cars','rooms','hotels','partners','tours_carousel','feedback_data'));
 
     }
 

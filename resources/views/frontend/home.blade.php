@@ -610,7 +610,7 @@
 
 
 {{-- feedback --}}
-<section class="py-0 d-none">
+<section class="py-0">
     <div class="container mt-5">
         <div class="row mt-5">
             <div class="col-md-12 justify-content-center">
@@ -619,147 +619,50 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-sm-9 col-md-4 mb-3 mb-md-0 h-100">
-                <div class="card card-span text-white h-100">
-                    <img class="img-card h-100" src="{{
-                            asset('frontnew/assets/img/file/myanmar.jpeg')
-                        }}" alt="..." />
-                    <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                        <div class="
-                                d-flex
-                                justify-content-between
-                                align-items-center
-                                bg-100
-                                mt-n5
-                                me-auto
-                            ">
-                            <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="60" alt="..." />
-                            <div class="d-flex flex-1 justify-content-around">
-                                <span class="text-900 text-center"><i class="fas fa-heart text-primary"></i><span class="text-900 ms-2">355</span></span><span class="text-900 text-center"><i class="fas fa-eye text-primary"></i><span class="text-900 ms-2">234</span></span><span class="text-900 text-center"><i class="fas fa-share text-primary"></i><span class="text-900 ms-2">14</span></span>
-                            </div>
+            <div class="feedback_class">
+
+                @foreach($feedback_data as $feedback)
+                {{-- <div class="col-sm-9 col-md-4 mb-3 mb-md-0 h-100"> --}}
+                    <div class="card card-span text-white h-100">
+
+                        <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
+                            
+                            <h3 class="text-900 mt-3 ">
+                                <i class="fa fa-user text-secondary" style="font-size: 20px;"></i>
+                                {{$feedback->user->name}}
+                                @php
+                                    $created_at = strtotime($feedback->created_at);
+                                    $date = Carbon\Carbon::now()->diffForHumans($feedback->created_at);
+                                   
+                                @endphp
+                                
+                            </h3>
+
+                            <span class="fw-normal text-900"> <i class="fas fa-clock me-2 text-secondary"></i>  {{$date}}  </span>
+                            
+                            <h5 class="text-900 mt-3">
+                                <blockquote> {{$feedback->message}} </blockquote>
+                            </h5>
+                            {{-- <a class="
+                                    btn btn-lg
+                                    text-900
+                                    fs-1
+                                    px-0
+                                    hvr-icon-forward
+                                " href="#!" role="button">Read more
+                                <svg class="bi bi-arrow-right-short hover-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                                </svg></a> --}}
                         </div>
-                        <h5 class="text-900 mt-3">
-                            John Oliver.
-                            <span class="fw-normal">5 mins Read. </span>
-                        </h5>
-                        <h3 class="fw-bold text-1000 mt-5 text-truncate">
-                            15 Best Day Trips from Portland Oregon
-                        </h3>
-                        <p class="text-900 mt-3">
-                            The structure of the trip blog is only a white
-                            canvas to highlight the atmospheric and immersive.
-                        </p>
-                        <a class="
-                                btn btn-lg
-                                text-900
-                                fs-1
-                                px-0
-                                hvr-icon-forward
-                            " href="#!" role="button">Read more
-                            <svg class="bi bi-arrow-right-short hover-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
-                            </svg></a>
+
                     </div>
-                </div>
+
+
+                {{-- </div> --}}
+
+                @endforeach
             </div>
-            <div class="col-sm-9 col-md-4 mb-3 mb-md-0 h-100">
-                <div class="card card-span text-white h-100">
-                    <img class="img-card h-100" src="{{
-                            asset('frontnew/assets/img/file/myanmar.jpeg')
-                        }}" alt="..." />
-                    <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                        <div class="
-                                d-flex
-                                justify-content-between
-                                align-items-center
-                                bg-100
-                                mt-n5
-                                me-auto
-                            ">
-                            <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="60" alt="..." />
-                            <div class="d-flex flex-1 justify-content-around">
-                                <span class="text-900 text-center"><i class="fas fa-heart text-primary"></i><span class="text-900 ms-2">35</span></span><span class="text-900 text-center"><i class="fas fa-eye text-primary"></i><span class="text-900 ms-2">23</span></span><span class="text-900 text-center"><i class="fas fa-share text-primary"></i><span class="text-900 ms-2">14</span></span>
-                            </div>
-                        </div>
-                        <h5 class="text-900 mt-3">
-                            Haley Wilson .
-                            <span class="fw-normal">5 mins Read. </span>
-                        </h5>
-                        <h3 class="fw-bold text-1000 mt-5 text-truncate">
-                            Famous Roads for Great Drives in California
-                        </h3>
-                        <p class="text-900 mt-3">
-                            I first discovered about famous road in california
-                            when I flew with KLM to Europe in 2018.
-                        </p>
-                        <a class="
-                                btn btn-lg
-                                text-900
-                                fs-1
-                                px-0
-                                hvr-icon-forward
-                            " href="#!" role="button">Read more
-                            <svg class="bi bi-arrow-right-short hover-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
-                            </svg></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-9 col-md-4 mb-3 mb-md-0 h-100">
-                <div class="card card-span text-white h-100">
-                    <img class="img-card h-100" src="{{
-                            asset('frontnew/assets/img/file/myanmar.jpeg')
-                        }}" alt="..." />
-                    <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                        <div class="
-                                d-flex
-                                justify-content-between
-                                align-items-center
-                                bg-100
-                                mt-n5
-                                me-auto
-                            ">
-                            <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="60" alt="..." />
-                            <div class="d-flex flex-1 justify-content-around">
-                                <span class="text-900 text-center"><i class="fas fa-heart text-primary"></i><span class="text-900 ms-2">35</span></span><span class="text-900 text-center"><i class="fas fa-eye text-primary"></i><span class="text-900 ms-2">23</span></span><span class="text-900 text-center"><i class="fas fa-share text-primary"></i><span class="text-900 ms-2">14</span></span>
-                            </div>
-                        </div>
-                        <h5 class="text-900 mt-3">
-                            Jeff Baley.
-                            <span class="fw-normal">5 mins Read. </span>
-                        </h5>
-                        <h3 class="fw-bold text-1000 mt-5 text-truncate">
-                            7 of the Best Train Trips in Canada
-                        </h3>
-                        <p class="text-900 mt-3">
-                            On this very stunning rail ride from Vancouver to
-                            Calgary, take in the stunning vistas andspectacular.
-                        </p>
-                        <a class="
-                                btn btn-lg
-                                text-900
-                                fs-1
-                                px-0
-                                hvr-icon-forward
-                            " href="#!" role="button">Read more
-                            <svg class="bi bi-arrow-right-short hover-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
-                            </svg></a>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>
@@ -775,25 +678,6 @@
 
         <div class="col-12">
 
-          {{--   <marquee width="60%" direction="left" height="100px" behavior="alternate">
-                <div class="row h-100 align-items-center g-2">
-                    @foreach($partners as $key => $partner)
-                    <div class="col-md-3 mb-3 mb-md-0 h-100 partnership_div">
-
-                        <div class="partnership_name_div">
-                            <h4 class="partnership_name">{{$partner->name}}</h4>
-                        </div>
-
-                        <img src="{{
-                            asset(
-                                "storage/".$partner->logo
-                            )
-                        }}" width="100%" alt="..." />
-                    </div>
-                    @endforeach
-
-                </div>
-            </marquee> --}}
 
             <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -1018,6 +902,38 @@
             }
           ]
       });
+
+
+
+      $('.feedback_class').slick({
+          autoplay: true,
+          autoplaySpeed: 2000,
+          centerMode: true,
+          centerPadding: '30px',
+          slidesToShow: 3,
+
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                arrows: false,
+                centerMode: true,
+                centerPadding: '30px',
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                arrows: true,
+                centerMode: true,
+                centerPadding: '30px',
+                slidesToShow: 1
+              }
+            }
+          ]
+      });
+   
    
 
     })

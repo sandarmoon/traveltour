@@ -187,6 +187,14 @@ require __DIR__.'/auth.php';
 
 // frontend start
 Route::prefix('front')->group(function () {
+
+//all car view
+Route::get('/cars',[FrontController::class,'showAllCars'])->name('frontend.cars');
+
+//all hotel view
+Route::get('/hotels',[FrontController::class,'showAllHotels'])->name('frontend.hotels');
+
+
 Route::get('/',[FrontController::class,'index'])->name('frontend.index');
 Route::post('/scar',[FrontController::class,'searchCar'])->name('search.car')->middleware('auth');
 // Booking survey start
@@ -252,10 +260,24 @@ Route::get('/tour_guide_detail/{id}',[FrontController::class,'tour_guide_detail'
 
 Route::post('/ajax_tour_guide',[FrontController::class,'ajax_tour_guide'])->name('ajax_tour_guide');
 
+
+//===========filter for hotel start ========================
+//using group-total-price
+Route::post('/hotel/filterbyprice',[FrontController::class,'hotelFilterByPrice'])->name('hotel.filter.price');
+
+//using room type
+Route::post('/hotel/filterbyRoomType',[FrontController::class,'hotelFilterByRoomType'])->name('hotel.filter.room.type');
+
+//using ppl count
+Route::post('/hotel/filterbyppl',[FrontController::class,'hotelFilterByPpl'])->name('hotel.filter.ppl.count');
+
+
 // frontend feedback
 Route::post('/ajax_frontent_feedback',[FrontController::class,'ajax_frontent_feedback'])->name('ajax_frontent_feedback');
 
 
+//===========dashboard start========================
+Route::get('/dashboard/car',[BackendController::class,'carDashboard'])->name('dashboard.car');
 
 
 

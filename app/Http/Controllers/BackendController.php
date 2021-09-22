@@ -90,7 +90,17 @@ class BackendController extends Controller
     // car booking list for admin
 
     public function carBookingList(){
-        $bookings=Booking::all();
+        $role=Auth::user()->roles[0];
+
+            if($role->name=="company"){
+                $company_id=Auth::user()->company->id;
+                $bookings=Booking::whereHas('car',function($q) use ($company_id){
+                    return $q->where('company_id',$company_id);
+                })->get();
+            }else{
+                $bookings=Booking::all();
+            }
+
         return  view('backend.carbookinglist',compact('bookings'));
     }
 
@@ -310,21 +320,22 @@ class BackendController extends Controller
     public function  getRoomAjax(){
         // dd(Auth::user()->company->id);
         $rooms=null;
-        if(Auth::check()){
+         if(Auth::check()){
             $role=Auth::user()->roles[0];
 
-            if($role->name=="company"){
+            if($role->name=="hotel"){
 
                 $rooms= Room::with(['type','company','facilities'])
                     ->where('company_id','=',Auth::user()->company->id)->get();
 
+            }else{
+                $rooms= Room::with(['type','company','facilities'])->get();
             }
-        }else{
-            $rooms= Room::with(['type','company','facilities'])->get();
-
         }
+
+       
         
-        $datatables=Datatable::of($rooms)
+        $datatables=Datatable::of($rooms)->with(['type','company','facilities'])
             ->addColumn('action',function($room){
 
                 return "<button class='btn btn-danger btn-delete' data-id=".$room->id."><i class='fas fa-trash'></i></button>
@@ -819,6 +830,21 @@ class BackendController extends Controller
         return Response()->json($arr);
         
     }
+
+
+//============dashboard start============
+
+public function carDashboard(){
+    return view('dashboard.car');
+}
+
+
+
+
+
+
+//============dashboard end============
+
 
 
 

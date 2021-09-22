@@ -1,6 +1,12 @@
 @extends('backendTemplate')
 @section('main-content')
 
+@php
+   $url = URL::previous();
+  
+   $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+  
+@endphp
 
 
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-7">
@@ -14,7 +20,13 @@
                   <p>{{ $message }}</p>
               </div>
           @endif
-          <a class="ct-example text-white float-right border-0" href="{{route('car.create')}}">
+          <a class="ct-example text-white float-right border-0" href="
+          @if($route == "partnership")
+          {{route('partnership')}}
+          @else
+          {{route('car.index')}}
+          @endif
+          ">
             <i class="fas fa-arrow-left me-1"></i>
                 <span class="error-name">back</span>
           </a>

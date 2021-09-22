@@ -487,7 +487,7 @@
                             </li>
                             <!-- hotel room -->
                             <li
-                                class="nav-item {{ Request::is('room*') ? 'active' : '' }}"
+                                class="nav-item {{ Request::is('room') ? 'active' : '' }}"
                             >
                                 <a
                                     class="nav-link"
@@ -542,6 +542,7 @@
                     <h6 class="navbar-heading text-muted">Booking list</h6>
                     <!-- Navigation -->
                     <ul class="navbar-nav mb-md-3">
+                    @hasanyrole('admin|car')
                         <li
                             class="nav-item {{ Request::is('list*') ? 'active' : '' }}"
                         >
@@ -550,8 +551,25 @@
                                 Car-Bookings
                             </a>
                         </li>
+                        @role('car')
                         <li
-                            class="nav-item {{ Request::is('city*') ? 'active' : '' }}"
+                            class="nav-item {{ Request::is('detail/*') ? 'active' : '' }}"
+                        >
+                            <a
+                                class="nav-link"
+                                href="{{ route('company.detail',Auth::user()->company->id) }}"
+                            >
+                                <i class="ni ni-circle-08 text-pink"></i>
+                                Profile 
+                            </a>
+                        </li>
+                        @endrole
+                    @endhasanyrole
+
+                    @hasanyrole('admin|hotel')
+
+                        <li
+                            class="nav-item {{ Request::is('room/hotel/bookings') ? 'active' : '' }}"
                         >
                             <a
                                 class="nav-link"
@@ -561,6 +579,21 @@
                                 Hotel-Booking
                             </a>
                         </li>
+                        @role('hotel')
+                        <li
+                            class="nav-item {{ Request::is('detail/*') ? 'active' : '' }}"
+                        >
+                            <a
+                                class="nav-link"
+                                href="{{ route('company.detail',Auth::user()->company->id) }}"
+                            >
+                                <i class="ni ni-circle-08 text-pink"></i>
+                                Profile 
+                            </a>
+                        </li>
+                        @endrole
+
+                    @endhasanyrole
                     </ul>
                     <!-- booking package url div end -->
                    @role('admin')

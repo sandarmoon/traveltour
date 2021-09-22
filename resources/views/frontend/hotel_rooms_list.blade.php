@@ -76,13 +76,13 @@
 							<div class="mb-3 px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
 								<label for="inputPassword2" class="
 								">Check In @error('start_date') <span class="text-danger">required</span> @enderror </label>
-									<input type="date" class="form-control" name="start_date" id="inputPassword2" value="{{$s_date}}" placeholder="">
+									<input type="date" class="form-control" name="start_date" id="inputPassword2" value="" placeholder="">
 
 
 							</div>
 							<div class="mb-3 px-lg-3 px-md-3 px-sm-0 px-xs-0 px-0">
 								<label for="inputPassword2" class="">Check Out  @error('end_date') <span class="text-danger">required</span> @enderror</label>
-									<input type="date" class="form-control" name="end_date" id="inputPassword2"  value="{{$e_date}}" placeholder="">
+									<input type="date" class="form-control" name="end_date" id="inputPassword2"  value="" placeholder="">
 
 							</div>
 
@@ -265,6 +265,19 @@
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
 		});
+
+$('input[name="start_date"]').val(getSavedValue('hotel_check_in'));
+$('input[name="end_date"]').val(getSavedValue('hotel_check_out'));
+
+
+		function getSavedValue(v) {
+  if (!sessionStorage.getItem(v)) {
+
+   return ""; // You can change this to your defualt value.
+  }
+  return sessionStorage.getItem(v);
+
+ }
 
 		
 

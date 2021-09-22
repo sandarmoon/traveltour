@@ -1,6 +1,6 @@
 @extends('frontendnew') @section('header')
 
-<x-searchingnew :cities="$cities" :packages="$packages"></x-searchingnew>
+<x-searchingnew ></x-searchingnew>
 
 
 
@@ -10,83 +10,83 @@
 
 @if (session()->has('message'))
 <div class="alert alert-success">
-    {{ session("message") }}
+ {{ session("message") }}
 </div>
 @endif
 
 
 
 <div class="d-none">
-    <div class="container mt-0 my-3">
-        <div class="row">
-            @foreach($rooms as $room) @php
-            $photos=json_decode($room->photos,true); $s=0; @endphp
-            <div class="col-md-4">
-                <div class="card">
-                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @foreach($photos as $k=>$p)
-                            <div class="carousel-item {{
+ <div class="container mt-0 my-3">
+  <div class="row">
+   @foreach($rooms as $room) @php
+   $photos=json_decode($room->photos,true); $s=0; @endphp
+   <div class="col-md-4">
+    <div class="card">
+     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+       @foreach($photos as $k=>$p)
+       <div class="carousel-item {{
                                     $s == $k ? 'active' : ''
                                 }}">
-                                <img src="{{ asset("storage/$p") }}" class="d-block w-100" alt="...">
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="mb-0">
-                            {{$room->type->name}},
-                            {{($room->single == null) ?  '':$room->single." Single"}}
-                            {{($room->double == null) ?  '':$room->double." Double"}}
-                            {{($room->king == null) ?  '':$room->king." King"}}
-                            {{($room->queen == null) ?  '':$room->queen." Queen"}}
-                            Beds, Non Smoking
-                        </h6>
-                        <p class="small text-muted">{{$room->wide}}Sqft</p>
-                        {{-- accordian start --}}
-                        <ul class="list-unstyled">
-                            <li>
-                                <i class="fas fa-user-friends"></i>
-                                Sleep{{$room->ppl}}
-                            </li>
-                            <li>
-                                <i class="fas fa-bed"></i>
-                                {{($room->single == null) ?  '':$room->single." Single"}}
-                                {{($room->double == null) ?  '':$room->double." Double"}}
-                                {{($room->king == null) ?  '':$room->king." King"}}
-                                {{($room->queen == null) ?  '':$room->queen." Queen"}}
-                                Bed
-                            </li>
-                            <li>
-                                <i class="fas fa-check"></i> Reserve Now,Pay
-                                Later
-                            </li>
-                            <li>
-                                <a href="{{route('room.show',$room->id)}}" class="text-decoration-none">More Details ></a>
-                            </li>
-                        </ul>
-                        <hr class="mx-2" />
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <h4 class="mb-0">${{$room->pricepernight}}</h4>
-                                <span class="price-desc small mb-2 text-muted">per night</span>
-                                <span class="total-desc small mb-2 text-dark">{{$room->pricepernight+ 10}} total</span><br />
+        <img src="{{ asset("storage/$p") }}" class="d-block w-100" alt="...">
+       </div>
+       @endforeach
+      </div>
+     </div>
+     <div class="card-body">
+      <h6 class="mb-0">
+       {{$room->type->name}},
+       {{($room->single == null) ?  '':$room->single." Single"}}
+       {{($room->double == null) ?  '':$room->double." Double"}}
+       {{($room->king == null) ?  '':$room->king." King"}}
+       {{($room->queen == null) ?  '':$room->queen." Queen"}}
+       Beds, Non Smoking
+      </h6>
+      <p class="small text-muted">{{$room->wide}}Sqft</p>
+      {{-- accordian start --}}
+      <ul class="list-unstyled">
+       <li>
+        <i class="fas fa-user-friends"></i>
+        Sleep{{$room->ppl}}
+       </li>
+       <li>
+        <i class="fas fa-bed"></i>
+        {{($room->single == null) ?  '':$room->single." Single"}}
+        {{($room->double == null) ?  '':$room->double." Double"}}
+        {{($room->king == null) ?  '':$room->king." King"}}
+        {{($room->queen == null) ?  '':$room->queen." Queen"}}
+        Bed
+       </li>
+       <li>
+        <i class="fas fa-check"></i> Reserve Now,Pay
+        Later
+       </li>
+       <li>
+        <a href="{{route('room.show',$room->id)}}" class="text-decoration-none">More Details ></a>
+       </li>
+      </ul>
+      <hr class="mx-2" />
+      <div class="d-flex justify-content-between">
+       <div>
+        <h4 class="mb-0">${{$room->pricepernight}}</h4>
+        <span class="price-desc small mb-2 text-muted">per night</span>
+        <span class="total-desc small mb-2 text-dark">{{$room->pricepernight+ 10}} total</span><br />
 
-                                <span class="fee-include small mb-2 text-dark">includes tax and fees</span>
-                            </div>
-                            <div>
-                                <span class="left-msg small mb-2 text-danger">We have 4 left!</span>
-                                <a href="#" class="btn btn-primary mt-3">Reserve Now!</a>
-                            </div>
-                        </div>
-                        {{-- accordian end --}}
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
+        <span class="fee-include small mb-2 text-dark">includes tax and fees</span>
+       </div>
+       <div>
+        <span class="left-msg small mb-2 text-danger">We have 4 left!</span>
+        <a href="#" class="btn btn-primary mt-3">Reserve Now!</a>
+       </div>
+      </div>
+      {{-- accordian end --}}
+     </div>
     </div>
+   </div>
+   @endforeach
+  </div>
+ </div>
 </div>
 
 
@@ -127,9 +127,9 @@
 {{-- popular packages --}}
 
 <section class="py-0">
-    <div class="container mt-5">
-        <div class="row justify-content-center pb-4">
-            <div class="
+ <div class="container mt-5">
+  <div class="row justify-content-center pb-4">
+   <div class="
                     col-md-12
                     heading-section
                     text-center
@@ -137,29 +137,29 @@
                     fadeInUp
                     ftco-animated
                 ">
-                <h2 class="mb-4">Popular Packages</h2>
-            </div>
-        </div>
+    <h2 class="mb-4">Popular Packages</h2>
+   </div>
+  </div>
 
-        <div class="row">
+  <div class="row">
 
-            @foreach($packages as $package)
+   @foreach($packages as $package)
 
-            @php
-            $s=0;
-            $tours=$package->tours;
-            $photos=[];
-            foreach($tours as $t){
-            $places=json_decode($t->photo,true);
-            foreach($places as $v){
-            array_push($photos,$v);
-            }
-            }
-            @endphp
+   @php
+   $s=0;
+   $tours=$package->tours;
+   $photos=[];
+   foreach($tours as $t){
+   $places=json_decode($t->photo,true);
+   foreach($places as $v){
+   array_push($photos,$v);
+   }
+   }
+   @endphp
 
-            <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-                <div class="project-wrap">
-                    <!-- <a
+   <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+    <div class="project-wrap">
+     <!-- <a
                         href="#"
                         class="img"
                         style="background-image:url({{
@@ -168,81 +168,81 @@
                     >
                         <span class="price">$550/person</span>
                     </a> -->
-                    <div class="my-img">
-                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                @foreach($photos as $k=>$p)
-                                <div class="carousel-item {{
+     <div class="my-img">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+       <div class="carousel-inner">
+        @foreach($photos as $k=>$p)
+        <div class="carousel-item {{
                                         $s == $k ? 'active' : ''
                                     }}">
-                                    <img src="{{ asset('storage/'.$p) }}" class="d-block w-100" alt="..." />
-                                </div>
-                                @endforeach
-                            </div>
-                            <button class="carousel-control-prev visually-hidden" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next visually-hidden" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                        <span class="packageprice">${{$package->priceperperson}}/person</span>
-                    </div>
-                    <div class="text p-4">
-                        <span class="days">{{$package->days}} Days Tour</span>
-                        <h3 class="mb-2"><a href="#">{{$package->name}}</a></h3>
-                        <p class="location">
-                            <span class="fa fa-map-marker"></span>
-                            @php $len=count($package->tours);
-                            $lastindex=$len-1;
-                            $places='';
-
-
-                            foreach($package->tours as $k=>$tours) {
-                            if($k == $lastindex)
-                            $places.=$tours->title;
-                            else
-                            $places.=$tours->title.',';
-                            }
-                            @endphp
-                            {{$places}}
-                        </p>
-
-                        <p><i class="fas fa-car fa_car_icon"></i> {{$package->car->name}} ({{$package->car->model}}-{{$package->car->type->name}}) </p>
-                        <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$package->hotel->name}}</p>
-                        <ul class="text-center">
-
-                            <li class="">
-                                <a href="{{route('frontend_package_detail',$package->id)}}"><span class="flaticon-mountains"></span>More info</a>
-                            </li>
-                        </ul>
-                        @php
-                        $booked_ppl=$package->pbookings->sum('ppl');
-
-                        @endphp
-                        @if(Auth::check())
-                        <button data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
-                        @else
-                        <a href="/login" class=" btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-            @endforeach
+         <img src="{{ asset('storage/'.$p) }}" class="d-block w-100" alt="..." />
         </div>
+        @endforeach
+       </div>
+       <button class="carousel-control-prev visually-hidden" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+       </button>
+       <button class="carousel-control-next visually-hidden" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+       </button>
+      </div>
+      <span class="packageprice">${{$package->priceperperson}}/person</span>
+     </div>
+     <div class="text p-4">
+      <span class="days">{{$package->days}} Days Tour</span>
+      <h3 class="mb-2"><a href="#">{{$package->name}}</a></h3>
+      <p class="location">
+       <span class="fa fa-map-marker"></span>
+       @php $len=count($package->tours);
+       $lastindex=$len-1;
+       $places='';
+
+
+       foreach($package->tours as $k=>$tours) {
+       if($k == $lastindex)
+       $places.=$tours->title;
+       else
+       $places.=$tours->title.',';
+       }
+       @endphp
+       {{$places}}
+      </p>
+
+      <p><i class="fas fa-car fa_car_icon"></i> {{$package->car->name}} ({{$package->car->model}}-{{$package->car->type->name}}) </p>
+      <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$package->hotel->name}}</p>
+      <ul class="text-center">
+
+       <li class="">
+        <a href="{{route('frontend_package_detail',$package->id)}}"><span class="flaticon-mountains"></span>More info</a>
+       </li>
+      </ul>
+      @php
+      $booked_ppl=$package->pbookings->sum('ppl');
+
+      @endphp
+      @if(Auth::check())
+      <button data-id="{{$package->id}}" class="package-booking-btn btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</button>
+      @else
+      <a href="/login" class=" btn btn-secondary form-control my-2 {{$booked_ppl == $package->ppl ? 'disabled':''}}">{{$booked_ppl == $package->ppl ? 'Full Booking':'Book Now'}}!</a>
+      @endif
+     </div>
     </div>
+   </div>
+
+   @endforeach
+  </div>
+ </div>
 </section>
 
 
 
 {{-- popular aco written cars --}}
 <section class="py-0">
-    <div class="container mt-5">
-        <div class=" justify-content-start ">
-            <div class="
+ <div class="container mt-5">
+  <div class=" justify-content-start ">
+   <div class="
                     col-md-12
                     heading-section
                     
@@ -250,99 +250,99 @@
                     fadeInUp
                     ftco-animated
                 ">
-                <h2 class="mb-4">Popular Cars</h2>
-            </div>
-        </div>
-        <div class="row">
+    <h2 class="mb-4">Popular Cars</h2>
+   </div>
+  </div>
+  <div class="row">
+
+   @php
+   $car_arry =[];
+   @endphp
+   @foreach($cars as $car)
 
 
-            @php
-            $car_arry =[];
-            @endphp
-            @foreach($cars as $car)
+   @php
+   $rating = 0;
+   foreach($car->rating as $data){
+   $rating += $data->rate;
 
-            @php
-            $rating = 0;
-            foreach($car->rating as $data){
-            $rating += $data->rate;
+   }
 
-            }
-
-            $car_arry[$rating] = $car;
+   $car_arry[$rating] = $car;
 
 
-            @endphp
+   @endphp
 
-            @endforeach
+   @endforeach
 
-            @php
-            if(count($car->rating) > 0){
-            krsort($car_arry);
-            }else{
-            $car_arry = $cars;
-            }
+   @php
+   if(count($car->rating) > 0){
+   krsort($car_arry);
+   }else{
+   $car_arry = $cars;
+   }
 
 
 
 
-            @endphp
+   @endphp
 
-            @foreach($car_arry as $car)
+   @foreach($car_arry as $car)
 
 
-            @php
-            // $car=(object)$booking->car;
+   @php
+   // $car=(object)$booking->car;
 
-            $photos=json_decode($car->photo,true);
+   $photos=json_decode($car->photo,true);
 
-            $cover=$photos['cover'];
-            @endphp
-            <div class="col-md-4">
-                <div class="project-wrap">
-                    <!-- <a
+   $cover=$photos['cover'];
+   @endphp
+   <div class="col-md-4">
+    <div class="project-wrap">
+     <!-- <a
                         href="#"
                         class="img"
                         style="background-image:url(http://localhost:8000/frontnew/assets/img/file/myanmar.jpeg)"
                     >
                         <span class="price">$550/person</span>
                     </a> -->
-                    <div class="my-img">
-                        <div class=" " style="height:280px;max-height: 260px;width: 100%;overflow: hidden;">
-                            <img src="{{asset('storage/'.$cover)}}" class="img-fluid " alt="photo">
+     <div class="my-img">
+      <div class=" " style="height:280px;max-height: 260px;width: 100%;overflow: hidden;">
+       <img src="{{asset('storage/'.$cover)}}" class="img-fluid " alt="photo">
 
-                        </div>
-                        <span class="packageprice">$50/person</span>
-                    </div>
+      </div>
+      <span class="packageprice">$50/person</span>
+     </div>
 
-                    <div class="text p-4" style="background-color: #e8e8e866;box-shadow: 0px 10px 23px -8px rgb(0 0 0 / 33%);">
-                        <span class="text-muted  d-block text-center text-uppercase">{{$car->company->name}}</span>
-                        <h3 class="text-center my-2">{{$car->name}}/{{$car->model}}<span style="font-size: 2rem; color: #f15d30;padding-left: 5px;">{{$car->priceperday}}$</span></h3>
-                        <hr style="border:1px solid #f15d30 ;">
-                        <!-- start strart here  -->
-
-
-
-                        <p class="rating text-center">
-                            <i class="fas fa-star-half-alt"></i>
-                            @php
-                            $rating = 0;
-                            foreach($car->rating as $data){
-                            $rating += $data->rate;
-                            }
-
-                            @endphp
-                            {{$rating}}
-                            Stars
-
-                        </p>
-
-                        <ul class="text-center">
-                            <div class="@if(Auth::user()) rating-input @else rating_login @endif" data-car_id="{{$car->id}}" data-type_id="{{$car->type->parent_id}}">
+     <div class="text p-4" style="background-color: #e8e8e866;box-shadow: 0px 10px 23px -8px rgb(0 0 0 / 33%);">
+      <span class="text-muted  d-block text-center text-uppercase">{{$car->company->name}}</span>
+      <h3 class="text-center my-2">{{$car->name}}/{{$car->model}}<span style="font-size: 2rem; color: #f15d30;padding-left: 5px;">{{$car->priceperday}}$</span></h3>
+      <hr style="border:1px solid #f15d30 ;">
+      <!-- start strart here  -->
 
 
 
-                                <span class="starone">
-                                    <i class="fas fa-star star_one star_blank 
+      <p class="rating text-center">
+       <i class="fas fa-star-half-alt"></i>
+       @php
+       $rating = 0;
+       foreach($car->rating as $data){
+       $rating += $data->rate;
+       }
+
+       @endphp
+       {{$rating}}
+       Stars
+
+      </p>
+
+      <ul class="text-center">
+       <div class="@if(Auth::check()) rating-input @else rating_login @endif" data-car_id="{{$car->id}}" data-type_id="{{$car->type->parent_id}}">
+
+
+
+        <span class="starone">
+         <i class="fas fa-star star_one star_blank 
                                     @foreach($car->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 1)
@@ -350,9 +350,9 @@
                                             @endif
                                         @endif
                                     @endforeach" data-value="1" title="One Star"></i>
-                                </span>
+        </span>
 
-                                <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
+        <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
                                     @foreach($car->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 2)
@@ -364,7 +364,7 @@
                                     
                                     " data-value="2"></i></span>
 
-                                <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
+        <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
                                     @foreach($car->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 3)
@@ -373,7 +373,7 @@
                                         @endif
                                     @endforeach" data-value="3"></i></span>
 
-                                <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
+        <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
                                     @foreach($car->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 4)
@@ -382,7 +382,7 @@
                                         @endif
                                     @endforeach" data-value="4"></i></span>
 
-                                <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
+        <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
                                     @foreach($car->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate == 5)
@@ -391,29 +391,30 @@
                                         @endif
                                     @endforeach" data-value="5"></i></span>
 
-                                <br>
-                                
-                         </div>
+        <br>
+        {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p> --}}
+       </div>
 
 
 
-                        </ul>
-                        <!-- start end here  -->
-                        <p class="text-center mb-0"><a href="" class="btn-car-detail" data-id="{{$car->id}}"><span class="flaticon-mountains"></span>More info</a></p>
-                        @if(Auth::check())
-                        <button data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
-                        @else
-                        <a href="/login" class=" btn btn-secondary form-control my-2">Book Now</a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-            @endforeach
-        </div>
+      </ul>
+      <!-- start end here  -->
+      <p class="text-center mb-0"><a href="" class="btn-car-detail" data-id="{{$car->id}}"><span class="flaticon-mountains"></span>More info</a></p>
+      @if(Auth::check())
+      <button data-id="" class="package-booking-btn btn {{$car->status ==1 ? 'btn-secondary':'btn-danger'}} form-control my-2 {{$car->status ==1 ? '':'disabled'}}">{{$car->status == 1 ? 'Book Now':'Booked'}}</button>
+      @else
+      <a href="/login" class=" btn {{$car->status ==1 ? 'btn-secondary':'btn-danger'}} form-control my-2 {{$car->status ==1 ? '':'disabled'}}">{{$car->status == 1 ? 'Book Now':'Booked'}}</a>
+      @endif
+     </div>
     </div>
+   </div>
+
+   @endforeach
+  </div>
+ </div>
 </section>
 <!-- popular car aco end  -->
+
 
 
 
@@ -474,11 +475,12 @@
 
 
 
+
 {{-- popular hotel --}}
 <section class="py-0 ">
-    <div class="container mt-5">
-        <div class="row justify-content-center pb-4">
-            <div class="
+ <div class="container mt-5">
+  <div class="row justify-content-center pb-4">
+   <div class="
                     col-md-12
                     heading-section
                     text-center
@@ -486,92 +488,92 @@
                     fadeInUp
                     ftco-animated
                 ">
-                <h2 class="mb-4">Popular Hotel</h2>
-            </div>
-        </div>
+    <h2 class="mb-4">Popular Hotel</h2>
+   </div>
+  </div>
 
-        <div class="row">
+  <div class="row">
 
-            @php
-            $hotel_array =[];
-            @endphp
-            @foreach($hotels as $hotel)
+   @php
+   $hotel_array =[];
+   @endphp
+   @foreach($hotels as $hotel)
 
-            @php
-            $rating = 0;
-            foreach($hotel->rating as $data){
-            $rating += $data->rate;
+   @php
+   $rating = 0;
+   foreach($hotel->rating as $data){
+   $rating += $data->rate;
 
-            }
+   }
 
-            $hotel_array[$rating] = $hotel;
+   $hotel_array[$rating] = $hotel;
 
-            @endphp
+   @endphp
 
-            @endforeach
+   @endforeach
 
-            @php
-            if(count($hotel->rating) > 0){
-            krsort($hotel_array);
-            }else{
-            $hotel_array = $hotels;
-            }
-            @endphp
+   @php
+   if(count($hotel->rating) > 0){
+   krsort($hotel_array);
+   }else{
+   $hotel_array = $hotels;
+   }
+   @endphp
 
-            @foreach($hotel_array as $hotel)
+   @foreach($hotel_array as $hotel)
 
-            <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-                <div class="project-wrap">
+   <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+    <div class="project-wrap">
 
-                    <div class="my-img">
+     <div class="my-img">
 
-                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <img src="{{asset('storage/'.$hotel->logo)}}" class="img-fluid">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+       <div class="carousel-inner">
+        <img src="{{asset('storage/'.$hotel->logo)}}" class="img-fluid">
 
-                            </div>
+       </div>
 
-                        </div>
-                        <div>
+      </div>
+      <div>
 
-                        </div>
-                        <span class="packageprice">{{$hotel->city->name}}</span>
-                    </div>
-                    <div class="text p-4">
-                        <span class="days"></span>
-                        <h3 class="mb-2"><a href="#"></a></h3>
-                        <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel->name}} </p>
-                        <p class="location">
-                            <i class="fas fa-phone"></i>
-                            {{$hotel->phone}}
+      </div>
+      <span class="packageprice">{{$hotel->city->name}}</span>
+     </div>
+     <div class="text p-4">
+      <span class="days"></span>
+      <h3 class="mb-2"><a href="#"></a></h3>
+      <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel->name}} </p>
+      <p class="location">
+       <i class="fas fa-phone"></i>
+       {{$hotel->phone}}
 
-                        </p>
-
-
+      </p>
 
 
-                        <p><i class="fas fa-location-arrow"></i> {{$hotel->addresss}} </p>
-
-                        <p class="rating">
-                            <i class="fas fa-star-half-alt"></i>
-                            @php
-                            $rating = 0;
-                            foreach($hotel->rating as $data){
-                            $rating += $data->rate;
-                            }
-
-                            @endphp
-                            {{$rating}}
-                            Stars
-
-                        </p>
 
 
-                        <ul class="text-center">
-                            <div class="rating-input" data-hotel_id="{{$hotel->id}}" data-type_id="1">
+      <p><i class="fas fa-location-arrow"></i> {{$hotel->addresss}} </p>
 
-                                <span class="starone">
-                                    <i class="fas fa-star star_one star_blank 
+      <p class="rating">
+       <i class="fas fa-star-half-alt"></i>
+       @php
+       $rating = 0;
+       foreach($hotel->rating as $data){
+       $rating += $data->rate;
+       }
+
+       @endphp
+       {{$rating}}
+       Stars
+
+      </p>
+
+
+      <ul class="text-center">
+       <div class="@if(Auth::check()) rating-input @else rating_login @endif" data-hotel_id="{{$hotel->id}}" data-type_id="1">
+
+        <span class="starone">
+         <i class="fas fa-star star_one star_blank 
                                     @foreach($hotel->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 1)
@@ -579,9 +581,9 @@
                                             @endif
                                         @endif
                                     @endforeach" data-value="1" title="One Star"></i>
-                                </span>
+        </span>
 
-                                <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
+        <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
                                     @foreach($hotel->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 2)
@@ -590,7 +592,7 @@
                                         @endif
                                     @endforeach" data-value="2"></i></span>
 
-                                <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
+        <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
                                     @foreach($hotel->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 3)
@@ -599,7 +601,7 @@
                                         @endif
                                     @endforeach" data-value="3"></i></span>
 
-                                <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
+        <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
                                     @foreach($hotel->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 4)
@@ -608,7 +610,7 @@
                                         @endif
                                     @endforeach" data-value="4"></i></span>
 
-                                <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
+        <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
                                     @foreach($hotel->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate == 5)
@@ -617,189 +619,147 @@
                                         @endif
                                     @endforeach" data-value="5"></i></span>
 
-                                <br>
-                                {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p> --}}
-                            </div>
+        <br>
+        {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p> --}}
+       </div>
 
 
-                        </ul>
+      </ul>
 
-                        @if(Auth::check())
-                        <button data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
-                        @else
-                        <a href="/login" class=" btn btn-secondary form-control my-2">Detail</a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-            @endforeach
-        </div>
+      @if(Auth::check())
+      <button data-id="" class="package-booking-btn btn btn-secondary form-control my-2">Detail</button>
+      @else
+      <a href="/login" class=" btn btn-secondary form-control my-2">Detail</a>
+      @endif
+     </div>
     </div>
+   </div>
+
+   @endforeach
+  </div>
+ </div>
 </section>
 
 
 
 
+<x-feedback-component />
 
 
 
 
 
-{{-- feedback --}}
-<section class="py-0">
-    <div class="container mt-5">
-        <div class="row mt-5">
-            <div class="col-md-12 justify-content-center">
-                
-                <h1 class="text-center">Feedbacks</h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-8 feedback_data_class">
-                <div class="feedback_class ">
-                    {{-- <div class="feedback_data_class"> --}}
-                        
-                        @foreach($feedback_data as $feedback)
-                        
-                            <div class="card card-span text-white h-100">
-
-                                <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                                    
-                                    <h3 class="text-900 mt-3 ">
-                                        <i class="fa fa-user text-secondary" style="font-size: 20px;"></i>
-                                        {{$feedback->user->name}}
-                                        @php
-                                            $created_at = strtotime($feedback->created_at);
-                                            $date = Carbon\Carbon::now()->diffForHumans($feedback->created_at);
-                                           
-                                        @endphp
-                                        
-                                    </h3>
-
-                                    <span class="fw-normal text-900"> <i class="fas fa-clock me-2 text-secondary"></i>  {{$date}}  </span>
-                                    
-                                    <h5 class="text-900 mt-3">
-                                        <blockquote> {{$feedback->message}} </blockquote>
-                                    </h5>
-                                    
-                                </div>
-
-                            </div>
-
-
-                        
-
-                        @endforeach
-                    {{-- </div> --}}
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                
-                <h5 class="text-center">You can send us feedbacks</h5>
-                <span class="text-danger">Maxlength is 100 letters</span>
-                <textarea class="form-control feedback_text" minlength="10" maxlength="100" style="height: 120px;"></textarea>
-                <div class="d-grid">
-                    @if(Auth::user())
-                    <button class="btn btn-secondary text-center mt-2 btn_feedback" type="button">
-                        Send Us!
-                    </button>
-                    @else
-                    <a href="/login" class=" btn btn-secondary form-control my-2">You are not Login!</a>
-                    @endif
-                </div>
-                    
-                
-            </div>
-
-        </div>
-    </div>
-</section>
 
 {{-- partnership --}}
 <section class="pt-0">
-    <div class="container mt-5">
-        <div class="row mt-5">
-            <div class="col-md-12 justify-content-center">
-                <h1 class="text-center">Partnerships</h1>
-            </div>
+ <div class="container mt-5">
+  <div class="row mt-5">
+   <div class="col-md-12 justify-content-center">
+    <h1 class="text-center">Partnerships</h1>
+   </div>
+  </div>
+
+  <div class="col-12">
+
+   <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+     <div class="carousel-item active" data-bs-interval="10000">
+      <div class="row h-100 align-items-center g-2">
+       <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
+
+        <div class="partnership_name_div">
+         <h4 class="partnership_name">Company name</h4>
         </div>
 
-        <div class="col-12">
+        <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+       </div>
+
+       <div class="col-md-4 mb-3 mb-md-0 h-100">
+        <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+       </div>
+
+       <div class="col-md-4 mb-3 mb-md-0 h-100">
+        <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+       </div>
 
 
-            <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
-                <div class="carousel-inner">
-
-                    
-                    @php
-                        $partners_array = [];
-                        $array = [];
-                        foreach($partners as $key => $partner){
-                            array_push($array,$partner);
-                        }
-                        
-                        $data = array_chunk( $array, 4);
-                        $partners_array = $data;
-                        
-
-                    @endphp
-
-                    @foreach($partners_array as $key => $partner)
-                    
-                    <div class="carousel-item @if($key == 0) active @endif" data-bs-interval="10000">
-                        <div class="row h-100 align-items-center g-2">
 
 
-                            {{-- @foreach($partners_array as $key => $data) --}}
-                                @foreach($partner as $value)
-                                    <div class="col-md-3 mb-3 mb-md-0 h-100 partnership_div">
-
-                                        <div class="partnership_name_div">
-                                            <h4 class="partnership_name">{{$value->name}}</h4>
-                                        </div>
-
-                                        <img src="{{
-                                            asset(
-                                                "storage/".$value->logo
-                                            )
-                                        }}" width="100%" alt="..." />
-                                    </div>
-                                {{-- @endforeach --}}
-                            @endforeach
-                            
-
-                        </div>
-                    </div>
-                   
-                    @endforeach
-                   
-
-                    <div class="row">
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next </span></button>
-                    </div>
-                </div>
+      </div>
+     </div>
 
 
-               {{--  <div class="row flex-center mt-2">
-                    <div class="col-auto position-relative z-index-2">
-                        <ol class="carousel-indicators me-xxl-7 me-xl-4 me-lg-7">
-                           
-                            <li class="active" data-bs-target="#carouselTestimonials" data-bs-slide-to="0"></li>
-                            <li data-bs-target="#carouselTestimonials" data-bs-slide-to="1"></li>
 
-                        </ol>
-                    </div>
-                </div> --}}
+     <div class="carousel-item" data-bs-interval="10000">
+      <div class="row h-100 align-items-center g-2">
+       <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
 
-
-            </div>
+        <div class="partnership_name_div">
+         <h4 class="partnership_name">Company he</h4>
         </div>
+
+        <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+       </div>
+
+       <div class="col-md-4 mb-3 mb-md-0 h-100">
+        <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+       </div>
+
+       <div class="col-md-4 mb-3 mb-md-0 h-100">
+        <img src="{{
+                                    asset(
+                                        'frontnew/assets/img/file/myanmar.jpeg'
+                                    )
+                                }}" width="100%" alt="..." />
+       </div>
+
+
+
+      </div>
+     </div>
+
+
+
+     <div class="row">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next </span></button>
+     </div>
     </div>
+    <div class="row flex-center mt-2">
+     <div class="col-auto position-relative z-index-2">
+      <ol class="carousel-indicators me-xxl-7 me-xl-4 me-lg-7">
+       <li class="active" data-bs-target="#carouselTestimonials" data-bs-slide-to="0"></li>
+       <li data-bs-target="#carouselTestimonials" data-bs-slide-to="1"></li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
 </section>
+
 
 
 
@@ -807,32 +767,32 @@
 
 <!-- Modal -->
 <div class="modal fade" id="packageBookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Package Booking</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+ <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+   <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Package Booking</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+   </div>
+   <div class="modal-body">
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+   </div>
+  </div>
+ </div>
 </div>
 
 @endsection
 @push('script')
 <script>
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+ $(document).ready(function() {
+  $.ajaxSetup({
+   headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   }
+  });
 
         $('.package-booking-btn').click(function() {
             let id = $(this).data('id');
@@ -918,146 +878,9 @@
 
         })
 
-      $('.your-class').slick({
-          autoplay: true,
-          autoplaySpeed: 2000,
-          centerMode: true,
-          centerPadding: '60px',
-          slidesToShow: 3,
-
-          responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                arrows: false,
-                centerMode: true,
-                centerPadding: '40px',
-                slidesToShow: 3
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                arrows: true,
-                centerMode: true,
-                centerPadding: '40px',
-                slidesToShow: 1
-              }
-            }
-          ]
-      });
 
 
-      function  slickcarousel() {
-          return {
-              autoplay: true,
-              autoplaySpeed: 2000,
-              slidesToShow: 2,
-          }
-      }
-      $('.feedback_class').slick(slickcarousel());
-
-
-      $('.btn_feedback').click(function () {
-          var feedback = $('.feedback_text').val();
-          var html = "";
-          var data = '';
-          var current = new Date();
-          var year = current.getFullYear();
-          console.log(year);
-          var month = current.getMonth()+1;
-          var daysInMonth = new Date(year,month,1,-1).getDate();
-          // console.log(daysInMonth);
-
-          $.ajax({
-                url : "/ajax_frontent_feedback",
-                type : "POST",
-                data : {feedback:feedback},
-                success:function(data){
-                    
-                
-                    $.each(data,function(i,v){
-                        var diff = current - new Date(v.created_at);
-
-                        var seconds = Math.floor(diff/1000); //ignore any left over units smaller than a second
-                        var minutes = Math.floor(seconds/60); 
-                        var second = seconds % 60;
-                        console.log(second);
-                        var hours = Math.floor(minutes/60);
-                        var days = Math.floor(hours/24);
-                        var months = days/month;
-                        var year = months/12;
-
-                        var hour_data = hours + ' hours after';
-                        var minute_data = minutes + ' minutes after';
-                        var second_data =  seconds + ' seconds after';
-
-                        var day_data = days + ' days after';
-                        var month_data = months + ' months after';
-                        var year_data = year + ' year after';
-
-                        if(seconds < 59){
-                            data = second_data;
-
-                        }else if (minutes <= 59) {
-
-                            data = minute_data;
-
-                        }else if (hours < 24) {
-                            data = hour_data;
-                        }else if (days < daysInMonth) {
-                            data = day_data;
-                        }else if (months < 12) {
-                            data = month_data;
-                        }else{
-                             data = year_data;
-                        }
-
-                        
-                html += `<div class="card card-span text-white h-100">
-
-                            <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                                
-                                <h3 class="text-900 mt-3 ">
-                                    <i class="fa fa-user text-secondary" style="font-size: 20px;"></i>
-                                    ${v.user.name}
-                                    
-                                    
-                                </h3>
-
-                                <span class="fw-normal text-900"> <i class="fas fa-clock me-2 text-secondary"></i>  ${data}  </span>
-                                
-                                <h5 class="text-900 mt-3">
-                                    <blockquote> ${v.message}</blockquote>
-                                </h5>
-                                
-                            </div>
-
-                        </div>`
-
-                    })
-                    
-
-                        $('.feedback_class').slick('unslick');
-
-                        $('.feedback_class').html(html);
-                        $(".feedback_class").not('.slick-initialized').slick(slickcarousel());
-
-                    
-
-
-
-
-                },
-                error: function(err) {
-                        console.log(err);
-                    }
-          })
-      })
-   
-   
-
-    })
+ })
 
 </script>
 @endpush

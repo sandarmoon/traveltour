@@ -204,7 +204,7 @@ class Wizard extends Component
   
         $this->clearForm();
         session()->flash('message', 'Booking is successfully added!.');
-         return redirect()->to('/front/');
+         return redirect()->to('/bookinghistory/');
     }
   
     /**

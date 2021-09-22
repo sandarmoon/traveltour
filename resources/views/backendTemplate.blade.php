@@ -211,6 +211,13 @@
                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
                 transition: 1s;
                 }
+
+            .dataTable_class_width{
+                width: 2em !important;
+                
+            }
+
+            
         </style>
     </head>
 
@@ -504,12 +511,27 @@
                                     <i class="ni ni-bullet-list-67 text-red"></i>
                                     Partnership
                                 </a>
+
+
                                 <input
                                     type="hidden"
                                     name="url"
                                     value="{{Request::segment(1)}}"
                                     class="url"
                                 />
+                            </li>
+
+
+                            <li class="nav-item {{ Request::segment(1) === 'feedbacks' || Request::segment(1) === 'detail' ? 'active' : '' }}"
+                            >
+                                <a
+                                    class="nav-link "
+                                    href="{{ route('feedbacks') }}"
+                                >
+                                    <i class="fas fa-comments text-orange"></i>
+                                    Feedback
+                                </a>
+
                             </li>
                         @endrole
                     </ul>

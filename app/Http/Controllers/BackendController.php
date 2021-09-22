@@ -19,6 +19,8 @@ use App\Models\Type;
 use Session;
 use  Auth;
 use DB;
+use App\Models\Feedback;
+
 class BackendController extends Controller
 
 {
@@ -818,6 +820,70 @@ class BackendController extends Controller
         
     }
 
+
+
+    public function feedback($value='')
+    {
+        $feedbacks = Feedback::all();
+        $email_contact = Emailcontact::all();
+
+        return view('backend.feedback',compact('feedbacks','email_contact'));
+    }
+
+    public function getfeedbackdataTable(Request $request){
+        DB::statement(DB::raw('set @rownum=0'));
+        $feedback_datas = Feedback::with('user')->select([
+            DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+            'id',
+            'user_id',
+            'message',
+            'created_at',
+            'updated_at']);
+
+        $datatables = Datatable::of($feedback_datas)->with('user')
+                        ->addColumn('name',function($feedback_data){
+                            return $feedback_data->user->name;
+                        // })
+                        // ->addColumn('action',function($feedback_data){
+                        //     return "<button class='btn btn-success' data-id=". $feedback_data->id.  ">
+                        //                 Confirm
+                        //               </button>
+
+                        //               <button class='btn btn-danger' data-id =".$feedback_data->id.">
+                        //                 Cancel
+                        //               </button>";
+                        } );
+
+        return $datatables->make(true);
+    }
+
+
+    public function getemailcontactdataTable(Request $request)
+    {
+        DB::statement(DB::raw('set @rownum=0'));
+        $email_contact_datas = Emailcontact::select([
+            DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+            'id',
+            'name',
+            'email',
+            'message',
+            'created_at',
+            'updated_at']);
+
+        $datatables = Datatable::of($email_contact_datas);
+                        
+                        // ->addColumn('action',function($email_contact_data){
+                        //     return "<button class='btn btn-success' data-id=". $email_contact_data->id.  ">
+                        //                 Confirm
+                        //               </button>
+
+                        //               <button class='btn btn-danger' data-id =".$email_contact_data->id.">
+                        //                 Cancel
+                        //               </button>";
+                        // } );
+
+        return $datatables->make(true);
+    }
 
 
 

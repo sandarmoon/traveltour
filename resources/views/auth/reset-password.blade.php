@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>A Agency</title>
+        <title>Lucky Seven</title>
         <!-- Favicon-->
         @livewireStyles
         <link rel="icon" type="image/x-icon" href="{{asset('frontend/assets/travel.svg')}}" />
@@ -91,15 +91,16 @@
         }
 
         .btn_submit{
-            background: #142f8c;
-            
-            color: white;
+             border: 1px solid #FE7A15;
+             color: #000;
         }
         .btn_submit:hover{
-            color: #e9eaf2;
-            background: #324da8;
+            background-color: #FE7A15;
+            color: #fff;
             
         }
+
+     
 
         </style>
 
@@ -115,7 +116,7 @@
                     <nav class="navbar navbar-expand-lg navbar-dark ">
                         <div class="container-fluid">
                             <a href="{{route('frontend.index')}}" class="text-white nav-link">
-                               <h4> Advance Agency </h4>
+                               <h4> Lucky Seven </h4>
                             </a>
 
                            

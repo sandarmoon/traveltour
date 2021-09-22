@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>A Agency</title>
+        <title>Lucky Seven</title>
         <!-- Favicon-->
         @livewireStyles
         <link rel="icon" type="image/x-icon" href="{{asset('frontend/assets/travel.svg')}}" />
@@ -90,6 +90,15 @@
 
         }
 
+        .btn_outline_primary{
+            border: 1px solid #FE7A15;
+        }
+
+        .btn_outline_primary:hover{
+            background-color: #FE7A15;
+            color: #fff;
+        }
+
         </style>
 
     </head>
@@ -104,7 +113,7 @@
                     <nav class="navbar navbar-expand-lg navbar-dark ">
                         <div class="container-fluid">
                             <a href="{{route('frontend.index')}}" class="text-white nav-link">
-                               <h4> Advance Agency </h4>
+                               <h4> Lucky Seven </h4>
                             </a>
 
                             <ul class="navbar-nav d-flex">
@@ -159,7 +168,7 @@
                                 </div>
 
                                 <div class="flex items-center justify-end text-center ">
-                                    <button class="btn btn-secondary my-4 px-3">
+                                    <button class="btn btn_outline_primary my-4 px-3">
                                         {{ __('Email Password Reset Link') }}
                                     </button>
                                 </div>

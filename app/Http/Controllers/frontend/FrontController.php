@@ -680,6 +680,12 @@ class FrontController extends Controller
        
     }
 
+
+    public function aboutus($value='')
+    {
+        return view('frontend.about');
+    }
+
     
 
 

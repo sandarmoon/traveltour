@@ -147,6 +147,12 @@
             height: 0;
         }  
 
+        .nav-pills .nav_custom.active, .nav-pills .show > .nav_custom {
+            color: #FFFEFE;
+            background-color: orange !important;
+        }
+
+
  </style>
 
  @stack('style')

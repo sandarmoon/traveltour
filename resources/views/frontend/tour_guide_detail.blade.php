@@ -110,6 +110,7 @@
 </section>
 
 
+@include('layouts.foot')
 
 @endsection
 

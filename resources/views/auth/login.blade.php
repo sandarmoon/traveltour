@@ -96,6 +96,15 @@
             background: linear-gradient(to right,rgba(250,158,27,0.8),rgba(48, 17, 188,0.9));
         }
 
+        .btn_outline_primary{
+            border: 1px solid #FE7A15;
+        }
+
+        .btn_outline_primary:hover{
+            background-color: #FE7A15;
+            color: #fff;
+        }
+
         </style>
 
     </head>
@@ -108,7 +117,7 @@
                     <nav class="navbar navbar-expand-lg navbar-dark justify-content-end">
                         <div class="container-fluid">
                             <a href="{{route('frontend.index')}}" class="text-white nav-link">
-                               <h4> Advance Agency </h4>
+                               <h4> Lucky Seven </h4>
                             </a>
 
                             <ul class="navbar-nav d-flex">
@@ -187,7 +196,7 @@
                                             
                                         </div>
                                         <div class="row  my-3">
-                                            <button class="btn btn-outline-primary d-block btn-block">
+                                            <button class="btn btn_outline_primary d-block btn-block">
                                                 {{ __('Log in') }}
                                             </button>
                                         </div>

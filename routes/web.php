@@ -275,6 +275,8 @@ Route::post('/hotel/filterbyppl',[FrontController::class,'hotelFilterByPpl'])->n
 // frontend feedback
 Route::post('/ajax_frontent_feedback',[FrontController::class,'ajax_frontent_feedback'])->name('ajax_frontent_feedback');
 
+Route::get('/about',[FrontController::class,'aboutus'])->name('aboutus');
+
 
 //===========dashboard start========================
 Route::get('/dashboard/car',[BackendController::class,'carDashboard'])->name('dashboard.car');

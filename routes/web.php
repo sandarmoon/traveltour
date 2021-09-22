@@ -173,6 +173,15 @@ Route::get('/pb/list',[BackendController::class,'packageBookingList'])->name('ba
 Route::get('/bookinglist/pid/{id}',[BackendController::class,'boolingListByPackageId'])->name('bookinglist.pid');
 
 
+// backend feedback
+
+Route::get('/feedbacks',[BackendController::class,'feedback'])->name('feedbacks');
+Route::post('ajax/getfeedbackdataTable',[BackendController::class,'getfeedbackdataTable'])->name('ajax.getfeedbackdataTable');
+Route::post('ajax/getemailcontactdataTable',[BackendController::class,'getemailcontactdataTable'])->name('ajax.getemailcontactdataTable');
+
+
+
+
 require __DIR__.'/auth.php';
 
 
@@ -241,11 +250,16 @@ Route::get('/package_detail/{id}',[FrontController::class,'packagedetail'])->nam
 
 Route::get('/pacakgebooking_detail/{id}',[FrontController::class,'pacakgebooking_detail'])->name('frontend_pacakgebooking_detail');
 
+// rating
+
 Route::post('/rating',[FrontController::class,'rating'])->name('rating');
 
+
+// tour guide 
 Route::get('/tour_guide_detail/{id}',[FrontController::class,'tour_guide_detail'])->name('frontend.tour_guide_detail');
 
 Route::post('/ajax_tour_guide',[FrontController::class,'ajax_tour_guide'])->name('ajax_tour_guide');
+
 
 //===========filter for hotel start ========================
 //using group-total-price
@@ -256,6 +270,10 @@ Route::post('/hotel/filterbyRoomType',[FrontController::class,'hotelFilterByRoom
 
 //using ppl count
 Route::post('/hotel/filterbyppl',[FrontController::class,'hotelFilterByPpl'])->name('hotel.filter.ppl.count');
+
+
+// frontend feedback
+Route::post('/ajax_frontent_feedback',[FrontController::class,'ajax_frontent_feedback'])->name('ajax_frontent_feedback');
 
 
 //===========dashboard start========================

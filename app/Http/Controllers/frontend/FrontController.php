@@ -538,9 +538,29 @@ class FrontController extends Controller
         $cities = City::with('tours')->get();
         $array = array('city'=>$cities,'tour_guide'=>$tour_guide);
         
-
-
         return $array;
+    }
+
+    public function ajax_frontent_feedback(Request $request)
+    {
+        $feedback = new Feedback;
+        $feedback->message = $request->feedback;
+        $feedback->user_id = Auth::id();
+
+        $feedback->save();
+
+        $feedbacks = Feedback::all();
+        if(count($feedbacks) > 8){
+
+            $feedback_data = Feedback::with('user')->get()->random(8);
+
+        }else{
+
+            $feedback_data = Feedback::orderBy('id','DESC')->with('user')->get();
+
+        }
+
+        return $feedback_data;
     }
 
 

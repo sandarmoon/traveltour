@@ -419,6 +419,62 @@
 
 
 
+{{-- tip and guide --}}
+
+
+<section class="py-0">
+    <div class="container mt-5">
+        <div class=" justify-content-start ">
+            <div class="
+                    col-md-12
+                    heading-section
+                    
+                    ftco-animate
+                    fadeInUp
+                    ftco-animated
+                ">
+                <h2 class="mb-4">Tips And Guides</h2>
+            </div>
+        </div>
+
+            <div class="your-class">
+
+                @foreach($tours_carousel as $tour)
+                <div>
+
+
+                    <div class="card" style="width: 18rem;">
+                      @php
+                        $photo = json_decode($tour->photo);
+
+                        $photo_array = array_rand($photo,1);
+                      @endphp  
+
+                      <div style="overflow: hidden; width: auto ; height: 180px;">
+
+                          <img src="{{asset('storage/'.$photo[$photo_array])}}" class="card-img-top img-fluid" alt="..." >
+
+                      </div>
+                      
+                      <div class="card-body">
+                        <h4 class=" text-center">{{$tour->title}}</h4>
+                        <h6 class="card-text text-center font-weight-normal text-uppercase my-2" style="font-size: 17px; color: #f15d30">{{$tour->city->name}}</h6>
+                        <a href="{{route('frontend.tour_guide_detail',$tour->id)}}" class="btn btn-secondary form-control my-2">Detail</a>
+                      </div>
+                    </div>
+                   
+                </div>
+                @endforeach
+
+            </div>
+
+            
+       
+</section>
+
+
+
+
 
 {{-- popular hotel --}}
 <section class="py-0 ">
@@ -598,53 +654,67 @@
     <div class="container mt-5">
         <div class="row mt-5">
             <div class="col-md-12 justify-content-center">
+                
                 <h1 class="text-center">Feedbacks</h1>
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="feedback_class">
+        <div class="row">
+            <div class="col-md-8 feedback_data_class">
+                <div class="feedback_class ">
+                    {{-- <div class="feedback_data_class"> --}}
+                        
+                        @foreach($feedback_data as $feedback)
+                        
+                            <div class="card card-span text-white h-100">
 
-                @foreach($feedback_data as $feedback)
-                {{-- <div class="col-sm-9 col-md-4 mb-3 mb-md-0 h-100"> --}}
-                    <div class="card card-span text-white h-100">
+                                <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
+                                    
+                                    <h3 class="text-900 mt-3 ">
+                                        <i class="fa fa-user text-secondary" style="font-size: 20px;"></i>
+                                        {{$feedback->user->name}}
+                                        @php
+                                            $created_at = strtotime($feedback->created_at);
+                                            $date = Carbon\Carbon::now()->diffForHumans($feedback->created_at);
+                                           
+                                        @endphp
+                                        
+                                    </h3>
 
-                        <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
-                            
-                            <h3 class="text-900 mt-3 ">
-                                <i class="fa fa-user text-secondary" style="font-size: 20px;"></i>
-                                {{$feedback->user->name}}
-                                @php
-                                    $created_at = strtotime($feedback->created_at);
-                                    $date = Carbon\Carbon::now()->diffForHumans($feedback->created_at);
-                                   
-                                @endphp
-                                
-                            </h3>
+                                    <span class="fw-normal text-900"> <i class="fas fa-clock me-2 text-secondary"></i>  {{$date}}  </span>
+                                    
+                                    <h5 class="text-900 mt-3">
+                                        <blockquote> {{$feedback->message}} </blockquote>
+                                    </h5>
+                                    
+                                </div>
 
-                            <span class="fw-normal text-900"> <i class="fas fa-clock me-2 text-secondary"></i>  {{$date}}  </span>
-                            
-                            <h5 class="text-900 mt-3">
-                                <blockquote> {{$feedback->message}} </blockquote>
-                            </h5>
-                            {{-- <a class="
-                                    btn btn-lg
-                                    text-900
-                                    fs-1
-                                    px-0
-                                    hvr-icon-forward
-                                " href="#!" role="button">Read more
-                                <svg class="bi bi-arrow-right-short hover-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
-                                </svg></a> --}}
-                        </div>
-
-                    </div>
+                            </div>
 
 
-                {{-- </div> --}}
+                        
 
-                @endforeach
+                        @endforeach
+                    {{-- </div> --}}
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                
+                <h5 class="text-center">You can send us feedbacks</h5>
+                <span class="text-danger">Maxlength is 100 letters</span>
+                <textarea class="form-control feedback_text" minlength="10" maxlength="100" style="height: 120px;"></textarea>
+                <div class="d-grid">
+                    @if(Auth::user())
+                    <button class="btn btn-secondary text-center mt-2 btn_feedback" type="button">
+                        Send Us!
+                    </button>
+                    @else
+                    <a href="/login" class=" btn btn-secondary form-control my-2">You are not Login!</a>
+                    @endif
+                </div>
+                    
+                
             </div>
 
         </div>
@@ -766,6 +836,7 @@
 
 
 
+
 @include('layouts.footer')
 
 <!-- Modal -->
@@ -800,6 +871,7 @@
   $('.package-booking-btn').click(function() {
    let id = $(this).data('id');
    console.log(id);
+
 
    Swal.fire({
     title: 'How many people with you for tour?'
@@ -876,35 +948,112 @@
   
 
 
+      function  slickcarousel() {
+          return {
+              autoplay: true,
+              autoplaySpeed: 2000,
+              slidesToShow: 2,
+          }
+      }
+      $('.feedback_class').slick(slickcarousel());
 
-      $('.feedback_class').slick({
-          autoplay: true,
-          autoplaySpeed: 2000,
-          centerMode: true,
-          centerPadding: '30px',
-          slidesToShow: 3,
 
-          responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                arrows: false,
-                centerMode: true,
-                centerPadding: '30px',
-                slidesToShow: 3
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                arrows: true,
-                centerMode: true,
-                centerPadding: '30px',
-                slidesToShow: 1
-              }
-            }
-          ]
-      });
+      $('.btn_feedback').click(function () {
+          var feedback = $('.feedback_text').val();
+          var html = "";
+          var data = '';
+          var current = new Date();
+          var year = current.getFullYear();
+          console.log(year);
+          var month = current.getMonth()+1;
+          var daysInMonth = new Date(year,month,1,-1).getDate();
+          // console.log(daysInMonth);
+
+          $.ajax({
+                url : "/ajax_frontent_feedback",
+                type : "POST",
+                data : {feedback:feedback},
+                success:function(data){
+                    
+                
+                    $.each(data,function(i,v){
+                        var diff = current - new Date(v.created_at);
+
+                        var seconds = Math.floor(diff/1000); //ignore any left over units smaller than a second
+                        var minutes = Math.floor(seconds/60); 
+                        var second = seconds % 60;
+                        console.log(second);
+                        var hours = Math.floor(minutes/60);
+                        var days = Math.floor(hours/24);
+                        var months = days/month;
+                        var year = months/12;
+
+                        var hour_data = hours + ' hours after';
+                        var minute_data = minutes + ' minutes after';
+                        var second_data =  seconds + ' seconds after';
+
+                        var day_data = days + ' days after';
+                        var month_data = months + ' months after';
+                        var year_data = year + ' year after';
+
+                        if(seconds < 59){
+                            data = second_data;
+
+                        }else if (minutes <= 59) {
+
+                            data = minute_data;
+
+                        }else if (hours < 24) {
+                            data = hour_data;
+                        }else if (days < daysInMonth) {
+                            data = day_data;
+                        }else if (months < 12) {
+                            data = month_data;
+                        }else{
+                             data = year_data;
+                        }
+
+                        
+                html += `<div class="card card-span text-white h-100">
+
+                            <div class="card-body px-xl-5 px-md-3 pt-0 pb-7">
+                                
+                                <h3 class="text-900 mt-3 ">
+                                    <i class="fa fa-user text-secondary" style="font-size: 20px;"></i>
+                                    ${v.user.name}
+                                    
+                                    
+                                </h3>
+
+                                <span class="fw-normal text-900"> <i class="fas fa-clock me-2 text-secondary"></i>  ${data}  </span>
+                                
+                                <h5 class="text-900 mt-3">
+                                    <blockquote> ${v.message}</blockquote>
+                                </h5>
+                                
+                            </div>
+
+                        </div>`
+
+                    })
+                    
+
+                        $('.feedback_class').slick('unslick');
+
+                        $('.feedback_class').html(html);
+                        $(".feedback_class").not('.slick-initialized').slick(slickcarousel());
+
+                    
+
+
+
+
+                },
+                error: function(err) {
+                        console.log(err);
+                    }
+          })
+      })
    
    
 

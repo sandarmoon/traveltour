@@ -17,6 +17,7 @@ class SearchingComposerProvider extends ServiceProvider
     {
         $this->searchingshare();
         $this->sharingcars();
+        $this->sharingfeedback();
     }
 
     /**
@@ -56,5 +57,13 @@ class SearchingComposerProvider extends ServiceProvider
            'components.fliter-component'
            
            ],'App\Http\ViewComposers\SearchingComposer@hoteltypes');
+    }
+
+    public function sharingfeedback(){
+         View::composer(
+           [
+           'components.feedback-component'
+           
+           ],'App\Http\ViewComposers\SearchingComposer@popularfeedback');
     }
 }

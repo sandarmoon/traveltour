@@ -6,6 +6,7 @@ use App\Models\Package;
 use App\Models\Car;
 use App\Models\Type;
 use App\Models\Company;
+use App\Models\Feedback;
 use App\Models\Room;
 use Carbon\Carbon;
 
@@ -48,6 +49,20 @@ class SearchingComposer
 
   public function hoteltypes(View $view){
      $view->with('hoteltypes',Type::where('parent_id',1)->get());
+  }
+
+  public function popularfeedback(View $view){
+      $feedbacks = Feedback::all();
+        if(count($feedbacks) > 8){
+
+            $feedback_data = Feedback::all()->random(8);
+
+        }else{
+
+            $feedback_data = Feedback::orderBy('id','DESC')->get();
+
+        }
+     $view->with('feedback_data',$feedback_data);
   }
 }
 ?>

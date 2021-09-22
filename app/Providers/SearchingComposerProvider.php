@@ -16,6 +16,7 @@ class SearchingComposerProvider extends ServiceProvider
     public function register()
     {
         $this->searchingshare();
+        $this->sharingcars();
     }
 
     /**
@@ -30,11 +31,30 @@ class SearchingComposerProvider extends ServiceProvider
 
     public function searchingshare(){
        View::composer(
-           ['frontend.home',
-           'frontend.result',
-           'frontend.show_all_hotels',
-           'frontend.hotelresult'
+           [ 'components.searchingnew',
+                'frontend.home',
+                'frontend.result'
            ],'App\Http\ViewComposers\SearchingComposer');
+        $this->sharinghoteltypes();
 
+    }
+
+    public function sharingcars(){
+       View::composer(
+           [
+           'components.fliter-component',
+           'frontend.show_all_hotels',
+           
+           
+           ],'App\Http\ViewComposers\SearchingComposer@hotels');
+
+    }
+
+    public function sharinghoteltypes(){
+        View::composer(
+           [
+           'components.fliter-component'
+           
+           ],'App\Http\ViewComposers\SearchingComposer@hoteltypes');
     }
 }

@@ -247,7 +247,19 @@ Route::get('/tour_guide_detail/{id}',[FrontController::class,'tour_guide_detail'
 
 Route::post('/ajax_tour_guide',[FrontController::class,'ajax_tour_guide'])->name('ajax_tour_guide');
 
+//===========filter for hotel start ========================
+//using group-total-price
+Route::post('/hotel/filterbyprice',[FrontController::class,'hotelFilterByPrice'])->name('hotel.filter.price');
 
+//using room type
+Route::post('/hotel/filterbyRoomType',[FrontController::class,'hotelFilterByRoomType'])->name('hotel.filter.room.type');
+
+//using ppl count
+Route::post('/hotel/filterbyppl',[FrontController::class,'hotelFilterByPpl'])->name('hotel.filter.ppl.count');
+
+
+//===========dashboard start========================
+Route::get('/dashboard/car',[BackendController::class,'carDashboard'])->name('dashboard.car');
 
 
 

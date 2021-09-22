@@ -22,6 +22,7 @@ use DB;
 use Carbon\Carbon;
 use App\Models\Rating;
 use App\Models\Tour;
+use App\Models\Feedback;
 
 
 class FrontController extends Controller
@@ -39,13 +40,31 @@ class FrontController extends Controller
         //company -> type ->2 ->car
         $partners = Company::all();
         $hotels=Company::where('type','=',1)->get();
-        $tours_carousel = Tour::all();
+        $tour = Tour::all();
+
+        if(count($tour) > 10){
+            $tours_carousel = Tour::all()->random(10);
+        }else{
+            $tours_carousel = Tour::orderBy('id','DESC')->get();
+        }
+        
+
 
         // $tours = Tour::inRandomOrder()->get();
+        $feedbacks = Feedback::all();
+        if(count($feedbacks) > 8){
+
+            $feedback_data = Feedback::all()->random(8);
+
+        }else{
+
+            $feedback_data = Feedback::orderBy('id','DESC')->get();
+
+        }
 
 
 
-        return view('frontend.home',compact('rooms','cars','rooms','hotels','partners','tours_carousel'));
+        return view('frontend.home',compact('rooms','cars','rooms','hotels','partners','tours_carousel','feedback_data'));
 
     }
 
@@ -195,7 +214,13 @@ class FrontController extends Controller
        // $hotels=Company::where('type',1)->where('city_id',$drop)
        //  ->get();
 
-        $hotels=Company::whereHas('room',function($q){
+       $group_total_price=$request->group_total_price;
+       $group_total_ppl=$request->group_total_ppl;
+       $group_total_room_type=$request->group_total_room_type;
+
+       
+
+        $resulthotels=Company::whereHas('room',function($q){
             $q->where('status','=','1')
                 ->orderBy('pricepernight','asc');
 
@@ -209,7 +234,7 @@ class FrontController extends Controller
         $search=1;
 
         // dd($hotels);
-        return view('frontend.hotelresult',compact('s_date','e_date','drop','search','hotels','common_type'));
+        return view('frontend.show_all_hotels',compact('s_date','e_date','drop','search','resulthotels','common_type'));
     }
 
     // rooms result from hotel id aco
@@ -518,6 +543,124 @@ class FrontController extends Controller
         return $array;
     }
 
+
+    //hotel filter by group price start here
+    public function hotelFilterByPrice(Request $request){
+       
+        $keyword=$request->price;
+        $max=0;
+        $min=0;
+
+        $resulthotels=null;
+
+        if($keyword == '0-60'){
+            $min_price=0;
+            $max_price=60;
+
+         
+            $resulthotels=Company::withCount(['room'=>function ($q) use($min_price,$max_price){
+                $q->whereBetween('pricepernight',[$min_price,$max_price])
+                        ->where('status','=',1);
+            }])
+            ->whereHas('room',function ($q) use($min_price,$max_price){
+                return $q->whereBetween('pricepernight',[$min_price,$max_price])
+                        ->where('status','=',1);
+            })
+            ->get();
+
+            
+
+                        
+         }
+
+        elseif($keyword == '70-140'){
+            $min_price=70;
+            $max_price=140;
+
+            $resulthotels=Company::withCount(['room'=>function ($q) use($min_price,$max_price){
+                $q->whereBetween('pricepernight',[$min_price,$max_price])
+                        ->where('status','=',1);
+            }])->whereHas('room',function ($q) use($min_price,$max_price){
+                return $q->whereBetween('pricepernight',[$min_price,$max_price])
+                        ->where('status','=',1);
+            })->get();
+
+        }else{
+            $resulthotels=Company::withCount(['room'=>function ($q) {
+                $q->where('pricepernight','>',140)
+                        ->where('status','=',1);
+            }])->whereHas('room',function ($q) {
+                return $q->where('pricepernight','>',140)
+                        ->where('status','=',1);
+            })->get();
+        }
+
+       
+
+        return response()->json(['hotels'=>$resulthotels]);
+        
+    }
+
+
+    public function hotelFilterByRoomType(Request $request){
+        $types=json_decode($request->type,true);
+        $hotels=[];
+
+        foreach($types as $k=>$type_id)
+        {
+             $resulthotels=Company::withCount(['room'=>function ($q) use ($type_id) {
+                $q->where('type_id','=',$type_id)
+                        ->where('status','=',1);
+            }])->whereHas('room',function ($q) use ($type_id) {
+                return $q->where('type_id','=',$type_id)
+                        ->where('status','=',1);
+            })->get();
+            array_push($hotels,$resulthotels);
+        }
+        return response()->json(['hotels'=>$hotels]);
+    }
+
+
+    public function hotelFilterByPpl(Request $request){
+           $keyword=$request->ppl;
+        
+
+        $resulthotels=null;
+
+        if($keyword == 1 || $keyword='2-3'){
+            
+
+         
+            $min_ppl=2;
+            $max_ppl=3;
+
+            $resulthotels=Company::withCount(['room'=>function ($q) use($min_ppl,$max_ppl){
+                $q->whereBetween('ppl',[$min_ppl,$max_ppl])
+                        ->where('status','=',1);
+            }])->whereHas('room',function ($q) use($min_ppl,$max_ppl){
+                return $q->whereBetween('ppl',[$min_ppl,$max_ppl])
+                        ->where('status','=',1);
+            })->get();
+                
+         }
+
+       else{
+            $resulthotels=Company::withCount(['room'=>function ($q) {
+                $q->where('ppl','>',3)
+                        ->where('status','=',1);
+            }])->whereHas('room',function ($q) {
+                return $q->where('ppl','>',3)
+                        ->where('status','=',1);
+            })->get();
+        }
+
+       
+
+        return response()->json(['hotels'=>$resulthotels]);
+       
+    }
+
+    
 
 
 

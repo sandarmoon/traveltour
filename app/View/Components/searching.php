@@ -38,7 +38,7 @@ class searching extends Component
        
          
 
-        return view('components.searchingnew',['cities'=>$this->cities]);
+        return view('components.searchingnew');
 
 
 

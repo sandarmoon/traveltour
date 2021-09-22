@@ -3,6 +3,10 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 use App\Models\City;
 use App\Models\Package;
+use App\Models\Car;
+use App\Models\Type;
+use App\Models\Company;
+use App\Models\Room;
 use Carbon\Carbon;
 
 
@@ -10,6 +14,7 @@ class SearchingComposer
 {
   public $packages;
   public $cities;
+  public $car_data;
   /**
   * Create a movie composer.
   *
@@ -18,11 +23,11 @@ class SearchingComposer
   public function __construct()
   {
      $today=Carbon::today();
-     
-
      $this->cities=City::whereNull('parent_id')->get();
      $this->packages=Package::where('start','>=',$today)
      ->orWhere('end','<=',$today) ->get();
+
+     $this->car_data=Car::orderBy('model','desc')->get();
 
   }
 
@@ -35,6 +40,14 @@ class SearchingComposer
   public function compose(View $view)
   {
      $view->with(['cities'=>$this->cities, 'packages'=>$this->packages ]);
+  }
+
+  public function hotels(View $view){
+      $view->with(['all_hotels'=>Company::where('type',1)->get()]);
+  }
+
+  public function hoteltypes(View $view){
+     $view->with('hoteltypes',Type::where('parent_id',1)->get());
   }
 }
 ?>

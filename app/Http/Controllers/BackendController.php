@@ -830,6 +830,21 @@ class BackendController extends Controller
     }
 
 
+//============dashboard start============
+
+public function carDashboard(){
+    return view('dashboard.car');
+}
+
+
+
+
+
+
+//============dashboard end============
+
+
+
 
 
 

@@ -122,6 +122,9 @@
           <div class="input-group-icon">
            <label class="form-label text-800" for="hotel_d_city_id">Destination
 
+            <input  type="hidden" name="group_total_price">
+            <input  type="hidden" name="group_total_room_type">
+            <input  type="hidden" name="group_total_ppl">
 
             @error('d_city_id')
             <span class="text-danger">required</span>

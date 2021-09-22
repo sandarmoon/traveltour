@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>A Agency</title>
+        <title>Lucky Seven</title>
         <!-- Favicon-->
         @livewireStyles
         <link rel="icon" type="image/x-icon" href="{{asset('frontend/assets/travel.svg')}}" />

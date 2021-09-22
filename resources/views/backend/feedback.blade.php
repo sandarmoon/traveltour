@@ -55,7 +55,7 @@
                             <td>1</td>
                             <td>example</td>
                             
-                            <td>This is message</td>
+                            <td>This is Data</td>
                             {{-- <td>
                               <button class="btn btn-success">
                                 Confirm

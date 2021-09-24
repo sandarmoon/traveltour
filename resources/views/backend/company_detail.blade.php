@@ -99,7 +99,7 @@
 
                                        <div class="col-md-12 col-sm-6 col-xs-6">
                                           <a href="{{asset('/storage/'.$company->logo)}}" target="_blank">
-                                             <img src="{{asset('/storage/'.$company->logo)}}" class="rounded-circle  img-fluid">
+                                             <img src="{{asset('/storage/'.$company->photo)}}" class="rounded-circle  img-fluid">
                                           </a> 
 
                                              <form method="post" id="upload_company_logo" enctype="multipart/form-data">

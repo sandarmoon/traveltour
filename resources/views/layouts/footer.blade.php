@@ -17,8 +17,8 @@
                         
                         <form id="contact-email-form" action="" method="post">
                           <div class="form-group row my-3">
-                            <label for="name" class="col-md-2 form-control-label">Name</label>
-                            <div class="col-md-10">
+                            <label for="name" class="col-md-3 form-control-label">Name</label>
+                            <div class="col-md-9">
                                 <input type="text" name="name" id="name" class="form-control ">
 
                             </div>
@@ -27,8 +27,8 @@
                           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
                           <div class="form-group row my-3">
-                            <label for="email" class="col-md-2 form-control-label">Email</label>
-                            <div class="col-md-10">
+                            <label for="email" class="col-md-3 form-control-label">Email</label>
+                            <div class="col-md-9">
                                 <input type="email" name="email" id="email" class="form-control ">
 
                             </div>
@@ -36,8 +36,8 @@
 
 
                           <div class="form-group row my-3">
-                            <label for="message" class="col-md-2 form-control-label">Message</label>
-                            <div class="col-md-10">
+                            <label for="message" class="col-md-3 form-control-label">Message</label>
+                            <div class="col-md-9">
                                 <textarea class="form-control" name="message" id="message"></textarea>
                             </div>
                           </div>

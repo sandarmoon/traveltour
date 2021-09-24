@@ -30,16 +30,46 @@ class FrontController extends Controller
     public function index()
     {
     
-
+        $car_arry_data = [];
+        $hotel_array_data = [];
         $rooms=Room::all();
         
+        $cars = Car::where('status','=',1)->get();
+
+
+        $car_data = $cars->map(function($car,$key){
+            $sum = strval($car->rating->sum('rate'));
+            $data = ['rating'=>$sum,'car'=>$car];
+            return $data;
+            
+        });
+
+        foreach($car_data as $data){
+            $car_arry_data[$data['car']->id]=[$data['rating'],$data['car']];
+            rsort($car_arry_data);
+            
+        }
         
-        $cars=Car::where('status','=',1)->get();
        
         //company -> type -> 1 ->hotel
         //company -> type ->2 ->car
         $partners = Company::all();
         $hotels=Company::where('type','=',1)->get();
+
+        $hotel_data = $hotels->map(function($hotel,$key){
+            $sum = strval($hotel->rating->sum('rate'));
+            $data = ['rating'=>$sum,'hotel'=>$hotel];
+            return $data;
+        });
+        // dd($hotel_data);
+
+        foreach($hotel_data as $hotel){
+
+            $hotel_array_data[$hotel['hotel']->id]=[$hotel['rating'],$hotel['hotel']];
+            rsort($hotel_array_data);
+            
+        };
+
         $tour = Tour::all();
 
         if(count($tour) > 10){
@@ -64,7 +94,7 @@ class FrontController extends Controller
 
 
 
-        return view('frontend.home',compact('rooms','cars','rooms','hotels','partners','tours_carousel','feedback_data'));
+        return view('frontend.home',compact('rooms','cars','rooms','hotels','partners','tours_carousel','feedback_data','car_arry_data','hotel_array_data'));
 
     }
 

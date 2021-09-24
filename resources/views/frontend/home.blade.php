@@ -168,8 +168,190 @@
 
 
 
+{{-- popular aco written cars --}}
+<section class="py-0">
+ <div class="container mt-5">
+  <div class=" justify-content-start ">
+   <div class="
+                    col-md-12
+                    heading-section
+                    text-center
+                    ftco-animate
+                    fadeInUp
+                    ftco-animated
+                ">
+    <h2 class="mb-4">Popular Cars</h2>
+   </div>
+  </div>
+  <div class="row">
+
+   {{-- @php
+   $car_arry =[];
+   @endphp
+   @foreach($cars as $car)
 
 
+   @php
+   $rating = 0;
+   foreach($car->rating as $data){
+   $rating += $data->rate;
+
+   }
+
+   $car_arry[$rating] = $car;
+
+
+   @endphp
+
+   @endforeach
+
+   @php
+   if(count($car->rating) > 0){
+   krsort($car_arry);
+   }else{
+   $car_arry = $cars;
+   }
+
+
+
+
+   @endphp --}}
+   @if(count($car_arry_data) > 0)
+
+   @foreach($car_arry_data as $car)
+
+
+   @php
+
+   // $car=(object)$booking->car;
+
+   $photos=json_decode($car[1]->photo,true);
+
+   $cover=$photos['cover'];
+   @endphp
+   <div class="col-md-4">
+    <div class="project-wrap">
+     <!-- <a
+                        href="#"
+                        class="img"
+                        style="background-image:url(http://localhost:8000/frontnew/assets/img/file/myanmar.jpeg)"
+                    >
+                        <span class="price">$550/person</span>
+                    </a> -->
+     <div class="my-img">
+      <div class=" " style="height:280px;max-height: 260px;width: 100%;overflow: hidden;">
+       <img src="{{asset('storage/'.$cover)}}" class="img-fluid " alt="photo">
+
+      </div>
+      <span class="packageprice">$50/person</span>
+     </div>
+
+     <div class="text p-4" style="background-color: #e8e8e866;box-shadow: 0px 10px 23px -8px rgb(0 0 0 / 33%);">
+      <span class="text-muted  d-block text-center text-uppercase">{{$car[1]->company->name}}</span>
+      <h3 class="text-center my-2">{{$car[1]->name}}/{{$car[1]->model}}<span style="font-size: 2rem; color: #f15d30;padding-left: 5px;">{{$car[1]->priceperday}}$</span></h3>
+      <hr style="border:1px solid #f15d30 ;">
+      <!-- start strart here  -->
+
+
+
+      <p class="rating text-center">
+       <i class="fas fa-star-half-alt"></i>
+       @php
+       $rating = 0;
+       foreach($car[1]->rating as $data){
+       $rating += $data->rate;
+       }
+
+       @endphp
+       {{$rating}}
+       Stars
+
+      </p>
+
+      <ul class="text-center">
+       <div class="@if(Auth::check()) rating-input @else rating_login @endif" data-car_id="{{$car[1]->id}}" data-type_id="{{$car[1]->type->parent_id}}">
+
+
+
+        <span class="starone">
+         <i class="fas fa-star star_one star_blank 
+                                    @foreach($car[1]->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 1)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="1" title="One Star"></i>
+        </span>
+
+        <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
+                                    @foreach($car[1]->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 2)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                    
+                                    
+                                    " data-value="2"></i></span>
+
+        <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
+                                    @foreach($car[1]->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 3)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="3"></i></span>
+
+        <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
+                                    @foreach($car[1]->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate >= 4)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="4"></i></span>
+
+        <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
+                                    @foreach($car[1]->rating as $rate)
+                                        @if($rate->user_id == Auth::id())
+                                            @if($rate->rate == 5)
+                                                star_color
+                                            @endif
+                                        @endif
+                                    @endforeach" data-value="5"></i></span>
+
+        <br>
+        {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p> --}}
+       </div>
+
+
+
+      </ul>
+      <!-- start end here  -->
+      <p class="text-center mb-0"><a href="" class="btn-car-detail" data-id="{{$car[1]->id}}"><span class="flaticon-mountains"></span>More info</a></p>
+      @if(Auth::check())
+      <button data-id="" class="package-booking-btn btn {{$car[1]->status ==1 ? 'btn-secondary':'btn-danger'}} form-control my-2 {{$car[1]->status ==1 ? '':'disabled'}}">{{$car[1]->status == 1 ? 'Book Now':'Booked'}}</button>
+      @else
+      <a href="/login" class=" btn {{$car[1]->status ==1 ? 'btn-secondary':'btn-danger'}} form-control my-2 {{$car[1]->status ==1 ? '':'disabled'}}">{{$car[1]->status == 1 ? 'Book Now':'Booked'}}</a>
+      @endif
+     </div>
+    </div>
+   </div>
+
+   @endforeach
+   @else
+    <div class="row">
+        <h4 class="text-muted text-center ">There is no Cars for the Moment!Plase Visit again to see!</h4>
+    </div>
+  @endif
+
+  </div>
+ </div>
+</section>
+<!-- popular car aco end  -->
 
 
 
@@ -183,17 +365,23 @@
             <div class="
                     col-md-12
                     heading-section
-                    
+                    text-center
                     ftco-animate
                     fadeInUp
                     ftco-animated
                 ">
-                <h2 class="mb-4">Tips And Guides</h2>
+                <h2 class="mb-4">
+                    Tips And Guides
+                    @if(count($tours_carousel) > 0)
+                    <span class="text-danger text-center d-block my-2" style="font-size: 15px;">Pull left or right for more data</span>
+                    @endif
+                </h2>
+
             </div>
         </div>
 
             <div class="your-class">
-
+                @if(count($tours_carousel) > 0)
                 @foreach($tours_carousel as $tour)
                 <div>
 
@@ -220,6 +408,11 @@
                    
                 </div>
                 @endforeach
+                @else
+                <div class="row">
+                    <h4 class="text-muted text-center ">There is no Places for the Moment!Plase Visit again to see!</h4>
+                </div>
+              @endif
 
             </div>
 
@@ -249,7 +442,7 @@
 
   <div class="row">
 
-   @php
+   {{-- @php
    $hotel_array =[];
    @endphp
    @foreach($hotels as $hotel)
@@ -273,9 +466,9 @@
    }else{
    $hotel_array = $hotels;
    }
-   @endphp
-
-   @foreach($hotel_array as $hotel)
+   @endphp --}}
+   @if(count($hotel_array_data) > 0)
+   @foreach($hotel_array_data as $hotel)
 
    <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
     <div class="project-wrap">
@@ -284,7 +477,7 @@
 
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
        <div class="carousel-inner">
-        <img src="{{asset('storage/'.$hotel->logo)}}" class="img-fluid">
+        <img src="{{asset('storage/'.$hotel[1]->logo)}}" class="img-fluid">
 
        </div>
 
@@ -292,28 +485,28 @@
       <div>
 
       </div>
-      <span class="packageprice">{{$hotel->city->name}}</span>
+      <span class="packageprice">{{$hotel[1]->city->name}}</span>
      </div>
      <div class="text p-4">
       <span class="days"></span>
       <h3 class="mb-2"><a href="#"></a></h3>
-      <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel->name}} </p>
+      <p><i class="fas fa-hotel fa_hotel_icon"></i> {{$hotel[1]->name}} </p>
       <p class="location">
        <i class="fas fa-phone"></i>
-       {{$hotel->phone}}
+       {{$hotel[1]->phone}}
 
       </p>
 
 
 
 
-      <p><i class="fas fa-location-arrow"></i> {{$hotel->addresss}} </p>
+      <p><i class="fas fa-location-arrow"></i> {{$hotel[1]->addresss}} </p>
 
       <p class="rating">
        <i class="fas fa-star-half-alt"></i>
        @php
        $rating = 0;
-       foreach($hotel->rating as $data){
+       foreach($hotel[1]->rating as $data){
        $rating += $data->rate;
        }
 
@@ -325,11 +518,11 @@
 
 
       <ul class="text-center">
-       <div class="@if(Auth::check()) rating-input @else rating_login @endif" data-hotel_id="{{$hotel->id}}" data-type_id="1">
+       <div class="@if(Auth::check()) rating-input @else rating_login @endif" data-hotel_id="{{$hotel[1]->id}}" data-type_id="1">
 
         <span class="starone">
          <i class="fas fa-star star_one star_blank 
-                                    @foreach($hotel->rating as $rate)
+                                    @foreach($hotel[1]->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 1)
                                                 star_color
@@ -339,7 +532,7 @@
         </span>
 
         <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
-                                    @foreach($hotel->rating as $rate)
+                                    @foreach($hotel[1]->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 2)
                                                 star_color
@@ -348,7 +541,7 @@
                                     @endforeach" data-value="2"></i></span>
 
         <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
-                                    @foreach($hotel->rating as $rate)
+                                    @foreach($hotel[1]->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 3)
                                                 star_color
@@ -357,7 +550,7 @@
                                     @endforeach" data-value="3"></i></span>
 
         <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
-                                    @foreach($hotel->rating as $rate)
+                                    @foreach($hotel[1]->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate >= 4)
                                                 star_color
@@ -366,7 +559,7 @@
                                     @endforeach" data-value="4"></i></span>
 
         <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
-                                    @foreach($hotel->rating as $rate)
+                                    @foreach($hotel[1]->rating as $rate)
                                         @if($rate->user_id == Auth::id())
                                             @if($rate->rate == 5)
                                                 star_color
@@ -391,6 +584,11 @@
    </div>
 
    @endforeach
+   @else
+    <div class="row">
+        <h4 class="text-muted text-center ">There is no Hotels for the Moment!Plase Visit again to see!</h4>
+    </div>
+  @endif
   </div>
  </div>
 </section>
@@ -410,107 +608,33 @@
  <div class="container mt-5">
   <div class="row mt-5">
    <div class="col-md-12 justify-content-center">
-    <h1 class="text-center">Partnerships</h1>
+    <h1 class="text-center">Partnerships
+        @if(count($partners) > 0)
+        <span class="text-danger text-center d-block my-2" style="font-size: 15px;">Pull left or right for more data</span>
+        @endif
+    </h1>
+
    </div>
   </div>
 
-  <div class="col-12">
-
-   <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
-    <div class="carousel-inner">
-
-     <div class="carousel-item active" data-bs-interval="10000">
-      <div class="row h-100 align-items-center g-2">
-       <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
-
+  <div class="your-class">
+    @foreach($partners as $partner)
+    <div class="partnership_div">
+        
+    
         <div class="partnership_name_div">
-         <h4 class="partnership_name">Company name</h4>
+         <h4 class="partnership_name">{{$partner->name}}</h4>
         </div>
-
+        <div style="overflow: hidden; width: auto ; height: 180px; position: cover;">
         <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="100%" alt="..." />
-       </div>
-
-       <div class="col-md-4 mb-3 mb-md-0 h-100">
-        <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="100%" alt="..." />
-       </div>
-
-       <div class="col-md-4 mb-3 mb-md-0 h-100">
-        <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="100%" alt="..." />
-       </div>
-
-
-
-
-      </div>
-     </div>
-
-
-
-     <div class="carousel-item" data-bs-interval="10000">
-      <div class="row h-100 align-items-center g-2">
-       <div class="col-md-4 mb-3 mb-md-0 h-100 partnership_div">
-
-        <div class="partnership_name_div">
-         <h4 class="partnership_name">Company he</h4>
+                    asset(
+                        'storage/'.$partner->logo
+                    )
+                }}" class="img-fluid" alt="..." />
         </div>
-
-        <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="100%" alt="..." />
-       </div>
-
-       <div class="col-md-4 mb-3 mb-md-0 h-100">
-        <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="100%" alt="..." />
-       </div>
-
-       <div class="col-md-4 mb-3 mb-md-0 h-100">
-        <img src="{{
-                                    asset(
-                                        'frontnew/assets/img/file/myanmar.jpeg'
-                                    )
-                                }}" width="100%" alt="..." />
-       </div>
-
-
-
-      </div>
-     </div>
-
-
-
-     <div class="row">
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next </span></button>
-     </div>
     </div>
-    <div class="row flex-center mt-2">
-     <div class="col-auto position-relative z-index-2">
-      <ol class="carousel-indicators me-xxl-7 me-xl-4 me-lg-7">
-       <li class="active" data-bs-target="#carouselTestimonials" data-bs-slide-to="0"></li>
-       <li data-bs-target="#carouselTestimonials" data-bs-slide-to="1"></li>
+    @endforeach
 
-      </ol>
-     </div>
-    </div>
-   </div>
   </div>
  </div>
 </section>

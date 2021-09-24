@@ -197,6 +197,20 @@ var myChart = new Chart(ctx, {
     }
 });
 
+//ajax stating
+
+$.ajax({
+    type: 'get', //post method
+    url: "{{route('getreport.car')}}", //ajaxformexample url
+    dataType: "json",
+    success: function (result, textStatus, jqXHR)
+    {
+      console.log(result);
+        //chart.data = result;
+        //chart.update();
+    }
+});
+
 //pie report chart
 
 var ctx = document.getElementById('report-pie-chart');

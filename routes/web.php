@@ -280,6 +280,7 @@ Route::get('/about',[FrontController::class,'aboutus'])->name('aboutus');
 
 //===========dashboard start========================
 Route::get('/dashboard/car',[BackendController::class,'carDashboard'])->name('dashboard.car');
+Route::get('/getreportcar',[BackendController::class,'getReportCar'])->name('getreport.car');
 
 Route::get('/dashboard/hotel',[BackendController::class,'hotelDashboard'])->name('dashboard.hotel');
 

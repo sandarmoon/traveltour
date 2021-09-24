@@ -93,7 +93,7 @@ class BackendController extends Controller
     public function carBookingList(){
         $role=Auth::user()->roles[0];
 
-            if($role->name=="company"){
+            if($role->name=="car"){
                 $company_id=Auth::user()->company->id;
                 $bookings=Booking::whereHas('car',function($q) use ($company_id){
                     return $q->where('company_id',$company_id);
@@ -971,7 +971,13 @@ public function hotelDashboard(){
 
 
 
-
+    public function getReportCar(){
+        $company=Auth::user()->company->id;
+        $bookings=Booking::wherehas('car',function($q)use($company){
+            return $q->where('company_id',$company);
+        })->get();
+        dd($bookings);
+    }
 
 
 

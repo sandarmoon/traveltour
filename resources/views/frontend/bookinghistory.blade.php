@@ -462,6 +462,7 @@
                                                         @endif
                                                     </td>
                                                 </tr>
+                                                @if($booking->pickup)
 
                                                 <tr>
                                                     <td> Location :</td>
@@ -469,6 +470,8 @@
                                                         {{$booking->pickup->name}},{{$booking->pickup->name}},{{$booking->pickup->parent->name}}
                                                     </td>
                                                 </tr>
+                                                
+                                                @endif
 
                                                
                                             </table>

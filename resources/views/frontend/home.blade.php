@@ -12,78 +12,7 @@
 
 
 
-<div class="d-none">
- <div class="container mt-0 my-3">
-  <div class="row">
-   @foreach($rooms as $room) @php
-   $photos=json_decode($room->photos,true); $s=0; @endphp
-   <div class="col-md-4">
-    <div class="card">
-     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-       @foreach($photos as $k=>$p)
-       <div class="carousel-item {{
-                                    $s == $k ? 'active' : ''
-                                }}">
-        <img src="{{ asset("storage/$p") }}" class="d-block w-100" alt="...">
-       </div>
-       @endforeach
-      </div>
-     </div>
-     <div class="card-body">
-      <h6 class="mb-0">
-       {{$room->type->name}},
-       {{($room->single == null) ?  '':$room->single." Single"}}
-       {{($room->double == null) ?  '':$room->double." Double"}}
-       {{($room->king == null) ?  '':$room->king." King"}}
-       {{($room->queen == null) ?  '':$room->queen." Queen"}}
-       Beds, Non Smoking
-      </h6>
-      <p class="small text-muted">{{$room->wide}}Sqft</p>
-      {{-- accordian start --}}
-      <ul class="list-unstyled">
-       <li>
-        <i class="fas fa-user-friends"></i>
-        Sleep{{$room->ppl}}
-       </li>
-       <li>
-        <i class="fas fa-bed"></i>
-        {{($room->single == null) ?  '':$room->single." Single"}}
-        {{($room->double == null) ?  '':$room->double." Double"}}
-        {{($room->king == null) ?  '':$room->king." King"}}
-        {{($room->queen == null) ?  '':$room->queen." Queen"}}
-        Bed
-       </li>
-       <li>
-        <i class="fas fa-check"></i> Reserve Now,Pay
-        Later
-       </li>
-       <li>
-        <a href="{{route('room.show',$room->id)}}" class="text-decoration-none">More Details ></a>
-       </li>
-      </ul>
-      <hr class="mx-2" />
-      <div class="d-flex justify-content-between">
-       <div>
-        <h4 class="mb-0">${{$room->pricepernight}}</h4>
-        <span class="price-desc small mb-2 text-muted">per night</span>
-        <span class="total-desc small mb-2 text-dark">{{$room->pricepernight+ 10}} total</span><br />
 
-        <span class="fee-include small mb-2 text-dark">includes tax and fees</span>
-       </div>
-       <div>
-        <span class="left-msg small mb-2 text-danger">We have 4 left!</span>
-        <a href="#" class="btn btn-primary mt-3">Reserve Now!</a>
-       </div>
-      </div>
-      {{-- accordian end --}}
-     </div>
-    </div>
-   </div>
-   @endforeach
-  </div>
- </div>
-</div>
 
 
 
@@ -136,7 +65,7 @@
     <h2 class="mb-4">Popular Packages</h2>
    </div>
   </div>
-
+    @if($packages == 'null')
   <div class="row">
 
    @foreach($packages as $package)
@@ -229,187 +158,17 @@
 
    @endforeach
   </div>
- </div>
-</section>
-
-
-
-{{-- popular aco written cars --}}
-<section class="py-0 d-none">
- <div class="container mt-5">
-  <div class=" justify-content-start ">
-   <div class="
-                    col-md-12
-                    heading-section
-                    
-                    ftco-animate
-                    fadeInUp
-                    ftco-animated
-                ">
-    <h2 class="mb-4">Popular Cars</h2>
-   </div>
-  </div>
-  <div class="row">
-
-   @php
-   $car_arry =[];
-   @endphp
-   @foreach($cars as $car)
-
-
-   @php
-   $rating = 0;
-   foreach($car->rating as $data){
-   $rating += $data->rate;
-
-   }
-
-   $car_arry[$rating] = $car;
-
-
-   @endphp
-
-   @endforeach
-
-   @php
-   if(count($car->rating) > 0){
-   krsort($car_arry);
-   }else{
-   $car_arry = $cars;
-   }
-
-
-
-
-   @endphp
-
-   @foreach($car_arry as $car)
-
-
-   @php
-   // $car=(object)$booking->car;
-
-   $photos=json_decode($car->photo,true);
-
-   $cover=$photos['cover'];
-   @endphp
-   <div class="col-md-4">
-    <div class="project-wrap">
-     <!-- <a
-                        href="#"
-                        class="img"
-                        style="background-image:url(http://localhost:8000/frontnew/assets/img/file/myanmar.jpeg)"
-                    >
-                        <span class="price">$550/person</span>
-                    </a> -->
-     <div class="my-img">
-      <div class=" " style="height:280px;max-height: 260px;width: 100%;overflow: hidden;">
-       <img src="{{asset('storage/'.$cover)}}" class="img-fluid " alt="photo">
-
-      </div>
-      <span class="packageprice">$50/person</span>
-     </div>
-
-     <div class="text p-4" style="background-color: #e8e8e866;box-shadow: 0px 10px 23px -8px rgb(0 0 0 / 33%);">
-      <span class="text-muted  d-block text-center text-uppercase">{{$car->company->name}}</span>
-      <h3 class="text-center my-2">{{$car->name}}/{{$car->model}}<span style="font-size: 2rem; color: #f15d30;padding-left: 5px;">{{$car->priceperday}}$</span></h3>
-      <hr style="border:1px solid #f15d30 ;">
-      <!-- start strart here  -->
-
-
-
-      <p class="rating text-center">
-       <i class="fas fa-star-half-alt"></i>
-       @php
-       $rating = 0;
-       foreach($car->rating as $data){
-       $rating += $data->rate;
-       }
-
-       @endphp
-       {{$rating}}
-       Stars
-
-      </p>
-
-      <ul class="text-center">
-       <div class="@if(Auth::check()) rating-input @else rating_login @endif" data-car_id="{{$car->id}}" data-type_id="{{$car->type->parent_id}}">
-
-
-
-        <span class="starone">
-         <i class="fas fa-star star_one star_blank 
-                                    @foreach($car->rating as $rate)
-                                        @if($rate->user_id == Auth::id())
-                                            @if($rate->rate >= 1)
-                                                star_color
-                                            @endif
-                                        @endif
-                                    @endforeach" data-value="1" title="One Star"></i>
-        </span>
-
-        <span class="startow" title="Two Star"><i class="fas fa-star star_two star_blank
-                                    @foreach($car->rating as $rate)
-                                        @if($rate->user_id == Auth::id())
-                                            @if($rate->rate >= 2)
-                                                star_color
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                    
-                                    
-                                    " data-value="2"></i></span>
-
-        <span class="starthree" title="Three Star"><i class="fas fa-star star_three star_blank
-                                    @foreach($car->rating as $rate)
-                                        @if($rate->user_id == Auth::id())
-                                            @if($rate->rate >= 3)
-                                                star_color
-                                            @endif
-                                        @endif
-                                    @endforeach" data-value="3"></i></span>
-
-        <span class="starfour" title="Four Star"><i class="fas fa-star star_four star_blank
-                                    @foreach($car->rating as $rate)
-                                        @if($rate->user_id == Auth::id())
-                                            @if($rate->rate >= 4)
-                                                star_color
-                                            @endif
-                                        @endif
-                                    @endforeach" data-value="4"></i></span>
-
-        <span class="starfive" title="Five Star"><i class="fas fa-star star_five star_blank
-                                    @foreach($car->rating as $rate)
-                                        @if($rate->user_id == Auth::id())
-                                            @if($rate->rate == 5)
-                                                star_color
-                                            @endif
-                                        @endif
-                                    @endforeach" data-value="5"></i></span>
-
-        <br>
-        {{-- <p class="bg-success text-white d-inline-block px-1 py-1 mt-1 star_text"></p> --}}
-       </div>
-
-
-
-      </ul>
-      <!-- start end here  -->
-      <p class="text-center mb-0"><a href="" class="btn-car-detail" data-id="{{$car->id}}"><span class="flaticon-mountains"></span>More info</a></p>
-      @if(Auth::check())
-      <button data-id="" class="package-booking-btn btn {{$car->status ==1 ? 'btn-secondary':'btn-danger'}} form-control my-2 {{$car->status ==1 ? '':'disabled'}}">{{$car->status == 1 ? 'Book Now':'Booked'}}</button>
-      @else
-      <a href="/login" class=" btn {{$car->status ==1 ? 'btn-secondary':'btn-danger'}} form-control my-2 {{$car->status ==1 ? '':'disabled'}}">{{$car->status == 1 ? 'Book Now':'Booked'}}</a>
-      @endif
-     </div>
+  @else
+    <div class="row">
+        <h4 class="text-muted text-center ">There is no Packages for the Moment!Plase Visit again to see!</h4>
     </div>
-   </div>
-
-   @endforeach
-  </div>
+  @endif
  </div>
 </section>
-<!-- popular car aco end  -->
+
+
+
+
 
 
 

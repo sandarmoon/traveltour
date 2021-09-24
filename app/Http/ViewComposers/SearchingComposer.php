@@ -25,8 +25,9 @@ class SearchingComposer
   {
      $today=Carbon::today();
      $this->cities=City::whereNull('parent_id')->get();
+
      $this->packages=Package::where('start','>=',$today)
-     ->orWhere('end','<=',$today) ->get();
+     ->where('end','>=',$today) ->get();
 
      $this->car_data=Car::orderBy('model','desc')->get();
 

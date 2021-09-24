@@ -147,6 +147,12 @@
             height: 0;
         }  
 
+        .nav-pills .nav_custom.active, .nav-pills .show > .nav_custom {
+            color: #FFFEFE;
+            background-color: orange !important;
+        }
+
+
  </style>
 
  @stack('style')
@@ -305,25 +311,25 @@ Swal.fire(message,'success');
      , showLoaderOnConfirm: true
      , inputValidator: ((value) => {
 
-      if (value >= 11) {
-       return 'please give us a clall!';
-      }
+                  if (value >= 11) {
+                   return 'please give us a clall!';
+                  }
 
-      if (value <= 0) {
-       return 'please select from more than one or one person';
-      }
+                  if (value <= 0) {
+                   return 'please select from more than one or one person';
+                  }
 
 
-     }),
+                 }),
 
-    }).then((e) => {
-     if (e.value) {
-      window.location.href = "/p/booking/" + id + "/" + e.value
-     } else {
-      console.log('enter');
-     }
-    })
-   })
+                }).then((e) => {
+                    if (e.value) {
+                        // window.location.href = "/p/booking/" + id + "/" + e.value
+                    } else {
+                        console.log('enter');
+                    }
+                })
+            })
 
 
    $('.rating-input').on('click', '.star_one , .star_two , .star_three , .star_four, .star_five', function() {

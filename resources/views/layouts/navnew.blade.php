@@ -22,7 +22,7 @@
 
     <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="{{route('frontend.index')}}"><span class="nav-link-text">Home </span></a></li>
 
-    <li class="nav-item px-2"><a class="nav-link" href="#flights"> <span class="nav-link-text">About</span></a></li>
+    <li class="nav-item px-2"><a class="nav-link" href="{{route('aboutus')}}"> <span class="nav-link-text">About</span></a></li>
 
 
     <li class="nav-item dropdown">

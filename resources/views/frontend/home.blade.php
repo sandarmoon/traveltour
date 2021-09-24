@@ -790,84 +790,91 @@
    }
   });
 
-  $('.package-booking-btn').click(function() {
-   let id = $(this).data('id');
-   console.log(id);
+        $('.package-booking-btn').click(function() {
+            let id = $(this).data('id');
+            console.log(id);
+
+            Swal.fire({
+                title: 'How many people with you for tour?'
+                , input: 'number'
+                , showCancelButton: !0
+                , cancelButtonText: "No, cancel!"
+                , confirmButtonText: "Go to booking"
+                , reverseButtons: !0
+                , allowOutsideClick: false
+                , showLoaderOnConfirm: true
+                , inputValidator: ((value) => {
+
+                    if (value >= 11) {
+                        return 'please give us a clall!';
+                    }
+
+                    if (value <= 0) {
+                        return 'please select from more than one or one person';
+                    }
 
 
-   Swal.fire({
-    title: 'How many people with you for tour?'
-    , input: 'number'
-    , showCancelButton: !0
-    , cancelButtonText: "No, cancel!"
-    , confirmButtonText: "Go to booking"
-    , reverseButtons: !0
-    , allowOutsideClick: false
-    , showLoaderOnConfirm: true
-    , inputValidator: ((value) => {
+                }),
 
-     if (value >= 11) {
-      return 'please give us a clall!';
-     }
-
-     if (value <= 0) {
-      return 'please select from more than one or one person';
-     }
+            }).then((e) => {
+                if (e.value) {
+                    window.location.href = "/p/booking/" + id + "/" + e.value
+                } else {
+                    console.log('enter');
+                }
+            })
 
 
-    }),
+        })
 
-   }).then((e) => {
-    if (e.value) {
-     window.location.href = "/p/booking/" + id + "/" + e.value
-    } else {
-     console.log('enter');
-    }
-   })
+        $('#contact-email-form').submit(function(e) {
+            e.preventDefault();
+            let formData = $(this).serialize();
+            let token = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                url: '/front/contact'
+                , type: 'POST'
+                , data: formData
+                , beforeSend: function() {
+                    swal.fire({
+
+                        html: '<h5>Loading...</h5>'
+                        , showConfirmButton: false
+                        , allowOutsideClick: false,
+
+                    });
+                }
+                , success: function(json) {
+                    if (json) {
+                        swal.fire({
+
+                            title: 'Your message is send'
+                            , text: 'Thank you so much'
+                            , type: 'success'
+                            , showConfirmButton: true,
+
+                        }).then(() => {
+                            $('#contact-email-form').trigger('reset');
+                        });
+                    }
+                }
+            })
+
+        })
 
 
 
 
+        $('#package-search-div').submit(function(e) {
+            e.preventDefault();
+            let packageid = $('#package-search-from').val();
+
+            window.location.href = "/package_detail/" + packageid;
+
+        })
 
 
-  })
-
-  $('#contact-email-form').submit(function(e) {
-   e.preventDefault();
-   let formData = $(this).serialize();
-   let token = $('meta[name="csrf-token"]').attr('content');
-
-   $.ajax({
-    url: '/front/contact'
-    , type: 'POST'
-    , data: formData
-    , beforeSend: function() {
-     swal.fire({
-
-      html: '<h5>Loading...</h5>'
-      , showConfirmButton: false
-      , allowOutsideClick: false,
-
-     });
-    }
-    , success: function(json) {
-     if (json) {
-      swal.fire({
-
-       title: 'Your message is send'
-       , text: 'Thank you so much'
-       , type: 'success'
-       , showConfirmButton: true,
-
-      }).then(() => {
-       $('#contact-email-form').trigger('reset');
-      });
-
-     }
-    }
-   })
-
-  })
 
  })
 

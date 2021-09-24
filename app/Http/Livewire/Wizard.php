@@ -107,16 +107,18 @@ class Wizard extends Component
      */
     public function secondStepSubmit()
     {
-        $validatedData = $this->validate([
-            'loc' => 'required',
-        ]);
         
-       $finalpickup=City::find($this->loc);
-       // dd($finalpickup);
-       $this->loc=$finalpickup->name;
-       $this->loc_id=$finalpickup->id;
-       $this->city=$finalpickup->parent->name;
-        $this->currentStep = 3;
+
+        if(!empty($this->loc)){
+             $finalpickup=City::find($this->loc);
+            // dd($finalpickup);
+            $this->loc=$finalpickup->name;
+            $this->loc_id=$finalpickup->id;
+            $this->city=$finalpickup->parent->name;
+       
+        }
+        
+         $this->currentStep = 3;
     }
 
     function generateRandomString($length = 20) {
@@ -158,7 +160,7 @@ class Wizard extends Component
        $discount=$this->car->discount;
        $price=$this->car->priceperday;
        $subtotal=0;
-       if($discount=== 0){
+       if($discount == 0){
         $subtotal=$price * $day;
        }else{
         $subtotal=$discount * $day;
@@ -174,6 +176,8 @@ class Wizard extends Component
             }
 
         $total=$subtotal+ $percent;
+
+        
        
        $pickup_location=$this->loc_id;
        $custom_location='';

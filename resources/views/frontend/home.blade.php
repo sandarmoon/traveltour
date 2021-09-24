@@ -8,86 +8,11 @@
 @endsection @section('main-content')
 <!-- Header-->
 
-@if (session()->has('message'))
-<div class="alert alert-success">
- {{ session("message") }}
-</div>
-@endif
 
 
 
-<div class="d-none">
- <div class="container mt-0 my-3">
-  <div class="row">
-   @foreach($rooms as $room) @php
-   $photos=json_decode($room->photos,true); $s=0; @endphp
-   <div class="col-md-4">
-    <div class="card">
-     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-       @foreach($photos as $k=>$p)
-       <div class="carousel-item {{
-                                    $s == $k ? 'active' : ''
-                                }}">
-        <img src="{{ asset("storage/$p") }}" class="d-block w-100" alt="...">
-       </div>
-       @endforeach
-      </div>
-     </div>
-     <div class="card-body">
-      <h6 class="mb-0">
-       {{$room->type->name}},
-       {{($room->single == null) ?  '':$room->single." Single"}}
-       {{($room->double == null) ?  '':$room->double." Double"}}
-       {{($room->king == null) ?  '':$room->king." King"}}
-       {{($room->queen == null) ?  '':$room->queen." Queen"}}
-       Beds, Non Smoking
-      </h6>
-      <p class="small text-muted">{{$room->wide}}Sqft</p>
-      {{-- accordian start --}}
-      <ul class="list-unstyled">
-       <li>
-        <i class="fas fa-user-friends"></i>
-        Sleep{{$room->ppl}}
-       </li>
-       <li>
-        <i class="fas fa-bed"></i>
-        {{($room->single == null) ?  '':$room->single." Single"}}
-        {{($room->double == null) ?  '':$room->double." Double"}}
-        {{($room->king == null) ?  '':$room->king." King"}}
-        {{($room->queen == null) ?  '':$room->queen." Queen"}}
-        Bed
-       </li>
-       <li>
-        <i class="fas fa-check"></i> Reserve Now,Pay
-        Later
-       </li>
-       <li>
-        <a href="{{route('room.show',$room->id)}}" class="text-decoration-none">More Details ></a>
-       </li>
-      </ul>
-      <hr class="mx-2" />
-      <div class="d-flex justify-content-between">
-       <div>
-        <h4 class="mb-0">${{$room->pricepernight}}</h4>
-        <span class="price-desc small mb-2 text-muted">per night</span>
-        <span class="total-desc small mb-2 text-dark">{{$room->pricepernight+ 10}} total</span><br />
 
-        <span class="fee-include small mb-2 text-dark">includes tax and fees</span>
-       </div>
-       <div>
-        <span class="left-msg small mb-2 text-danger">We have 4 left!</span>
-        <a href="#" class="btn btn-primary mt-3">Reserve Now!</a>
-       </div>
-      </div>
-      {{-- accordian end --}}
-     </div>
-    </div>
-   </div>
-   @endforeach
-  </div>
- </div>
-</div>
+
 
 
 
@@ -140,7 +65,7 @@
     <h2 class="mb-4">Popular Packages</h2>
    </div>
   </div>
-
+    @if($packages == 'null')
   <div class="row">
 
    @foreach($packages as $package)
@@ -233,6 +158,11 @@
 
    @endforeach
   </div>
+  @else
+    <div class="row">
+        <h4 class="text-muted text-center ">There is no Packages for the Moment!Plase Visit again to see!</h4>
+    </div>
+  @endif
  </div>
 </section>
 
@@ -286,6 +216,7 @@
 
 
    @endphp --}}
+   @if(count($car_arry_data) > 0)
 
    @foreach($car_arry_data as $car)
 
@@ -411,11 +342,16 @@
    </div>
 
    @endforeach
+   @else
+    <div class="row">
+        <h4 class="text-muted text-center ">There is no Cars for the Moment!Plase Visit again to see!</h4>
+    </div>
+  @endif
+
   </div>
  </div>
 </section>
 <!-- popular car aco end  -->
-
 
 
 
@@ -445,7 +381,7 @@
         </div>
 
             <div class="your-class">
-
+                @if(count($tours_carousel) > 0)
                 @foreach($tours_carousel as $tour)
                 <div>
 
@@ -472,6 +408,11 @@
                    
                 </div>
                 @endforeach
+                @else
+                <div class="row">
+                    <h4 class="text-muted text-center ">There is no Places for the Moment!Plase Visit again to see!</h4>
+                </div>
+              @endif
 
             </div>
 
@@ -484,7 +425,7 @@
 
 
 {{-- popular hotel --}}
-<section class="py-0 ">
+<section class="py-0 d-none ">
  <div class="container mt-5">
   <div class="row justify-content-center pb-4">
    <div class="
@@ -526,7 +467,7 @@
    $hotel_array = $hotels;
    }
    @endphp --}}
-
+   @if(count($hotel_array_data) > 0)
    @foreach($hotel_array_data as $hotel)
 
    <div class="col-md-4 ftco-animate fadeInUp ftco-animated">
@@ -643,6 +584,11 @@
    </div>
 
    @endforeach
+   @else
+    <div class="row">
+        <h4 class="text-muted text-center ">There is no Hotels for the Moment!Plase Visit again to see!</h4>
+    </div>
+  @endif
   </div>
  </div>
 </section>

@@ -1,11 +1,7 @@
 @extends('frontendnew')
 @section('main-content')
 <!-- Header-->
- @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endif
+
        <div class="container-fluid style_height" style="height: 100vh;">
 
            <div class="container mt-5">

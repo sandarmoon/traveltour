@@ -4,17 +4,17 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class card-header-component extends Component
-{   
-    public $header;
+class dashboard-card-component extends Component
+{
+    public $column;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($header)
+    public function __construct($column)
     {
-        $this->header=$header;
+        $this->column=$column;
     }
 
     /**
@@ -24,6 +24,6 @@ class card-header-component extends Component
      */
     public function render()
     {
-        return view('components.card-header-component');
+        return view('components.dashboard-card-component');
     }
 }

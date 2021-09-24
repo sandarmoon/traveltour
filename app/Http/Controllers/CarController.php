@@ -32,7 +32,7 @@ class CarController extends Controller
        if(Auth::check()){
           
             $role=Auth::user()->roles[0];
-            if($role->name =='company'){
+            if($role->name =='car'){
                 $cars=Car::where('company_id',Auth::user()->company->id)->get();
             }else{
                 $cars=Car::all();
@@ -107,6 +107,8 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+            
+       
          // dd($request->discount);
         // codeno generate
     
@@ -188,7 +190,7 @@ class CarController extends Controller
          $codeno=$this->generateCode();
 
             
-        Car::create([
+        $car=Car::create([
             'name'=>$request->name,
             'codeno'=>$codeno,
             'photo'=>json_encode($input['image']),
@@ -206,8 +208,10 @@ class CarController extends Controller
             "qty"=>1,
             "city_id"=>$request->city_id
         ]);
-        return redirect()->route('car.index')
-                        ->with('success','Vehicle added successfully');
+        $car_id=$car->id;
+        
+         return redirect()->route('car.index')
+                        ->with( ['data' => $car_id] );
         
     }
 

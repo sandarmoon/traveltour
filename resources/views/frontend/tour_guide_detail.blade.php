@@ -53,7 +53,7 @@
 				        		
 					        		<button class="btn">
 					        		
-					        			Not Yet
+					        			There is no places for the moment!Please visit again to see.
 					        		
 					        		</button>
 					        	</li>

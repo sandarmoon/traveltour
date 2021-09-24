@@ -23,7 +23,7 @@ class CreateBookingsTable extends Migration
             $table->BigInteger('to_city_id')->unsigned()->nullable();
             $table->string('day');
             $table->string('total');
-            $table->BigInteger('pickup_id')->unsigned();
+            $table->BigInteger('pickup_id')->unsigned()->nullable();
             $table->text('custom_pickup');
             $table->string('departure_date');
             $table->text('arrival_date');

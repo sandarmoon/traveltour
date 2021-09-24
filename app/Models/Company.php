@@ -15,6 +15,8 @@ class Company extends Model
         return $this->hasMany(Car::class);
     }
 
+    
+
     public function rooms(){
         return $this->hasMany(Room::class);
     }

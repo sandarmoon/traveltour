@@ -265,7 +265,12 @@
            Carbon\Carbon::setTestNow($ed);
            $ed=new Carbon\Carbon('tomorrow');
 
-           $days=$sd->diffInDays($ed);
+             $diff = strtotime($sd) - strtotime($ed);
+        
+        // 1 day = 24 hours 
+        // 24 * 60 * 60 = 86400 seconds
+          $days= ceil(abs($diff / 86400));
+           
 
            echo $days
            @endphp</p>
@@ -290,12 +295,7 @@
           </tr>
           <tr>
            <td>Days</td>
-           <td> @php
-            $sd = new Carbon\Carbon($sdate);
-            $ed = new Carbon\Carbon($edate);
-            $days=$sd->diffInDays($ed);
-            echo $days
-            @endphp</td>
+           <td> {{$days}}</td>
           </tr>
           <tr>
            <td>Subtotal</td>

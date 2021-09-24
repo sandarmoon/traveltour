@@ -254,6 +254,13 @@
 
 @livewireScripts
 
+@if (session()->has('message'))
+
+<script>
+let message="{{ Session("message") }}";
+Swal.fire(message,'success');
+</script>
+@endif
  <script>
   $(document).ready(function() {
 

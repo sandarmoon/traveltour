@@ -17,11 +17,7 @@
           
         </div>
         
-        @if ($message = Session::get('status'))
-              <div class="alert alert-success">
-                  <p>{{ $message }}</p>
-              </div>
-          @endif
+        
         
       </div>
 
@@ -67,7 +63,18 @@
     </div>
 @endsection
 @section('script')
+@if(Session::get('status'))
 <script>
+Swal.fire(
+  'Data Added!',
+  'Your data is saved successfully!',
+  'success'
+)
+</script>
+@endif
+<script>
+
+
   var table;
   $(document).ready(function(){
     

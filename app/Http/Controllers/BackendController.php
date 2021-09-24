@@ -18,6 +18,7 @@ use App\Models\Package;
 use App\Models\Type;
 use Session;
 use  Auth;
+use Carbon\Carbon;
 use DB;
 use App\Models\Feedback;
 
@@ -113,29 +114,37 @@ class BackendController extends Controller
        if($type== 1){
            //hotel confirm
            $booking=HotelBooking::find($id);
+           $room=Room::find($booking->room_id);
            if($status ==2){
                 $booking->status =2;
+                $room->status=2;
             }
 
             if($status == 3){
                 $booking->status =3;
+                $room->status=1;
             }
 
             $booking->save();
+            $room->save();
        }
 
        if($type ==2){
            //car confirm
             $booking=Booking::find($id);
+            $car=Car::find($booking->car_id);
             if($status ==2){
                 $booking->status =2;
+                $car->status=2;
             }
 
             if($status == 3){
                 $booking->status =3;
+                $car->status=1;
             }
 
             $booking->save();
+            $car->save();
 
             
        }
@@ -835,8 +844,56 @@ class BackendController extends Controller
 //============dashboard start============
 
 public function carDashboard(){
-    return view('dashboard.car');
+    $today=Carbon::today();
+    if(Auth::check()){
+        $id=Auth::user()->company->id;
+        $report=Company::withCount(['cars as total_car',
+
+        'cars as car_booking'=>function($q){
+            return $q->whereHas('booking',function($r){
+                return $r->where('status',2);
+            });
+        },
+        'cars as today_unconfirmed_booking'=>function($q) use ($today){
+            return $q->whereHas('booking',function($r) use ($today){
+                return $r->where('status',1)->whereDate('booking_date',$today);
+            });
+        }
+        ])->find($id);
+
+        $month = '9';
+        $data=DB::table('bookings')
+                    ->select('created_at as dan',DB::raw('count(id) as ukupno'))
+                    ->whereDate('created_at',$today)
+                    ->groupBy('dan')
+                    ->get();
+
+    
+        
+    }
+    return view('dashboard.car',compact('report'));
+
+    
+    
 }
+
+public function hotelDashboard(){
+    $today=Carbon::today();
+    if(Auth::check()){
+        $id=Auth::user()->company->id;
+        
+        $report=Company::withCount('rooms')->find($id);
+        dd($report);
+        
+        
+    }
+    return view('dashboard.hotel',compact('report'));
+
+    
+    
+}
+
+
 
 
 

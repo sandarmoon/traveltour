@@ -20,7 +20,7 @@ class CreateCompaniesTable extends Migration
             $table->string('ceo_name')->nullable();
             $table->text('photo')->nullable();
             $table->string('phone')->nullable();
-            $table->string('addresss')->nullable();
+            $table->text('addresss')->nullable();
             $table->string('incharge_name')->nullable();
             $table->string('incharge_phone')->nullable();
             $table->string('incharge_position')->nullable();

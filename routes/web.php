@@ -279,5 +279,7 @@ Route::post('/ajax_frontent_feedback',[FrontController::class,'ajax_frontent_fee
 //===========dashboard start========================
 Route::get('/dashboard/car',[BackendController::class,'carDashboard'])->name('dashboard.car');
 
+Route::get('/dashboard/hotel',[BackendController::class,'hotelDashboard'])->name('dashboard.hotel');
+
 
 

@@ -46,6 +46,8 @@ class Company extends Component
     public function mount($cities,$id){
         $this->cities=$cities;
         $this->id=$id;
+
+        
         
     }
 
@@ -103,11 +105,11 @@ class Company extends Component
      */
     public function secondStepSubmit()
     {
-        
+       
 
-        if(Auth::user()->hasRole('company')){
-            if(empty(Auth::user()->company)){
-                $validatedData = $this->validate([
+       
+             
+            $validatedData = $this->validate([
                     'name' => 'required|unique:companies',
                     'logo' => 'required|image|max:1024',
                     'license' => 'required|image|max:1024',
@@ -140,48 +142,7 @@ class Company extends Component
                  ]);
                   // $this->successMsg = 'Company already exists!';
                  $this->currentStep=3;
-                
-            }else{
-                
-                $this->currentStep=1;
-                $this->successMsg = 'Company already exists!';
-                
-                
-            }
-        }else{
-            $validatedData = $this->validate([
-                    'name' => 'required|unique:companies',
-                    'logo' => 'required|image|max:1024',
-                    'license' => 'required|image|max:1024',
-                    'info' => 'required',
-                    'phone' => 'required',
-                    'address' => 'required',
-                    'city_id'=>'required'
-                ]);
-                $filename=time();
-
-                $path = $this->logo->storeAs('logo',$filename,'public');
-                 $license = $this->logo->storeAs('license','l-'.$filename,'public');
-
-                
-                // if(Auth::check() && Auth::user()->hasRole()){
-
-                // }
-                 
-                 $this->company=\App\Models\Company::create([
-                    'name'=>$this->name,
-                    'logo'=>$path,
-                    'photo'=>$license,
-                    'info'=>$this->info,
-                    'phone'=>$this->phone,
-                    'addresss'=>$this->address,
-                    'status'=>1,
-                    'user_id'=>Auth::user()->id,
-                    'city_id'=>$this->city_id,
-                 ]);
-                  // $this->successMsg = 'Company already exists!';
-                 $this->currentStep=3;
-        }
+        
 
          
            // dd($this->currentStep);

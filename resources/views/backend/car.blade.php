@@ -9,11 +9,7 @@
           <h1 class="ct-title text-white d-inline-block" id="content">
             Transportation 
           </h1>
-          @if ($message = Session::get('success'))
-              <div class="alert alert-success">
-                  <p>{{ $message }}</p>
-              </div>
-          @endif
+          
           <a class="ct-example text-white float-right border-0" href="{{route('car.create')}}">
             <i class="fas fa-plus-square me-1"></i>
                 <span class="error-name">New Vehicle</span>
@@ -93,6 +89,31 @@
     </div>
 @endsection
 @section('script')
+
+@if(Session::get('data'))
+
+<script>
+let id="{{Session::get('data')}}";
+Swal.fire('Data is added successfully!','success').then(()=>{
+  $('#pickupModel').modal('show');
+  $('input[name="carid"]').val(id);
+})
+</script>
+@endif
+
+@if(Session::get('success'))
+
+<script>
+let msg="{{Session::get('success')}}";
+Swal.fire(msg,'success')
+</script>
+@endif
+
+
+
+
+
+
 <script>
   $(document).ready(function(){
 

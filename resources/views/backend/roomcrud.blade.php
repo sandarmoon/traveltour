@@ -6,7 +6,7 @@
       <h1 class="ct-title text-white d-inline-block" id="content">
         New Hotel Room Adding 
       </h1>
-      <a class="ct-example text-white float-right border-0" href="{{route('car.index')}}">
+      <a class="ct-example text-white float-right border-0" href="{{route('room.index')}}">
         <i class="ni ni-bold-left"></i>
             <span class="error-name">Go Back</span>
       </a>

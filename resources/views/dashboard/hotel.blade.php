@@ -158,8 +158,16 @@
 </div>
 @endsection
 @section('script')
+@if (Session::get('success'))
 <script>
-console.log('helo');
+Swal.fire(
+  'Data is added','Plesae add pickup location of new Car','success'
+)
+</script>
+             
+@endif
+<script>
+
 
  var ctx = document.getElementById('report-chart');
 var myChart = new Chart(ctx, {

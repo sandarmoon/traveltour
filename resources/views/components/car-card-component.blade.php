@@ -24,14 +24,17 @@
      <img src="{{asset($cover)}}" class="img-fluid " alt="photo">
 
     </div>
-    <span class="packageprice">$50/person</span>
+    <span class="packageprice">
+    ${{$car->discount ? $car->discount: $car->priceperday}}
+     
+    </span>
    </div>
 
    <div class="text p-4" style="background-color: #e8e8e866;box-shadow: 0px 10px 23px -8px rgb(0 0 0 / 33%);">
     <span class="text-muted  d-block text-center text-uppercase">{{$car->company->name}}</span>
     <h3 class="text-center my-2">{{$car->name}}/{{$car->model}}
-    <span style="font-size: 1.6rem; color: red;">${{$car->discount}}</span>
-     <span style="font-size: 1rem; color: #f15d30;" class="text-decoration-line-through" >${{$car->priceperday}}</span>
+    
+     <span style="font-size: 1rem; color: #f15d30;" class="{{$car->discount ? 'text-decoration-line-through':'d-none'}}" >${{$car->priceperday}}</span>
      
     </h3>
     <hr style="border:1px solid #f15d30 ;">

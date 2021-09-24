@@ -78,6 +78,7 @@
             href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
             rel="stylesheet"
         />
+        <link rel="stylesheet" href="{{asset('js/sweetalert2.min.css')}}">
 
         <!-- CSS Files -->
         <link
@@ -781,6 +782,9 @@
                 )
             }}"></script>
         <!--   Optional JS   -->
+        <!--   Optional JS   -->
+        <script src="{{asset('assets/js/plugins/chart.js/dist/Chart.min.js')}}"></script>
+        <script src="{{asset('assets/js/plugins/chart.js/dist/Chart.extension.js')}}"></script>
         {{-- datatable js   --}}
 
         <script
@@ -808,11 +812,11 @@
         {{-- datatable js   --}}
         <!--   Argon JS   -->
         <script src="{{
-                asset('assets/js/argon-dashboard.min.js?v=1.1.1')
+                asset('assets/js/argon-dashboard.js')
             }}"></script>
         <!-- <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
         {{-- summernote --}}
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
         <!-- <script>
@@ -846,6 +850,7 @@
                     localStorage.clear();
                 }
             });
+            
         </script>
     </body>
 </html>

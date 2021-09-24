@@ -8,11 +8,7 @@
 @endsection @section('main-content')
 <!-- Header-->
 
-@if (session()->has('message'))
-<div class="alert alert-success">
- {{ session("message") }}
-</div>
-@endif
+
 
 
 
@@ -239,7 +235,7 @@
 
 
 {{-- popular aco written cars --}}
-<section class="py-0">
+<section class="py-0 d-none">
  <div class="container mt-5">
   <div class=" justify-content-start ">
    <div class="
@@ -477,7 +473,7 @@
 
 
 {{-- popular hotel --}}
-<section class="py-0 ">
+<section class="py-0 d-none ">
  <div class="container mt-5">
   <div class="row justify-content-center pb-4">
    <div class="

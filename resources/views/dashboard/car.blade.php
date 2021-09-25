@@ -85,7 +85,7 @@
           <div class="row align-items-center">
             <div class="col">
               <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-              <h2 class="text-white mb-0">Sales value</h2>
+              <h2 class="text-white mb-0">Income report</h2>
             </div>
             <div class="col">
               <ul class="nav nav-pills justify-content-end d-none">
@@ -106,6 +106,7 @@
           </div>
         </div>
         <div class="card-body">
+        
           <!-- Chart -->
           <div class="chart">
             <!-- Chart wrapper -->
@@ -115,14 +116,16 @@
       </div>
     </div>
     <div class="col-xl-4">
-      <div class="card shadow">
-        <div class="card-header bg-transparent">
-          
-        </div>
+      <div class="card  bg-gradient-default shadow">
+       
         <div class="card-body">
           <!-- Chart -->
+          <div class="col mb-4">
+          <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+              <h2 class="text-white mb-0">Rating report</h2>
+        </div>
           <div class="chart">
-            <canvas id="report-pie-chart" class="chart-canvas"></canvas>
+            <canvas id="report-pie-chart" class="chart-canvas "></canvas>
           </div>
         </div>
       </div>
@@ -159,8 +162,102 @@
 @endsection
 @section('script')
 <script>
-console.log('helo');
 
+var optionsforreport={
+  responsive: true,
+          layout: {
+            padding: {
+                left: 50,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
+        },
+        scales: {
+          
+        yAxes: [{
+          scaleLabel: {
+                  display: true,
+                  labelString: 'Incomes'
+                },
+          ticks: {
+           
+            beginAtZero: true,
+            
+                      steps: 5,
+                      stepValue: 5,
+                      max: 1000,
+                       
+            
+              // Return an empty string to draw the tick line but hide the tick label
+              // Return `null` or `undefined` to hide the tick line entirely
+              userCallback: function(value, index, values) {
+                // Convert the number to a string and splite the string every 3 charaters from the end
+                
+                return '$' + value;
+               }
+          }
+        }]
+      },
+         legend: {
+            display: false,
+            labels: {
+                fontColor: 'rgb(255, 99, 132)'
+            }
+        },
+        title: {
+            display: true,
+            text: 'Your income for past 6 Months Chart'
+        }
+    };
+
+var optionforrating={
+  responsive: true,
+          layout: {
+            padding: {
+                left: 10,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
+        },
+        scales: {
+          
+        yAxes: [{
+          scaleLabel: {
+                  display: true,
+                  labelString: 'Rating'
+                },
+          ticks: {
+           
+            beginAtZero: true,
+            
+                      steps: 5,
+                      stepValue: 5,
+                      max: 1000,
+                       
+            
+              // Return an empty string to draw the tick line but hide the tick label
+              // Return `null` or `undefined` to hide the tick line entirely
+              userCallback: function(value, index, values) {
+                // Convert the number to a string and splite the string every 3 charaters from the end
+                
+                return   value;
+               }
+          }
+        }]
+      },
+         legend: {
+            display: false,
+            labels: {
+                fontColor: 'rgb(255, 99, 132)'
+            }
+        },
+        title: {
+            display: true,
+            text: 'Your Rating for past 6 Months Chart'
+        }
+    };
  var ctx = document.getElementById('report-chart');
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -170,6 +267,45 @@ var myChart = new Chart(ctx, {
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 26, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 232, 1)',
+                'rgba(54, 120, 335, 1)',
+                'rgba(255, 26, 86, 1)',
+                'rgba(23, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+     options: optionsforreport
+    
+    
+});
+
+//ajax stating
+
+
+var ctx2 = document.getElementById('report-pie-chart');
+var myChart2 = new Chart(ctx2, {
+    type: 'bar',
+    data:  {
+      labels: [
+        'Red',
+        'Blue',
+        'Yellow'
+      ],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [300, 50, 100],
+       backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
@@ -185,61 +321,35 @@ var myChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
-        }]
+            borderWidth: 1,
+        hoverOffset: 4
+      }]
     },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
+    options: optionforrating
 });
-
-//ajax stating
 
 $.ajax({
     type: 'get', //post method
     url: "{{route('getreport.car')}}", //ajaxformexample url
-    dataType: "json",
-    success: function (result, textStatus, jqXHR)
+    success: function (result)
     {
-      console.log(result);
-        //chart.data = result;
-        //chart.update();
+      let report=result.report;
+      myChart.data.labels=report.labels;
+      myChart.data.datasets[0].data=report.data ;
+      myChart.options.scales.yAxes[0].ticks.max=Math.max.apply(Math, report.data) ;
+      
+      myChart.update();
+
+      let rating=result.rating;
+      myChart2.data.labels=rating.labels;
+      myChart2.data.datasets[0].data=rating.data ;
+      myChart2.options.scales.yAxes[0].ticks.max=Math.max.apply(Math, rating.data) ;
+      myChart2.update();
     }
 });
 
 //pie report chart
 
-var ctx = document.getElementById('report-pie-chart');
-var myChart = new Chart(ctx, {
-    type: 'pie',
-    data:  {
-      labels: [
-        'Red',
-        'Blue',
-        'Yellow'
-      ],
-      datasets: [{
-        label: 'My First Dataset',
-        data: [300, 50, 100],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)'
-        ],
-        hoverOffset: 4
-      }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+ 
 </script>
 @endsection

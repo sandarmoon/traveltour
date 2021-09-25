@@ -11,6 +11,7 @@ use App\Models\Facility;
 use App\Models\Tour;
 use App\Models\Car;
 use App\Models\City;
+use App\Models\Rating;
 use App\Models\HotelBooking;
 use App\Models\Emailcontact;
 use App\Models\Packagebooking;
@@ -877,21 +878,108 @@ public function carDashboard(){
     
 }
 
-public function hotelDashboard(){
-    $today=Carbon::today();
-    if(Auth::check()){
-        $id=Auth::user()->company->id;
+
+public function getReportCar(){
+        $company=Auth::user()->company->id;
+        $data_array=Booking::wherehas('car',function($q)use($company){
+            return $q->where('company_id',$company);
+            })->get()->take(6)
+            ->sortByDESC(function ($item) {
+            return $item->created_at->month;
+            })
+            ->groupBy(function ($item) {
+                return $item->created_at->format("F");
+            })
+            ->map
+            ->sum('total');
+
+       $data_array=collect($data_array)->toArray();
+       
+           // dd($data_array);
+            
+
+        $report['labels']=[];
+        $report['data']=[];
+
+        $rating['labels']=[];
+        $rating['data']=[];
+        $month=[];
+        for($i=1; $i<6;$i++){
+             
+            $month[]=\Carbon\Carbon::now()->subMonth($i)->format('F');
+            
+        }
+
+        foreach($month as $k=>$m){
+            
+            $report['labels'][]=$m;
+            if(array_key_exists($m,$data_array)){
+                
+                $report['data'][$k]=$data_array[$m];
+
+            }else{
+                $report['data'][$k]=0;
+            }
+        }
+
+        $ratings=Rating::wherehas('car',function($q)use($company){
+            return $q->where('company_id',$company);
+            })->get()->take(6)
+            ->sortByDESC(function ($item) {
+            return $item->created_at->month;
+            })
+            ->groupBy(function ($item) {
+                return $item->created_at->format("F");
+            })
+            ->map
+            ->sum('rate');
+
+             $ratings=collect($ratings)->toArray();
+
+            //dd($ratings);
+
+        foreach($month as $k=>$m){
+            
+            $rating['labels'][]=$m;
+            if(array_key_exists($m,$ratings)){
+                
+                $rating['data'][$k]=$ratings[$m];
+                
+
+            }else{
+                $rating['data'][$k]=0;
+            }
+        }
         
-        $report=Company::withCount('rooms')->find($id);
-        dd($report);
+        
+
+      
+        return Response()->json(['report'=>$report,'rating'=>$rating]);
+    }
+
+
+
+    
+
+    public function hotelDashboard(){
+        $today=Carbon::today();
+        if(Auth::check()){
+            $id=Auth::user()->company->id;
+            
+            $report=Company::withCount('rooms')->find($id);
+            dd($report);
+            
+            
+        }
+        return view('dashboard.hotel',compact('report'));
+
         
         
     }
-    return view('dashboard.hotel',compact('report'));
 
-    
-    
-}
+    public function getReportHotel(){
+        dd('helo');
+    }
 
 
 
@@ -971,13 +1059,7 @@ public function hotelDashboard(){
 
 
 
-    public function getReportCar(){
-        $company=Auth::user()->company->id;
-        $bookings=Booking::wherehas('car',function($q)use($company){
-            return $q->where('company_id',$company);
-        })->get();
-        dd($bookings);
-    }
+    
 
 
 

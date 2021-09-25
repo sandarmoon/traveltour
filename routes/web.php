@@ -283,6 +283,7 @@ Route::get('/dashboard/car',[BackendController::class,'carDashboard'])->name('da
 Route::get('/getreportcar',[BackendController::class,'getReportCar'])->name('getreport.car');
 
 Route::get('/dashboard/hotel',[BackendController::class,'hotelDashboard'])->name('dashboard.hotel');
+Route::get('/getreporthotel',[BackendController::class,'getReportHotel'])->name('getreport.hotel');
 
 
 

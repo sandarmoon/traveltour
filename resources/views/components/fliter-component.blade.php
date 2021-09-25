@@ -93,13 +93,15 @@ $.ajaxSetup({
     $('input:radio[name="group_total_ppl"]').filter('[value="'+auto_total_ppl+'"]').attr('checked', true);
 
      
-
+   let hotels='';
     
 
    $('input[name="group_total_price"]').change(function(){
+     $('#php-data').html('');
+      
        let data=$(this).val();
        sessionStorage.setItem('group_total_price', data);
-        let hotels='';
+       
        $.ajax({
          url:"{{route('hotel.filter.price')}}",
          type:"POST",
@@ -115,7 +117,7 @@ $.ajaxSetup({
 
               hotels+=`
                 <div class="col-md-12">
-                  <div class="card mb-3" data-id="${v.id}">
+                  <div class="card mb-3" >
                   <div class="row g-0">
                   
                     <div class="col-md-4">
@@ -129,6 +131,7 @@ $.ajaxSetup({
                         ${info}"..."
                         </p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <button class="btn btn-secondary btn-view" data-id="${v.id}">View More</button>
                       </div>
                     </div>
                   </div>
@@ -136,7 +139,8 @@ $.ajaxSetup({
                 </div>
               `;
             })
-            $('#filter-data-ajax').html(hotels);
+            
+            $('#php-data').html(hotels);
          }
          
        })
@@ -145,6 +149,7 @@ $.ajaxSetup({
 
    $('input[name="group_total_room_type"]').change(function(){
       
+       $('#php-data').html('');
 
         let room_type=sessionStorage.getItem('group_total_room_type');
         if(!room_type){
@@ -197,6 +202,7 @@ $.ajaxSetup({
                         ${info}"..."
                         </p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <button class="btn btn-secondary btn-view" data-id="${v.id}">View More</button>
                       </div>
                     </div>
                   </div>
@@ -205,7 +211,7 @@ $.ajaxSetup({
               `;
             })
             })
-            $('#filter-data-ajax').html(hotels);
+            $('#php-data').html(hotels);
          }
          
        })
@@ -214,6 +220,8 @@ $.ajaxSetup({
    })
 
    $('input[name="group_total_ppl"]').change(function(){
+      $('#php-data').html('');
+     
        let data=$(this).val();
        sessionStorage.setItem('group_total_ppl', data);
        let hotels='';
@@ -222,7 +230,9 @@ $.ajaxSetup({
          type:"POST",
          data:{'ppl':data},
          success:function(res){
+           
            let data=res.hotels;
+           
             
             $.each(data,function(i,v){
               let info="{{substr(':info', 0, 200)}}";
@@ -246,6 +256,7 @@ $.ajaxSetup({
                         ${info}"..."
                         </p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <button class="btn btn-secondary btn-view" data-id="${v.id}">View More</button>
                       </div>
                     </div>
                   </div>
@@ -253,7 +264,8 @@ $.ajaxSetup({
                 </div>
               `;
             })
-            $('#filter-data-ajax').html(hotels);
+            
+            $('#php-data').html(hotels);
          }
          
        })

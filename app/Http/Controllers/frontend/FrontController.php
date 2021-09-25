@@ -112,6 +112,7 @@ class FrontController extends Controller
 
 
     public function searchCar(Request $request){
+       
     
         $pickup=$request->p_city_id;
         $drop=$request->d_city_id;
@@ -221,6 +222,7 @@ class FrontController extends Controller
     // ===================hotel bookin start now======================
     public function searchHotel(Request $request){
         // echo "helo worl";
+         
        
          $validator = Validator::make($request->all(), [
             'd_city_id' => 'required',
@@ -254,7 +256,8 @@ class FrontController extends Controller
             $q->where('status','=','1')
                 ->orderBy('pricepernight','asc');
 
-        })->with('room')->where('type','=','1')->get();
+        })->where('city_id',$drop)
+        ->with('room')->where('type','=','1')->get();
 
         // dd($hotels);
 
@@ -288,10 +291,10 @@ class FrontController extends Controller
          $cities=City::whereNull('parent_id')->get();
          $h=Company::find($h_id);
 
-         $rooms=Room::whereDoesntHave('hotelBookings',function($q) use ($start_date,$end_date){
-                $q->whereDate('check_in','>=',$start_date)
-                ->whereDate('check_out','<=',$end_date);
-         })->where('company_id',$h->id)->with(['facilities','type'])->get();
+         $rooms=Room::whereDoesntHave('hotelBookings',function($q){
+             return $q->where('status','1')->orWhere('status','2');
+         })->where('company_id',$h->id)
+         ->with(['facilities','type'])->get();
         
         
          
@@ -325,7 +328,9 @@ class FrontController extends Controller
         $s_date=$data['start'];
         $e_date=$data['end'];
 
-        $rooms=Room::where('company_id',$hid)
+        $rooms=Room::whereDoesntHave('hotelBookings',function($q){
+             return $q->where('status','1')->orWhere('status','2');
+         })-> where('company_id',$hid)
                     ->where('ppl','>=',$max_ppl)
                     ->with(['facilities','type'])
                     ->get();
@@ -419,6 +424,8 @@ class FrontController extends Controller
             'address'=>$request->address,
             'msg'=>$request->msg
             ]);
+        $room->status=2;
+        $room->save();
 
         return response()->json(['success'=>'Success booking']);
 

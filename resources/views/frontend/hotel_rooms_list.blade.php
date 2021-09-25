@@ -104,79 +104,84 @@
 							<!-- end here -->
 						</form>
 					  </div>
+							
+							@if(count($rooms) > 0)
 						<div class="row rooms-div ">
-							@foreach($rooms as $room)
-							@php
-							$photos=json_decode($room->photos,true);
-							$s=0;
-							@endphp
-							<div class="col-md-4">
-								<div class="card">
-									<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-										<div class="carousel-inner">
-											@foreach($photos as $k=>$p)
-											<div class="carousel-item {{($s==$k) ? 'active':''}}">
-												<img src="{{asset('storage/'.$p)}}" class="d-block w-100" alt="...">
-											</div>
-											@endforeach
-										</div>
-									</div>
-									<div class="card-body">
-										<h6 class="mb-0">{{$room->type->name}},
-											{{($room->single == null) ? '':$room->single." Single"}}
-											{{($room->double == null) ? '':$room->double." Double"}}
-											{{($room->king == null) ? '':$room->king." King"}}
-											{{($room->queen == null) ? '':$room->queen." Queen"}}
-											Beds, Non Smoking </h6>
-										<p class="small text-muted">{{$room->wide}}Sqft</p>
-										{{-- accordian start --}}
-										<ul class="list-unstyled">
-											<li><i class="fas fa-user-friends"></i> Sleep{{$room->ppl}}</li>
-											<li><i class="fas fa-bed"></i>
-												{{($room->single == null) ? '':$room->single." Single"}}
-												{{($room->double == null) ? '':$room->double." Double"}}
-												{{($room->king == null) ? '':$room->king." King"}}
-												{{($room->queen == null) ? '':$room->queen." Queen"}} Bed
-											</li>
-											<li>
-												<i class="fas fa-check"></i> Reserve Now,Pay Later
-											</li>
-											<li><a href="{{route('room.show',$room->id)}}" class="text-decoration-none">More Details ></a></li>
-										</ul>
-										<hr>
-										<h6 class="description">Tax free is $10.(fixed)</h6>
-										<hr class="mx-2">
-										<div class="d-flex justify-content-between">
-											<div>
-												<h4 class="mb-0">${{$room->pricepernight}}</h4>
-							
-												<span class="price-desc small mb-2 text-muted">per night</span>
-												<span class="total-desc  small mb-2 text-dark ">{{$room->pricepernight+ 10}} total</span><br />
-							
-							
-												<div class="my-tooltip">
-													<span class="fee-include  small mb-2 text-dark ">includes tax and fees</span>
-													<div class=" tooltiptext">
-														Tax Fee is 10$
-														Total is {{$h->pricepernight}} + 10
+										@foreach($rooms as $room)
+										@php
+										$photos=json_decode($room->photos,true);
+										$s=0;
+										@endphp
+										<div class="col-md-4">
+											<div class="card">
+												<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+													<div class="carousel-inner">
+														@foreach($photos as $k=>$p)
+														<div class="carousel-item {{($s==$k) ? 'active':''}}">
+															<img src="{{asset('storage/'.$p)}}" class="d-block w-100" alt="...">
+														</div>
+														@endforeach
 													</div>
 												</div>
-											</div>
-											<div>
-												<span class="left-msg d-none  small mb-2 text-danger "></span>
-												<button type="submit" class="btn btn-primary mt-3 btn-reserve" data-id="{{$room->id}}">Reserve
-													Now!</button>
-							
+												<div class="card-body">
+													<h6 class="mb-0">{{$room->type->name}},
+														{{($room->single == null) ? '':$room->single." Single"}}
+														{{($room->double == null) ? '':$room->double." Double"}}
+														{{($room->king == null) ? '':$room->king." King"}}
+														{{($room->queen == null) ? '':$room->queen." Queen"}}
+														Beds, Non Smoking </h6>
+													<p class="small text-muted">{{$room->wide}}Sqft</p>
+													{{-- accordian start --}}
+													<ul class="list-unstyled">
+														<li><i class="fas fa-user-friends"></i> Sleep{{$room->ppl}}</li>
+														<li><i class="fas fa-bed"></i>
+															{{($room->single == null) ? '':$room->single." Single"}}
+															{{($room->double == null) ? '':$room->double." Double"}}
+															{{($room->king == null) ? '':$room->king." King"}}
+															{{($room->queen == null) ? '':$room->queen." Queen"}} Bed
+														</li>
+														<li>
+															<i class="fas fa-check"></i> Reserve Now,Pay Later
+														</li>
+														<li><a href="{{route('room.show',$room->id)}}" class="text-decoration-none">More Details ></a></li>
+													</ul>
+													<hr>
+													<h6 class="description">Tax free is $10.(fixed)</h6>
+													<hr class="mx-2">
+													<div class="d-flex justify-content-between">
+														<div>
+															<h4 class="mb-0">${{$room->pricepernight}}</h4>
+										
+															<span class="price-desc small mb-2 text-muted">per night</span>
+															<span class="total-desc  small mb-2 text-dark ">{{$room->pricepernight+ 10}} total</span><br />
+										
+										
+															<div class="my-tooltip">
+																<span class="fee-include  small mb-2 text-dark ">includes tax and fees</span>
+																<div class=" tooltiptext">
+																	Tax Fee is 10$
+																	Total is {{$h->pricepernight}} + 10
+																</div>
+															</div>
+														</div>
+														<div>
+															<span class="left-msg d-none  small mb-2 text-danger "></span>
+															<button type="submit" class="btn btn-primary mt-3 btn-reserve" data-id="{{$room->id}}">Reserve
+																Now!</button>
+										
+														</div>
+													</div>
+													{{-- accordian end --}}
+										
+												</div>
 											</div>
 										</div>
-										{{-- accordian end --}}
-							
-									</div>
-								</div>
-							</div>
-							@endforeach
+										@endforeach
 			            </div>
+							
+              
 					  </div>
+
 
 					  {{-- //for More information --}}
 					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -186,7 +191,10 @@
 					  	</div>
 					  </div>
 					</div>
-                        
+							@else
+					<h4 class="text-muted text-center">Room are fully Booked at the moment !Thank you so much !</h4>
+					@endif
+				          
                  </div>
                 {{-- end here --}}
 

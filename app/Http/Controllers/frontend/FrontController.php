@@ -67,7 +67,7 @@ class FrontController extends Controller
 
             $hotel_array_data[$hotel['hotel']->id]=[$hotel['rating'],$hotel['hotel']];
             rsort($hotel_array_data);
-            
+
         };
 
         $tour = Tour::all();
@@ -156,7 +156,7 @@ class FrontController extends Controller
 
         $booking_historys = HotelBooking::where('user_id',Auth::id())->orderBy('id','DESC')->get()->groupBy(function($data){
 
-            $date = $data->created_at->format('Y-m-d');
+            $date = $data->check_in;
             // $check_in = $data->check_in;
             $array = array(
                         'date' =>$date,  
@@ -164,6 +164,7 @@ class FrontController extends Controller
             return $array;
 
         });
+        // dd($booking_historys);
 
         $packages_booking = Packagebooking::where('user_id',Auth::id())->orderBy('id','DESC')->get();
 
@@ -188,14 +189,14 @@ class FrontController extends Controller
 
 
     public function roombookingdetail(Request $request,$data){
-
+        $date = str_replace('-','/',$data);
         $view = 3;
         $booking_historys = array();
         $bookings = array();
         $booking = array();
         $package_booking = array();
         $packages_booking = array();
-        $hotelbooking = HotelBooking::where('user_id',Auth::id())->whereDate('created_at',$data)->get();
+        $hotelbooking = HotelBooking::where('user_id',Auth::id())->where('check_in',$date)->get();
         // dd($hotelbooking);
 
         return view('frontend.bookinghistory',compact('bookings','view','booking','hotelbooking','booking_historys','package_booking','packages_booking'));

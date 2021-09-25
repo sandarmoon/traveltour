@@ -328,6 +328,7 @@ class BackendController extends Controller
 
     
     public function  getRoomAjax(){
+        // dd('j');
         // dd(Auth::user()->company->id);
         $rooms=null;
          if(Auth::check()){
@@ -352,15 +353,22 @@ class BackendController extends Controller
 
                 <a href=room/$room->id/edit class='btn btn-warning btn-edit' data-id=".$room->id."><i class='fas fa-edit'></i></a>
 
-
-
-                <a href=room/$room->id class='btn btn-info btn-detail' data-id=".$room->id."><i class='fas fa-info-circle'></i></a>
+                <a href=room/backend_roomdetail/$room->id class='btn btn-info btn-detail' data-id=".$room->id."><i class='fas fa-info-circle'></i></a>
                 ";
             });
 
        return $datatables->make(true);
 
     }
+
+
+    public function backend_roomdetail($id)
+    {
+        
+        $room = Room::find($id);
+        return view('backend.room_detail',compact('room'));
+    }
+    
 
 
     // +================ end==========

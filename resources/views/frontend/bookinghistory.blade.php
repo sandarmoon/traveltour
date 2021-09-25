@@ -172,7 +172,7 @@
                                                 @endphp
                                                 @if(count($booking_historys) > 0)
                                                 @foreach($booking_historys as $booking_date => $booking_history)
-                                        
+
                                                    <tr>
                                                        
                                                        <td>{{$i++}}.</td>
@@ -193,10 +193,11 @@
 
                                                        <td>
                                                         @php
-                                                            $b_date = date_create($booking_date);
-                                                            $date= date_format($b_date,"m/d/Y ");
+                                                            $date = str_replace('/', '-', $booking_date)
+                                                            // $t = strtotime($booking_date);
+                                                            // $date= date('d-m-Y',$booking_date);
                                                         @endphp
-                                                           {{$booking_date}}
+                                                           {{$date}}
                                                        </td>
                                                        <td>
                                                           
@@ -214,7 +215,7 @@
                                                             @endif
                                                        </td>
                                                        <td>
-                                                            <a href="{{route('roombookingdetail',$booking_date)}}" class="btn btn-info text-white">
+                                                            <a href="{{route('roombookingdetail',$date)}}" class="btn btn-info text-white">
                                                                Detail
                                                             </a>
                                                        </td>

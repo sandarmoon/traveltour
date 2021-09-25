@@ -115,6 +115,8 @@ Route::delete('/{id}',[BackendController::class,'roomDestroy'])->name('room.dest
 
 Route::get('/get/rooms',[BackendController::class,'getRoomAjax'])->name('ajax.getroomAjax');
 
+Route::get('/backend_roomdetail/{id}',[BackendController::class,'backend_roomdetail'])->name('backend_roomdetail');
+
 //admin for hotel-booking list
 Route::get('/hotel/bookings',[BackendController::class,'getBackendHotelBooking'])->name('backend.hotel.bookinglist');
 

@@ -427,7 +427,21 @@
 
                         @hasanyrole('admin|car')
                         <!-- admin/car -->
+                            @role('car')
+                            <li
+                                class="nav-item {{ Request::is('dashboard/car') ? 'active' : '' }}"
+                            >
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('dashboard.car') }}"
+                                >
+                                    <i class="ni ni-planet text-blue"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            @endrole
                             <!-- pickup location -->
+
                             <li
                                 class="nav-item {{ Request::is('pickup*') ? 'active' : '' }}"
                             >
@@ -462,6 +476,19 @@
                         
                         @hasanyrole('admin|hotel')
                         <!-- admin/hotel -->
+                            @role('hotel')
+                            <li
+                                class="nav-item {{ Request::is('dashboard/hotel') ? 'active' : '' }}"
+                            >
+                                <a
+                                    class="nav-link"
+                                    href="{{ route('dashboard.hotel') }}"
+                                >
+                                    <i class="ni ni-planet text-blue"></i>
+                                    Dashboards
+                                </a>
+                            </li>
+                            @endrole
                             <!-- Facility Category -->
                             <li
                                 class="nav-item {{ Request::is('fcategory*') ? 'active' : '' }}"

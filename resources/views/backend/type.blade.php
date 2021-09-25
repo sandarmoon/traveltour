@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="my-ct-page-title text-white">
           <h1 class="ct-title text-white" id="content">
-            Category 
+            Type 
           </h1>
           <div class="avatar-group mt-3">
           </div>
@@ -81,7 +81,7 @@
             <div class="col">
               <div class="card shadow">
                 <div class="card-header border-0">
-                  <h3 class="mb-0">City List</h3>
+                  <h3 class="mb-0">Type List</h3>
                 </div>
                 <div class="table-responsive  p-1">
                   <table class="table align-items-center table-flush" id="type-table">

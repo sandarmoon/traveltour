@@ -9,11 +9,12 @@
           <h1 class="ct-title text-white d-inline-block" id="content">
             Transportation 
           </h1>
-          
+          @role('car')
           <a class="ct-example text-white float-right border-0" href="{{route('car.create')}}">
             <i class="fas fa-plus-square me-1"></i>
                 <span class="error-name">New Vehicle</span>
           </a>
+          @endrole
           
         </div>
         

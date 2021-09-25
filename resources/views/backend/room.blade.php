@@ -9,11 +9,12 @@
           <h1 class="ct-title text-white d-inline-block" id="content">
             Hotel Room 
           </h1>
-         
+         @role('hotel')
           <a class="ct-example text-white float-right border-0" href="{{route('room.create')}}">
             <i class="fas fa-plus-square me-1"></i>
                 <span class="error-name">New Room </span>
           </a>
+          @endrole
           
         </div>
         

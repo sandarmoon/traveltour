@@ -613,11 +613,14 @@ class BackendController extends Controller
     }
 
     function getPackageAjax(){
-        $package=Package::with(['depart','destination','hotel','car'=>function($q){
-            return $q->with('company')->get();
-        }])->get();
+        $packages=Package::with(['depart','destination','hotel','car'=>function($q){
+            return $q->with('company');
+        }])
+        ->orderBy('id', 'desc')
+        ->get();
+        
 
-        $datatables=Datatable::of($package)
+        $datatables=Datatable::of($packages)
             ->addColumn('action',function($package){
 
                 return "<button class='btn btn-danger btn-delete' data-id=".$package->id."><i class='fas fa-trash'></i></button>

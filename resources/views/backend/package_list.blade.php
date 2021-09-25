@@ -92,11 +92,30 @@
           {data:'priceperperson'},
           {data:function(data){
             let html='';
-            if(data.status ==1)
-            html='valid';
-            else
-            html='booking full';
+           let package_date = new Date(data.start);
+          package_date=package_date.getTime();
+
+          let today = new Date();
+          today=today.getTime();
+          
+
+          if( today > package_date){
+              html="<h3><span class='badge badge-danger'>invalid</span></h3>";
+          }else{
+             if(data.status ==1)
+                  html="<h3><span class='badge badge-success'>valid</span></h3>";
+              else
+              html="<h3><span class='badge badge-danger'>booking full</span></h3>";
+          }
+
             return html;
+           
+
+
+
+
+
+
           }},
           {data:'action',name:'action',orderable:false,searchable:false}
         ]

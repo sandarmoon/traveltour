@@ -287,5 +287,11 @@ Route::get('/getreportcar',[BackendController::class,'getReportCar'])->name('get
 Route::get('/dashboard/hotel',[BackendController::class,'hotelDashboard'])->name('dashboard.hotel');
 Route::get('/getreporthotel',[BackendController::class,'getReportHotel'])->name('getreport.hotel');
 
+//Package creating fixing
+
+Route::get('/getfilterbyDeparture/{id}',[BackendController::class,'getfilterbyDepartureForPackage'])->name('getFilter.depature.package.cruds');
+
+Route::get('/getfilterbyDestination/{id}',[BackendController::class,'getfilterbyDestinationForPackage'])->name('getFilter.destination.package.crud');
+
 
 

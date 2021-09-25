@@ -593,8 +593,12 @@ class BackendController extends Controller
             $package->company_car_id=$request->car;
 
             $package->save();
-        $package->tours()->detach();
-        $package->tours()->attach($request->tours);
+        
+        if(count($request->tours)>0){
+            $package->tours()->detach();
+            $package->tours()->attach($request->tours);
+        }
+        
         return redirect()->route('package.index');
     }
 
@@ -1067,6 +1071,33 @@ public function getReportCar(){
         return $datatables->make(true);
     }
 
+
+    public function getfilterbyDepartureForPackage($id){
+
+        $cars=Car::whereDoesntHave('booking',function($q){
+             return $q->where('status','1')->orWhere('status','2');
+         })->where('city_id',$id)
+         ->get();
+
+         return response()->json($cars);
+    }
+
+
+     public function getfilterbyDestinationForPackage($id){
+
+             $hotels=Company::whereHas('rooms',function($r){
+                        return $r->whereDoesntHave('hotelBookings',function($q){
+                                return $q->where('status','1')->orWhere('status','2');
+                    });
+                    })
+                    ->where('type',1)
+                    ->where('city_id',$id)
+                   ->get();
+            
+            $tours=Tour::where('city_id',$id)->get();
+            
+         return response()->json(['hotels'=>$hotels,'tours'=>$tours]);
+    }
 
 
 

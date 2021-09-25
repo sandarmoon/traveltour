@@ -55,6 +55,7 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-departure_city">Depature City</label>
                         <select class="js-example-basic-multiple  form-control" id="input-departure_city" name="departure"  >
+                            <option value="">Please chose one!</option>
                             @foreach($cities as $i)
                                 
                             <option value="{{$i['id']}}"
@@ -71,6 +72,7 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-destination_city">Destination City</label>
                         <select class="js-example-basic-multiple  form-control" id="destination_city_id" name="destination" >
+                        <option value="">Plase choose one</option>
                             @foreach($cities as $i)
                                 
                             <option value="{{$i['id']}}"
@@ -105,7 +107,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-price-per-person">Hotel for stay</label>
-                        <select class="js-example-basic-multiple  form-control" id="input-price-per-person" name="hotel" >
+                        <select class="js-example-basic-multiple  form-control" id="input-hotels" name="hotel" >
                             @foreach($hotels as $h)
                                 
                             <option value="{{$h->id}}"
@@ -170,7 +172,7 @@
                   Please select Tours places according with ascending Day.
                 </span>
                         <label class="form-control-label visually-hidden" for="input-tours">Tours</label>
-                        <select name="tours[]" class="js-example-basic-multiple form-control" multiple  id="input-tours">
+                        <select name="tours[]" class="js-example-basic-multiple-tour form-control" multiple  id="input-tours">
                           @foreach($tours as $t)
                           <option value="{{$t->id}}"
 @foreach($package->tours as $pt)
@@ -220,7 +222,62 @@ selected
 @section('script')
 <script type="text/javascript">
     $(document).ready(function(){
-         $('.js-example-basic-multiple').select2();
+         
+        $('.js-example-basic-multiple-tour').select2();
+         $('#input-departure_city').change(function(){
+             let value=$(this).val();
+             let url="{{route('getFilter.depature.package.cruds',':id')}}";
+             url=url.replace(':id',value);
+
+             $.ajax({
+               url:url,
+               type:'GET',
+               success:function(res){
+                 console.log(res);
+                   let toAppend = '';
+                    $.each(res,function(i,o){
+                    toAppend += `<option data-id value=${o.id}>${o.name}</option>`;
+                    });
+
+                  $('#input-car').html(toAppend);
+               }
+             })
+            
+         })
+
+         
+
+         $('#destination_city_id').change(function(){
+             let value=$(this).val();
+             let url="{{route('getFilter.destination.package.crud',':id')}}";
+             url=url.replace(':id',value);
+
+             $.ajax({
+               url:url,
+               type:'GET',
+               success:function(res){
+                 let hotels=res.hotels;
+                 let tours=res.tours;
+                   
+                   let toAppend = '';
+                    $.each(hotels,function(i,o){
+                    toAppend += `<option data-id value=${o.id}>${o.name}</option>`;
+                    });
+
+                  $('#input-hotels').html(toAppend);
+
+
+                  let toAppend2 = '';
+                    $.each(tours,function(i,o){
+                    toAppend2 += `<option data-id value=${o.id}>${o.title}</option>`;
+                    });
+
+                  $('#input-tours').html(toAppend2);
+               }
+             })
+            
+         })
+
     })
 </script>
 @endsection

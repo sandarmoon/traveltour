@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="my-ct-page-title text-white">
           <h1 class="ct-title text-white d-inline-block" id="content">
-            Cities
+            Sub-Facilites
           </h1>
           
           <a class="ct-example text-white float-right border-0" data-toggle="modal"

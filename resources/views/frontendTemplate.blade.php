@@ -85,6 +85,7 @@
         <!-- div for search div -->
 
         <!-- Section-->
+        <h1>Merry</h1>
 
         @yield('main')
 
